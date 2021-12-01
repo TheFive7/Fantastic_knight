@@ -25,7 +25,9 @@ public class Player extends Sprite {
     String name;
     State state;
     Image image;
-    double vSaut = 20;
+    double vSaut = 15;
+
+    // 0 RIGHT; 180 LEFT
 
     public Player(Model model) {
         super(model);
@@ -44,12 +46,14 @@ public class Player extends Sprite {
 
     public void moveLeft() {
         xVelocity = 2;
+        yVelocity = 0;
         angle = 180;
         state = State.WALK;
     }
 
     public void moveRight() {
         xVelocity = 2;
+        yVelocity = 0;
         angle = 0;
         state = State.WALK;
     }
@@ -81,12 +85,14 @@ public class Player extends Sprite {
     private double getNewY() {
         double y = getyPosition();
         y += Math.sin(Math.toRadians(angle))* yVelocity;
+        System.out.println(y);
         return y;
     }
 
     public void jump() {
-        if(state == State.JUMP || state == State.FALL) return;
-        xVelocity = 3;
+        if(state==State.JUMP) return;
+
+        xVelocity=2;
         yVelocity = - vSaut;
         state = State.JUMP;
     }
@@ -104,8 +110,25 @@ public class Player extends Sprite {
             // Create a copie
             Rectangle shape1 = new Rectangle(width,height,Color.BLACK);
 
-            if(state == State.JUMP){
-                yPosition += yVelocity;
+            if(state==State.JUMP){
+                y = yPosition + yVelocity;
+                shape1.setX(xPosition);
+                shape1.setY(y);
+                boolean isFloor = false;
+                for(Shape s : model.obstacles) {
+                    Shape inter = Shape.intersect(shape1,s);
+                    Bounds b = inter.getBoundsInLocal();
+                    if (b.getWidth() != -1) {
+                        isFloor = true;
+                    }
+                }
+                if(isFloor){
+                    state = State.FALL;
+                    angle = 90;
+                }
+                if (!isFloor) {
+                    yPosition += yVelocity;
+                }
             }
 
             if (state == State.WALK) {
