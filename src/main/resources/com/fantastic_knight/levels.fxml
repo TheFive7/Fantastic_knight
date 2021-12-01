@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fantastic_knight.controller.LevelsController">
+   <children>
+      <ImageView fitHeight="800.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@levels.png" />
+         </image></ImageView>
+      <Button layoutX="1128.0" layoutY="697.0" mnemonicParsing="false" onAction="#returnMenu" opacity="0.0" prefHeight="85.3" prefWidth="60.0" />
+      <Button layoutX="60.0" layoutY="349.0" mnemonicParsing="false" onAction="#selectLevel2" opacity="0.0" prefHeight="100.0" prefWidth="200.0" />
+      <Button layoutX="60.0" layoutY="219.0" mnemonicParsing="false" onAction="#selectLevel1" opacity="0.0" prefHeight="100.0" prefWidth="200.0" />
+   </children>
+</AnchorPane>

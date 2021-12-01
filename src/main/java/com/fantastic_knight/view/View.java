@@ -5,6 +5,9 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 
+import static com.fantastic_knight.Game.primaryStage;
+import static com.fantastic_knight.controller.MenuController.scene_levels;
+
 public class View {
 
     Model model;
@@ -58,7 +61,6 @@ public class View {
     public void returnMenu() {
         model.state = Model.STATE_INITIAL;
         model.reset();
-        root.getChildren().clear();
-        root.getChildren().add(paneIntro);
+        primaryStage.setScene(scene_levels);
     }
 }

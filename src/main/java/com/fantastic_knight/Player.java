@@ -25,7 +25,7 @@ public class Player extends Sprite {
     String name;
     State state;
     Image image;
-    double vSaut = 10;
+    double vSaut = 20;
 
     public Player(Model model) {
         super(model);

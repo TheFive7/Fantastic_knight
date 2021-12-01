@@ -13,7 +13,10 @@ import javafx.stage.StageStyle;
 public class Game extends Application {
     public static View view;
     public static Model model;
+    public static Controller controller;
     public static Stage primaryStage;
+    public static Scene scene;
+    public static Scene scene_menu ;
 
     public static void main(String[] args) {
         launch(args);
@@ -25,14 +28,16 @@ public class Game extends Application {
 
         model = new Model();
         view = new View(model);
-        Controller controller = new Controller(model, view);
+        controller = new Controller(model, view);
+
+        scene = new Scene(view.root, model.width, model.height);
 
         // FXML
         FXMLLoader fxmlLoaderMenu = new FXMLLoader(getClass().getResource("menu.fxml"));
         Parent root_menu = fxmlLoaderMenu.load();
 
         // SCENE PRINCIPALE
-        Scene scene_menu = new Scene(root_menu, 1200, 800);
+        scene_menu = new Scene(root_menu, 1200, 800);
 
         stage.setTitle("Platformer");
         stage.initStyle(StageStyle.TRANSPARENT);
