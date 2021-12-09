@@ -9,4 +9,6 @@ module com.fantastic_knight {
     exports com.fantastic_knight.controller;
     opens com.fantastic_knight to javafx.fxml;
     opens com.fantastic_knight.controller to javafx.fxml;
+    exports com.fantastic_knight.levelMaker;
+    opens com.fantastic_knight.levelMaker to javafx.fxml;
 }

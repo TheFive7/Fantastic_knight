@@ -1,8 +1,10 @@
 package com.fantastic_knight.view;
 
 import com.fantastic_knight.model.Model;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
 public class ViewLevel1 extends ViewLevel {
@@ -20,7 +22,9 @@ public class ViewLevel1 extends ViewLevel {
         model.obstacles.add(model.r2);
         model.obstacles.add(model.r3);
 
-        model.player.getShape().setFill(Color.BLACK);
+        Image img = new Image("file:");
+        model.player.getShape().setFill(new ImagePattern(img));
+
         pane.getChildren().addAll(model.player.getShape(),model.r1,model.r2,model.r3);
         pane.setStyle("-fx-background-color: white;");
     }
