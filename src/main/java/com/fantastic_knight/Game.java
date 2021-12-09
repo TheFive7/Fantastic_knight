@@ -39,7 +39,7 @@ public class Game extends Application {
         // SCENE PRINCIPALE
         scene_menu = new Scene(root_menu, 1200, 800);
 
-        stage.setTitle("Platformer");
+        stage.setTitle("Fantastic Knight");
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene_menu);
         stage.show();
