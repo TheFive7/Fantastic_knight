@@ -25,7 +25,8 @@ public class Player extends Sprite {
     String name;
     State state;
     Image image;
-    double vSaut = 15;
+    double vSaut = 18;
+    int lastMove;
 
     // 0 RIGHT; 180 LEFT
 
@@ -48,6 +49,7 @@ public class Player extends Sprite {
         xVelocity = 2;
         yVelocity = 0;
         angle = 180;
+        lastMove = 1;
         state = State.WALK;
     }
 
@@ -55,6 +57,7 @@ public class Player extends Sprite {
         xVelocity = 2;
         yVelocity = 0;
         angle = 0;
+        lastMove = 2;
         state = State.WALK;
     }
 
@@ -85,13 +88,13 @@ public class Player extends Sprite {
     private double getNewY() {
         double y = getyPosition();
         y += Math.sin(Math.toRadians(angle))* yVelocity;
-        System.out.println(y);
         return y;
     }
 
     public void jump() {
         if(state==State.JUMP) return;
-
+        if(lastMove==1) angle=180;
+        else if(lastMove==2) angle=0;
         xVelocity=2;
         yVelocity = - vSaut;
         state = State.JUMP;
@@ -201,7 +204,6 @@ public class Player extends Sprite {
                         yVelocity = 0;
                         break;
                     }
-
                 }
                 setxVelocity(xVelocity);
                 setyVelocity(yVelocity);
