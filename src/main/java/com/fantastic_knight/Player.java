@@ -284,10 +284,6 @@ public class Player extends Sprite {
         this.life = life;
     }
 
-    public void setWin(boolean win) {
-        this.win = win;
-    }
-
     public boolean isLife() {
         return life;
     }

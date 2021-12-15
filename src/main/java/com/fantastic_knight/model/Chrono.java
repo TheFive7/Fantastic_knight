@@ -19,8 +19,8 @@ class Chrono implements Runnable {
         // Créer un switch pour savoir quoi mettre en attente
         try {
             this.item.isActive = false;     // désactive le piège
-            Thread.sleep(3000);       // attend 3000 millisecondes -> 3 secondes
             choixMethodes(methode);         // choix de la méthode à utiliser selon l'item
+            Thread.sleep(3000);       // attend 3000 millisecondes -> 3 secondes
             this.item.isActive = true;      // réactive l'item avant de terminer le Thread puis le fermer
             Thread.currentThread().interrupt();
             return;
@@ -33,6 +33,7 @@ class Chrono implements Runnable {
         switch (methode){
             case "spikes":
                 if (player.isLife()) player.setLife(false);
+                else player.reset();
                 break;
             case "shield":
                 System.out.println("Me voilà bien protégé");
