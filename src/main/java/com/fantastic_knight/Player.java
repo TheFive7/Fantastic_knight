@@ -36,6 +36,7 @@ public class Player extends Sprite {
         width = 20;
         height = 50;
         shape = new Rectangle(width,height,Color.BLACK);
+        life = true;
         xPosition = 25;
         yPosition = 25;
         xVelocity = 5;
@@ -53,7 +54,7 @@ public class Player extends Sprite {
         angle = 180;
         lastMove = 1;
         state = State.WALK;
-        System.out.println("etat walkL");
+        //System.out.println("etat walkL");
     }
 
     public void moveRight() {
@@ -63,7 +64,7 @@ public class Player extends Sprite {
         angle = 0;
         lastMove = 2;
         state = State.WALK;
-        System.out.println("etat walkR");
+        //System.out.println("etat walkR");
     }
 
     public void stop() {
@@ -103,7 +104,7 @@ public class Player extends Sprite {
         xVelocity=5;
         yVelocity = - vSaut;
         state = State.JUMP;
-        System.out.println("etat jump");
+        //System.out.println("etat jump");
     }
 
     @Override
@@ -144,7 +145,7 @@ public class Player extends Sprite {
             }
             if(isFloor){
                 state = State.FALL;
-                System.out.println("etat fall");
+                //System.out.println("etat fall");
                 angle = 90;
             }
             if (!isFloor) {
@@ -170,7 +171,7 @@ public class Player extends Sprite {
             // No floor => change angle & state to falling
             if (!isFloor) {
                 state = State.FALL;
-                System.out.println("etat fall");
+                //System.out.println("etat fall");
                 angle = 90;
             }
         }
@@ -215,7 +216,7 @@ public class Player extends Sprite {
 
                 if (collide) {
                     state = State.IDLE; // stop moving
-                    System.out.println("etat idle");
+                    //System.out.println("etat idle");
                     xVelocity = i-1;
                     yVelocity = i-1;
                     x = getNewX();
@@ -269,5 +270,25 @@ public class Player extends Sprite {
 
     public State getState() {
         return state;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setLife(boolean life) {
+        this.life = life;
+    }
+
+    public void setWin(boolean win) {
+        this.win = win;
+    }
+
+    public boolean isLife() {
+        return life;
     }
 }

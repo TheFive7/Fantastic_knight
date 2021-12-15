@@ -26,6 +26,7 @@ public class Model {
     // SPRITES
     List<Sprite> sprites;
     public List<Shape> obstacles; // obstacles in each scene
+    public List<Item> items;      // items in the game
 
     // Murs
     public Shape northWall;
@@ -36,6 +37,8 @@ public class Model {
     // Objets
     public Player player;
 
+    // Items
+    public Spikes spikes;
 
     // Obstacles
     public Rectangle r1;
@@ -49,8 +52,10 @@ public class Model {
         height = 800;
         lastFrame = -1;
         player = new Player(this);
+        spikes = new Spikes(this);
         obstacles = new ArrayList<>();
         sprites = new ArrayList<>();
+        items = new ArrayList<>();
     }
 
     public void startGame() {
@@ -68,5 +73,6 @@ public class Model {
         for(Sprite s: sprites) {
             s.update();
         }
+        spikes.update();
     }
 }

@@ -4,7 +4,7 @@ import com.fantastic_knight.model.Model;
 
 public abstract class Sprite {
 
-    Model model;
+    protected Model model;
     
     public Sprite(Model model) {
 	this.model = model;
