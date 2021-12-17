@@ -23,7 +23,7 @@ public class Spikes extends Item{
         shape.setX(xPosition);
         shape.setY(yPosition);
         isActive = true;
-        image = new Image("file:src/main/resources/com/fantastic_knight/spike.png");
+        image = new Image("file:src/main/resources/com/fantastic_knight/items/spike.png");
         shape.setFill(new ImagePattern(image));
     }
 

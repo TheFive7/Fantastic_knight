@@ -24,7 +24,7 @@ public class ViewLevel1 extends ViewLevel {
         model.items.add(model.spikes);
 
 /*        model.spikes.getShape().setFill(Color.PURPLE);*/
-        pane.getChildren().addAll(model.player.getShape(),model.r1,model.r2,model.r3,model.spikes.getShape());
+        pane.getChildren().addAll(model.spikes.getShape(),model.player.getShape(),model.r1,model.r2,model.r3);
         pane.setStyle("-fx-background-color: white;");
     }
 }
