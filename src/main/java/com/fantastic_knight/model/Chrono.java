@@ -7,20 +7,23 @@ class Chrono implements Runnable {
     Player player;
     String methode;
 
-    public Chrono(Item item, Player player, String methode) {
+    public Chrono(Item item, Player player, String methode)
+    {
         this.item = item;
         this.player = player;
         this.methode = methode;
+
     }
 
     public void run() {
         // Créer un switch pour savoir quoi mettre en attente
         try {
-            item.isActive = false;     // désactive le piège
-            Thread.sleep(3000);       // attend 3000 millisecondes -> 3 secondes
+            this.item.isActive = false;     // désactive le piège
             choixMethodes(methode);         // choix de la méthode à utiliser selon l'item
-            item.isActive = true;      // réactive l'item avant de terminer le Thread puis le fermer
+            Thread.sleep(3000);       // attend 3000 millisecondes -> 3 secondes
+            this.item.isActive = true;      // réactive l'item avant de terminer le Thread puis le fermer
             Thread.currentThread().interrupt();
+            return;
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -30,6 +33,7 @@ class Chrono implements Runnable {
         switch (methode){
             case "spikes":
                 if (player.isLife()) player.setLife(false);
+                else player.reset();
                 break;
             case "shield":
                 System.out.println("Me voilà bien protégé");
