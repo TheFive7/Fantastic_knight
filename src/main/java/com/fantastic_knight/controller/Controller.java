@@ -8,7 +8,6 @@ public class Controller {
     protected Model model;
     protected View view;
     protected ControllerKeyboard keyboard;
-    protected ControllerAction actions;
 
     protected AnimationTimer animator;
 
@@ -16,7 +15,6 @@ public class Controller {
         this.model = model;
         this.view = view;
         keyboard = new ControllerKeyboard(model,view,this);
-        actions = new ControllerAction(model,view,this);
 
         animator = new AnimationTimer(){
 

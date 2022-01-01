@@ -10,6 +10,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 public class Game extends Application {
     public static View view;
     public static Model model;
@@ -17,6 +22,7 @@ public class Game extends Application {
     public static Stage primaryStage;
     public static Scene scene;
     public static Scene scene_menu ;
+    public static List<String> levels = findAllLevels();
 
     public static void main(String[] args) {
         launch(args);
@@ -43,5 +49,20 @@ public class Game extends Application {
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene_menu);
         stage.show();
+    }
+
+    public static List<String> findAllLevels() {
+        File folder = new File("src/main/java/com/fantastic_knight/save");
+        List<String> levels = new ArrayList<>();
+        for (File file : Objects.requireNonNull(folder.listFiles())) {
+            if (!file.isDirectory()) {
+                // SEPARER LE NOM DU FICHIER AVEC LE POINT
+                final String POINT = "\\.";
+                levels.add(file.getName().split(POINT)[0]);
+            } else {
+                findAllLevels();
+            }
+        }
+        return levels;
     }
 }

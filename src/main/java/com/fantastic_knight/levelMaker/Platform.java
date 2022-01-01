@@ -23,4 +23,9 @@ public class Platform extends Rectangle {
     public void setyCoordonnee(int yCoordonnee) {
         this.yCoordonnee = yCoordonnee;
     }
+
+    @Override
+    public String toString() {
+        return xCoordonnee + "," + yCoordonnee + "," + getFill();
+    }
 }
