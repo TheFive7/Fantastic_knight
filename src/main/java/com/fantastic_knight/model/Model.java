@@ -45,6 +45,9 @@ public class Model {
     public Rectangle r2;
     public Rectangle r3;
 
+    //Background
+
+
     public Model() {
         state = STATE_INITIAL;
         level = 1;

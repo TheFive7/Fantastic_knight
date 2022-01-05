@@ -1,8 +1,13 @@
 package com.fantastic_knight.view;
 
+import com.fantastic_knight.Game;
 import com.fantastic_knight.model.Model;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
@@ -25,6 +30,8 @@ public class ViewLevel1 extends ViewLevel {
 
 /*        model.spikes.getShape().setFill(Color.PURPLE);*/
         pane.getChildren().addAll(model.spikes.getShape(),model.player.getShape(),model.r1,model.r2,model.r3);
-        pane.setStyle("-fx-background-color: white;");
+
+        pane.setStyle("-fx-background-image: url('"+ Game.class.getResource("bg.png")+"')");
+
     }
 }
