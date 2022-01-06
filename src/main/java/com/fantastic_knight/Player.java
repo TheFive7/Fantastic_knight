@@ -4,6 +4,7 @@ import com.fantastic_knight.model.Model;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
@@ -28,11 +29,13 @@ public class Player extends Sprite {
     double vSaut = 18;
     int lastMove;
     double lastX = xPosition;
+    Model model;
 
     // 0 RIGHT; 180 LEFT
 
     public Player(Model model) {
         super(model);
+        this.model = model;
         width = 20;
         height = 50;
         shape = new Rectangle(width,height,Color.BLACK);
@@ -83,6 +86,8 @@ public class Player extends Sprite {
         shape.setX(xPosition);
         shape.setY(yPosition);
         state = State.IDLE;
+        getModel().shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/shield.png")));
+
     }
 
     private double getNewX() {
@@ -287,4 +292,6 @@ public class Player extends Sprite {
     public boolean isLife() {
         return life;
     }
+
+    public Model getModel() {return model;}
 }

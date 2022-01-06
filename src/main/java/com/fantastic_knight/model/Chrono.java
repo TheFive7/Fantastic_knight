@@ -1,6 +1,11 @@
 package com.fantastic_knight.model;
 
+import com.fantastic_knight.Game;
 import com.fantastic_knight.Player;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
 
 class Chrono implements Runnable {
     Item item;
@@ -32,10 +37,14 @@ class Chrono implements Runnable {
     public void choixMethodes(String methode){
         switch (methode){
             case "spikes":
-                if (player.isLife()) player.setLife(false);
+                if (player.isLife()) {
+                    player.setLife(false);
+                    player.getModel().shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/shield_empty.png")));
+                }
                 else player.reset();
                 break;
             case "shield":
+                if (!this.item.isActive)
                 System.out.println("Me voilà bien protégé");
         }
     }

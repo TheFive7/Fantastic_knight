@@ -40,6 +40,9 @@ public class Model {
     // Items
     public Spikes spikes;
 
+    // Ath
+    public Shield shield;
+
     // Obstacles
     public Rectangle r1;
     public Rectangle r2;

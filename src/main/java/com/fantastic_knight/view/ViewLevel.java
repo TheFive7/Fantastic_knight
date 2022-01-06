@@ -1,6 +1,7 @@
 package com.fantastic_knight.view;
 
 import com.fantastic_knight.model.Model;
+import com.fantastic_knight.model.Shield;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
@@ -25,7 +26,9 @@ public abstract class ViewLevel {
 		model.obstacles.add(model.southWall);
 		model.obstacles.add(model.eastWall);
 		model.obstacles.add(model.westWall);
-
+		// model.traps.add();
+		model.shield = new Shield();
+		pane.getChildren().add(model.shield);
 		// autocall the init method to setup the level.
 		init();
     }
