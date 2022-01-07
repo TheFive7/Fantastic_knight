@@ -1,5 +1,6 @@
 package com.fantastic_knight.view;
 
+import com.fantastic_knight.Game;
 import com.fantastic_knight.model.Model;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -11,8 +12,7 @@ public class ViewLevel2 extends ViewLevel {
     }
 
     public void init() {
-        model.player.getShape().setFill(Color.WHITE);
         pane.getChildren().addAll(model.player.getShape());
-        pane.setStyle("-fx-background-color: black;");
+        pane.setStyle("-fx-background-image: url('"+ Game.class.getResource("bg.png")+"')");
     }
 }

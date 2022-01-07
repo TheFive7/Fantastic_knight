@@ -25,23 +25,27 @@ public class Player extends Sprite {
     double angle;
     String name;
     State state;
-    Image image;
+    Image[] image;
     double vSaut = 18;
     int lastMove;
     double lastX = xPosition;
     Model model;
+    AnimationImage animation;
 
     // 0 RIGHT; 180 LEFT
 
     public Player(Model model) {
         super(model);
         this.model = model;
-        width = 20;
-        height = 50;
+        image = new Image[2];
+        image[0] = new Image("file:src/main/resources/com/fantastic_knight/perso_droite_idle.png");
+        image[1] = new Image("file:src/main/resources/com/fantastic_knight/perso_droite_walk.png");
+        width = image[0].getWidth();
+        height = image[0].getHeight();
         shape = new Rectangle(width,height,Color.BLACK);
         life = true;
-        xPosition = 25;
-        yPosition = 25;
+        xPosition = 0;
+        yPosition = model.height - height;
         xVelocity = 5;
         yVelocity = 0;
         angle = 0;
@@ -49,6 +53,10 @@ public class Player extends Sprite {
         shape.setY(yPosition);
         state = State.IDLE;
         life = true;
+        shape.setFill(new ImagePattern(image[0]));
+        animation = new AnimationImage(image, shape);
+        animated = true;
+        win = false;
     }
 
     public void moveLeft() {
@@ -79,16 +87,16 @@ public class Player extends Sprite {
     }
 
     public void reset() {
-        xPosition = 25;
-        yPosition = 25;
+        xPosition = 0;
+        yPosition = model.height - height;
         xVelocity = 2;
         yVelocity = 0;
         angle = 0;
+        life = true;
         shape.setX(xPosition);
         shape.setY(yPosition);
         state = State.IDLE;
         getModel().shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/shield.png")));
-
     }
 
     private double getNewX() {
@@ -121,9 +129,9 @@ public class Player extends Sprite {
 
         Rectangle shape1 = new Rectangle(width,height,Color.BLACK);
         if (state == State.IDLE) {
-            return;
+            animation.getTimer().stop();
         } else { // moving or falling
-
+            if (state == State.WALK) {animation.getTimer().start();}
             testJump(shape1,y);
             testWalk(shape1);
 
@@ -294,5 +302,19 @@ public class Player extends Sprite {
         return life;
     }
 
-    public Model getModel() {return model;}
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+    }
+
+    public AnimationImage getAnimation() {
+        return animation;
+    }
+
+    public void setAnimation(AnimationImage animation) {
+        this.animation = animation;
+    }
 }

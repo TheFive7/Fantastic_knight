@@ -19,6 +19,9 @@ public class ViewLevel1 extends ViewLevel {
     }
 
     public void init() {
+        // Background
+        pane.setStyle("-fx-background-image: url('"+ Game.class.getResource("bg.png")+"')");
+
         // Obstacles
         model.r1 = new Rectangle(0,150,300,20); model.r1.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/shield.png")));
         model.r2 = new Rectangle(150,300,300,20); model.r2.setFill(Color.YELLOW);
@@ -26,12 +29,14 @@ public class ViewLevel1 extends ViewLevel {
         model.obstacles.add(model.r1);
         model.obstacles.add(model.r2);
         model.obstacles.add(model.r3);
+
+        // SPIKES
+        model.spikes.getShape().setX(500);
+        model.spikes.getShape().setY(model.height - model.spikes.getShape().getHeight());
         model.items.add(model.spikes);
 
-/*        model.spikes.getShape().setFill(Color.PURPLE);*/
         pane.getChildren().addAll(model.spikes.getShape(),model.player.getShape(),model.r1,model.r2,model.r3);
 
-        pane.setStyle("-fx-background-image: url('"+ Game.class.getResource("bg.png")+"')");
 
     }
 }

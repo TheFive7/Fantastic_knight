@@ -1,25 +1,19 @@
 package com.fantastic_knight.model;
 
-import com.fantastic_knight.Game;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
-import java.io.File;
-
-public class Spikes extends Item{
+public class Spikes extends Item {
     public Spikes(Model m){
         super(m);
         width = 100;
-        height = 75;
+        height = 20;
         shape = new Rectangle(width,height);
-        xPosition = 400;
-        yPosition = 410;
+        xPosition = 0;
+        yPosition = 0;
         shape.setX(xPosition);
         shape.setY(yPosition);
         isActive = true;
