@@ -2,26 +2,42 @@ package com.fantastic_knight.controller;
 
 import com.fantastic_knight.model.Model;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 
 import static com.fantastic_knight.Game.*;
 import static com.fantastic_knight.Game.primaryStage;
 
-public class LevelsController {
+public class LevelsController extends Pane {
 
-    public void selectLevel1(){
-        if (model.state == Model.STATE_INITIAL) {
-            primaryStage.setScene(scene);
-            model.level = 1;
-            System.out.println("Level " + model.level);
-            controller.startGame();
+    public LevelsController(){
+        setHeight(800);
+        setWidth(1200);
+        ImageView bgImage = new ImageView(new Image("file:src/main/resources/com/fantastic_knight/levels.png"));
+        Button buttonMenu = new Button();
+        buttonMenu.setLayoutX(1128); buttonMenu.setLayoutY(697); buttonMenu.setOnAction(e -> returnMenu());
+        buttonMenu.setOpacity(0); buttonMenu.setPrefSize(60,85.3);
+        getChildren().addAll(bgImage, buttonMenu);
+
+        int i = 0; int j = 0;
+        int compteur = 1;
+        for (String levelName : levels) {
+            ButtonLevel buttonLevel = new ButtonLevel(levelName,60 + j * 250, 219 + i * 130);
+            int finalCompteur = compteur;
+            buttonLevel.setOnAction(e -> selectLevel(finalCompteur));
+            getChildren().add(buttonLevel);
+            compteur++;
+            i++;
+            if (i == 4){i = 0; j++;}
         }
     }
 
-    public void selectLevel2(){
+    public void selectLevel(int i){
         if (model.state == Model.STATE_INITIAL) {
             primaryStage.setScene(scene);
-            model.level = 2;
-            System.out.println("Level "+ model.level);
+            model.level = i;
             controller.startGame();
         }
     }
@@ -32,15 +48,22 @@ public class LevelsController {
 }
 
 class ButtonLevel extends Button {
-    public ButtonLevel(double x, double y){
+    public ButtonLevel(String name, double x, double y){
         super();
+        setText(name);
         setLayoutX(x); setLayoutY(y);
-        setWidth(200);
+        setPrefSize(200,100);
         setHeight(100);
-        setStyle("-fx-background-color: #444444 ");
-        setStyle("-fx-border: 3px solid #000000 ");
-        setStyle("-fx-border-radius: 40px ");
-        setStyle("-fx-box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.25) ");
-        setOpacity(0);
+        setWidth(200);
+        String css = """
+                -fx-font: 22 Arial;
+                -fx-base: #444444;
+                -fx-background-radius: 40px;
+                -fx-border-color:black;
+                -fx-border-radius: 40;
+                -fx-border-width: 3;
+                """;
+        setStyle(css);
+        setOpacity(100);
     }
 }
