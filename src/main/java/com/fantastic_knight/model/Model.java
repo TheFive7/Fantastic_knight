@@ -38,19 +38,8 @@ public class Model {
     // Objets
     public Player player;
 
-    // Items
-    public Spikes spikes;
-
     // Ath
     public Shield shield;
-
-    // Obstacles
-    public Rectangle r1;
-    public Rectangle r2;
-    public Rectangle r3;
-
-    //Background
-
 
     public Model() {
         state = STATE_INITIAL;
@@ -59,7 +48,6 @@ public class Model {
         height = 800;
         lastFrame = -1;
         player = new Player(this);
-        spikes = new Spikes(this);
         obstacles = new ArrayList<>();
         sprites = new ArrayList<>();
         items = new ArrayList<>();
@@ -80,6 +68,8 @@ public class Model {
         for(Sprite s: sprites) {
             s.update();
         }
-        spikes.update();
+        for(Item i: items) {
+            i.update();
+        }
     }
 }
