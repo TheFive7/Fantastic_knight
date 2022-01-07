@@ -48,6 +48,7 @@ public class Player extends Sprite {
         shape.setX(xPosition);
         shape.setY(yPosition);
         state = State.IDLE;
+        life = true;
     }
 
     public void moveLeft() {

@@ -12,12 +12,10 @@ class Chrono implements Runnable {
     Player player;
     String methode;
 
-    public Chrono(Item item, Player player, String methode)
-    {
+    public Chrono(Item item, Player player, String methode) {
         this.item = item;
         this.player = player;
         this.methode = methode;
-
     }
 
     public void run() {
@@ -25,7 +23,7 @@ class Chrono implements Runnable {
         try {
             this.item.isActive = false;     // désactive le piège
             choixMethodes(methode);         // choix de la méthode à utiliser selon l'item
-            Thread.sleep(3000);       // attend 3000 millisecondes -> 3 secondes
+            Thread.sleep(1500);       // attend 3000 millisecondes -> 3 secondes
             this.item.isActive = true;      // réactive l'item avant de terminer le Thread puis le fermer
             Thread.currentThread().interrupt();
             return;

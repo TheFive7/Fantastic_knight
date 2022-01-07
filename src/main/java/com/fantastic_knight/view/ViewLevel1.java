@@ -20,7 +20,7 @@ public class ViewLevel1 extends ViewLevel {
 
     public void init() {
         // Obstacles
-        model.r1 = new Rectangle(0,150,300,20); model.r1.setFill(Color.RED);
+        model.r1 = new Rectangle(0,150,300,20); model.r1.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/shield.png")));
         model.r2 = new Rectangle(150,300,300,20); model.r2.setFill(Color.YELLOW);
         model.r3 = new Rectangle(300,450,300,20); model.r3.setFill(Color.BLUE);
         model.obstacles.add(model.r1);
