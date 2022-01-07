@@ -38,7 +38,6 @@ public class ControllerKeyboard implements EventHandler<KeyEvent> {
 
 		// System.out.println("keycode = "+arg0.getCode());
 
-
 		if (arg0.getCode() == KeyCode.Q) {
 			control.movePersoLeft();
 		} else if (arg0.getCode() == KeyCode.D) {
