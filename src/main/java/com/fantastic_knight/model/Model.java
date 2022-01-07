@@ -2,6 +2,7 @@ package com.fantastic_knight.model;
 
 import com.fantastic_knight.Player;
 import com.fantastic_knight.Sprite;
+import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 

@@ -22,10 +22,10 @@ public abstract class ViewLevel {
 		model.southWall = new Rectangle(0,model.height,model.width,50);
 		model.westWall = new Rectangle(-50,-50,50,model.height+100);
 		model.eastWall = new Rectangle(model.width,-50,50,model.height+100);
-		model.obstacles.add(model.northWall);
-		model.obstacles.add(model.southWall);
-		model.obstacles.add(model.eastWall);
-		model.obstacles.add(model.westWall);
+//		model.obstacles.add(model.northWall);
+//		model.obstacles.add(model.southWall);
+//		model.obstacles.add(model.eastWall);
+//		model.obstacles.add(model.westWall);
 		// model.traps.add();
 		model.shield = new Shield();
 		pane.getChildren().add(model.shield);
