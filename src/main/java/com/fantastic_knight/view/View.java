@@ -4,6 +4,7 @@ import com.fantastic_knight.model.Model;
 import javafx.scene.Group;
 import javafx.scene.layout.Pane;
 
+import static com.fantastic_knight.Game.levels;
 import static com.fantastic_knight.Game.primaryStage;
 import static com.fantastic_knight.controller.MenuController.scene_levels;
 
@@ -31,10 +32,12 @@ public class View {
     public void startGame() {
         root.getChildren().clear();
         // add game panel to the scene
-        if (model.level == 1) {
-            currentLevel = new ViewLevel1(model, paneGame);
-        } else if (model.level == 2) {
-            currentLevel = new ViewLevel2(model, paneGame);
+
+        for (int i = 0; i < levels.size(); i++){
+            if (model.level - 1 == i){
+                currentLevel = new ViewLevel(model, paneGame, i);
+                break;
+            }
         }
         root.getChildren().add(paneGame);
     }
@@ -43,9 +46,5 @@ public class View {
         model.state = Model.STATE_INITIAL;
         model.reset();
         primaryStage.setScene(scene_levels);
-    }
-
-    public void loadLevel(String nameLevel){
-
     }
 }
