@@ -1,22 +1,21 @@
 package com.fantastic_knight.levelMaker;
 
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.Scanner;
 
-import static com.fantastic_knight.Game.findAllLevels;
+import static com.fantastic_knight.Game.*;
 
-public class LevelMaker extends Application {
+public class LevelMaker extends Pane {
+
+    Color color = Color.BLACK;
 
     Platform[][] platforms = new Platform[12][40];
     String fileNameExport = "default";
@@ -24,8 +23,7 @@ public class LevelMaker extends Application {
 
     ChoiceBox<String> choiceBoxLevels;
 
-    @Override
-    public void start(Stage stage) {
+    public LevelMaker(){
         Pane paneLevelMaker = new Pane();
         paneLevelMaker.setPrefSize(1500,800);
 
@@ -33,6 +31,7 @@ public class LevelMaker extends Application {
         Pane paneMaker = new Pane();
         paneMaker.setPrefSize(1200,800);
 
+        // REMPLISSAGE DE RECTANGLES BLANCS
         for(int i = 0; i < 12; i++){
             for (int j = 0; j < 40; j++){
                 Platform platform = new Platform();
@@ -43,6 +42,7 @@ public class LevelMaker extends Application {
             }
         }
 
+        // EVENTS MOUSE
         paneMaker.setOnMouseClicked(e -> drawPlatform(e,platforms));
         paneMaker.setOnMouseDragged(e -> drawPlatform(e,platforms));
 
@@ -73,27 +73,55 @@ public class LevelMaker extends Application {
         buttonLoad.setLayoutX(100); buttonLoad.setLayoutY(150);
         buttonLoad.setOnAction(e -> load(paneMaker));
 
+        // TOGGLE BUTTON
+        ToggleButton toggleButton = new ToggleButton("Spikes");
+        toggleButton.setLayoutX(150); toggleButton.setLayoutY(200);
+        toggleButton.setOnAction(e -> spikesActive());
+
         // CLEAR
         Button buttonClear = new Button("CLEAR");
         buttonClear.setLayoutX(100); buttonClear.setLayoutY(250);
         buttonClear.setOnAction(e -> clear());
 
-        paneChoose.getChildren().addAll(buttonExport,buttonLoad,buttonClear,textFieldFileName,choiceBoxLevels);
+        // MENU
+        Button buttonMenu = new Button("MENU");
+        buttonMenu.setLayoutX(100); buttonMenu.setLayoutY(350);
+        buttonMenu.setOnAction(e -> menu());
 
+        // AJOUTS
+        paneChoose.getChildren().addAll(buttonExport,buttonLoad,toggleButton,buttonClear,buttonMenu,textFieldFileName,choiceBoxLevels);
         paneLevelMaker.getChildren().addAll(paneMaker,paneChoose);
-
-        Scene scene = new Scene(paneLevelMaker,1500,800);
-
-        stage.setTitle("Fantastic Knight Level Maker");
-        stage.setScene(scene);
-        stage.show();
+        getChildren().add(paneLevelMaker);
     }
 
+    /**
+     * Efface tous les rectangles
+     */
     void clear() {
         for (Platform[] platform : platforms){
             for (Platform p : platform){
                 p.setFill(Color.WHITE);
             }
+        }
+    }
+
+    /**
+     * Retourne au menu
+     */
+    void menu() {
+        levels = findAllLevels();
+        primaryStage.setWidth(1200);
+        primaryStage.setScene(scene_menu);
+    }
+
+    /**
+     * Active les piques
+     */
+    void spikesActive(){
+        if (color.equals(Color.BLACK)){
+            color = Color.RED;
+        } else {
+            color = Color.BLACK;
         }
     }
 
@@ -104,7 +132,7 @@ public class LevelMaker extends Application {
             if (e.getButton() == MouseButton.PRIMARY){
                 platforms[x][y].setxCoordonnee(x);
                 platforms[x][y].setyCoordonnee(y);
-                platforms[x][y].setFill(Color.BLACK);
+                platforms[x][y].setFill(color);
             } else if (e.getButton() == MouseButton.SECONDARY){
                 platforms[x][y].setxCoordonnee(x);
                 platforms[x][y].setyCoordonnee(y);
