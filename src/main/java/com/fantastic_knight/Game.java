@@ -28,9 +28,25 @@ public class Game extends Application {
         launch(args);
     }
 
+    /* FAIT:
+    * Modifications majeures:
+    * Possibilité de charger un niveau dans le jeu
+    * Levels ajoutés automatiquements dans le jeu
+    * Changement du menu
+    * Changement du menuLevels
+    * View, ViewLevel modifiés
+    * Model modifié
+    * LevelMaker amélioré, possibilité de générer des piques
+    * MenuController Modifié
+    * Piques remaniés
+    * Chaque niveau peut maintenant être chargé avec ses piques et platformes
+    * Amélioration de l'animation
+    * Bugs corrigés
+    */
 
     @Override
     public void start(Stage stage) throws Exception {
+        System.out.println(levels);
         primaryStage = stage;
 
         model = new Model();
