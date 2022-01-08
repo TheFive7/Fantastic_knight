@@ -53,17 +53,26 @@ public class Model {
         items = new ArrayList<>();
     }
 
+    /**
+     * Lance le jeu
+     */
     public void startGame() {
         state = STATE_PLAY;
         sprites.add(player);
     }
 
+    /**
+     * Reset le jeu
+     */
     public void reset() {
         sprites.clear();
         player.reset();
         obstacles.clear();
     }
 
+    /**
+     * Actualisation
+     */
     public void update() {
         for(Sprite s: sprites) {
             s.update();
