@@ -125,6 +125,11 @@ public class LevelMaker extends Pane {
         }
     }
 
+    /**
+     * Dessine une plateforme
+     * @param e : Mouse Event
+     * @param platforms : Tableau des plateformes
+     */
     void drawPlatform(MouseEvent e, Platform[][] platforms){
         int x = (int) (Math.round(e.getX() * 10)/1000);
         int y = (int) (Math.round(e.getY() * 10)/200);
@@ -141,6 +146,9 @@ public class LevelMaker extends Pane {
         }
     }
 
+    /**
+     * Exporter un niveau
+     */
     void export(){
         try {
 
@@ -163,6 +171,10 @@ public class LevelMaker extends Pane {
         }
     }
 
+    /**
+     * Charger un niveau
+     * @param paneMaker : Pane sur lequel afficher le niveau
+     */
     void load(Pane paneMaker){
         clear();
         try {
@@ -172,16 +184,18 @@ public class LevelMaker extends Pane {
             final String ESPACE = " ";
             final String VIRGULE = ",";
 
+            // Parcours du tableau
             for(int i = 0; i < 12; i++){
                 String[] mots = scanner.nextLine().split(ESPACE);
                 for (int j = 0; j < 40; j++){
                     String[] coordonnees = mots[j].split(VIRGULE);
-                    // System.out.println(Arrays.toString(coordonnees));
 
+                    // Lecture des valeurs
                     int x = Integer.parseInt(coordonnees[0]);
                     int y = Integer.parseInt(coordonnees[1]);
                     Color color = Color.valueOf(coordonnees[2]);
 
+                    // Creation d'une plateforme
                     Platform platform = new Platform();
                     platform.setFill(color);
 
