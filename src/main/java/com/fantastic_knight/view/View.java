@@ -24,14 +24,19 @@ public class View {
     }
 
 
+    /**
+     * Met en place la vue du jeu
+     */
     public void game() {
         paneGame = new Pane();
         paneGame.setPrefSize(model.width,model.height);
     }
 
+    /**
+     * Démarre le jeu (le niveau demandé)
+     */
     public void startGame() {
         root.getChildren().clear();
-        // add game panel to the scene
 
         for (int i = 0; i < levels.size(); i++){
             if (model.level - 1 == i){
@@ -42,6 +47,9 @@ public class View {
         root.getChildren().add(paneGame);
     }
 
+    /**
+     * Retourne au menu
+     */
     public void returnMenu() {
         model.state = Model.STATE_INITIAL;
         model.reset();
