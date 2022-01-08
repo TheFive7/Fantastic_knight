@@ -29,19 +29,11 @@ public class Game extends Application {
     }
 
     /* FAIT:
-    * Modifications majeures:
-    * Possibilité de charger un niveau dans le jeu
-    * Levels ajoutés automatiquements dans le jeu
-    * Changement du menu
-    * Changement du menuLevels
-    * View, ViewLevel modifiés
-    * Model modifié
-    * LevelMaker amélioré, possibilité de générer des piques
-    * MenuController Modifié
-    * Piques remaniés
-    * Chaque niveau peut maintenant être chargé avec ses piques et platformes
-    * Amélioration de l'animation
-    * Bugs corrigés
+    * code commenté
+    * chevalier regarde maintenant aussi à gauche
+    * animation du chevalier à gauche
+    * Arrangement de parties du code
+    * Quelques bugs réglés
     */
 
     @Override
@@ -68,6 +60,10 @@ public class Game extends Application {
         stage.show();
     }
 
+    /**
+     * Trouve tous les niveaux crées dans le dossier /save
+     * @return : La liste des niveaux crées
+     */
     public static List<String> findAllLevels() {
         File folder = new File("src/main/java/com/fantastic_knight/save");
         List<String> levels = new ArrayList<>();
