@@ -39,10 +39,10 @@ public class Player extends Sprite {
         super(model);
         this.model = model;
         imageRight = new Image[2]; imageLeft = new Image[2];
-        imageRight[0] = new Image("file:src/main/resources/com/fantastic_knight/perso_droite_idle.png");
-        imageRight[1] = new Image("file:src/main/resources/com/fantastic_knight/perso_droite_walk.png");
-        imageLeft[0] = new Image("file:src/main/resources/com/fantastic_knight/perso_gauche_idle.png");
-        imageLeft[1] = new Image("file:src/main/resources/com/fantastic_knight/perso_gauche_walk.png");
+        imageRight[0] = new Image("file:src/main/resources/com/fantastic_knight/player/perso_droite_idle.png");
+        imageRight[1] = new Image("file:src/main/resources/com/fantastic_knight/player/perso_droite_walk.png");
+        imageLeft[0] = new Image("file:src/main/resources/com/fantastic_knight/player/perso_gauche_idle.png");
+        imageLeft[1] = new Image("file:src/main/resources/com/fantastic_knight/player/perso_gauche_walk.png");
         width = imageRight[0].getWidth();
         height = imageRight[0].getHeight();
         shape = new Rectangle(width,height,Color.BLACK);
@@ -57,7 +57,7 @@ public class Player extends Sprite {
         state = State.IDLE;
         life = true;
         shape.setFill(new ImagePattern(imageRight[0]));
-        animation = new AnimationImage(imageRight, shape);
+        animation = new AnimationImage(imageRight, shape, 10);
         animated = true;
         win = false;
     }
@@ -66,34 +66,32 @@ public class Player extends Sprite {
      * Bouge à gauche
      */
     public void moveLeft() {
-        if(state==State.JUMP || state==State.FALL) return;
+        if(state == State.JUMP || state == State.FALL) return;
         // Image
         animation.getTimer().stop();
         shape.setFill(new ImagePattern(imageLeft[0]));
-        animation = new AnimationImage(imageLeft, shape);
+        animation = new AnimationImage(imageLeft, shape, 10);
         xVelocity = 5;
         yVelocity = 0;
         angle = 180;
         lastMove = 1;
         state = State.WALK;
-        //System.out.println("etat walkL");
     }
 
     /**
      * Bouge à droite
      */
     public void moveRight() {
-        if(state==State.JUMP || state==State.FALL) return;
+        if(state == State.JUMP || state == State.FALL) return;
         // Image
         animation.getTimer().stop();
         shape.setFill(new ImagePattern(imageRight[0]));
-        animation = new AnimationImage(imageRight, shape);
+        animation = new AnimationImage(imageRight, shape, 10);
         xVelocity = 5;
         yVelocity = 0;
         angle = 0;
         lastMove = 2;
         state = State.WALK;
-        //System.out.println("etat walkR");
     }
 
     /**

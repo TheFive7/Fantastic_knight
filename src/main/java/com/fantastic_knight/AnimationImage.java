@@ -12,11 +12,13 @@ public class AnimationImage {
     int i = 0;
     Shape shape;
     Image[] images;
+    int speed;
 
-    public AnimationImage(Image[] images, Shape shape){
+    public AnimationImage(Image[] images, Shape shape, int speed){
         this.images = images;
         this.shape = shape;
         length = images.length;
+        this.speed = speed;
         toggleTimer();
     }
 
@@ -26,7 +28,7 @@ public class AnimationImage {
     private void toggleTimer() {
         if (timer == null) {
             timer = new AnimationTimer() {
-                private final int MAXSAMPPLES = 10;
+                private final int MAXSAMPPLES = speed;
                 private long[] diffs = new long[MAXSAMPPLES];
                 private long previousTime = -1;
                 private int currentIndex = 0;
