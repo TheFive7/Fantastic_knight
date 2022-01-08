@@ -29,7 +29,7 @@ public class ViewLevel {
 		// Background
 		pane.setStyle("-fx-background-image: url('"+ Game.class.getResource("bg.png")+"')");
 
-		// define obstacle for outside the view.
+		// Define obstacle for outside the view.
 		model.northWall = new Rectangle(0,-50,model.width,50);
 		model.southWall = new Rectangle(0,model.height,model.width,50);
 		model.westWall = new Rectangle(-50,-50,50,model.height+100);
@@ -42,7 +42,7 @@ public class ViewLevel {
 		model.shield = new Shield();
 		pane.getChildren().add(model.shield);
 
-		// autocall the init method to setup the level.
+		// Autocall the init method to setup the level.
 		loadLevel(Game.levels.get(levelNumber));
 		init();
     }
@@ -52,6 +52,10 @@ public class ViewLevel {
 		pane.getChildren().add(model.player.getShape());
 	}
 
+	/**
+	 * Charge le niveau demandé
+	 * @param nameLevel : Nom du niveau demandé
+	 */
 	public void loadLevel(String nameLevel){
 		System.out.println(nameLevel);
 
@@ -100,11 +104,10 @@ public class ViewLevel {
 			}
 
 			scanner.close();
-
 			System.out.println("Fichier " + nameLevel + " chargé");
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("Error with Level Load");
 		}
 	}
 
