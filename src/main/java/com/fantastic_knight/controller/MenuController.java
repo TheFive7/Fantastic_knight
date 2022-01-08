@@ -9,12 +9,18 @@ public class MenuController {
     public static Scene scene_levels;
     public static Scene scene_levelMaker;
 
+    /**
+     * Bouton PLAY
+     */
     public void play() {
-        LevelsController levelsController = new LevelsController();
-        scene_levels = new Scene(levelsController, 1200, 800);
+        LevelsMenu levelsMenu = new LevelsMenu();
+        scene_levels = new Scene(levelsMenu, 1200, 800);
         primaryStage.setScene(scene_levels);
     }
 
+    /**
+     * Bouton PLAY du LevelMaker
+     */
     public void playLevelMaker(){
         scene_levelMaker = new Scene(new LevelMaker(), 1200, 800);
         primaryStage.setWidth(1500);
