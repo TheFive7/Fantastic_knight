@@ -22,10 +22,13 @@ public class ControllerKeyboard implements EventHandler<KeyEvent> {
         view.root.requestFocus();
         view.root.setOnKeyPressed(this);
 
+		// Touches
 		view.root.setOnKeyReleased(event -> {
 			if (model.state == Model.STATE_INITIAL) return;
+			// Gauche
 			if (event.getCode() == KeyCode.Q && model.player.getAngle() == 180 && model.player.getState() == State.WALK) {
 				control.stopPerso();
+			// Droite
 			} else if (event.getCode() == KeyCode.D && model.player.getAngle() == 0 && model.player.getState() == State.WALK) {
 				control.stopPerso();
 			}
@@ -48,10 +51,6 @@ public class ControllerKeyboard implements EventHandler<KeyEvent> {
 			view.returnMenu();
 		} else if (arg0.getCode() == KeyCode.F) {
 			control.stopPerso();
-		} else if (arg0.getCode() == KeyCode.UP) {
-
-		} else if (arg0.getCode() == KeyCode.DOWN) {
-
 		} else if (arg0.getCode() == KeyCode.SPACE) {
 			control.jumpPerso();
 		}
