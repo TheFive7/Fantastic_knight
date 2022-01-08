@@ -28,6 +28,7 @@ class Chrono implements Runnable {
             Thread.sleep(1500);       // attend 3000 millisecondes -> 3 secondes
             this.item.isActive = true;      // réactive l'item avant de terminer le Thread puis le fermer
             Thread.currentThread().interrupt();
+            return;
         } catch (InterruptedException e) {
             System.err.println("Error with Chrono");
         }
