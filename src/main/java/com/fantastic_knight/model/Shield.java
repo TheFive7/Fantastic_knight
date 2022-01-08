@@ -8,6 +8,7 @@ public class Shield extends Rectangle {
     double width, height;
     double xpos, ypos;
     Image image;
+
     public Shield() {
         width = 100;
         height = 100;
