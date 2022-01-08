@@ -20,6 +20,9 @@ public class AnimationImage {
         toggleTimer();
     }
 
+    /**
+     * Active l'animation d'images
+     */
     private void toggleTimer() {
         if (timer == null) {
             timer = new AnimationTimer() {
