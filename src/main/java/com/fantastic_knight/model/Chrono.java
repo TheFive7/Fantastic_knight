@@ -18,17 +18,18 @@ class Chrono implements Runnable {
         this.methode = methode;
     }
 
+    /**
+     * Lancement du chrono
+     */
     public void run() {
-        // Créer un switch pour savoir quoi mettre en attente
         try {
             this.item.isActive = false;     // désactive le piège
             choixMethodes(methode);         // choix de la méthode à utiliser selon l'item
             Thread.sleep(1500);       // attend 3000 millisecondes -> 3 secondes
             this.item.isActive = true;      // réactive l'item avant de terminer le Thread puis le fermer
             Thread.currentThread().interrupt();
-            return;
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            System.err.println("Error with Chrono");
         }
     }
 
