@@ -21,12 +21,11 @@ public class Spikes extends Item {
         shape.setFill(new ImagePattern(image));
     }
 
+    /**
+     * Actualisation des piques
+     */
     @Override
     public void update() {
-        // importer player en mettant ses attributs de position en static pour récup ses attributs et travailler avec sa position
-        // comment récup coords player ?
-        // importer player en mettant ses attributs de position en static pour récup ses attributs et travailler avec sa position
-        // collision ? oui -> meurt
         double x = model.player.getxPosition();
         double y = model.player.getyPosition();
         Rectangle joueur = new Rectangle(model.player.getWidth(),model.player.getHeight());
