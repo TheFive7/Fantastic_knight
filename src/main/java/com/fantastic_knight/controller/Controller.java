@@ -16,6 +16,7 @@ public class Controller {
         this.view = view;
         keyboard = new ControllerKeyboard(model,view,this);
 
+        // Boucle d'animation
         animator = new AnimationTimer(){
 
             @Override
@@ -31,14 +32,12 @@ public class Controller {
         };
     }
 
+    /**
+     * Permet de commencer le jeu
+     */
     public void startGame() {
         model.startGame();
         view.startGame();
-	/* CAUTION: since starting the game implies to
-	   remove the intro pane from root, then root has no more
-	   children. It seems that this removal causes a focus lost
-	   which must be set once again in ordre to catch keyboard events.
-	*/
         view.root.setFocusTraversable(true);
         view.root.requestFocus();
         animator.start();
