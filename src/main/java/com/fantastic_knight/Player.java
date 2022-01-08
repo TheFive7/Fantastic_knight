@@ -25,7 +25,8 @@ public class Player extends Sprite {
     double angle;
     String name;
     State state;
-    Image[] image;
+    Image[] imageRight;
+    Image[] imageLeft;
     double vSaut = 18;
     int lastMove;
     double lastX = xPosition;
@@ -37,11 +38,13 @@ public class Player extends Sprite {
     public Player(Model model) {
         super(model);
         this.model = model;
-        image = new Image[2];
-        image[0] = new Image("file:src/main/resources/com/fantastic_knight/perso_droite_idle.png");
-        image[1] = new Image("file:src/main/resources/com/fantastic_knight/perso_droite_walk.png");
-        width = image[0].getWidth();
-        height = image[0].getHeight();
+        imageRight = new Image[2]; imageLeft = new Image[2];
+        imageRight[0] = new Image("file:src/main/resources/com/fantastic_knight/perso_droite_idle.png");
+        imageRight[1] = new Image("file:src/main/resources/com/fantastic_knight/perso_droite_walk.png");
+        imageLeft[0] = new Image("file:src/main/resources/com/fantastic_knight/perso_gauche_idle.png");
+        imageLeft[1] = new Image("file:src/main/resources/com/fantastic_knight/perso_gauche_walk.png");
+        width = imageRight[0].getWidth();
+        height = imageRight[0].getHeight();
         shape = new Rectangle(width,height,Color.BLACK);
         life = true;
         xPosition = 0;
@@ -53,14 +56,21 @@ public class Player extends Sprite {
         shape.setY(yPosition);
         state = State.IDLE;
         life = true;
-        shape.setFill(new ImagePattern(image[0]));
-        animation = new AnimationImage(image, shape);
+        shape.setFill(new ImagePattern(imageRight[0]));
+        animation = new AnimationImage(imageRight, shape);
         animated = true;
         win = false;
     }
 
+    /**
+     * Bouge à gauche
+     */
     public void moveLeft() {
         if(state==State.JUMP || state==State.FALL) return;
+        // Image
+        animation.getTimer().stop();
+        shape.setFill(new ImagePattern(imageLeft[0]));
+        animation = new AnimationImage(imageLeft, shape);
         xVelocity = 5;
         yVelocity = 0;
         angle = 180;
@@ -69,8 +79,15 @@ public class Player extends Sprite {
         //System.out.println("etat walkL");
     }
 
+    /**
+     * Bouge à droite
+     */
     public void moveRight() {
         if(state==State.JUMP || state==State.FALL) return;
+        // Image
+        animation.getTimer().stop();
+        shape.setFill(new ImagePattern(imageRight[0]));
+        animation = new AnimationImage(imageRight, shape);
         xVelocity = 5;
         yVelocity = 0;
         angle = 0;
@@ -79,6 +96,9 @@ public class Player extends Sprite {
         //System.out.println("etat walkR");
     }
 
+    /**
+     * Stop le personnage
+     */
     public void stop() {
         xVelocity = 0;
         yVelocity = 0;
@@ -86,6 +106,9 @@ public class Player extends Sprite {
         state = State.IDLE;
     }
 
+    /**
+     * Reset le personnage
+     */
     public void reset() {
         xPosition = 0;
         yPosition = model.height - height;
@@ -99,18 +122,29 @@ public class Player extends Sprite {
         getModel().shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/shield.png")));
     }
 
+    /**
+     * Retourne la nouvelle abscisse
+     * @return : La nouvelle abscisse
+     */
     private double getNewX() {
         double x = getxPosition();
         x += Math.cos(Math.toRadians(angle))* xVelocity;
         return x;
     }
 
+    /**
+     * Retourne la nouvelle ordonnée
+     * @return : Nouvelle ordonnéee
+     */
     private double getNewY() {
         double y = getyPosition();
         y += Math.sin(Math.toRadians(angle))* yVelocity;
         return y;
     }
 
+    /**
+     * Fais sauter le personnage
+     */
     public void jump() {
         if(state==State.JUMP || state==State.IDLE) return;
         if(lastMove==1) angle=180;
@@ -118,25 +152,33 @@ public class Player extends Sprite {
         xVelocity=5;
         yVelocity = - vSaut;
         state = State.JUMP;
-        //System.out.println("etat jump");
     }
 
+    /**
+     * Actualisation du joueur
+     */
     @Override
     public void update() {
 
-        double x=0;
-        double y=0;
+        double x = 0;
+        double y = 0;
 
-        Rectangle shape1 = new Rectangle(width,height,Color.BLACK);
+        Rectangle shape1 = new Rectangle(width,height);
+
+        // Bouge pas
         if (state == State.IDLE) {
             animation.getTimer().stop();
         } else { // moving or falling
+
+            // Si il marche
             if (state == State.WALK) {animation.getTimer().start();}
+
             testJump(shape1,y);
             testWalk(shape1);
 
+            // tombe ou saute
             if (state == State.FALL || state == State.JUMP){
-                if(yPosition>=model.height) state = State.IDLE;
+                if(yPosition >= model.height) state = State.IDLE;
                 else yVelocity ++;
             }
 
@@ -144,11 +186,18 @@ public class Player extends Sprite {
         }
     }
 
+    /**
+     * Sauter
+     * @param shape1 : Rectangle pour savoir la prochaine position
+     * @param y : yPosition
+     */
     public void testJump(Rectangle shape1,double y){
         if(state==State.JUMP){
             y = yPosition + yVelocity;
             shape1.setX(xPosition);
             shape1.setY(y);
+
+            // Détection de collision
             boolean isFloor = false;
             for(Shape s : model.obstacles) {
                 Shape inter = Shape.intersect(shape1,s);
@@ -157,9 +206,10 @@ public class Player extends Sprite {
                     isFloor = true;
                 }
             }
+
+            // Si il y a le sol
             if(isFloor){
                 state = State.FALL;
-                //System.out.println("etat fall");
                 angle = 90;
             }
             if (!isFloor) {
@@ -168,11 +218,17 @@ public class Player extends Sprite {
         }
     }
 
+    /**
+     * Marche
+     * @param shape1 : Rectangle pour savoir la prochaine position
+     */
     public void testWalk(Rectangle shape1){
         if (state == State.WALK) {
             // NO FLOOR DETECTION for actual position: just move perso one pixel down
             shape1.setX(xPosition);
             shape1.setY(yPosition+1);
+
+            // Détection de collision
             boolean isFloor = false;
             for(Shape s : model.obstacles) {
                 Shape inter = Shape.intersect(shape1,s);
@@ -185,12 +241,17 @@ public class Player extends Sprite {
             // No floor => change angle & state to falling
             if (!isFloor) {
                 state = State.FALL;
-                //System.out.println("etat fall");
                 angle = 90;
             }
         }
     }
 
+    /**
+     * Collision
+     * @param shape1 : Rectangle pour savoir la prochaine position
+     * @param x : xPosition
+     * @param y : yPosition
+     */
     public void testCollision(Rectangle shape1, double x, double y){
         x = getNewX();
         y = getNewY();
@@ -228,9 +289,9 @@ public class Player extends Sprite {
                     }
                 }
 
+                // Si collision
                 if (collide) {
                     state = State.IDLE; // stop moving
-                    //System.out.println("etat idle");
                     xVelocity = i-1;
                     yVelocity = i-1;
                     x = getNewX();
