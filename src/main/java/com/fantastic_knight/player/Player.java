@@ -1,9 +1,11 @@
-package com.fantastic_knight;
+package com.fantastic_knight.player;
 
+import com.fantastic_knight.AnimationImage;
+import com.fantastic_knight.Sprite;
+import com.fantastic_knight.State;
 import com.fantastic_knight.model.Model;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
@@ -29,7 +31,6 @@ public class Player extends Sprite {
     Image[] imageLeft;
     double vSaut = 18;
     int lastMove;
-    double lastX = xPosition;
     Model model;
     AnimationImage animation;
 
@@ -38,6 +39,7 @@ public class Player extends Sprite {
     public Player(Model model) {
         super(model);
         this.model = model;
+
         imageRight = new Image[2]; imageLeft = new Image[2];
         imageRight[0] = new Image("file:src/main/resources/com/fantastic_knight/player/perso_droite_idle.png");
         imageRight[1] = new Image("file:src/main/resources/com/fantastic_knight/player/perso_droite_walk.png");
@@ -45,7 +47,8 @@ public class Player extends Sprite {
         imageLeft[1] = new Image("file:src/main/resources/com/fantastic_knight/player/perso_gauche_walk.png");
         width = imageRight[0].getWidth();
         height = imageRight[0].getHeight();
-        shape = new Rectangle(width,height,Color.BLACK);
+
+        shape = new Rectangle(width,height);
         life = true;
         xPosition = 0;
         yPosition = model.height - height;
@@ -60,17 +63,19 @@ public class Player extends Sprite {
         animation = new AnimationImage(imageRight, shape, 10);
         animated = true;
         win = false;
+        name = "Knight Red";
     }
+
 
     /**
      * Bouge à gauche
      */
     public void moveLeft() {
         if(state == State.JUMP || state == State.FALL) return;
+
         // Image
-        animation.getTimer().stop();
-        shape.setFill(new ImagePattern(imageLeft[0]));
-        animation = new AnimationImage(imageLeft, shape, 10);
+        animation.setImages(imageLeft);
+
         xVelocity = 5;
         yVelocity = 0;
         angle = 180;
@@ -83,10 +88,10 @@ public class Player extends Sprite {
      */
     public void moveRight() {
         if(state == State.JUMP || state == State.FALL) return;
+
         // Image
-        animation.getTimer().stop();
-        shape.setFill(new ImagePattern(imageRight[0]));
-        animation = new AnimationImage(imageRight, shape, 10);
+        animation.setImages(imageRight);
+
         xVelocity = 5;
         yVelocity = 0;
         angle = 0;
@@ -165,7 +170,7 @@ public class Player extends Sprite {
 
         // Bouge pas
         if (state == State.IDLE) {
-            animation.getTimer().stop();
+             animation.getTimer().stop();
         } else { // moving or falling
 
             // Si il marche

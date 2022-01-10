@@ -5,6 +5,7 @@ import javafx.scene.shape.Rectangle;
 public class Platform extends Rectangle {
     private int xCoordonnee = 0;
     private int yCoordonnee = 0;
+    private String type;
 
     public Platform(){super();}
 
@@ -26,6 +27,14 @@ public class Platform extends Rectangle {
 
     @Override
     public String toString() {
-        return xCoordonnee + "," + yCoordonnee + "," + getFill();
+        return xCoordonnee + "," + yCoordonnee + "," + getType();
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

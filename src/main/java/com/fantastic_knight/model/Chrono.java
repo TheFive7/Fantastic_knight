@@ -1,9 +1,6 @@
 package com.fantastic_knight.model;
 
-import com.fantastic_knight.Game;
-import com.fantastic_knight.Player;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import com.fantastic_knight.player.Player;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 

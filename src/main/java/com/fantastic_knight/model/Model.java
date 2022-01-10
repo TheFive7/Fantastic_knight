@@ -1,9 +1,7 @@
 package com.fantastic_knight.model;
 
-import com.fantastic_knight.Player;
+import com.fantastic_knight.player.Player;
 import com.fantastic_knight.Sprite;
-import javafx.scene.image.ImageView;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 import java.util.ArrayList;
@@ -66,8 +64,9 @@ public class Model {
      */
     public void reset() {
         sprites.clear();
-        player.reset();
+        items.clear();
         obstacles.clear();
+        player.reset();
     }
 
     /**

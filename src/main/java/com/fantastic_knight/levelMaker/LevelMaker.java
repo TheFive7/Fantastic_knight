@@ -1,21 +1,27 @@
 package com.fantastic_knight.levelMaker;
 
+import com.fantastic_knight.Game;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 
 import java.io.*;
 import java.util.Scanner;
 
 import static com.fantastic_knight.Game.*;
 
+// void, platform, spike
+
 public class LevelMaker extends Pane {
 
-    Color color = Color.BLACK;
+    boolean isSpike = false;
+    Image currentImg = new Image("file:src/main/resources/com/fantastic_knight/platform.png");
 
     Platform[][] platforms = new Platform[12][40];
     String fileNameExport = "default";
@@ -31,16 +37,20 @@ public class LevelMaker extends Pane {
         Pane paneMaker = new Pane();
         paneMaker.setPrefSize(1200,800);
 
-        // REMPLISSAGE DE RECTANGLES BLANCS
+        // Background
+        paneMaker.setStyle("-fx-background-image: url('"+ Game.class.getResource("bg.png")+"')");
+
+        // REMPLISSAGE DE RECTANGLES
         for(int i = 0; i < 12; i++){
             for (int j = 0; j < 40; j++){
                 Platform platform = new Platform();
-                platform.setFill(Color.WHITE); platform.setWidth(100); platform.setHeight(20);
+                platform.setWidth(100); platform.setHeight(20);
                 platform.setLayoutX(i * 100); platform.setLayoutY(j * 20);
                 platforms[i][j] = platform;
                 paneMaker.getChildren().add(platforms[i][j]);
             }
         }
+        clear();
 
         // EVENTS MOUSE
         paneMaker.setOnMouseClicked(e -> drawPlatform(e,platforms));
@@ -100,7 +110,8 @@ public class LevelMaker extends Pane {
     void clear() {
         for (Platform[] platform : platforms){
             for (Platform p : platform){
-                p.setFill(Color.WHITE);
+                p.setType("void");
+                p.setOpacity(0);
             }
         }
     }
@@ -118,10 +129,12 @@ public class LevelMaker extends Pane {
      * Active les piques
      */
     void spikesActive(){
-        if (color.equals(Color.BLACK)){
-            color = Color.RED;
+        if (!isSpike){
+            isSpike = true;
+            currentImg = new Image("file:src/main/resources/com/fantastic_knight/items/spike.png");
         } else {
-            color = Color.BLACK;
+            isSpike = false;
+            currentImg = new Image("file:src/main/resources/com/fantastic_knight/platform.png");
         }
     }
 
@@ -137,11 +150,17 @@ public class LevelMaker extends Pane {
             if (e.getButton() == MouseButton.PRIMARY){
                 platforms[x][y].setxCoordonnee(x);
                 platforms[x][y].setyCoordonnee(y);
-                platforms[x][y].setFill(color);
+                platforms[x][y].setOpacity(100);
+
+                if(isSpike){platforms[x][y].setType("spike");
+                } else {platforms[x][y].setType("platform");}
+
+                platforms[x][y].setFill(new ImagePattern(currentImg));
             } else if (e.getButton() == MouseButton.SECONDARY){
                 platforms[x][y].setxCoordonnee(x);
                 platforms[x][y].setyCoordonnee(y);
-                platforms[x][y].setFill(Color.WHITE);
+                platforms[x][y].setOpacity(0);
+                platforms[x][y].setType("void");
             }
         }
     }
@@ -193,11 +212,19 @@ public class LevelMaker extends Pane {
                     // Lecture des valeurs
                     int x = Integer.parseInt(coordonnees[0]);
                     int y = Integer.parseInt(coordonnees[1]);
-                    Color color = Color.valueOf(coordonnees[2]);
+                    String type = coordonnees[2];
 
                     // Creation d'une plateforme
                     Platform platform = new Platform();
-                    platform.setFill(color);
+                    if (type.equals("platform")){
+                        platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/platform.png")));
+                        platform.setOpacity(100);
+                    } else if(type.equals("spike")){
+                        platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/items/spike.png")));
+                        platform.setOpacity(100);
+                    } else {
+                        platform.setOpacity(0);
+                    }
 
                     platform.setxCoordonnee(x);
                     platform.setyCoordonnee(y);

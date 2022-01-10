@@ -11,6 +11,7 @@ public class AnimationImage {
     int length;
     int i = 0;
     Shape shape;
+
     Image[] images;
     int speed;
 
@@ -58,5 +59,9 @@ public class AnimationImage {
 
     public AnimationTimer getTimer() {
         return timer;
+    }
+
+    public void setImages(Image[] images) {
+        this.images = images;
     }
 }

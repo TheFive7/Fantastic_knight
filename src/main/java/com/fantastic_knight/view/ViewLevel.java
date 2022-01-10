@@ -40,16 +40,18 @@ public class ViewLevel {
 		model.obstacles.add(model.westWall);
 
 		model.shield = new Shield();
-		pane.getChildren().add(model.shield);
 
 		// Autocall the init method to setup the level.
 		loadLevel(Game.levels.get(levelNumber));
+
+		pane.getChildren().add(model.shield);
+
 		init();
     }
 
     // to initialize levels
     public void init() {
-		pane.getChildren().add(model.player.getShape());
+		pane.getChildren().addAll(model.player.getShape());
 	}
 
 	/**
@@ -66,18 +68,31 @@ public class ViewLevel {
 			final String ESPACE = " ";
 			final String VIRGULE = ",";
 
+			// Parcours du tableau
 			for(int i = 0; i < 12; i++){
 				String[] mots = scanner.nextLine().split(ESPACE);
 				for (int j = 0; j < 40; j++){
 					String[] coordonnees = mots[j].split(VIRGULE);
-					// System.out.println(Arrays.toString(coordonnees));
 
+					// Lecture des valeurs
 					int x = Integer.parseInt(coordonnees[0]);
 					int y = Integer.parseInt(coordonnees[1]);
-					Color color = Color.valueOf(coordonnees[2]);
+					String type = coordonnees[2];
 
+					// Creation d'une plateforme
 					Platform platform = new Platform();
-					platform.setFill(color);
+					if (type.equals("platform")){
+						platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/platform.png")));
+						model.obstacles.add(platform);
+						platform.setOpacity(100);
+					} else if(type.equals("spike")){
+						platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/items/spike.png")));
+						Spikes spike = new Spikes(model); spike.setShape(platform);
+						model.items.add(spike);
+						platform.setOpacity(100);
+					} else {
+						platform.setOpacity(0);
+					}
 
 					platform.setxCoordonnee(x);
 					platform.setyCoordonnee(y);
@@ -85,21 +100,7 @@ public class ViewLevel {
 					platform.setHeight(20);
 					platform.setLayoutX(x * 100);
 					platform.setLayoutY(y * 20);
-
-					// Si couleur != blanc
-					if (!platform.getFill().equals(Color.valueOf("0xffffffff"))){
-						Image img = null;
-						if (platform.getFill().equals(Color.valueOf("0x000000ff"))) {
-							img = new Image("file:src/main/resources/com/fantastic_knight/plateforme3.png");
-							model.obstacles.add(platform);
-						} else if (platform.getFill().equals(Color.valueOf("0xff0000ff"))){
-							img = new Image("file:src/main/resources/com/fantastic_knight/items/spike.png");
-							Spikes spike = new Spikes(model); spike.setShape(platform);
-							model.items.add(spike);
-						}
-						platform.setFill(new ImagePattern(Objects.requireNonNull(img)));
-						pane.getChildren().add(platform);
-					}
+					pane.getChildren().add(platform);
 				}
 			}
 

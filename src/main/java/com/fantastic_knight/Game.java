@@ -9,7 +9,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +28,11 @@ public class Game extends Application {
     }
 
     /* FAIT:
-    * code commenté
-    * chevalier regarde maintenant aussi à gauche
-    * animation du chevalier à gauche
-    * Arrangement de parties du code
-    * Quelques bugs réglés
+    * Plus grande taille du personnage
+    * image droite du perso bleu
+    * bug : piques invisibles réglé
+    * Corrections diverses
+    * LevelMaker amélioré -> nouveaux graphismes
     */
 
     @Override
