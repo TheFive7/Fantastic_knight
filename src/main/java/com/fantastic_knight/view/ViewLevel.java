@@ -41,7 +41,6 @@ public class ViewLevel {
 		model.obstacles.add(model.westWall);
 
 		// Autocall the init method to setup the level.
-		System.out.println(Game.levels.get(levelNumber));
 		loadLevel(Game.levels.get(levelNumber));
 
 		init();
@@ -60,8 +59,6 @@ public class ViewLevel {
 	 * @param nameLevel : Nom du niveau demandé
 	 */
 	public void loadLevel(String nameLevel){
-		System.out.println(nameLevel);
-
 		try {
 			FileInputStream file = new FileInputStream("src/main/java/com/fantastic_knight/save/"+ nameLevel +".sav");
 			Scanner scanner = new Scanner(file);
@@ -86,18 +83,16 @@ public class ViewLevel {
 						platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/platform.png")));
 						platform.setOpacity(100);
 						model.obstacles.add(platform);
-						platform.setType("platform");
 					} else if(type.equals("spike")){
 						platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/items/spike.png")));
 						platform.setOpacity(100);
 						Spikes spike = new Spikes(model); spike.setShape(platform);
 						model.items.add(spike);
-						platform.setType("spike");
 					} else {
 						platform.setOpacity(0);
-						platform.setType("void");
 					}
 
+					platform.setType(type);
 					platform.setxCoordonnee(x);
 					platform.setyCoordonnee(y);
 					platform.setWidth(100);
