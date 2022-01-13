@@ -13,26 +13,23 @@ import javafx.scene.shape.Shape;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.fantastic_knight.Game.primaryStage;
-import static com.fantastic_knight.controller.MenuController.scene_levels;
-
 public class Player extends Sprite {
-    Rectangle shape;
+    final Rectangle shape;
     double xPosition;
     double yPosition;
     double xVelocity; // pixel/s
     double yVelocity; // pixel/s
-    double width;
-    double height;
+    final double width;
+    final double height;
     boolean life;
     boolean win;
-    boolean animated;
+    final boolean animated;
     double angle;
-    String name;
+    final String name;
     State state;
-    Image[] imageRight;
-    Image[] imageLeft;
-    double vSaut = 18;
+    final Image[] imageRight;
+    final Image[] imageLeft;
+    final double vSaut = 18;
     int lastMove;
     Model model;
     AnimationImage animation;
@@ -179,7 +176,7 @@ public class Player extends Sprite {
             // Si il marche
             if (state == State.WALK) {animation.getTimer().start();}
 
-            testJump(shape1,y);
+            testJump(shape1);
             testWalk(shape1);
 
             // tombe ou saute
@@ -188,18 +185,17 @@ public class Player extends Sprite {
                 else yVelocity ++;
             }
 
-            testCollision(shape1,x,y);
+            testCollision(shape1);
         }
     }
 
     /**
      * Sauter
      * @param shape1 : Rectangle pour savoir la prochaine position
-     * @param y : yPosition
      */
-    public void testJump(Rectangle shape1,double y){
+    public void testJump(Rectangle shape1){
         if(state==State.JUMP){
-            y = yPosition + yVelocity;
+            double y = yPosition + yVelocity;
             shape1.setX(xPosition);
             shape1.setY(y);
 
@@ -255,12 +251,10 @@ public class Player extends Sprite {
     /**
      * Collision
      * @param shape1 : Rectangle pour savoir la prochaine position
-     * @param x : xPosition
-     * @param y : yPosition
      */
-    public void testCollision(Rectangle shape1, double x, double y){
-        x = getNewX();
-        y = getNewY();
+    public void testCollision(Rectangle shape1){
+        double x = getNewX();
+        double y = getNewY();
 
         // COLLISION DETECTION
         shape1.setX(x);

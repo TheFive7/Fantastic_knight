@@ -27,12 +27,14 @@ public class Game extends Application {
         launch(args);
     }
 
-    /* FAIT:
-    * Plus grande taille du personnage
-    * image droite du perso bleu
-    * bug : piques invisibles réglé
-    * Corrections diverses
-    * LevelMaker amélioré -> nouveaux graphismes
+    /*
+    * TODO
+    *  Do some Levels
+    *  Do Door to finish level
+    *  Implement Door in LevelMaker
+    *  Do scrolling
+    *  Do graphics door
+    *  Organize code
     */
 
     @Override
@@ -60,15 +62,15 @@ public class Game extends Application {
     }
 
     /**
-     * Trouve tous les niveaux crées dans le dossier /save
-     * @return : La liste des niveaux crées
+     * Trouve tous les niveaux créés dans le dossier /save
+     * @return : La liste des niveaux créés
      */
     public static List<String> findAllLevels() {
         File folder = new File("src/main/java/com/fantastic_knight/save");
         List<String> levels = new ArrayList<>();
         for (File file : Objects.requireNonNull(folder.listFiles())) {
             if (!file.isDirectory()) {
-                // SEPARER LE NOM DU FICHIER AVEC LE POINT
+                // SÉPARER LE NOM DU FICHIER AVEC LE POINT
                 final String POINT = "\\.";
                 levels.add(file.getName().split(POINT)[0]);
             } else {

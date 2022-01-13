@@ -5,11 +5,11 @@ import com.fantastic_knight.view.View;
 import javafx.animation.AnimationTimer;
 
 public class Controller {
-    protected Model model;
-    protected View view;
-    protected ControllerKeyboard keyboard;
+    protected final Model model;
+    protected final View view;
+    protected final ControllerKeyboard keyboard;
 
-    protected AnimationTimer animator;
+    protected final AnimationTimer animator;
 
     public Controller(Model model, View view) {
         this.model = model;
@@ -21,12 +21,10 @@ public class Controller {
 
             @Override
             public void handle(long arg0) {
-                if (model.lastFrame == -1) {
-                    model.lastFrame = arg0;
-                } else {
-                    if ((arg0-model.lastFrame) < 10000000) return;
-                    model.lastFrame = arg0;
+                if (model.lastFrame != -1) {
+                    if ((arg0 - model.lastFrame) < 10000000) return;
                 }
+                model.lastFrame = arg0;
                 model.update();
             }
         };

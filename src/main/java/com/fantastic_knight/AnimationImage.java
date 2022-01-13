@@ -8,12 +8,12 @@ import javafx.scene.shape.Shape;
 public class AnimationImage {
 
     private AnimationTimer timer;
-    int length;
-    int i = 0;
-    Shape shape;
+    private final int length;
+    private int i = 0;
+    private final Shape shape;
 
-    Image[] images;
-    int speed;
+    private Image[] images;
+    private final int speed;
 
     public AnimationImage(Image[] images, Shape shape, int speed){
         this.images = images;
@@ -30,7 +30,7 @@ public class AnimationImage {
         if (timer == null) {
             timer = new AnimationTimer() {
                 private final int MAXSAMPPLES = speed;
-                private long[] diffs = new long[MAXSAMPPLES];
+                private final long[] diffs = new long[MAXSAMPPLES];
                 private long previousTime = -1;
                 private int currentIndex = 0;
 

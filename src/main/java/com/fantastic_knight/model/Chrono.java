@@ -5,9 +5,9 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 
 class Chrono implements Runnable {
-    Item item;
-    Player player;
-    String methode;
+    final Item item;
+    final Player player;
+    final String methode;
 
     public Chrono(Item item, Player player, String methode) {
         this.item = item;

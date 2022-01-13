@@ -5,13 +5,9 @@ import com.fantastic_knight.player.Player;
 import com.fantastic_knight.Sprite;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Shape;
-import javafx.scene.text.Font;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.fantastic_knight.Game.primaryStage;
-import static com.fantastic_knight.controller.MenuController.scene_levels;
 
 public class Model {
 
@@ -24,14 +20,14 @@ public class Model {
     public int level;
 
     // WINDOW
-    public int width;
-    public int height;
+    public final int width;
+    public final int height;
     public long lastFrame;
 
     // SPRITES
-    List<Sprite> sprites;
-    public List<Shape> obstacles; // obstacles in each scene
-    public List<Item> items;      // items in the game
+    final List<Sprite> sprites;
+    public final List<Shape> obstacles; // obstacles in each scene
+    public final List<Item> items;      // items in the game
 
     // Murs
     public Shape northWall;
@@ -40,14 +36,14 @@ public class Model {
     public Shape westWall;
 
     // Objets
-    public Player player;
+    public final Player player;
 
     // Ath
     public Shield shield;
 
     // Exit
     public Door door;
-    public Label labelWin;
+    public final Label labelWin;
 
     public Model() {
         state = STATE_INITIAL;

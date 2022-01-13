@@ -21,11 +21,11 @@ public class LevelMaker extends Pane {
     boolean isSpike = false;
     Image currentImg = new Image("file:src/main/resources/com/fantastic_knight/platform.png");
 
-    Platform[][] platforms = new Platform[12][40];
+    final Platform[][] platforms = new Platform[12][40];
     String fileNameExport = "default";
     String fileNameLoad = "default";
 
-    ChoiceBox<String> choiceBoxLevels;
+    final ChoiceBox<String> choiceBoxLevels;
 
     public LevelMaker(){
         Pane paneLevelMaker = new Pane();

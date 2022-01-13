@@ -6,9 +6,9 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 public class Door extends Rectangle {
-    double width = 50;
-    double height = 100;
-    Model model;
+    final double width = 50;
+    final double height = 100;
+    final Model model;
 
     public Door(Model model) {
         super();

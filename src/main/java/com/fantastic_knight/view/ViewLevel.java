@@ -1,25 +1,22 @@
 package com.fantastic_knight.view;
 
-import com.fantastic_knight.Door;
 import com.fantastic_knight.Game;
 import com.fantastic_knight.levelMaker.Platform;
 import com.fantastic_knight.model.Model;
 import com.fantastic_knight.model.Shield;
 import com.fantastic_knight.model.Spikes;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 
 import java.io.FileInputStream;
 import java.util.Scanner;
 
 public class ViewLevel {
 
-    Model model;
-    Pane pane;
+    final Model model;
+    final Pane pane;
     
     public ViewLevel(Model model, Pane pane, int levelNumber) {
 
@@ -40,7 +37,7 @@ public class ViewLevel {
 		model.obstacles.add(model.eastWall);
 		model.obstacles.add(model.westWall);
 
-		// Autocall the init method to setup the level.
+		// Autocall the init method to set up the level.
 		loadLevel(Game.levels.get(levelNumber));
 
 		init();
