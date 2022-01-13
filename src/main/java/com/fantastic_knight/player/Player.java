@@ -169,7 +169,7 @@ public class Player extends Sprite {
         double x = 0;
         double y = 0;
 
-        Rectangle shape1 = new Rectangle(width,height);
+        Rectangle shape1 = new Rectangle(width, height);
 
         // Bouge pas
         if (state == State.IDLE) {
