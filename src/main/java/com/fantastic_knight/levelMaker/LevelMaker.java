@@ -112,6 +112,8 @@ public class LevelMaker extends Pane {
             for (Platform p : platform){
                 p.setType("void");
                 p.setOpacity(0);
+                p.setxCoordonnee(0);
+                p.setyCoordonnee(0);
             }
         }
     }
@@ -157,8 +159,8 @@ public class LevelMaker extends Pane {
 
                 platforms[x][y].setFill(new ImagePattern(currentImg));
             } else if (e.getButton() == MouseButton.SECONDARY){
-                platforms[x][y].setxCoordonnee(x);
-                platforms[x][y].setyCoordonnee(y);
+                platforms[x][y].setxCoordonnee(0);
+                platforms[x][y].setyCoordonnee(0);
                 platforms[x][y].setOpacity(0);
                 platforms[x][y].setType("void");
             }
@@ -175,6 +177,7 @@ public class LevelMaker extends Pane {
             for(int i = 0; i < 12; i++){
                 for (int j = 0; j < 40; j++){
                     writer.print(platforms[i][j].toString() + " ");
+                    System.out.println(platforms[i][j].toString());
                 }
                 writer.println();
             }
@@ -219,11 +222,14 @@ public class LevelMaker extends Pane {
                     if (type.equals("platform")){
                         platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/platform.png")));
                         platform.setOpacity(100);
+                        platform.setType("platform");
                     } else if(type.equals("spike")){
                         platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/items/spike.png")));
                         platform.setOpacity(100);
+                        platform.setType("spike");
                     } else {
                         platform.setOpacity(0);
+                        platform.setType("void");
                     }
 
                     platform.setxCoordonnee(x);

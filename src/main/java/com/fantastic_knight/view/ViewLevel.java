@@ -1,18 +1,19 @@
 package com.fantastic_knight.view;
 
+import com.fantastic_knight.Door;
 import com.fantastic_knight.Game;
 import com.fantastic_knight.levelMaker.Platform;
 import com.fantastic_knight.model.Model;
 import com.fantastic_knight.model.Shield;
 import com.fantastic_knight.model.Spikes;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 
 import java.io.FileInputStream;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class ViewLevel {
@@ -39,19 +40,19 @@ public class ViewLevel {
 		model.obstacles.add(model.eastWall);
 		model.obstacles.add(model.westWall);
 
-		model.shield = new Shield();
-
 		// Autocall the init method to setup the level.
+		System.out.println(Game.levels.get(levelNumber));
 		loadLevel(Game.levels.get(levelNumber));
-
-		pane.getChildren().add(model.shield);
 
 		init();
     }
 
     // to initialize levels
     public void init() {
-		pane.getChildren().addAll(model.player.getShape());
+		model.shield = new Shield();
+		pane.getChildren().add(model.shield);
+
+		pane.getChildren().add(model.player.getShape());
 	}
 
 	/**
@@ -83,15 +84,18 @@ public class ViewLevel {
 					Platform platform = new Platform();
 					if (type.equals("platform")){
 						platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/platform.png")));
-						model.obstacles.add(platform);
 						platform.setOpacity(100);
+						model.obstacles.add(platform);
+						platform.setType("platform");
 					} else if(type.equals("spike")){
 						platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/items/spike.png")));
+						platform.setOpacity(100);
 						Spikes spike = new Spikes(model); spike.setShape(platform);
 						model.items.add(spike);
-						platform.setOpacity(100);
+						platform.setType("spike");
 					} else {
 						platform.setOpacity(0);
+						platform.setType("void");
 					}
 
 					platform.setxCoordonnee(x);

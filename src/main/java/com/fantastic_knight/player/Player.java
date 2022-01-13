@@ -13,6 +13,9 @@ import javafx.scene.shape.Shape;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.fantastic_knight.Game.primaryStage;
+import static com.fantastic_knight.controller.MenuController.scene_levels;
+
 public class Player extends Sprite {
     Rectangle shape;
     double xPosition;
@@ -380,5 +383,13 @@ public class Player extends Sprite {
 
     public void setAnimation(AnimationImage animation) {
         this.animation = animation;
+    }
+
+    public boolean isWin() {
+        return win;
+    }
+
+    public void setWin(boolean win) {
+        this.win = win;
     }
 }

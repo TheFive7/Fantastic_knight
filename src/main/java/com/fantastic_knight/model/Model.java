@@ -1,11 +1,17 @@
 package com.fantastic_knight.model;
 
+import com.fantastic_knight.Door;
 import com.fantastic_knight.player.Player;
 import com.fantastic_knight.Sprite;
+import javafx.scene.control.Label;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Font;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.fantastic_knight.Game.primaryStage;
+import static com.fantastic_knight.controller.MenuController.scene_levels;
 
 public class Model {
 
@@ -39,6 +45,10 @@ public class Model {
     // Ath
     public Shield shield;
 
+    // Exit
+    public Door door;
+    public Label labelWin;
+
     public Model() {
         state = STATE_INITIAL;
         level = 1;
@@ -49,6 +59,8 @@ public class Model {
         obstacles = new ArrayList<>();
         sprites = new ArrayList<>();
         items = new ArrayList<>();
+
+        labelWin = new Label("T'as gagné BG"); labelWin.setOpacity(0);
     }
 
     /**

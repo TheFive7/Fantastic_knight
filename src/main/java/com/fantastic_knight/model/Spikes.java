@@ -32,7 +32,6 @@ public class Spikes extends Item {
         joueur.setX(x);
         joueur.setY(y);
 
-
         Shape inter = Shape.intersect(joueur,shape);
         Bounds b = inter.getBoundsInParent();
         if (b.getWidth() != -1) {
