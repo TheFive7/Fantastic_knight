@@ -177,7 +177,6 @@ public class LevelMaker extends Pane {
             for(int i = 0; i < 12; i++){
                 for (int j = 0; j < 40; j++){
                     writer.print(platforms[i][j].toString() + " ");
-                    System.out.println(platforms[i][j].toString());
                 }
                 writer.println();
             }
@@ -222,16 +221,14 @@ public class LevelMaker extends Pane {
                     if (type.equals("platform")){
                         platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/platform.png")));
                         platform.setOpacity(100);
-                        platform.setType("platform");
                     } else if(type.equals("spike")){
                         platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/items/spike.png")));
                         platform.setOpacity(100);
-                        platform.setType("spike");
                     } else {
                         platform.setOpacity(0);
-                        platform.setType("void");
                     }
 
+                    platform.setType(type);
                     platform.setxCoordonnee(x);
                     platform.setyCoordonnee(y);
                     platform.setWidth(100);
