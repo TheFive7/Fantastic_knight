@@ -62,14 +62,16 @@ public class LevelMaker extends Pane {
 
         // FILE NAME
         Label fileName = new Label("File name :"); fileName.setLayoutX(10); fileName.setLayoutY(25); fileName.setFont(new Font(20));
-        TextField textFieldFileName = new TextField(fileNameExport); textFieldFileName.setLayoutX(130); textFieldFileName.setLayoutY(15); textFieldFileName.setPrefSize(120,55);
+        fileName.setStyle("-fx-font-weight: bold");
+        TextField textFieldFileName = new TextField(fileNameExport); textFieldFileName.setLayoutX(150); textFieldFileName.setLayoutY(15); textFieldFileName.setPrefSize(120,55);
         textFieldFileName.setStyle("-fx-background-image: url('"+ Game.class.getResource("paper.png")+"');-fx-background-color: transparent");
         textFieldFileName.setOnKeyReleased(e -> fileNameExport = textFieldFileName.getText());
 
         // EXPORT
         Label exportFile = new Label("Save the file :"); exportFile.setLayoutX(10); exportFile.setLayoutY(75); exportFile.setFont(new Font(20));
+        exportFile.setStyle("-fx-font-weight: bold");
         Button buttonExport = new Button("EXPORT");
-        buttonExport.setLayoutX(155); buttonExport.setLayoutY(77.5);
+        buttonExport.setLayoutX(185); buttonExport.setLayoutY(77.5);
         buttonExport.setOnAction(e -> export());
 
         // CHOICE LEVEL
@@ -85,11 +87,13 @@ public class LevelMaker extends Pane {
         buttonLoad.setOnAction(e -> load(paneMaker));
 
         // TOGGLE BUTTON
-        Label spikesImage = new Label(); spikesImage.setStyle("-fx-background-image: url('"+ Game.class.getResource("spike.png")+"');-fx-background-color: transparent");
-        spikesImage.setLayoutX(100); spikesImage.setLayoutY(300);
-        ToggleButton toggleButton = new ToggleButton("Spikes");
-        toggleButton.setLayoutX(150); toggleButton.setLayoutY(300);
-        toggleButton.setOnAction(e -> spikesActive());
+        Label spikesImage = new Label(""); spikesImage.setStyle("-fx-background-color: transparent;-fx-background-image: url('"+ Game.class.getResource("items/spike.png")+"')");
+        spikesImage.setPrefSize(100,25);
+        spikesImage.setLayoutX(50); spikesImage.setLayoutY(305);
+        ToggleButton toggleButton = new ToggleButton();
+        toggleButton.setLayoutX(175); toggleButton.setLayoutY(305); toggleButton.setPrefSize(100,45);
+        toggleButton.setStyle("-fx-background-image: url('"+ Game.class.getResource("off.png")+"');-fx-background-color: transparent;-fx-background-repeat: no-repeat");
+        toggleButton.setOnAction(e -> spikesActive(toggleButton));
 
         // CLEAR
         Button buttonClear = new Button();
@@ -137,13 +141,15 @@ public class LevelMaker extends Pane {
     /**
      * Active les piques
      */
-    void spikesActive(){
+    void spikesActive(ToggleButton button){
         if (!isSpike){
             isSpike = true;
             currentImg = new Image("file:src/main/resources/com/fantastic_knight/items/spike.png");
+            button.setStyle("-fx-background-image: url('"+ Game.class.getResource("on.png")+"');-fx-background-color: transparent;-fx-background-repeat: no-repeat");
         } else {
             isSpike = false;
             currentImg = new Image("file:src/main/resources/com/fantastic_knight/platform.png");
+            button.setStyle("-fx-background-image: url('"+ Game.class.getResource("off.png")+"');-fx-background-color: transparent;-fx-background-repeat: no-repeat");
         }
     }
 
