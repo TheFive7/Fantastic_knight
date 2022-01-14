@@ -25,7 +25,7 @@ public class View {
 
 
     /**
-     * Met en place la vue du jeu
+     * Sets up the game view
      */
     public void game() {
         paneGame = new Pane();
@@ -33,7 +33,7 @@ public class View {
     }
 
     /**
-     * Démarre le jeu (le niveau demandé)
+     * Start the game (the requested level)
      */
     public void startGame() {
         root.getChildren().clear();
@@ -48,7 +48,7 @@ public class View {
     }
 
     /**
-     * Retourne au menu
+     * Return to menu
      */
     public void returnMenu() {
         model.state = Model.STATE_INITIAL;

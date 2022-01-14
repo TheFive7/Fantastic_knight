@@ -52,9 +52,9 @@ public class ViewLevel {
     }
 
     /**
-     * Charge le niveau demandé
+     * Load requested leveandé
      *
-     * @param nameLevel : Nom du niveau demandé
+     * @param nameLevel : requested level name
      */
     public void loadLevel(String nameLevel) {
         try {

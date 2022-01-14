@@ -23,7 +23,7 @@ public class AnimationImage {
     }
 
     /**
-     * Active l'animation d'images
+     * Activate image animation
      */
     private void toggleTimer() {
         if (timer == null) {

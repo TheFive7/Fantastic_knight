@@ -22,7 +22,7 @@ public class Spikes extends Item {
     }
 
     /**
-     * Actualisation des piques
+     * update spike
      */
     @Override
     public void update() {

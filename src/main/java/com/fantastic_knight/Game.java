@@ -39,7 +39,7 @@ public class Game extends Application {
      */
 
     /**
-     * Trouve tous les niveaux créés dans le dossier /save
+     * find all levels created in /levels
      *
      * @return : La liste des niveaux créés
      */

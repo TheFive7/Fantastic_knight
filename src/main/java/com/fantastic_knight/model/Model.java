@@ -13,29 +13,37 @@ public class Model {
 
     public final static int STATE_INITIAL = 1;
     final static int STATE_PLAY = 2;
+
     // WINDOW
     public final int width;
     public final int height;
     public final List<Shape> obstacles; // obstacles in each scene
     public final List<Item> items;      // items in the game
+
     // Objets
     public final Player player;
     public final Label labelWin;
+
     // SPRITES
     final List<Sprite> sprites;
+
     // STATE
     public int state;
+
     // LEVEL
     public int level;
     public long lastFrame;
-    // Murs
+
+    // WALLS
     public Shape northWall;
     public Shape southWall;
     public Shape eastWall;
     public Shape westWall;
-    // Ath
+
+    // ATH
     public Shield shield;
-    // Exit
+
+    // EXIT
     public Door door;
 
     public Model() {
@@ -54,7 +62,7 @@ public class Model {
     }
 
     /**
-     * Lance le jeu
+     * Start the game
      */
     public void startGame() {
         state = STATE_PLAY;
@@ -62,7 +70,7 @@ public class Model {
     }
 
     /**
-     * Reset le jeu
+     * Reset the game
      */
     public void reset() {
         sprites.clear();
@@ -72,7 +80,7 @@ public class Model {
     }
 
     /**
-     * Actualisation
+     * Update
      */
     public void update() {
         for (Sprite s : sprites) {
