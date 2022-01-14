@@ -8,7 +8,6 @@ public class Controller {
     protected final Model model;
     protected final View view;
     protected final ControllerKeyboard keyboard;
-
     protected final AnimationTimer animator;
 
     public Controller(Model model, View view) {
