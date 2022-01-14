@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,24 +21,46 @@ public class Game extends Application {
     public static Controller controller;
     public static Stage primaryStage;
     public static Scene scene;
-    public static Scene scene_menu ;
+    public static Scene scene_menu;
     public static List<String> levels = findAllLevels();
 
     public static void main(String[] args) {
         launch(args);
     }
 
-    /* FAIT:
-    * Plus grande taille du personnage
-    * image droite du perso bleu
-    * bug : piques invisibles réglé
-    * Corrections diverses
-    * LevelMaker amélioré -> nouveaux graphismes
-    */
+    /*
+     * TODO
+     *  Do some Levels
+     *  Do Door to finish level
+     *  Implement Door in LevelMaker
+     *  Do scrolling
+     *  Do graphics door
+     *  Organize code
+     */
+
+    /**
+     * find all levels created in /levels
+     *
+     * @return : La liste des niveaux créés
+     */
+    public static List<String> findAllLevels() {
+        File folder = new File("src/main/java/com/fantastic_knight/save");
+        List<String> levels = new ArrayList<>();
+        for (File file : Objects.requireNonNull(folder.listFiles())) {
+            if (!file.isDirectory()) {
+                // SÉPARER LE NOM DU FICHIER AVEC LE POINT
+                final String POINT = "\\.";
+                levels.add(file.getName().split(POINT)[0]);
+            } else {
+                findAllLevels();
+            }
+        }
+        return levels;
+    }
 
     @Override
     public void start(Stage stage) throws Exception {
-        System.out.println(levels);
+        //System.out.println(levels);
         primaryStage = stage;
 
         model = new Model();
@@ -57,24 +80,5 @@ public class Game extends Application {
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene_menu);
         stage.show();
-    }
-
-    /**
-     * Trouve tous les niveaux crées dans le dossier /save
-     * @return : La liste des niveaux crées
-     */
-    public static List<String> findAllLevels() {
-        File folder = new File("src/main/java/com/fantastic_knight/save");
-        List<String> levels = new ArrayList<>();
-        for (File file : Objects.requireNonNull(folder.listFiles())) {
-            if (!file.isDirectory()) {
-                // SEPARER LE NOM DU FICHIER AVEC LE POINT
-                final String POINT = "\\.";
-                levels.add(file.getName().split(POINT)[0]);
-            } else {
-                findAllLevels();
-            }
-        }
-        return levels;
     }
 }

@@ -1,53 +1,50 @@
 package com.fantastic_knight.model;
 
 import com.fantastic_knight.Door;
-import com.fantastic_knight.player.Player;
 import com.fantastic_knight.Sprite;
+import com.fantastic_knight.player.Player;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Shape;
-import javafx.scene.text.Font;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.fantastic_knight.Game.primaryStage;
-import static com.fantastic_knight.controller.MenuController.scene_levels;
-
 public class Model {
 
-    // STATE
-    public int state;
     public final static int STATE_INITIAL = 1;
     final static int STATE_PLAY = 2;
 
-    // LEVEL
-    public int level;
-
     // WINDOW
-    public int width;
-    public int height;
-    public long lastFrame;
+    public final int width;
+    public final int height;
+    public final List<Shape> obstacles; // obstacles in each scene
+    public final List<Item> items;      // items in the game
+
+    // Objets
+    public final Player player;
+    public final Label labelWin;
 
     // SPRITES
-    List<Sprite> sprites;
-    public List<Shape> obstacles; // obstacles in each scene
-    public List<Item> items;      // items in the game
+    final List<Sprite> sprites;
 
-    // Murs
+    // STATE
+    public int state;
+
+    // LEVEL
+    public int level;
+    public long lastFrame;
+
+    // WALLS
     public Shape northWall;
     public Shape southWall;
     public Shape eastWall;
     public Shape westWall;
 
-    // Objets
-    public Player player;
-
-    // Ath
+    // ATH
     public Shield shield;
 
-    // Exit
+    // EXIT
     public Door door;
-    public Label labelWin;
 
     public Model() {
         state = STATE_INITIAL;
@@ -60,11 +57,12 @@ public class Model {
         sprites = new ArrayList<>();
         items = new ArrayList<>();
 
-        labelWin = new Label("T'as gagné BG"); labelWin.setOpacity(0);
+        labelWin = new Label("T'as gagné BG");
+        labelWin.setOpacity(0);
     }
 
     /**
-     * Lance le jeu
+     * Start the game
      */
     public void startGame() {
         state = STATE_PLAY;
@@ -72,7 +70,7 @@ public class Model {
     }
 
     /**
-     * Reset le jeu
+     * Reset the game
      */
     public void reset() {
         sprites.clear();
@@ -82,13 +80,13 @@ public class Model {
     }
 
     /**
-     * Actualisation
+     * Update
      */
     public void update() {
-        for(Sprite s: sprites) {
+        for (Sprite s : sprites) {
             s.update();
         }
-        for(Item i: items) {
+        for (Item i : items) {
             i.update();
         }
     }

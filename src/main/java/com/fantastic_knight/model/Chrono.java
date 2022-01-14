@@ -5,9 +5,9 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 
 class Chrono implements Runnable {
-    Item item;
-    Player player;
-    String methode;
+    final Item item;
+    final Player player;
+    final String methode;
 
     public Chrono(Item item, Player player, String methode) {
         this.item = item;
@@ -16,14 +16,14 @@ class Chrono implements Runnable {
     }
 
     /**
-     * Lancement du chrono
+     * Start timer
      */
     public void run() {
         try {
-            this.item.isActive = false;     // désactive le piège
+            this.item.isActive = false;     // disable trap
             choixMethodes(methode);         // choix de la méthode à utiliser selon l'item
-            Thread.sleep(1500);       // attend 3000 millisecondes -> 3 secondes
-            this.item.isActive = true;      // réactive l'item avant de terminer le Thread puis le fermer
+            Thread.sleep(1500);       // wait 3000 milliseconds -> 3 seconds
+            this.item.isActive = true;      // Reactivate the item before ending the thread, then close it
             Thread.currentThread().interrupt();
             return;
         } catch (InterruptedException e) {
@@ -31,18 +31,18 @@ class Chrono implements Runnable {
         }
     }
 
-    public void choixMethodes(String methode){
-        switch (methode){
+    public void choixMethodes(String methode) {
+        switch (methode) {
             case "spikes":
                 if (player.isLife()) {
                     player.setLife(false);
                     player.getModel().shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/shield_empty.png")));
-                }
-                else player.reset();
+                } else player.reset();
                 break;
             case "shield":
-                if (!this.item.isActive)
-                System.out.println("Me voilà bien protégé");
+                break;
+                //if (!this.item.isActive)
+                //    System.out.println("Me voilà bien protégé");
         }
     }
 }

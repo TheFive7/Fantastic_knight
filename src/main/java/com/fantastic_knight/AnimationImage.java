@@ -7,15 +7,14 @@ import javafx.scene.shape.Shape;
 
 public class AnimationImage {
 
+    private final int length;
+    private final Shape shape;
+    private final int speed;
     private AnimationTimer timer;
-    int length;
-    int i = 0;
-    Shape shape;
+    private int i = 0;
+    private Image[] images;
 
-    Image[] images;
-    int speed;
-
-    public AnimationImage(Image[] images, Shape shape, int speed){
+    public AnimationImage(Image[] images, Shape shape, int speed) {
         this.images = images;
         this.shape = shape;
         length = images.length;
@@ -24,13 +23,13 @@ public class AnimationImage {
     }
 
     /**
-     * Active l'animation d'images
+     * Activate image animation
      */
     private void toggleTimer() {
         if (timer == null) {
             timer = new AnimationTimer() {
                 private final int MAXSAMPPLES = speed;
-                private long[] diffs = new long[MAXSAMPPLES];
+                private final long[] diffs = new long[MAXSAMPPLES];
                 private long previousTime = -1;
                 private int currentIndex = 0;
 
@@ -43,7 +42,7 @@ public class AnimationImage {
                     if (currentIndex == MAXSAMPPLES) {
                         shape.setFill(new ImagePattern(images[i]));
                         i++;
-                        if (i == length) i=0;
+                        if (i == length) i = 0;
 
                         currentIndex = 0;
                     }

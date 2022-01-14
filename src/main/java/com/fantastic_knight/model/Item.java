@@ -15,9 +15,13 @@ abstract class Item extends Sprite {
     boolean animated;
     Image image;
 
-    public Item(Model model) { super(model); }
+    public Item(Model model) {
+        super(model);
+    }
 
-    public Rectangle getShape() { return shape; }
+    public Rectangle getShape() {
+        return shape;
+    }
 
     public void setShape(Rectangle shape) {
         this.shape = shape;

@@ -10,14 +10,14 @@ import static com.fantastic_knight.controller.MenuController.scene_levels;
 
 public class View {
 
-    Model model;
-    public Group root;
+    public final Group root;
+    final Model model;
     ViewLevel currentLevel;
 
     // PANE
     Pane paneGame;
 
-    public View(Model model){
+    public View(Model model) {
         this.model = model;
         root = new Group();
         game();
@@ -25,21 +25,21 @@ public class View {
 
 
     /**
-     * Met en place la vue du jeu
+     * Sets up the game view
      */
     public void game() {
         paneGame = new Pane();
-        paneGame.setPrefSize(model.width,model.height);
+        paneGame.setPrefSize(model.width, model.height);
     }
 
     /**
-     * Démarre le jeu (le niveau demandé)
+     * Start the game (the requested level)
      */
     public void startGame() {
         root.getChildren().clear();
 
-        for (int i = 0; i < levels.size(); i++){
-            if (model.level - 1 == i){
+        for (int i = 0; i < levels.size(); i++) {
+            if (model.level - 1 == i) {
                 currentLevel = new ViewLevel(model, paneGame, i);
                 break;
             }
@@ -48,7 +48,7 @@ public class View {
     }
 
     /**
-     * Retourne au menu
+     * Return to menu
      */
     public void returnMenu() {
         model.state = Model.STATE_INITIAL;
