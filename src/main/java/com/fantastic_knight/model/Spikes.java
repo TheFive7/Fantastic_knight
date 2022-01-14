@@ -7,11 +7,11 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 public class Spikes extends Item {
-    public Spikes(Model m){
+    public Spikes(Model m) {
         super(m);
         width = 100;
         height = 20;
-        shape = new Rectangle(width,height);
+        shape = new Rectangle(width, height);
         xPosition = 0;
         yPosition = 0;
         shape.setX(xPosition);
@@ -28,14 +28,14 @@ public class Spikes extends Item {
     public void update() {
         double x = model.player.getxPosition();
         double y = model.player.getyPosition();
-        Rectangle joueur = new Rectangle(model.player.getWidth(),model.player.getHeight());
+        Rectangle joueur = new Rectangle(model.player.getWidth(), model.player.getHeight());
         joueur.setX(x);
         joueur.setY(y);
 
-        Shape inter = Shape.intersect(joueur,shape);
+        Shape inter = Shape.intersect(joueur, shape);
         Bounds b = inter.getBoundsInParent();
         if (b.getWidth() != -1) {
-            Thread t = new Thread(new Chrono(this,model.player,"spikes"));
+            Thread t = new Thread(new Chrono(this, model.player, "spikes"));
             if (isActive) t.start();
             isActive = false;
         }

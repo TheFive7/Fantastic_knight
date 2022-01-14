@@ -7,7 +7,9 @@ public class Platform extends Rectangle {
     private int yCoordonnee = 0;
     private String type;
 
-    public Platform(){super();}
+    public Platform() {
+        super();
+    }
 
     public int getxCoordonnee() {
         return xCoordonnee;

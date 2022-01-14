@@ -21,13 +21,13 @@ public class MenuController {
     /**
      * Bouton PLAY du LevelMaker
      */
-    public void playLevelMaker(){
+    public void playLevelMaker() {
         scene_levelMaker = new Scene(new LevelMaker(), 1200, 800);
         primaryStage.setWidth(1500);
         primaryStage.setScene(scene_levelMaker);
     }
 
-    public void quit(){
+    public void quit() {
         System.exit(0);
     }
 }

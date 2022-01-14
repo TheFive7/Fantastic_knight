@@ -10,7 +10,7 @@ import static com.fantastic_knight.Game.*;
 
 public class LevelsMenu extends Pane {
 
-    public LevelsMenu(){
+    public LevelsMenu() {
         // Taille
         setHeight(800);
         setWidth(1200);
@@ -20,32 +20,41 @@ public class LevelsMenu extends Pane {
 
         // Bouton pour retourner au menu
         Button buttonMenu = new Button();
-        buttonMenu.setLayoutX(1128); buttonMenu.setLayoutY(697); buttonMenu.setOnAction(e -> returnMenu());
-        buttonMenu.setOpacity(0); buttonMenu.setPrefSize(60,85.3);
+        buttonMenu.setLayoutX(1128);
+        buttonMenu.setLayoutY(697);
+        buttonMenu.setOnAction(e -> returnMenu());
+        buttonMenu.setOpacity(0);
+        buttonMenu.setPrefSize(60, 85.3);
 
         getChildren().addAll(bgImage, buttonMenu);
 
         // Parcours des niveaux
-        int i = 0; int j = 0;
+        int i = 0;
+        int j = 0;
         int compteur = 1;
         for (String levelName : levels) {
             // Affichage et création
-            ButtonLevel buttonLevel = new ButtonLevel(levelName,60 + j * 250, 219 + i * 130);
+            ButtonLevel buttonLevel = new ButtonLevel(levelName, 60 + j * 250, 219 + i * 130);
             int finalCompteur = compteur;
             buttonLevel.setOnAction(e -> selectLevel(finalCompteur));
             getChildren().add(buttonLevel);
-            compteur++; i++;
+            compteur++;
+            i++;
 
             // Si 4 niveaux dans une colonne, on commence une nouvelle colonne
-            if (i == 4){i = 0; j++;}
+            if (i == 4) {
+                i = 0;
+                j++;
+            }
         }
     }
 
     /**
      * Selectionner un niveau
+     *
      * @param i : Numero du niveau
      */
-    public void selectLevel(int i){
+    public void selectLevel(int i) {
         if (model.state == Model.STATE_INITIAL) {
             primaryStage.setScene(scene);
             model.level = i;
@@ -53,17 +62,18 @@ public class LevelsMenu extends Pane {
         }
     }
 
-    public void returnMenu(){
+    public void returnMenu() {
         primaryStage.setScene(scene_menu);
     }
 }
 
 class ButtonLevel extends Button {
-    public ButtonLevel(String name, double x, double y){
+    public ButtonLevel(String name, double x, double y) {
         super();
         setText(name);
-        setLayoutX(x); setLayoutY(y);
-        setPrefSize(200,100);
+        setLayoutX(x);
+        setLayoutY(y);
+        setPrefSize(200, 100);
         setHeight(100);
         setWidth(200);
         String css = """

@@ -31,18 +31,17 @@ class Chrono implements Runnable {
         }
     }
 
-    public void choixMethodes(String methode){
-        switch (methode){
+    public void choixMethodes(String methode) {
+        switch (methode) {
             case "spikes":
                 if (player.isLife()) {
                     player.setLife(false);
                     player.getModel().shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/shield_empty.png")));
-                }
-                else player.reset();
+                } else player.reset();
                 break;
             case "shield":
                 if (!this.item.isActive)
-                System.out.println("Me voilà bien protégé");
+                    System.out.println("Me voilà bien protégé");
         }
     }
 }
