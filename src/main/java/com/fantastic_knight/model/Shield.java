@@ -5,9 +5,11 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
 public class Shield extends Rectangle {
-    double width, height;
-    double xpos, ypos;
-    Image image;
+    final double width;
+    final double height;
+    final double xpos;
+    final double ypos;
+    final Image image;
 
     public Shield() {
         width = 100;

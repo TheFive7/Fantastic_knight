@@ -9,9 +9,9 @@ import javafx.scene.input.KeyEvent;
 
 public class ControllerKeyboard implements EventHandler<KeyEvent> {
 
-    protected Model model;
-    protected View view;
-    protected Controller control;
+    protected final Model model;
+    protected final View view;
+    protected final Controller control;
 
 	public ControllerKeyboard(Model model, View view, Controller control) {
 		this.model = model;

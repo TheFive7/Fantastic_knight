@@ -7,18 +7,16 @@ import com.fantastic_knight.model.Shield;
 import com.fantastic_knight.model.Spikes;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
 import java.io.FileInputStream;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class ViewLevel {
 
-    Model model;
-    Pane pane;
+    final Model model;
+    final Pane pane;
     
     public ViewLevel(Model model, Pane pane, int levelNumber) {
 
@@ -39,19 +37,18 @@ public class ViewLevel {
 		model.obstacles.add(model.eastWall);
 		model.obstacles.add(model.westWall);
 
-		model.shield = new Shield();
-
-		// Autocall the init method to setup the level.
+		// Autocall the init method to set up the level.
 		loadLevel(Game.levels.get(levelNumber));
-
-		pane.getChildren().add(model.shield);
 
 		init();
     }
 
     // to initialize levels
     public void init() {
-		pane.getChildren().addAll(model.player.getShape());
+		model.shield = new Shield();
+		pane.getChildren().add(model.shield);
+
+		pane.getChildren().add(model.player.getShape());
 	}
 
 	/**
@@ -59,8 +56,6 @@ public class ViewLevel {
 	 * @param nameLevel : Nom du niveau demandé
 	 */
 	public void loadLevel(String nameLevel){
-		System.out.println(nameLevel);
-
 		try {
 			FileInputStream file = new FileInputStream("src/main/java/com/fantastic_knight/save/"+ nameLevel +".sav");
 			Scanner scanner = new Scanner(file);
@@ -83,17 +78,18 @@ public class ViewLevel {
 					Platform platform = new Platform();
 					if (type.equals("platform")){
 						platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/platform.png")));
-						model.obstacles.add(platform);
 						platform.setOpacity(100);
+						model.obstacles.add(platform);
 					} else if(type.equals("spike")){
 						platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/items/spike.png")));
+						platform.setOpacity(100);
 						Spikes spike = new Spikes(model); spike.setShape(platform);
 						model.items.add(spike);
-						platform.setOpacity(100);
 					} else {
 						platform.setOpacity(0);
 					}
 
+					platform.setType(type);
 					platform.setxCoordonnee(x);
 					platform.setyCoordonnee(y);
 					platform.setWidth(100);

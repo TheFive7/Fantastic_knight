@@ -7,27 +7,25 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.text.Font;
 
 import java.io.*;
 import java.util.Scanner;
 
 import static com.fantastic_knight.Game.*;
 
-// void, platform, spike
-
 public class LevelMaker extends Pane {
 
     boolean isSpike = false;
     Image currentImg = new Image("file:src/main/resources/com/fantastic_knight/platform.png");
 
-    Platform[][] platforms = new Platform[12][40];
+    final Platform[][] platforms = new Platform[12][40];
     String fileNameExport = "default";
     String fileNameLoad = "default";
 
-    ChoiceBox<String> choiceBoxLevels;
+    final ChoiceBox<String> choiceBoxLevels;
 
     public LevelMaker(){
         Pane paneLevelMaker = new Pane();
@@ -60,46 +58,55 @@ public class LevelMaker extends Pane {
         // PANE CHOOSE
         Pane paneChoose = new Pane();
         paneChoose.setPrefSize(300,800); paneChoose.setLayoutX(1200);
-        paneChoose.setStyle("-fx-background-color: red");
+        paneChoose.setStyle("-fx-background-image: url('"+ Game.class.getResource("levels.png")+"')");
 
         // FILE NAME
-        TextField textFieldFileName = new TextField(fileNameExport); textFieldFileName.setLayoutX(100); textFieldFileName.setLayoutY(20);
+        Label fileName = new Label("File name :"); fileName.setLayoutX(10); fileName.setLayoutY(25); fileName.setFont(new Font(20));
+        TextField textFieldFileName = new TextField(fileNameExport); textFieldFileName.setLayoutX(130); textFieldFileName.setLayoutY(15); textFieldFileName.setPrefSize(120,55);
+        textFieldFileName.setStyle("-fx-background-image: url('"+ Game.class.getResource("paper.png")+"');-fx-background-color: transparent");
         textFieldFileName.setOnKeyReleased(e -> fileNameExport = textFieldFileName.getText());
 
         // EXPORT
+        Label exportFile = new Label("Save the file :"); exportFile.setLayoutX(10); exportFile.setLayoutY(75); exportFile.setFont(new Font(20));
         Button buttonExport = new Button("EXPORT");
-        buttonExport.setLayoutX(100); buttonExport.setLayoutY(50);
+        buttonExport.setLayoutX(155); buttonExport.setLayoutY(77.5);
         buttonExport.setOnAction(e -> export());
 
         // CHOICE LEVEL
         ObservableList<String> levels = FXCollections.observableArrayList(findAllLevels());
         choiceBoxLevels = new ChoiceBox<>(levels);
         choiceBoxLevels.setValue(choiceBoxLevels.getItems().get(0));
-        choiceBoxLevels.setLayoutX(100); choiceBoxLevels.setLayoutY(120);
+        choiceBoxLevels.setLayoutX(50); choiceBoxLevels.setLayoutY(150);
         choiceBoxLevels.setOnAction(e -> fileNameLoad = choiceBoxLevels.getValue());
 
         // LOAD
         Button buttonLoad = new Button("LOAD");
-        buttonLoad.setLayoutX(100); buttonLoad.setLayoutY(150);
+        buttonLoad.setLayoutX(200); buttonLoad.setLayoutY(150);
         buttonLoad.setOnAction(e -> load(paneMaker));
 
         // TOGGLE BUTTON
+        Label spikesImage = new Label(); spikesImage.setStyle("-fx-background-image: url('"+ Game.class.getResource("spike.png")+"');-fx-background-color: transparent");
+        spikesImage.setLayoutX(100); spikesImage.setLayoutY(300);
         ToggleButton toggleButton = new ToggleButton("Spikes");
-        toggleButton.setLayoutX(150); toggleButton.setLayoutY(200);
+        toggleButton.setLayoutX(150); toggleButton.setLayoutY(300);
         toggleButton.setOnAction(e -> spikesActive());
 
         // CLEAR
-        Button buttonClear = new Button("CLEAR");
-        buttonClear.setLayoutX(100); buttonClear.setLayoutY(250);
+        Button buttonClear = new Button();
+        buttonClear.setPrefSize(150,160);
+        buttonClear.setStyle("-fx-background-image: url('"+ Game.class.getResource("clear.png")+"');-fx-background-color: transparent; -fx-background-repeat: no-repeat");
+        buttonClear.setLayoutX(105); buttonClear.setLayoutY(550);
         buttonClear.setOnAction(e -> clear());
 
         // MENU
-        Button buttonMenu = new Button("MENU");
-        buttonMenu.setLayoutX(100); buttonMenu.setLayoutY(350);
+        Button buttonMenu = new Button();
+        buttonMenu.setPrefSize(75,80);
+        buttonMenu.setStyle("-fx-background-image: url('"+ Game.class.getResource("back.png")+"');-fx-background-color: transparent; -fx-background-repeat: no-repeat");
+        buttonMenu.setLayoutX(235); buttonMenu.setLayoutY(725);
         buttonMenu.setOnAction(e -> menu());
 
         // AJOUTS
-        paneChoose.getChildren().addAll(buttonExport,buttonLoad,toggleButton,buttonClear,buttonMenu,textFieldFileName,choiceBoxLevels);
+        paneChoose.getChildren().addAll(fileName,exportFile,spikesImage,buttonExport,buttonLoad,toggleButton,buttonClear,buttonMenu,textFieldFileName,choiceBoxLevels);
         paneLevelMaker.getChildren().addAll(paneMaker,paneChoose);
         getChildren().add(paneLevelMaker);
     }
@@ -112,6 +119,8 @@ public class LevelMaker extends Pane {
             for (Platform p : platform){
                 p.setType("void");
                 p.setOpacity(0);
+                p.setxCoordonnee(0);
+                p.setyCoordonnee(0);
             }
         }
     }
@@ -157,8 +166,8 @@ public class LevelMaker extends Pane {
 
                 platforms[x][y].setFill(new ImagePattern(currentImg));
             } else if (e.getButton() == MouseButton.SECONDARY){
-                platforms[x][y].setxCoordonnee(x);
-                platforms[x][y].setyCoordonnee(y);
+                platforms[x][y].setxCoordonnee(0);
+                platforms[x][y].setyCoordonnee(0);
                 platforms[x][y].setOpacity(0);
                 platforms[x][y].setType("void");
             }
@@ -226,6 +235,7 @@ public class LevelMaker extends Pane {
                         platform.setOpacity(0);
                     }
 
+                    platform.setType(type);
                     platform.setxCoordonnee(x);
                     platform.setyCoordonnee(y);
                     platform.setWidth(100);

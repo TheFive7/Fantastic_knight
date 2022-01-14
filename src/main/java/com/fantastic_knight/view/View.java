@@ -10,8 +10,8 @@ import static com.fantastic_knight.controller.MenuController.scene_levels;
 
 public class View {
 
-    Model model;
-    public Group root;
+    final Model model;
+    public final Group root;
     ViewLevel currentLevel;
 
     // PANE

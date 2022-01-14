@@ -7,7 +7,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 import static com.fantastic_knight.Game.*;
-import static com.fantastic_knight.Game.primaryStage;
 
 public class LevelsMenu extends Pane {
 

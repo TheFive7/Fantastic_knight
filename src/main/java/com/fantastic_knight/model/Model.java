@@ -1,7 +1,9 @@
 package com.fantastic_knight.model;
 
+import com.fantastic_knight.Door;
 import com.fantastic_knight.player.Player;
 import com.fantastic_knight.Sprite;
+import javafx.scene.control.Label;
 import javafx.scene.shape.Shape;
 
 import java.util.ArrayList;
@@ -18,14 +20,14 @@ public class Model {
     public int level;
 
     // WINDOW
-    public int width;
-    public int height;
+    public final int width;
+    public final int height;
     public long lastFrame;
 
     // SPRITES
-    List<Sprite> sprites;
-    public List<Shape> obstacles; // obstacles in each scene
-    public List<Item> items;      // items in the game
+    final List<Sprite> sprites;
+    public final List<Shape> obstacles; // obstacles in each scene
+    public final List<Item> items;      // items in the game
 
     // Murs
     public Shape northWall;
@@ -34,10 +36,14 @@ public class Model {
     public Shape westWall;
 
     // Objets
-    public Player player;
+    public final Player player;
 
     // Ath
     public Shield shield;
+
+    // Exit
+    public Door door;
+    public final Label labelWin;
 
     public Model() {
         state = STATE_INITIAL;
@@ -49,6 +55,8 @@ public class Model {
         obstacles = new ArrayList<>();
         sprites = new ArrayList<>();
         items = new ArrayList<>();
+
+        labelWin = new Label("T'as gagné BG"); labelWin.setOpacity(0);
     }
 
     /**
