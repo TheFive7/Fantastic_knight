@@ -60,7 +60,7 @@ public class Game extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        System.out.println(levels);
+        //System.out.println(levels);
         primaryStage = stage;
 
         model = new Model();

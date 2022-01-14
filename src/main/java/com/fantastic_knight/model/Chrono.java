@@ -40,8 +40,9 @@ class Chrono implements Runnable {
                 } else player.reset();
                 break;
             case "shield":
-                if (!this.item.isActive)
-                    System.out.println("Me voilà bien protégé");
+                break;
+                //if (!this.item.isActive)
+                //    System.out.println("Me voilà bien protégé");
         }
     }
 }

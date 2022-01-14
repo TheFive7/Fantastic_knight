@@ -103,7 +103,7 @@ public class ViewLevel {
             }
 
             scanner.close();
-            System.out.println("Fichier " + nameLevel + " chargé");
+            //System.out.println("Fichier " + nameLevel + " chargé");
 
         } catch (Exception e) {
             System.err.println("Error with Level Load");

@@ -219,8 +219,7 @@ public class Player extends Sprite {
             if (isFloor) {
                 state = State.FALL;
                 angle = 90;
-            }
-            if (!isFloor) {
+            } else {
                 yPosition += yVelocity;
             }
         }

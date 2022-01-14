@@ -217,7 +217,7 @@ public class LevelMaker extends Pane {
             choiceBoxLevels.setItems(FXCollections.observableArrayList(findAllLevels()));
             choiceBoxLevels.setValue(choiceBoxLevels.getItems().get(0));
 
-            System.out.println("Fichier " + fileNameExport + " sauvegardé.");
+            //System.out.println("Fichier " + fileNameExport + " sauvegardé.");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -274,7 +274,7 @@ public class LevelMaker extends Pane {
 
             scanner.close();
 
-            System.out.println("Fichier " + fileNameLoad + " chargé");
+            //System.out.println("Fichier " + fileNameLoad + " chargé");
 
         } catch (Exception e) {
             e.printStackTrace();
