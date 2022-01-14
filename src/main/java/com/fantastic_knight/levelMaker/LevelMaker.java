@@ -7,43 +7,45 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Font;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 import static com.fantastic_knight.Game.*;
 
 public class LevelMaker extends Pane {
 
+    final Platform[][] platforms = new Platform[12][40];
+    final ChoiceBox<String> choiceBoxLevels;
     boolean isSpike = false;
     Image currentImg = new Image("file:src/main/resources/com/fantastic_knight/platform.png");
-
-    final Platform[][] platforms = new Platform[12][40];
     String fileNameExport = "default";
     String fileNameLoad = "default";
 
-    final ChoiceBox<String> choiceBoxLevels;
-
-    public LevelMaker(){
+    public LevelMaker() {
         Pane paneLevelMaker = new Pane();
-        paneLevelMaker.setPrefSize(1500,800);
+        paneLevelMaker.setPrefSize(1500, 800);
 
         // PANE MAKER
         Pane paneMaker = new Pane();
-        paneMaker.setPrefSize(1200,800);
+        paneMaker.setPrefSize(1200, 800);
 
         // Background
-        paneMaker.setStyle("-fx-background-image: url('"+ Game.class.getResource("bg.png")+"')");
+        paneMaker.setStyle("-fx-background-image: url('" + Game.class.getResource("bg.png") + "')");
 
         // REMPLISSAGE DE RECTANGLES
-        for(int i = 0; i < 12; i++){
-            for (int j = 0; j < 40; j++){
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 40; j++) {
                 Platform platform = new Platform();
-                platform.setWidth(100); platform.setHeight(20);
-                platform.setLayoutX(i * 100); platform.setLayoutY(j * 20);
+                platform.setWidth(100);
+                platform.setHeight(20);
+                platform.setLayoutX(i * 100);
+                platform.setLayoutY(j * 20);
                 platforms[i][j] = platform;
                 paneMaker.getChildren().add(platforms[i][j]);
             }
@@ -51,63 +53,81 @@ public class LevelMaker extends Pane {
         clear();
 
         // EVENTS MOUSE
-        paneMaker.setOnMouseClicked(e -> drawPlatform(e,platforms));
-        paneMaker.setOnMouseDragged(e -> drawPlatform(e,platforms));
+        paneMaker.setOnMouseClicked(e -> drawPlatform(e, platforms));
+        paneMaker.setOnMouseDragged(e -> drawPlatform(e, platforms));
 
 
         // PANE CHOOSE
         Pane paneChoose = new Pane();
-        paneChoose.setPrefSize(300,800); paneChoose.setLayoutX(1200);
-        paneChoose.setStyle("-fx-background-image: url('"+ Game.class.getResource("levels.png")+"')");
+        paneChoose.setPrefSize(300, 800);
+        paneChoose.setLayoutX(1200);
+        paneChoose.setStyle("-fx-background-image: url('" + Game.class.getResource("levels.png") + "')");
 
         // FILE NAME
-        Label fileName = new Label("File name :"); fileName.setLayoutX(10); fileName.setLayoutY(25); fileName.setFont(new Font(20));
-        TextField textFieldFileName = new TextField(fileNameExport); textFieldFileName.setLayoutX(130); textFieldFileName.setLayoutY(15); textFieldFileName.setPrefSize(120,55);
-        textFieldFileName.setStyle("-fx-background-image: url('"+ Game.class.getResource("paper.png")+"');-fx-background-color: transparent");
+        Label fileName = new Label("File name :");
+        fileName.setLayoutX(10);
+        fileName.setLayoutY(25);
+        fileName.setFont(new Font(20));
+        TextField textFieldFileName = new TextField(fileNameExport);
+        textFieldFileName.setLayoutX(130);
+        textFieldFileName.setLayoutY(15);
+        textFieldFileName.setPrefSize(120, 55);
+        textFieldFileName.setStyle("-fx-background-image: url('" + Game.class.getResource("paper.png") + "');-fx-background-color: transparent");
         textFieldFileName.setOnKeyReleased(e -> fileNameExport = textFieldFileName.getText());
 
         // EXPORT
-        Label exportFile = new Label("Save the file :"); exportFile.setLayoutX(10); exportFile.setLayoutY(75); exportFile.setFont(new Font(20));
+        Label exportFile = new Label("Save the file :");
+        exportFile.setLayoutX(10);
+        exportFile.setLayoutY(75);
+        exportFile.setFont(new Font(20));
         Button buttonExport = new Button("EXPORT");
-        buttonExport.setLayoutX(155); buttonExport.setLayoutY(77.5);
+        buttonExport.setLayoutX(155);
+        buttonExport.setLayoutY(77.5);
         buttonExport.setOnAction(e -> export());
 
         // CHOICE LEVEL
         ObservableList<String> levels = FXCollections.observableArrayList(findAllLevels());
         choiceBoxLevels = new ChoiceBox<>(levels);
         choiceBoxLevels.setValue(choiceBoxLevels.getItems().get(0));
-        choiceBoxLevels.setLayoutX(50); choiceBoxLevels.setLayoutY(150);
+        choiceBoxLevels.setLayoutX(50);
+        choiceBoxLevels.setLayoutY(150);
         choiceBoxLevels.setOnAction(e -> fileNameLoad = choiceBoxLevels.getValue());
 
         // LOAD
         Button buttonLoad = new Button("LOAD");
-        buttonLoad.setLayoutX(200); buttonLoad.setLayoutY(150);
+        buttonLoad.setLayoutX(200);
+        buttonLoad.setLayoutY(150);
         buttonLoad.setOnAction(e -> load(paneMaker));
 
         // TOGGLE BUTTON
-        Label spikesImage = new Label(); spikesImage.setStyle("-fx-background-image: url('"+ Game.class.getResource("spike.png")+"');-fx-background-color: transparent");
-        spikesImage.setLayoutX(100); spikesImage.setLayoutY(300);
+        Label spikesImage = new Label();
+        spikesImage.setStyle("-fx-background-image: url('" + Game.class.getResource("spike.png") + "');-fx-background-color: transparent");
+        spikesImage.setLayoutX(100);
+        spikesImage.setLayoutY(300);
         ToggleButton toggleButton = new ToggleButton("Spikes");
-        toggleButton.setLayoutX(150); toggleButton.setLayoutY(300);
+        toggleButton.setLayoutX(150);
+        toggleButton.setLayoutY(300);
         toggleButton.setOnAction(e -> spikesActive());
 
         // CLEAR
         Button buttonClear = new Button();
-        buttonClear.setPrefSize(150,160);
-        buttonClear.setStyle("-fx-background-image: url('"+ Game.class.getResource("clear.png")+"');-fx-background-color: transparent; -fx-background-repeat: no-repeat");
-        buttonClear.setLayoutX(105); buttonClear.setLayoutY(550);
+        buttonClear.setPrefSize(150, 160);
+        buttonClear.setStyle("-fx-background-image: url('" + Game.class.getResource("clear.png") + "');-fx-background-color: transparent; -fx-background-repeat: no-repeat");
+        buttonClear.setLayoutX(105);
+        buttonClear.setLayoutY(550);
         buttonClear.setOnAction(e -> clear());
 
         // MENU
         Button buttonMenu = new Button();
-        buttonMenu.setPrefSize(75,80);
-        buttonMenu.setStyle("-fx-background-image: url('"+ Game.class.getResource("back.png")+"');-fx-background-color: transparent; -fx-background-repeat: no-repeat");
-        buttonMenu.setLayoutX(235); buttonMenu.setLayoutY(725);
+        buttonMenu.setPrefSize(75, 80);
+        buttonMenu.setStyle("-fx-background-image: url('" + Game.class.getResource("back.png") + "');-fx-background-color: transparent; -fx-background-repeat: no-repeat");
+        buttonMenu.setLayoutX(235);
+        buttonMenu.setLayoutY(725);
         buttonMenu.setOnAction(e -> menu());
 
         // AJOUTS
-        paneChoose.getChildren().addAll(fileName,exportFile,spikesImage,buttonExport,buttonLoad,toggleButton,buttonClear,buttonMenu,textFieldFileName,choiceBoxLevels);
-        paneLevelMaker.getChildren().addAll(paneMaker,paneChoose);
+        paneChoose.getChildren().addAll(fileName, exportFile, spikesImage, buttonExport, buttonLoad, toggleButton, buttonClear, buttonMenu, textFieldFileName, choiceBoxLevels);
+        paneLevelMaker.getChildren().addAll(paneMaker, paneChoose);
         getChildren().add(paneLevelMaker);
     }
 
@@ -115,8 +135,8 @@ public class LevelMaker extends Pane {
      * Efface tous les rectangles
      */
     void clear() {
-        for (Platform[] platform : platforms){
-            for (Platform p : platform){
+        for (Platform[] platform : platforms) {
+            for (Platform p : platform) {
                 p.setType("void");
                 p.setOpacity(0);
                 p.setxCoordonnee(0);
@@ -137,8 +157,8 @@ public class LevelMaker extends Pane {
     /**
      * Active les piques
      */
-    void spikesActive(){
-        if (!isSpike){
+    void spikesActive() {
+        if (!isSpike) {
             isSpike = true;
             currentImg = new Image("file:src/main/resources/com/fantastic_knight/items/spike.png");
         } else {
@@ -149,23 +169,27 @@ public class LevelMaker extends Pane {
 
     /**
      * Dessine une plateforme
-     * @param e : Mouse Event
+     *
+     * @param e         : Mouse Event
      * @param platforms : Tableau des plateformes
      */
-    void drawPlatform(MouseEvent e, Platform[][] platforms){
-        int x = (int) (Math.round(e.getX() * 10)/1000);
-        int y = (int) (Math.round(e.getY() * 10)/200);
-        if ((x < 12 && x >= 0) && (y < 40 && y >= 0)){
-            if (e.getButton() == MouseButton.PRIMARY){
+    void drawPlatform(MouseEvent e, Platform[][] platforms) {
+        int x = (int) (Math.round(e.getX() * 10) / 1000);
+        int y = (int) (Math.round(e.getY() * 10) / 200);
+        if ((x < 12 && x >= 0) && (y < 40 && y >= 0)) {
+            if (e.getButton() == MouseButton.PRIMARY) {
                 platforms[x][y].setxCoordonnee(x);
                 platforms[x][y].setyCoordonnee(y);
                 platforms[x][y].setOpacity(100);
 
-                if(isSpike){platforms[x][y].setType("spike");
-                } else {platforms[x][y].setType("platform");}
+                if (isSpike) {
+                    platforms[x][y].setType("spike");
+                } else {
+                    platforms[x][y].setType("platform");
+                }
 
                 platforms[x][y].setFill(new ImagePattern(currentImg));
-            } else if (e.getButton() == MouseButton.SECONDARY){
+            } else if (e.getButton() == MouseButton.SECONDARY) {
                 platforms[x][y].setxCoordonnee(0);
                 platforms[x][y].setyCoordonnee(0);
                 platforms[x][y].setOpacity(0);
@@ -177,12 +201,12 @@ public class LevelMaker extends Pane {
     /**
      * Exporter un niveau
      */
-    void export(){
+    void export() {
         try {
 
-            PrintWriter writer = new PrintWriter("src/main/java/com/fantastic_knight/save/" + fileNameExport +".sav");
-            for(int i = 0; i < 12; i++){
-                for (int j = 0; j < 40; j++){
+            PrintWriter writer = new PrintWriter("src/main/java/com/fantastic_knight/save/" + fileNameExport + ".sav");
+            for (int i = 0; i < 12; i++) {
+                for (int j = 0; j < 40; j++) {
                     writer.print(platforms[i][j].toString() + " ");
                 }
                 writer.println();
@@ -201,21 +225,22 @@ public class LevelMaker extends Pane {
 
     /**
      * Charger un niveau
+     *
      * @param paneMaker : Pane sur lequel afficher le niveau
      */
-    void load(Pane paneMaker){
+    void load(Pane paneMaker) {
         clear();
         try {
-            FileInputStream file = new FileInputStream("src/main/java/com/fantastic_knight/save/"+ fileNameLoad +".sav");
+            FileInputStream file = new FileInputStream("src/main/java/com/fantastic_knight/save/" + fileNameLoad + ".sav");
             Scanner scanner = new Scanner(file);
 
             final String ESPACE = " ";
             final String VIRGULE = ",";
 
             // Parcours du tableau
-            for(int i = 0; i < 12; i++){
+            for (int i = 0; i < 12; i++) {
                 String[] mots = scanner.nextLine().split(ESPACE);
-                for (int j = 0; j < 40; j++){
+                for (int j = 0; j < 40; j++) {
                     String[] coordonnees = mots[j].split(VIRGULE);
 
                     // Lecture des valeurs
@@ -225,10 +250,10 @@ public class LevelMaker extends Pane {
 
                     // Creation d'une plateforme
                     Platform platform = new Platform();
-                    if (type.equals("platform")){
+                    if (type.equals("platform")) {
                         platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/platform.png")));
                         platform.setOpacity(100);
-                    } else if(type.equals("spike")){
+                    } else if (type.equals("spike")) {
                         platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/items/spike.png")));
                         platform.setOpacity(100);
                     } else {

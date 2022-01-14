@@ -7,15 +7,14 @@ import javafx.scene.shape.Shape;
 
 public class AnimationImage {
 
-    private AnimationTimer timer;
     private final int length;
-    private int i = 0;
     private final Shape shape;
-
-    private Image[] images;
     private final int speed;
+    private AnimationTimer timer;
+    private int i = 0;
+    private Image[] images;
 
-    public AnimationImage(Image[] images, Shape shape, int speed){
+    public AnimationImage(Image[] images, Shape shape, int speed) {
         this.images = images;
         this.shape = shape;
         length = images.length;
@@ -43,7 +42,7 @@ public class AnimationImage {
                     if (currentIndex == MAXSAMPPLES) {
                         shape.setFill(new ImagePattern(images[i]));
                         i++;
-                        if (i == length) i=0;
+                        if (i == length) i = 0;
 
                         currentIndex = 0;
                     }
