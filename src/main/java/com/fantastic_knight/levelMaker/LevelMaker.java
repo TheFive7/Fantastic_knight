@@ -132,7 +132,7 @@ public class LevelMaker extends Pane {
     }
 
     /**
-     * Efface tous les rectangles
+     *  Erease all rectangles
      */
     void clear() {
         for (Platform[] platform : platforms) {
@@ -146,7 +146,7 @@ public class LevelMaker extends Pane {
     }
 
     /**
-     * Retourne au menu
+     * back to the menu
      */
     void menu() {
         levels = findAllLevels();
@@ -155,7 +155,7 @@ public class LevelMaker extends Pane {
     }
 
     /**
-     * Active les piques
+     * Activate the spike
      */
     void spikesActive() {
         if (!isSpike) {
@@ -168,10 +168,10 @@ public class LevelMaker extends Pane {
     }
 
     /**
-     * Dessine une plateforme
+     * Draw platform
      *
      * @param e         : Mouse Event
-     * @param platforms : Tableau des plateformes
+     * @param platforms : array of plateforms
      */
     void drawPlatform(MouseEvent e, Platform[][] platforms) {
         int x = (int) (Math.round(e.getX() * 10) / 1000);
@@ -199,7 +199,7 @@ public class LevelMaker extends Pane {
     }
 
     /**
-     * Exporter un niveau
+     * Exporter level
      */
     void export() {
         try {
@@ -224,9 +224,9 @@ public class LevelMaker extends Pane {
     }
 
     /**
-     * Charger un niveau
+     * load level
      *
-     * @param paneMaker : Pane sur lequel afficher le niveau
+     * @param paneMaker : Pane on which to display the level
      */
     void load(Pane paneMaker) {
         clear();
