@@ -15,7 +15,7 @@ public class Controller {
         this.view = view;
         keyboard = new ControllerKeyboard(model, view, this);
 
-        // Boucle d'animation
+        // animation loop
         animator = new AnimationTimer() {
 
             @Override
@@ -30,7 +30,7 @@ public class Controller {
     }
 
     /**
-     * Permet de commencer le jeu
+     * Start the game
      */
     public void startGame() {
         model.startGame();

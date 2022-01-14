@@ -237,7 +237,7 @@ public class LevelMaker extends Pane {
             final String ESPACE = " ";
             final String VIRGULE = ",";
 
-            // Parcours du tableau
+            // browse array
             for (int i = 0; i < 12; i++) {
                 String[] mots = scanner.nextLine().split(ESPACE);
                 for (int j = 0; j < 40; j++) {
