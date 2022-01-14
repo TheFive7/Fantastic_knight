@@ -11,14 +11,14 @@ import static com.fantastic_knight.Game.*;
 public class LevelsMenu extends Pane {
 
     public LevelsMenu() {
-        // Taille
+        // size
         setHeight(800);
         setWidth(1200);
 
         // Background
         ImageView bgImage = new ImageView(new Image("file:src/main/resources/com/fantastic_knight/levels.png"));
 
-        // Bouton pour retourner au menu
+        // button return menu
         Button buttonMenu = new Button();
         buttonMenu.setLayoutX(1128);
         buttonMenu.setLayoutY(697);
@@ -28,12 +28,12 @@ public class LevelsMenu extends Pane {
 
         getChildren().addAll(bgImage, buttonMenu);
 
-        // Parcours des niveaux
+        // brows levels
         int i = 0;
         int j = 0;
         int compteur = 1;
         for (String levelName : levels) {
-            // Affichage et création
+            // Print and creation
             ButtonLevel buttonLevel = new ButtonLevel(levelName, 60 + j * 250, 219 + i * 130);
             int finalCompteur = compteur;
             buttonLevel.setOnAction(e -> selectLevel(finalCompteur));
@@ -41,7 +41,7 @@ public class LevelsMenu extends Pane {
             compteur++;
             i++;
 
-            // Si 4 niveaux dans une colonne, on commence une nouvelle colonne
+            // If 4 levels in a column, we start a new column
             if (i == 4) {
                 i = 0;
                 j++;
@@ -50,9 +50,9 @@ public class LevelsMenu extends Pane {
     }
 
     /**
-     * Selectionner un niveau
+     * select a level
      *
-     * @param i : Numero du niveau
+     * @param i : level number
      */
     public void selectLevel(int i) {
         if (model.state == Model.STATE_INITIAL) {

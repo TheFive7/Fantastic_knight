@@ -22,13 +22,13 @@ public class ControllerKeyboard implements EventHandler<KeyEvent> {
         view.root.requestFocus();
         view.root.setOnKeyPressed(this);
 
-        // Touches
+        // Keys
         view.root.setOnKeyReleased(event -> {
             if (model.state == Model.STATE_INITIAL) return;
-            // Gauche
+            // Left
             if (event.getCode() == KeyCode.Q && model.player.getAngle() == 180 && model.player.getState() == State.WALK) {
                 control.stopPerso();
-                // Droite
+                // Right
             } else if (event.getCode() == KeyCode.D && model.player.getAngle() == 0 && model.player.getState() == State.WALK) {
                 control.stopPerso();
             }

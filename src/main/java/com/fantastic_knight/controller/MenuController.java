@@ -19,7 +19,7 @@ public class MenuController {
     }
 
     /**
-     * Bouton PLAY du LevelMaker
+     * Bouton PLAY LevelMaker
      */
     public void playLevelMaker() {
         scene_levelMaker = new Scene(new LevelMaker(), 1200, 800);
