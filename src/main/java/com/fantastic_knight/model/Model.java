@@ -1,13 +1,17 @@
 package com.fantastic_knight.model;
 
-import com.fantastic_knight.Door;
 import com.fantastic_knight.Sprite;
 import com.fantastic_knight.player.Player;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Shape;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.fantastic_knight.Game.primaryStage;
+import static com.fantastic_knight.controller.MenuController.scene_levels;
 
 public class Model {
 
@@ -44,7 +48,7 @@ public class Model {
     public Shield shield;
 
     // EXIT
-    public Door door;
+    public Door door = new Door(this);
 
     public Model() {
         state = STATE_INITIAL;
@@ -77,6 +81,7 @@ public class Model {
         items.clear();
         obstacles.clear();
         player.reset();
+        shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/shield.png")));
     }
 
     /**
@@ -89,5 +94,6 @@ public class Model {
         for (Item i : items) {
             i.update();
         }
+//        door.update();
     }
 }

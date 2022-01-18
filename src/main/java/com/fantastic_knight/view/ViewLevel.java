@@ -48,6 +48,9 @@ public class ViewLevel {
         model.shield = new Shield();
         pane.getChildren().add(model.shield);
 
+//        model.door.setX(200); model.door.setY(model.height - model.door.getHeight());
+//        pane.getChildren().add(model.door);
+
         pane.getChildren().add(model.player.getShape());
     }
 

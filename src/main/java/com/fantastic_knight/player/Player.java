@@ -6,12 +6,16 @@ import com.fantastic_knight.State;
 import com.fantastic_knight.model.Model;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.fantastic_knight.Game.primaryStage;
+import static com.fantastic_knight.controller.MenuController.scene_levels;
 
 public class Player extends Sprite {
     final Rectangle shape;
@@ -123,12 +127,10 @@ public class Player extends Sprite {
         shape.setX(xPosition);
         shape.setY(yPosition);
         state = State.IDLE;
-        getModel().shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/shield.png")));
     }
 
     /**
      * Retourne la nouvelle abscisse
-     *
      * @return : La nouvelle abscisse
      */
     private double getNewX() {
@@ -139,7 +141,6 @@ public class Player extends Sprite {
 
     /**
      * Retourne la nouvelle ordonnée
-     *
      * @return : Nouvelle ordonnéee
      */
     private double getNewY() {
@@ -191,6 +192,11 @@ public class Player extends Sprite {
             }
 
             testCollision(shape1);
+
+            // Win
+            if(isWin()){
+                setWin(false);
+            }
         }
     }
 

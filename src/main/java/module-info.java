@@ -14,4 +14,5 @@ module com.fantastic_knight {
     opens com.fantastic_knight.levelMaker to javafx.fxml;
     exports com.fantastic_knight.player;
     opens com.fantastic_knight.player to javafx.fxml;
+    opens com.fantastic_knight.model to javafx.fxml;
 }

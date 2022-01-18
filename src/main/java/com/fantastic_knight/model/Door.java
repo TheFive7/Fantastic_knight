@@ -1,6 +1,5 @@
-package com.fantastic_knight;
+package com.fantastic_knight.model;
 
-import com.fantastic_knight.model.Model;
 import javafx.geometry.Bounds;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
@@ -31,5 +30,9 @@ public class Door extends Rectangle {
                 model.player.setWin(true);
             }
         }
+    }
+
+    public Model getModel() {
+        return model;
     }
 }
