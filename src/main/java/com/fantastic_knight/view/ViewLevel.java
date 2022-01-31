@@ -2,13 +2,17 @@ package com.fantastic_knight.view;
 
 import com.fantastic_knight.Game;
 import com.fantastic_knight.levelMaker.Platform;
+import com.fantastic_knight.model.Door;
 import com.fantastic_knight.model.Model;
 import com.fantastic_knight.model.Shield;
 import com.fantastic_knight.model.Spikes;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 
 import java.io.FileInputStream;
 import java.util.Scanner;
@@ -45,18 +49,29 @@ public class ViewLevel {
 
     // to initialize levels
     public void init() {
+        // Shield
         model.shield = new Shield();
         pane.getChildren().add(model.shield);
 
+        // Door
 //        model.door.setX(200); model.door.setY(model.height - model.door.getHeight());
 //        pane.getChildren().add(model.door);
 
+        // Label
+        model.labelWin.setOpacity(0);
+        model.labelWin.setFont(new Font(50));
+        model.labelWin.setTextFill(Color.WHITE);
+        model.labelWin.setStyle("-fx-background-color: black; -fx-background-radius: 20");
+        model.labelWin.setLayoutY(model.height/2.0);
+        model.labelWin.setLayoutX(200);
+        pane.getChildren().add(model.labelWin);
+
+        // Player
         pane.getChildren().add(model.player.getShape());
     }
 
     /**
      * Load requested leveandé
-     *
      * @param nameLevel : requested level name
      */
     public void loadLevel(String nameLevel) {
@@ -80,6 +95,13 @@ public class ViewLevel {
 
                     // Creation d'une plateforme
                     Platform platform = new Platform();
+                    platform.setWidth(100);
+                    platform.setHeight(20);
+                    platform.setxCoordonnee(x);
+                    platform.setyCoordonnee(y);
+                    platform.setLayoutX(x * 100);
+                    platform.setLayoutY(y * 20);
+
                     if (type.equals("platform")) {
                         platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/platform.png")));
                         platform.setOpacity(100);
@@ -90,18 +112,22 @@ public class ViewLevel {
                         Spikes spike = new Spikes(model);
                         spike.setShape(platform);
                         model.items.add(spike);
+                    } else if(type.equals("door")) {
+                        Door door = model.door;
+                        door.setX(platform.getxCoordonnee() * 100 + 15);
+                        door.setY(platform.getyCoordonnee() * 20);
+                        door.setWidth(70);
+                        door.setHeight(100);
+                        door.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/door.png")));
+                        pane.getChildren().add(door);
                     } else {
                         platform.setOpacity(0);
                     }
 
                     platform.setType(type);
-                    platform.setxCoordonnee(x);
-                    platform.setyCoordonnee(y);
-                    platform.setWidth(100);
-                    platform.setHeight(20);
-                    platform.setLayoutX(x * 100);
-                    platform.setLayoutY(y * 20);
-                    pane.getChildren().add(platform);
+                    if (!type.equals("door")) {
+                        pane.getChildren().add(platform);
+                    }
                 }
             }
 
