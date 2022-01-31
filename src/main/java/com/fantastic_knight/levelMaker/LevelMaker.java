@@ -15,10 +15,12 @@ import java.io.*;
 import java.util.Scanner;
 
 import static com.fantastic_knight.Game.*;
+import static com.fantastic_knight.model.Model.findAllLevels;
 
 public class LevelMaker extends Pane {
 
     boolean isSpike = false;
+    boolean isDoor = false;
     Image currentImg = new Image("file:src/main/resources/com/fantastic_knight/platform.png");
 
     Platform[][] platforms = new Platform[12][40];
@@ -95,6 +97,11 @@ public class LevelMaker extends Pane {
         toggleButton.setStyle("-fx-background-image: url('"+ Game.class.getResource("off.png")+"');-fx-background-color: transparent;-fx-background-repeat: no-repeat");
         toggleButton.setOnAction(e -> spikesActive(toggleButton));
 
+        // DOOR
+        CheckBox doorCheck = new CheckBox("DOOR");
+        doorCheck.setLayoutX(50); doorCheck.setLayoutY(350);
+        doorCheck.setOnAction(e -> doorActive());
+
         // CLEAR
         Button buttonClear = new Button();
         buttonClear.setPrefSize(150,160);
@@ -110,7 +117,7 @@ public class LevelMaker extends Pane {
         buttonMenu.setOnAction(e -> menu());
 
         // AJOUTS
-        paneChoose.getChildren().addAll(fileName,exportFile,spikesImage,buttonExport,buttonLoad,toggleButton,buttonClear,buttonMenu,textFieldFileName,choiceBoxLevels);
+        paneChoose.getChildren().addAll(fileName,exportFile,spikesImage,buttonExport,buttonLoad,toggleButton,doorCheck,buttonClear,buttonMenu,textFieldFileName,choiceBoxLevels);
         paneLevelMaker.getChildren().addAll(paneMaker,paneChoose);
         getChildren().add(paneLevelMaker);
     }
@@ -153,6 +160,16 @@ public class LevelMaker extends Pane {
         }
     }
 
+    public void doorActive(){
+        if (!isDoor){
+            isDoor = true;
+            currentImg = new Image("file:src/main/resources/com/fantastic_knight/door.png");
+        } else {
+            isDoor = false;
+            currentImg = new Image("file:src/main/resources/com/fantastic_knight/platform.png");
+        }
+    }
+
     /**
      * Dessine une plateforme
      * @param e : Mouse Event
@@ -167,8 +184,17 @@ public class LevelMaker extends Pane {
                 platforms[x][y].setyCoordonnee(y);
                 platforms[x][y].setOpacity(100);
 
+                // Spikes & Platform
                 if(isSpike){platforms[x][y].setType("spike");
                 } else {platforms[x][y].setType("platform");}
+
+                // Door
+                if (isDoor){
+                    platforms[x][y].setType("door");
+                    platforms[x][y].setWidth(70);
+                    platforms[x][y].setHeight(100);
+                    platforms[x][y].setLayoutX(x * 100 + 15);
+                }
 
                 platforms[x][y].setFill(new ImagePattern(currentImg));
             } else if (e.getButton() == MouseButton.SECONDARY){
@@ -232,25 +258,38 @@ public class LevelMaker extends Pane {
 
                     // Creation d'une plateforme
                     Platform platform = new Platform();
-                    if (type.equals("platform")){
-                        platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/platform.png")));
-                        platform.setOpacity(100);
-                        platform.setType("platform");
-                    } else if(type.equals("spike")){
-                        platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/items/spike.png")));
-                        platform.setOpacity(100);
-                        platform.setType("spike");
-                    } else {
-                        platform.setOpacity(0);
-                        platform.setType("void");
-                    }
-
-                    platform.setxCoordonnee(x);
-                    platform.setyCoordonnee(y);
                     platform.setWidth(100);
                     platform.setHeight(20);
+                    platform.setxCoordonnee(x);
+                    platform.setyCoordonnee(y);
                     platform.setLayoutX(x * 100);
                     platform.setLayoutY(y * 20);
+
+                    switch (type) {
+                        case "platform" -> {
+                            platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/platform.png")));
+                            platform.setOpacity(100);
+                            platform.setType("platform");
+                        }
+                        case "spike" -> {
+                            platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/items/spike.png")));
+                            platform.setOpacity(100);
+                            platform.setType("spike");
+                        }
+                        case "door" -> {
+                            platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/door.png")));
+                            platform.setOpacity(100);
+                            platform.setType("door");
+                            platform.setWidth(70);
+                            platform.setHeight(100);
+                            platform.setLayoutX(x * 100 + 15);
+                        }
+                        default -> {
+                            platform.setOpacity(0);
+                            platform.setType("void");
+                        }
+                    }
+
                     platforms[x][y] = platform;
                     paneMaker.getChildren().add(platform);
                 }

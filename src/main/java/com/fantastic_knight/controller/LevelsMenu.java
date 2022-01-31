@@ -50,13 +50,12 @@ public class LevelsMenu extends Pane {
     }
 
     /**
-     * select a level
-     *
+     * Select a level
      * @param i : level number
      */
     public void selectLevel(int i) {
         if (model.state == Model.STATE_INITIAL) {
-            primaryStage.setScene(scene);
+            primaryStage.setScene(scene_game);
             model.level = i;
             controller.startGame();
         }
