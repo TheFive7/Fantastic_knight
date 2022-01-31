@@ -114,6 +114,7 @@ public class Player extends Sprite {
      * Reset le personnage
      */
     public void reset() {
+        setWin(false);
         xPosition = 0;
         yPosition = model.height - height;
         xVelocity = 2;
