@@ -1,21 +1,17 @@
 package com.fantastic_knight.player;
 
-import com.fantastic_knight.AnimationImage;
-import com.fantastic_knight.Sprite;
+import com.fantastic_knight.animation.AnimationImage;
+import com.fantastic_knight.model.Sprite;
 import com.fantastic_knight.State;
 import com.fantastic_knight.model.Model;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.fantastic_knight.Game.primaryStage;
-import static com.fantastic_knight.controller.MenuController.scene_levels;
 
 public class Player extends Sprite {
     final Rectangle shape;
@@ -127,6 +123,7 @@ public class Player extends Sprite {
         shape.setX(xPosition);
         shape.setY(yPosition);
         state = State.IDLE;
+        model.shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/shield.png")));
     }
 
     /**
@@ -196,6 +193,7 @@ public class Player extends Sprite {
             // Win
             if(isWin()){
                 setWin(false);
+                model.labelWin.setOpacity(100);
             }
         }
     }
