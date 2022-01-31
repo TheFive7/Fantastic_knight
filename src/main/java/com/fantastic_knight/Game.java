@@ -9,19 +9,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
+import static com.fantastic_knight.model.Model.findAllLevels;
 
 public class Game extends Application {
     public static View view;
     public static Model model;
     public static Controller controller;
     public static Stage primaryStage;
-    public static Scene scene;
+    public static Scene scene_game;
     public static Scene scene_menu;
+    public static Scene scene_credits;
     public static List<String> levels = findAllLevels();
 
     public static void main(String[] args) {
@@ -38,26 +37,6 @@ public class Game extends Application {
      *  Organize code
      */
 
-    /**
-     * find all levels created in /levels
-     *
-     * @return : La liste des niveaux créés
-     */
-    public static List<String> findAllLevels() {
-        File folder = new File("src/main/java/com/fantastic_knight/save");
-        List<String> levels = new ArrayList<>();
-        for (File file : Objects.requireNonNull(folder.listFiles())) {
-            if (!file.isDirectory()) {
-                // SÉPARER LE NOM DU FICHIER AVEC LE POINT
-                final String POINT = "\\.";
-                levels.add(file.getName().split(POINT)[0]);
-            } else {
-                findAllLevels();
-            }
-        }
-        return levels;
-    }
-
     @Override
     public void start(Stage stage) throws Exception {
         //System.out.println(levels);
@@ -67,14 +46,17 @@ public class Game extends Application {
         view = new View(model);
         controller = new Controller(model, view);
 
-        scene = new Scene(view.root, model.width, model.height);
-
         // FXML
         FXMLLoader fxmlLoaderMenu = new FXMLLoader(getClass().getResource("menu.fxml"));
         Parent root_menu = fxmlLoaderMenu.load();
 
-        // SCENE PRINCIPALE
-        scene_menu = new Scene(root_menu, 1200, 800);
+        FXMLLoader fxmlLoaderCredits = new FXMLLoader(getClass().getResource("credits.fxml"));
+        Parent root_credits = fxmlLoaderCredits.load();
+
+        // SCENES PRINCIPALES
+        scene_menu = new Scene(root_menu, model.width, model.height);
+        scene_game = new Scene(view.root, model.width, model.height);
+        scene_credits = new Scene(root_credits, model.width, model.height);
 
         stage.setTitle("Fantastic Knight");
         stage.initStyle(StageStyle.TRANSPARENT);
