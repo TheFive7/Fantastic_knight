@@ -1,17 +1,17 @@
 package com.fantastic_knight.model;
 
-import com.fantastic_knight.Sprite;
 import com.fantastic_knight.player.Player;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Font;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.fantastic_knight.Game.primaryStage;
-import static com.fantastic_knight.controller.MenuController.scene_levels;
+import java.util.Objects;
 
 public class Model {
 
@@ -26,7 +26,7 @@ public class Model {
 
     // Objets
     public final Player player;
-    public final Label labelWin;
+    public final Label labelWin = new Label("You WIN ! Press 'M' to return Menu.");
 
     // SPRITES
     final List<Sprite> sprites;
@@ -61,8 +61,6 @@ public class Model {
         sprites = new ArrayList<>();
         items = new ArrayList<>();
 
-        labelWin = new Label("T'as gagné BG");
-        labelWin.setOpacity(0);
     }
 
     /**
@@ -94,6 +92,25 @@ public class Model {
         for (Item i : items) {
             i.update();
         }
-//        door.update();
+        door.update();
+    }
+
+    /**
+     * Find all levels created in /levels
+     * @return : La liste des niveaux créés
+     */
+    public static List<String> findAllLevels() {
+        File folder = new File("src/main/java/com/fantastic_knight/save");
+        List<String> levels = new ArrayList<>();
+        for (File file : Objects.requireNonNull(folder.listFiles())) {
+            if (!file.isDirectory()) {
+                // SÉPARER LE NOM DU FICHIER AVEC LE POINT
+                final String POINT = "\\.";
+                levels.add(file.getName().split(POINT)[0]);
+            } else {
+                findAllLevels();
+            }
+        }
+        return levels;
     }
 }
