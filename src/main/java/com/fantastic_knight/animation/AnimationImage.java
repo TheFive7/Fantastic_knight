@@ -1,4 +1,4 @@
-package com.fantastic_knight;
+package com.fantastic_knight.animation;
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.Image;
@@ -7,12 +7,14 @@ import javafx.scene.shape.Shape;
 
 public class AnimationImage {
 
-    private final int length;
-    private final Shape shape;
-    private final int speed;
+    private int length;
+    private Shape shape;
+    private int speed;
     private AnimationTimer timer;
     private int i = 0;
     private Image[] images;
+
+    public AnimationImage(){}
 
     public AnimationImage(Image[] images, Shape shape, int speed) {
         this.images = images;
