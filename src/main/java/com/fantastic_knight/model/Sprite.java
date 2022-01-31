@@ -1,4 +1,4 @@
-package com.fantastic_knight;
+package com.fantastic_knight.model;
 
 import com.fantastic_knight.model.Model;
 
