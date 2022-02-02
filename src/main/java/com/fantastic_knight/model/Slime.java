@@ -12,8 +12,10 @@ public class Slime extends Item {
         width = 100;
         height = 20;
         shape = new Rectangle(width, height);
-        shape.setX(0);
-        shape.setY(0);
+        xPosition = 0;
+        yPosition = 0;
+        shape.setX(xPosition);
+        shape.setY(yPosition);
         image = new Image("file:src/main/resources/com/fantastic_knight/items/slime.png");
         shape.setFill(new ImagePattern(image));
     }
@@ -28,12 +30,10 @@ public class Slime extends Item {
         playerHitbox.setY(this.player.getyPosition());
 
         Shape inter = Shape.intersect(playerHitbox, shape);
-        Bounds b = inter.getBoundsInParent();
+        Bounds b = inter.getBoundsInLocal();
         if (b.getWidth() != -1) {
-            model.player.setIsTouchingSlime(true);
             model.player.setxVelocity(1);
-            return;
+            model.player.setyVelocity(1);
         }
-        model.player.setIsTouchingSlime(false);
     }
 }
