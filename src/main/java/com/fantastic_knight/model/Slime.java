@@ -20,6 +20,7 @@ public class Slime extends Item {
 
     /**
      * update slime
+     * version alpha
      */
     @Override
     public void update() {
