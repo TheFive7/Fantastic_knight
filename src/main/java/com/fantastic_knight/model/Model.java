@@ -86,11 +86,11 @@ public class Model {
      * Update
      */
     public void update() {
-        for (Sprite s : sprites) {
-            s.update();
-        }
         for (Item i : items) {
             i.update();
+        }
+        for (Sprite s : sprites) {
+            s.update();
         }
         door.update();
     }
