@@ -28,8 +28,8 @@ public class Spikes extends Item {
      */
     @Override
     public void update() {
-        playerHitbox.setX(this.player.getxPosition());
-        playerHitbox.setY(this.player.getyPosition());
+        playerHitbox.setX(model.player.getxPosition());
+        playerHitbox.setY(model.player.getyPosition());
 
         Shape inter = Shape.intersect(playerHitbox, shape);
         Bounds b = inter.getBoundsInParent();
@@ -38,7 +38,6 @@ public class Spikes extends Item {
             if (isActive) {
                 if (model.player.isLife()) {
                     model.player.setLife(false);
-                    model.player.getModel().shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/shield_empty.png")));
                     t.start();
                 } else {
                     model.player.reset();

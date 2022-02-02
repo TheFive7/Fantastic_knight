@@ -25,8 +25,8 @@ public class Slime extends Item {
      */
     @Override
     public void update() {
-        playerHitbox.setX(this.player.getxPosition());
-        playerHitbox.setY(this.player.getyPosition());
+        playerHitbox.setX(model.player.getxPosition());
+        playerHitbox.setY(model.player.getyPosition());
 
         Shape inter = Shape.intersect(playerHitbox, shape);
         Bounds b = inter.getBoundsInLocal();
