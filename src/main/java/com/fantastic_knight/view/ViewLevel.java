@@ -1,6 +1,7 @@
 package com.fantastic_knight.view;
 
 import com.fantastic_knight.Game;
+import com.fantastic_knight.items.ArrowTrap;
 import com.fantastic_knight.items.Slime;
 import com.fantastic_knight.items.Spikes;
 import com.fantastic_knight.levelMaker.Platform;
@@ -51,9 +52,10 @@ public class ViewLevel {
         model.shield = new Shield();
         pane.getChildren().add(model.shield);
 
-        // Door
-//        model.door.setX(200); model.door.setY(model.height - model.door.getHeight());
-//        pane.getChildren().add(model.door);
+        // Heart
+        model.heart = new Heart(model);
+        model.items.add(model.heart);
+        pane.getChildren().add(model.heart.getShape());
 
         // Label
         model.labelWin.setOpacity(0);
@@ -66,6 +68,15 @@ public class ViewLevel {
 
         // Player
         pane.getChildren().add(model.player.getShape());
+
+        // ArrowTrap
+        ArrowTrap arrowTrap = new ArrowTrap(model);
+        arrowTrap.getShape().setX(700);
+        arrowTrap.getShape().setY(model.height - arrowTrap.getShape().getHeight());
+        model.obstacles.add(arrowTrap.getShape());
+        model.items.add(arrowTrap);
+        pane.getChildren().add(arrowTrap.getShape());
+        pane.getChildren().add(arrowTrap.getArrow().getShape());
     }
 
     /**

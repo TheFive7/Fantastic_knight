@@ -17,9 +17,6 @@ public class Model {
     public final static int STATE_INITIAL = 1;
     final static int STATE_PLAY = 2;
 
-    Chrono chrono = new Chrono();
-    Thread thread = new Thread(chrono);
-
     // WINDOW
     public final int width;
     public final int height;
@@ -48,6 +45,7 @@ public class Model {
 
     // ATH
     public Shield shield;
+    public Heart heart;
 
     // EXIT
     public Door door = new Door(this);
@@ -71,8 +69,6 @@ public class Model {
     public void startGame() {
         state = STATE_PLAY;
         sprites.add(player);
-
-        thread.start();
     }
 
     /**
@@ -97,7 +93,7 @@ public class Model {
             s.update();
         }
         door.update();
-        System.out.println(chrono.affiche());
+        // System.out.println(chrono.affiche());
     }
 
     /**
