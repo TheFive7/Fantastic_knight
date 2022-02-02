@@ -17,8 +17,8 @@ public class Chrono implements Runnable {
 
         while (running) {
             try{
-                sleep(100);
-                time += 0.1;
+                sleep(10);
+                time += 0.01;
                 time = (double)Math.round(time * 100) / 100;
             }
             catch(InterruptedException ignored){}
@@ -32,4 +32,6 @@ public class Chrono implements Runnable {
     public String affiche() {
         return this.time + "";
     }
+
+    public double getTime(){return time;}
 }
