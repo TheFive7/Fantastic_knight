@@ -24,6 +24,10 @@ abstract class Item extends Sprite {
         this.shape = shape;
     }
 
+    public Rectangle getShape() {
+        return shape;
+    }
+
     public Image getImage() {
         return image;
     }
