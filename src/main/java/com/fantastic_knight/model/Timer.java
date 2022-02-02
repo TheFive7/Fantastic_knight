@@ -33,12 +33,4 @@ public class Timer implements Runnable {
             System.err.println("Error with Timer");
         }
     }
-
-    public void setBool(boolean bool) {
-        bool = this.bool;
-    }
-
-    public void setItem(Item item){
-        this.item = item;
-    }
 }
