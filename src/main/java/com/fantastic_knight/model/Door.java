@@ -17,7 +17,7 @@ public class Door extends Rectangle {
         this.model = model;
         setWidth(width);
         setHeight(height);
-        image = new Image("file:src/main/resources/com/fantastic_knight/door.png");
+        image = new Image("file:src/main/resources/com/fantastic_knight/assets/door.png");
         setFill(new ImagePattern(image));
     }
 

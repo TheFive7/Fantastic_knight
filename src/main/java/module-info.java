@@ -17,4 +17,8 @@ module com.fantastic_knight {
     opens com.fantastic_knight.model to javafx.fxml;
     exports com.fantastic_knight.animation;
     opens com.fantastic_knight.animation to javafx.fxml;
+    exports com.fantastic_knight.menu;
+    opens com.fantastic_knight.menu to javafx.fxml;
+    exports com.fantastic_knight.items;
+    opens com.fantastic_knight.items to javafx.fxml;
 }

@@ -1,4 +1,4 @@
-package com.fantastic_knight.controller;
+package com.fantastic_knight.menu;
 
 import com.fantastic_knight.model.Model;
 import javafx.scene.control.Button;
@@ -16,7 +16,7 @@ public class LevelsMenu extends Pane {
         setWidth(1200);
 
         // Background
-        ImageView bgImage = new ImageView(new Image("file:src/main/resources/com/fantastic_knight/levels.png"));
+        ImageView bgImage = new ImageView(new Image("file:src/main/resources/com/fantastic_knight/menu/levels.png"));
 
         // button return menu
         Button buttonMenu = new Button();

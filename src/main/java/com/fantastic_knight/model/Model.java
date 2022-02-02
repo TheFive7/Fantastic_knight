@@ -1,12 +1,11 @@
 package com.fantastic_knight.model;
 
+import com.fantastic_knight.items.Item;
 import com.fantastic_knight.player.Player;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Shape;
-import javafx.scene.text.Font;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -79,7 +78,7 @@ public class Model {
         items.clear();
         obstacles.clear();
         player.reset();
-        shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/shield.png")));
+        shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/shield.png")));
     }
 
     /**

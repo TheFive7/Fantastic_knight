@@ -22,7 +22,7 @@ public class LevelMaker extends Pane {
     boolean isSpike = false;
     boolean isDoor = false;
     boolean isSlime = false;
-    Image currentImg = new Image("file:src/main/resources/com/fantastic_knight/platform.png");
+    Image currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png");
 
     Platform[][] platforms = new Platform[12][40];
     String fileNameExport = "default";
@@ -39,7 +39,7 @@ public class LevelMaker extends Pane {
         paneMaker.setPrefSize(1200,800);
 
         // Background
-        paneMaker.setStyle("-fx-background-image: url('"+ Game.class.getResource("bg.png")+"')");
+        paneMaker.setStyle("-fx-background-image: url('"+ Game.class.getResource("assets/bg.png")+"')");
 
         // REMPLISSAGE DE RECTANGLES
         for(int i = 0; i < 12; i++){
@@ -61,13 +61,13 @@ public class LevelMaker extends Pane {
         // PANE CHOOSE
         Pane paneChoose = new Pane();
         paneChoose.setPrefSize(300,800); paneChoose.setLayoutX(1200);
-        paneChoose.setStyle("-fx-background-image: url('"+ Game.class.getResource("levels.png")+"')");
+        paneChoose.setStyle("-fx-background-image: url('"+ Game.class.getResource("menu/levels.png")+"')");
 
         // FILE NAME
         Label fileName = new Label("File name :"); fileName.setLayoutX(10); fileName.setLayoutY(25); fileName.setFont(new Font(20));
         fileName.setStyle("-fx-font-weight: bold");
         TextField textFieldFileName = new TextField(fileNameExport); textFieldFileName.setLayoutX(150); textFieldFileName.setLayoutY(15); textFieldFileName.setPrefSize(120,55);
-        textFieldFileName.setStyle("-fx-background-image: url('"+ Game.class.getResource("paper.png")+"');-fx-background-color: transparent");
+        textFieldFileName.setStyle("-fx-background-image: url('"+ Game.class.getResource("icons/paper.png")+"');-fx-background-color: transparent");
         textFieldFileName.setOnKeyReleased(e -> fileNameExport = textFieldFileName.getText());
 
         // EXPORT
@@ -95,7 +95,7 @@ public class LevelMaker extends Pane {
         spikesImage.setLayoutX(50); spikesImage.setLayoutY(305);
         ToggleButton toggleButton = new ToggleButton();
         toggleButton.setLayoutX(175); toggleButton.setLayoutY(305); toggleButton.setPrefSize(100,45);
-        toggleButton.setStyle("-fx-background-image: url('"+ Game.class.getResource("off.png")+"');-fx-background-color: transparent;-fx-background-repeat: no-repeat");
+        toggleButton.setStyle("-fx-background-image: url('"+ Game.class.getResource("icons/off.png")+"');-fx-background-color: transparent;-fx-background-repeat: no-repeat");
         toggleButton.setOnAction(e -> spikesActive(toggleButton));
 
         //SLIME
@@ -111,14 +111,14 @@ public class LevelMaker extends Pane {
         // CLEAR
         Button buttonClear = new Button();
         buttonClear.setPrefSize(150,160);
-        buttonClear.setStyle("-fx-background-image: url('"+ Game.class.getResource("clear.png")+"');-fx-background-color: transparent; -fx-background-repeat: no-repeat");
+        buttonClear.setStyle("-fx-background-image: url('"+ Game.class.getResource("icons/clear.png")+"');-fx-background-color: transparent; -fx-background-repeat: no-repeat");
         buttonClear.setLayoutX(105); buttonClear.setLayoutY(550);
         buttonClear.setOnAction(e -> clear());
 
         // MENU
         Button buttonMenu = new Button();
         buttonMenu.setPrefSize(75,80);
-        buttonMenu.setStyle("-fx-background-image: url('"+ Game.class.getResource("back.png")+"');-fx-background-color: transparent; -fx-background-repeat: no-repeat");
+        buttonMenu.setStyle("-fx-background-image: url('"+ Game.class.getResource("icons/back.png")+"');-fx-background-color: transparent; -fx-background-repeat: no-repeat");
         buttonMenu.setLayoutX(235); buttonMenu.setLayoutY(725);
         buttonMenu.setOnAction(e -> menu());
 
@@ -161,7 +161,7 @@ public class LevelMaker extends Pane {
             button.setStyle("-fx-background-image: url('"+ Game.class.getResource("on.png")+"');-fx-background-color: transparent;-fx-background-repeat: no-repeat");
         } else {
             isSpike = false;
-            currentImg = new Image("file:src/main/resources/com/fantastic_knight/platform.png");
+            currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png");
             button.setStyle("-fx-background-image: url('"+ Game.class.getResource("off.png")+"');-fx-background-color: transparent;-fx-background-repeat: no-repeat");
         }
     }
@@ -172,17 +172,17 @@ public class LevelMaker extends Pane {
             currentImg = new Image("file:src/main/resources/com/fantastic_knight/items/slime.png");
         } else {
             isSlime = false;
-            currentImg = new Image("file:src/main/resources/com/fantastic_knight/platform.png");
+            currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png");
         }
     }
 
     public void doorActive(){
         if (!isDoor){
             isDoor = true;
-            currentImg = new Image("file:src/main/resources/com/fantastic_knight/door.png");
+            currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/door.png");
         } else {
             isDoor = false;
-            currentImg = new Image("file:src/main/resources/com/fantastic_knight/platform.png");
+            currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png");
         }
     }
 
@@ -284,7 +284,7 @@ public class LevelMaker extends Pane {
 
                     switch (type) {
                         case "platform" -> {
-                            platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/platform.png")));
+                            platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png")));
                             platform.setOpacity(100);
                             platform.setType("platform");
                         }
@@ -299,7 +299,7 @@ public class LevelMaker extends Pane {
                             platform.setType("slime");
                         }
                         case "door" -> {
-                            platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/door.png")));
+                            platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/door.png")));
                             platform.setOpacity(100);
                             platform.setType("door");
                             platform.setWidth(70);

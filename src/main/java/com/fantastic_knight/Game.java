@@ -47,10 +47,10 @@ public class Game extends Application {
         controller = new Controller(model, view);
 
         // FXML
-        FXMLLoader fxmlLoaderMenu = new FXMLLoader(getClass().getResource("menu.fxml"));
+        FXMLLoader fxmlLoaderMenu = new FXMLLoader(getClass().getResource("menu/menu.fxml"));
         Parent root_menu = fxmlLoaderMenu.load();
 
-        FXMLLoader fxmlLoaderCredits = new FXMLLoader(getClass().getResource("credits.fxml"));
+        FXMLLoader fxmlLoaderCredits = new FXMLLoader(getClass().getResource("menu/credits.fxml"));
         Parent root_credits = fxmlLoaderCredits.load();
 
         // SCENES PRINCIPALES

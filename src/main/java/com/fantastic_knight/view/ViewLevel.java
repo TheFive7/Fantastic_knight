@@ -1,10 +1,11 @@
 package com.fantastic_knight.view;
 
 import com.fantastic_knight.Game;
+import com.fantastic_knight.items.Slime;
+import com.fantastic_knight.items.Spikes;
 import com.fantastic_knight.levelMaker.Platform;
 import com.fantastic_knight.model.*;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -26,7 +27,7 @@ public class ViewLevel {
         pane.getChildren().clear();
 
         // Background
-        pane.setStyle("-fx-background-image: url('" + Game.class.getResource("bg.png") + "')");
+        pane.setStyle("-fx-background-image: url('" + Game.class.getResource("assets/bg.png") + "')");
 
         // Define obstacle for outside the view.
         model.northWall = new Rectangle(0, -50, model.width, 50);
@@ -101,7 +102,7 @@ public class ViewLevel {
 
                     switch (type) {
                         case "platform" -> {
-                            platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/platform.png")));
+                            platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png")));
                             platform.setOpacity(100);
                             model.obstacles.add(platform);
                         }
@@ -125,7 +126,7 @@ public class ViewLevel {
                             door.setY(platform.getyCoordonnee() * 20);
                             door.setWidth(70);
                             door.setHeight(100);
-                            door.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/door.png")));
+                            door.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/door.png")));
                             pane.getChildren().add(door);
                         }
                         default -> platform.setOpacity(0);

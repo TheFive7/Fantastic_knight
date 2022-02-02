@@ -1,4 +1,4 @@
-package com.fantastic_knight;
+package com.fantastic_knight.model;
 
 public enum State {
     IDLE,

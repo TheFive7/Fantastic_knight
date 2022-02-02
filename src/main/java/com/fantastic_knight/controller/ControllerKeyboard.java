@@ -1,6 +1,6 @@
 package com.fantastic_knight.controller;
 
-import com.fantastic_knight.State;
+import com.fantastic_knight.model.State;
 import com.fantastic_knight.model.Model;
 import com.fantastic_knight.view.View;
 import javafx.event.EventHandler;

@@ -1,6 +1,7 @@
 package com.fantastic_knight.controller;
 
 import com.fantastic_knight.levelMaker.LevelMaker;
+import com.fantastic_knight.menu.LevelsMenu;
 import javafx.scene.Scene;
 
 import static com.fantastic_knight.Game.primaryStage;

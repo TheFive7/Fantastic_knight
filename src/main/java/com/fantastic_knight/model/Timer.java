@@ -1,6 +1,8 @@
 package com.fantastic_knight.model;
 
-class Timer implements Runnable {
+import com.fantastic_knight.items.Item;
+
+public class Timer implements Runnable {
     final int time;
     boolean bool;
     Item item;
@@ -22,9 +24,9 @@ class Timer implements Runnable {
      */
     public void run() {
         try {
-            bool = false; item.isActive = bool; // disable
+            bool = false; item.setActive(bool); // disable
             Thread.sleep(time);
-            bool = true; item.isActive = bool; // able
+            bool = true; item.setActive(bool); // able
             Thread.currentThread().interrupt();
             return;
         } catch (InterruptedException e) {

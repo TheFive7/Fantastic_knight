@@ -1,5 +1,7 @@
-package com.fantastic_knight.model;
+package com.fantastic_knight.items;
 
+import com.fantastic_knight.model.Model;
+import com.fantastic_knight.model.Timer;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
@@ -11,12 +13,10 @@ public class Spikes extends Item {
 
     public Spikes(Model m) {
         super(m);
-        type = "spikes";
+        type = "spike";
         width = 100;
         height = 20;
         shape = new Rectangle(width, height);
-        xPosition = 0;
-        yPosition = 0;
         shape.setX(xPosition);
         shape.setY(yPosition);
         image = new Image("file:src/main/resources/com/fantastic_knight/items/spike.png");
@@ -24,7 +24,7 @@ public class Spikes extends Item {
     }
 
     /**
-     * update spike
+     * Update spike
      */
     @Override
     public void update() {
@@ -38,7 +38,7 @@ public class Spikes extends Item {
             if (isActive) {
                 if (model.player.isLife()) {
                     model.player.setLife(false);
-                    model.player.getModel().shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/shield_empty.png")));
+                    model.player.getModel().shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/shield_empty.png")));
                     t.start();
                 } else {
                     model.player.reset();

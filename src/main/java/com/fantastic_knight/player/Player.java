@@ -2,7 +2,7 @@ package com.fantastic_knight.player;
 
 import com.fantastic_knight.animation.AnimationImage;
 import com.fantastic_knight.model.Sprite;
-import com.fantastic_knight.State;
+import com.fantastic_knight.model.State;
 import com.fantastic_knight.model.Model;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
@@ -123,7 +123,7 @@ public class Player extends Sprite {
         shape.setX(xPosition);
         shape.setY(yPosition);
         state = State.IDLE;
-        model.shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/shield.png")));
+        model.shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/shield.png")));
     }
 
     /**
