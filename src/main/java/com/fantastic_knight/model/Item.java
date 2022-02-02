@@ -1,11 +1,11 @@
 package com.fantastic_knight.model;
 
+import com.fantastic_knight.player.Player;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 
 abstract class Item extends Sprite {
     Rectangle shape;
-    String effect;
     double xPosition;
     double yPosition;
     double width;
@@ -13,6 +13,8 @@ abstract class Item extends Sprite {
     boolean isActive;
     boolean animated;
     Image image;
+    public Player player = model.player;
+    Rectangle playerHitbox = new Rectangle(this.player.getWidth(), this.player.getHeight());
 
     public Item(Model model) {
         super(model);

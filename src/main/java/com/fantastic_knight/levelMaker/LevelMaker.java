@@ -21,6 +21,7 @@ public class LevelMaker extends Pane {
 
     boolean isSpike = false;
     boolean isDoor = false;
+    boolean isSlime = false;
     Image currentImg = new Image("file:src/main/resources/com/fantastic_knight/platform.png");
 
     Platform[][] platforms = new Platform[12][40];
@@ -97,6 +98,11 @@ public class LevelMaker extends Pane {
         toggleButton.setStyle("-fx-background-image: url('"+ Game.class.getResource("off.png")+"');-fx-background-color: transparent;-fx-background-repeat: no-repeat");
         toggleButton.setOnAction(e -> spikesActive(toggleButton));
 
+        //SLIME
+        CheckBox slimeCheck = new CheckBox("SLIME");
+        slimeCheck.setLayoutX(50); slimeCheck.setLayoutY(500);
+        slimeCheck.setOnAction(e -> slimeActive());
+
         // DOOR
         CheckBox doorCheck = new CheckBox("DOOR");
         doorCheck.setLayoutX(50); doorCheck.setLayoutY(350);
@@ -117,7 +123,7 @@ public class LevelMaker extends Pane {
         buttonMenu.setOnAction(e -> menu());
 
         // AJOUTS
-        paneChoose.getChildren().addAll(fileName,exportFile,spikesImage,buttonExport,buttonLoad,toggleButton,doorCheck,buttonClear,buttonMenu,textFieldFileName,choiceBoxLevels);
+        paneChoose.getChildren().addAll(fileName,exportFile,spikesImage,buttonExport,buttonLoad,toggleButton,slimeCheck,doorCheck,buttonClear,buttonMenu,textFieldFileName,choiceBoxLevels);
         paneLevelMaker.getChildren().addAll(paneMaker,paneChoose);
         getChildren().add(paneLevelMaker);
     }
@@ -160,6 +166,16 @@ public class LevelMaker extends Pane {
         }
     }
 
+    private void slimeActive() {
+        if (!isSlime){
+            isSlime = true;
+            currentImg = new Image("file:src/main/resources/com/fantastic_knight/items/slime.png");
+        } else {
+            isSlime = false;
+            currentImg = new Image("file:src/main/resources/com/fantastic_knight/platform.png");
+        }
+    }
+
     public void doorActive(){
         if (!isDoor){
             isDoor = true;
@@ -185,8 +201,9 @@ public class LevelMaker extends Pane {
                 platforms[x][y].setOpacity(100);
 
                 // Spikes & Platform
-                if(isSpike){platforms[x][y].setType("spike");
-                } else {platforms[x][y].setType("platform");}
+                if(isSpike)platforms[x][y].setType("spike");
+                else if (isSlime)platforms[x][y].setType("slime");
+                else {platforms[x][y].setType("platform");}
 
                 // Door
                 if (isDoor){
@@ -276,6 +293,11 @@ public class LevelMaker extends Pane {
                             platform.setOpacity(100);
                             platform.setType("spike");
                         }
+                        case "slime" -> {
+                            platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/items/slime.png")));
+                            platform.setOpacity(100);
+                            platform.setType("slime");
+                        }
                         case "door" -> {
                             platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/door.png")));
                             platform.setOpacity(100);
@@ -289,12 +311,10 @@ public class LevelMaker extends Pane {
                             platform.setType("void");
                         }
                     }
-
                     platforms[x][y] = platform;
                     paneMaker.getChildren().add(platform);
                 }
             }
-
             scanner.close();
 
             System.out.println("Fichier " + fileNameLoad + " chargé");

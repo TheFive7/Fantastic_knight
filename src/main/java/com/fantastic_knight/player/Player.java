@@ -34,6 +34,9 @@ public class Player extends Sprite {
     Model model;
     AnimationImage animation;
 
+
+    boolean isTouchingSlime;
+
     // 0 RIGHT; 180 LEFT
 
     public Player(Model model) {
@@ -53,7 +56,8 @@ public class Player extends Sprite {
         life = true;
         xPosition = 0;
         yPosition = model.height - height;
-        xVelocity = 5;
+        if (isTouchingSlime) xVelocity = 1;
+        else xVelocity = 5;
         yVelocity = 0;
         angle = 0;
         shape.setX(xPosition);
@@ -65,6 +69,9 @@ public class Player extends Sprite {
         animated = true;
         win = false;
         name = "Knight Red";
+
+
+        isTouchingSlime = false;
     }
 
 
@@ -77,7 +84,9 @@ public class Player extends Sprite {
         // Image
         animation.setImages(imageLeft);
 
-        xVelocity = 5;
+        //tester si en contact avec un slime
+        if (isTouchingSlime) xVelocity = 1;
+        else xVelocity = 5;
         yVelocity = 0;
         angle = 180;
         lastMove = 1;
@@ -93,7 +102,9 @@ public class Player extends Sprite {
         // Image
         animation.setImages(imageRight);
 
-        xVelocity = 5;
+        //tester si en contact avec un slime
+        if (isTouchingSlime) xVelocity = 1;
+        else xVelocity = 5;
         yVelocity = 0;
         angle = 0;
         lastMove = 2;
@@ -154,7 +165,8 @@ public class Player extends Sprite {
         if (state == State.JUMP || state == State.IDLE) return;
         if (lastMove == 1) angle = 180;
         else if (lastMove == 2) angle = 0;
-        xVelocity = 5;
+        if (isTouchingSlime) xVelocity = 1;
+        else xVelocity = 5;
         yVelocity = -vSaut;
         state = State.JUMP;
     }
@@ -347,6 +359,8 @@ public class Player extends Sprite {
         this.xVelocity = xVelocity;
     }
 
+    public double getxVelocity() {return xVelocity;}
+
     public void setyVelocity(double yVelocity) {
         this.yVelocity = yVelocity;
     }
@@ -398,4 +412,6 @@ public class Player extends Sprite {
     public void setWin(boolean win) {
         this.win = win;
     }
+
+    public void setIsTouchingSlime(boolean touchingSlime) { this.isTouchingSlime = touchingSlime; }
 }

@@ -2,10 +2,7 @@ package com.fantastic_knight.view;
 
 import com.fantastic_knight.Game;
 import com.fantastic_knight.levelMaker.Platform;
-import com.fantastic_knight.model.Door;
-import com.fantastic_knight.model.Model;
-import com.fantastic_knight.model.Shield;
-import com.fantastic_knight.model.Spikes;
+import com.fantastic_knight.model.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.Pane;
@@ -102,26 +99,36 @@ public class ViewLevel {
                     platform.setLayoutX(x * 100);
                     platform.setLayoutY(y * 20);
 
-                    if (type.equals("platform")) {
-                        platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/platform.png")));
-                        platform.setOpacity(100);
-                        model.obstacles.add(platform);
-                    } else if (type.equals("spike")) {
-                        platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/items/spike.png")));
-                        platform.setOpacity(100);
-                        Spikes spike = new Spikes(model);
-                        spike.setShape(platform);
-                        model.items.add(spike);
-                    } else if(type.equals("door")) {
-                        Door door = model.door;
-                        door.setX(platform.getxCoordonnee() * 100 + 15);
-                        door.setY(platform.getyCoordonnee() * 20);
-                        door.setWidth(70);
-                        door.setHeight(100);
-                        door.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/door.png")));
-                        pane.getChildren().add(door);
-                    } else {
-                        platform.setOpacity(0);
+                    switch (type) {
+                        case "platform" -> {
+                            platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/platform.png")));
+                            platform.setOpacity(100);
+                            model.obstacles.add(platform);
+                        }
+                        case "spike" -> {
+                            platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/items/spike.png")));
+                            platform.setOpacity(100);
+                            Spikes spike = new Spikes(model);
+                            spike.setShape(platform);
+                            model.items.add(spike);
+                        }
+                        case "slime" -> {
+                            platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/items/slime.png")));
+                            platform.setOpacity(100);
+                            Slime slime = new Slime(model);
+                            slime.setShape(platform);
+                            model.items.add(slime);
+                        }
+                        case "door" -> {
+                            Door door = model.door;
+                            door.setX(platform.getxCoordonnee() * 100 + 15);
+                            door.setY(platform.getyCoordonnee() * 20);
+                            door.setWidth(70);
+                            door.setHeight(100);
+                            door.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/door.png")));
+                            pane.getChildren().add(door);
+                        }
+                        default -> platform.setOpacity(0);
                     }
 
                     platform.setType(type);
