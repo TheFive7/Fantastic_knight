@@ -52,7 +52,7 @@ public class Player extends Sprite {
         shape = new Rectangle(width, height);
         life = true;
         xPosition = 0;
-        yPosition = model.height - height;
+        yPosition = 800+800 - height;
         xVelocity = 5;
         yVelocity = 0;
         angle = 0;
@@ -116,7 +116,7 @@ public class Player extends Sprite {
     public void reset() {
         setWin(false);
         xPosition = 0;
-        yPosition = model.height - height;
+        yPosition = 800+800 - height;
         xVelocity = 2;
         yVelocity = 0;
         angle = 0;
@@ -321,6 +321,10 @@ public class Player extends Sprite {
         setyPosition(y);
         shape.setX(getxPosition());
         shape.setY(getyPosition());
+    }
+
+    public double getyVelocity() {
+        return yVelocity;
     }
 
     public Rectangle getShape() {

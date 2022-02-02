@@ -25,6 +25,7 @@ public class Controller {
                 }
                 model.lastFrame = arg0;
                 model.update();
+                //view.getPaneGame().setTranslateY(model.player.getyVelocity());
             }
         };
     }

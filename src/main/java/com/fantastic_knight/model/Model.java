@@ -60,7 +60,6 @@ public class Model {
         obstacles = new ArrayList<>();
         sprites = new ArrayList<>();
         items = new ArrayList<>();
-
     }
 
     /**

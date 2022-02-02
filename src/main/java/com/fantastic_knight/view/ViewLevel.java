@@ -33,9 +33,9 @@ public class ViewLevel {
 
         // Define obstacle for outside the view.
         model.northWall = new Rectangle(0, -50, model.width, 50);
-        model.southWall = new Rectangle(0, model.height, model.width, 50);
-        model.westWall = new Rectangle(-50, -50, 50, model.height + 100);
-        model.eastWall = new Rectangle(model.width, -50, 50, model.height + 100);
+        model.southWall = new Rectangle(0, model.height+800, model.width, 50);
+        model.westWall = new Rectangle(-50, -50, 50, model.height+800 + 100);
+        model.eastWall = new Rectangle(model.width, -50, 50, model.height+800 + 100);
         model.obstacles.add(model.northWall);
         model.obstacles.add(model.southWall);
         model.obstacles.add(model.eastWall);
@@ -85,7 +85,7 @@ public class ViewLevel {
             // Parcours du tableau
             for (int i = 0; i < 12; i++) {
                 String[] mots = scanner.nextLine().split(ESPACE);
-                for (int j = 0; j < 40; j++) {
+                for (int j = 0; j < 80; j++) {
                     String[] coordonnees = mots[j].split(VIRGULE);
 
                     // Lecture des valeurs
@@ -98,7 +98,7 @@ public class ViewLevel {
                     platform.setWidth(100);
                     platform.setHeight(20);
                     platform.setxCoordonnee(x);
-                    platform.setyCoordonnee(y);
+                    platform.setyCoordonnee(y + 800);
                     platform.setLayoutX(x * 100);
                     platform.setLayoutY(y * 20);
 

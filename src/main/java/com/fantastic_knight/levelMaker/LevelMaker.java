@@ -23,26 +23,31 @@ public class LevelMaker extends Pane {
     boolean isDoor = false;
     Image currentImg = new Image("file:src/main/resources/com/fantastic_knight/platform.png");
 
-    Platform[][] platforms = new Platform[12][40];
+    Platform[][] platforms = new Platform[12][80];
     String fileNameExport = "default";
     String fileNameLoad = "default";
 
     ChoiceBox<String> choiceBoxLevels;
 
     public LevelMaker(){
+        ScrollPane scrollPane = new ScrollPane();
         Pane paneLevelMaker = new Pane();
         paneLevelMaker.setPrefSize(1500,800);
 
         // PANE MAKER
         Pane paneMaker = new Pane();
-        paneMaker.setPrefSize(1200,800);
+        paneMaker.setPrefSize(1200,800+800);
+        scrollPane.setPrefSize(1200,800);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVvalue(scrollPane.getVmax());
+        scrollPane.setContent(paneMaker);
 
         // Background
         paneMaker.setStyle("-fx-background-image: url('"+ Game.class.getResource("bg.png")+"')");
 
         // REMPLISSAGE DE RECTANGLES
         for(int i = 0; i < 12; i++){
-            for (int j = 0; j < 40; j++){
+            for (int j = 0; j < 80; j++){
                 Platform platform = new Platform();
                 platform.setWidth(100); platform.setHeight(20);
                 platform.setLayoutX(i * 100); platform.setLayoutY(j * 20);
@@ -118,7 +123,7 @@ public class LevelMaker extends Pane {
 
         // AJOUTS
         paneChoose.getChildren().addAll(fileName,exportFile,spikesImage,buttonExport,buttonLoad,toggleButton,doorCheck,buttonClear,buttonMenu,textFieldFileName,choiceBoxLevels);
-        paneLevelMaker.getChildren().addAll(paneMaker,paneChoose);
+        paneLevelMaker.getChildren().addAll(scrollPane,paneChoose);
         getChildren().add(paneLevelMaker);
     }
 
@@ -178,7 +183,7 @@ public class LevelMaker extends Pane {
     void drawPlatform(MouseEvent e, Platform[][] platforms){
         int x = (int) (Math.round(e.getX() * 10)/1000);
         int y = (int) (Math.round(e.getY() * 10)/200);
-        if ((x < 12 && x >= 0) && (y < 40 && y >= 0)){
+        if ((x < 12 && x >= 0) && (y < 80 && y >= 0)){
             if (e.getButton() == MouseButton.PRIMARY){
                 platforms[x][y].setxCoordonnee(x);
                 platforms[x][y].setyCoordonnee(y);
@@ -214,7 +219,7 @@ public class LevelMaker extends Pane {
 
             PrintWriter writer = new PrintWriter("src/main/java/com/fantastic_knight/save/" + fileNameExport +".sav");
             for(int i = 0; i < 12; i++){
-                for (int j = 0; j < 40; j++){
+                for (int j = 0; j < 80; j++){
                     writer.print(platforms[i][j].toString() + " ");
                     System.out.println(platforms[i][j].toString());
                 }
@@ -248,7 +253,7 @@ public class LevelMaker extends Pane {
             // Parcours du tableau
             for(int i = 0; i < 12; i++){
                 String[] mots = scanner.nextLine().split(ESPACE);
-                for (int j = 0; j < 40; j++){
+                for (int j = 0; j < 80; j++){
                     String[] coordonnees = mots[j].split(VIRGULE);
 
                     // Lecture des valeurs
