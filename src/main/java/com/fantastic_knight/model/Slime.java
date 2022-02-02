@@ -9,6 +9,7 @@ import javafx.scene.shape.Shape;
 public class Slime extends Item {
     public Slime(Model m) {
         super(m);
+        type = "slime";
         width = 100;
         height = 20;
         shape = new Rectangle(width, height);

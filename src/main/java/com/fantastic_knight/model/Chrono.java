@@ -1,48 +1,33 @@
 package com.fantastic_knight.model;
 
-import com.fantastic_knight.player.Player;
-import javafx.scene.image.Image;
-import javafx.scene.paint.ImagePattern;
+public class Chrono extends Thread {
+    private double time;
+    private boolean running;
 
-class Chrono implements Runnable {
-    final Item item;
-    final Player player;
-    final String methode;
-
-    public Chrono(Item item, Player player, String methode) {
-        this.item = item;
-        this.player = player;
-        this.methode = methode;
+    public Chrono(){
+        this.running = false;
+        this.time = 0;
     }
 
-    /**
-     * Start timer
-     */
-    public void run() {
-        try {
-            this.item.isActive = false;     // disable trap
-            choixMethodes(methode);         // choix de la méthode à utiliser selon l'item
-            Thread.sleep(1500);       // wait 3000 milliseconds -> 3 seconds
-            this.item.isActive = true;      // Reactivate the item before ending the thread, then close it
-            Thread.currentThread().interrupt();
-            return;
-        } catch (InterruptedException e) {
-            System.err.println("Error with Chrono");
+    @Override
+    public void run(){
+        running = true;
+
+        while (running) {
+            try{
+                sleep(100);
+                time += 0.1;
+                time = (double)Math.round(time * 100) / 100;
+            }
+            catch(InterruptedException ignored){}
         }
     }
 
-    public void choixMethodes(String methode) {
-        switch (methode) {
-            case "spikes":
-                if (player.isLife()) {
-                    player.setLife(false);
-                    player.getModel().shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/shield_empty.png")));
-                } else player.reset();
-                break;
-            case "shield":
-                break;
-                //if (!this.item.isActive)
-                //    System.out.println("Me voilà bien protégé");
-        }
+    public void terminate(){
+        running = false;
+    }
+
+    public String affiche() {
+        return this.time + "";
     }
 }

@@ -5,12 +5,13 @@ import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 
 abstract class Item extends Sprite {
+    String type;
     Rectangle shape;
     double xPosition;
     double yPosition;
     double width;
     double height;
-    boolean isActive;
+    boolean isActive = true;
     boolean animated;
     Image image;
     public Player player = model.player;

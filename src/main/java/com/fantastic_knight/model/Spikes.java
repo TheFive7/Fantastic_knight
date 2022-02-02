@@ -7,8 +7,11 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 public class Spikes extends Item {
+    Timer timer = new Timer(1500, this);
+
     public Spikes(Model m) {
         super(m);
+        type = "spikes";
         width = 100;
         height = 20;
         shape = new Rectangle(width, height);
@@ -16,7 +19,6 @@ public class Spikes extends Item {
         yPosition = 0;
         shape.setX(xPosition);
         shape.setY(yPosition);
-        isActive = true;
         image = new Image("file:src/main/resources/com/fantastic_knight/items/spike.png");
         shape.setFill(new ImagePattern(image));
     }
@@ -32,9 +34,16 @@ public class Spikes extends Item {
         Shape inter = Shape.intersect(playerHitbox, shape);
         Bounds b = inter.getBoundsInParent();
         if (b.getWidth() != -1) {
-            Thread t = new Thread(new Chrono(this, model.player, "spikes"));
-            if (isActive) t.start();
-            isActive = false;
+            Thread t = new Thread(timer);
+            if (isActive) {
+                if (model.player.isLife()) {
+                    model.player.setLife(false);
+                    model.player.getModel().shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/shield_empty.png")));
+                    t.start();
+                } else {
+                    model.player.reset();
+                }
+            }
         }
     }
 }
