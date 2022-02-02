@@ -110,6 +110,7 @@ public class ViewLevel {
                             platform.setOpacity(100);
                             Spikes spike = new Spikes(model);
                             spike.setShape(platform);
+                            System.out.println(spike.getShape());
                             model.items.add(spike);
                         }
                         case "slime" -> {
