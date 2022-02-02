@@ -1,9 +1,8 @@
 package com.fantastic_knight.items;
 
 import com.fantastic_knight.model.Model;
-import com.fantastic_knight.player.Player;
-import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.image.Image;
 
 public abstract class Item {
     Model model;
@@ -15,7 +14,6 @@ public abstract class Item {
     double height;
     boolean isActive;
     Image image;
-    Player player;
     Rectangle playerHitbox;
 
     public Item(Model model){
@@ -23,8 +21,7 @@ public abstract class Item {
         isActive = true;
         xPosition = 0;
         yPosition = 0;
-        player = model.player;
-        playerHitbox = new Rectangle(this.player.getWidth(), this.player.getHeight());
+        playerHitbox = new Rectangle(model.player.getWidth(), model.player.getHeight());
     }
 
     public abstract void update();
@@ -33,8 +30,14 @@ public abstract class Item {
         this.shape = shape;
     }
 
+    public Rectangle getShape(){return this.shape;}
+
     public Image getImage() {
         return image;
+    }
+
+    public boolean getActive() {
+        return isActive;
     }
 
     public void setImage(Image image) {
