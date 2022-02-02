@@ -1,5 +1,6 @@
 package com.fantastic_knight.view;
 
+import com.fantastic_knight.model.Chrono;
 import com.fantastic_knight.model.Model;
 import javafx.scene.Group;
 import javafx.scene.layout.Pane;

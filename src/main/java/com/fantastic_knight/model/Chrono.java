@@ -1,6 +1,8 @@
 package com.fantastic_knight.model;
 
-public class Chrono extends Thread {
+import static java.lang.Thread.sleep;
+
+public class Chrono implements Runnable {
     private double time;
     private boolean running;
 
