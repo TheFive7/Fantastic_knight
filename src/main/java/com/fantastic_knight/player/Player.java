@@ -4,6 +4,7 @@ import com.fantastic_knight.animation.AnimationImage;
 import com.fantastic_knight.model.Sprite;
 import com.fantastic_knight.model.State;
 import com.fantastic_knight.model.Model;
+import com.fantastic_knight.model.Timer;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
@@ -76,7 +77,6 @@ public class Player extends Sprite {
 
         // Image
         animation.setImages(imageLeft);
-
         xVelocity = 5;
         yVelocity = 0;
         angle = 180;
@@ -367,6 +367,10 @@ public class Player extends Sprite {
     }
 
     public void setLife(boolean life) {
+        if (!life) {
+            model.heart.setActive(false);
+            getModel().shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/shield_empty.png")));
+        }
         this.life = life;
     }
 
