@@ -4,7 +4,6 @@ import com.fantastic_knight.animation.AnimationImage;
 import com.fantastic_knight.model.Sprite;
 import com.fantastic_knight.model.State;
 import com.fantastic_knight.model.Model;
-import com.fantastic_knight.model.Timer;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
@@ -43,10 +42,10 @@ public class Player extends Sprite {
 
         imageRight = new Image[2];
         imageLeft = new Image[2];
-        imageRight[0] = new Image("file:src/main/resources/com/fantastic_knight/player/perso_droite_idle.png");
-        imageRight[1] = new Image("file:src/main/resources/com/fantastic_knight/player/perso_droite_walk.png");
-        imageLeft[0] = new Image("file:src/main/resources/com/fantastic_knight/player/perso_gauche_idle.png");
-        imageLeft[1] = new Image("file:src/main/resources/com/fantastic_knight/player/perso_gauche_walk.png");
+        imageRight[0] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_stand.png");
+        imageRight[1] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_walk.png");
+        imageLeft[0] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_stand.png");
+        imageLeft[1] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_walk.png");
         width = imageRight[0].getWidth();
         height = imageRight[0].getHeight();
 
