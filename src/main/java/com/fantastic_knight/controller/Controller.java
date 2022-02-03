@@ -59,4 +59,8 @@ public class Controller {
     public void resetPerso() {
         model.player.reset();
     }
+
+    public void dash() {
+        model.player.dash();
+    }
 }

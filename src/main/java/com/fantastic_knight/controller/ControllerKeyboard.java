@@ -53,6 +53,8 @@ public class ControllerKeyboard implements EventHandler<KeyEvent> {
             control.stopPerso();
         } else if (arg0.getCode() == KeyCode.SPACE) {
             control.jumpPerso();
+        } else if (arg0.getCode() == KeyCode.E) {
+            control.dash();
         }
     }
 }

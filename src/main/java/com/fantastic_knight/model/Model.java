@@ -62,7 +62,6 @@ public class Model {
         obstacles = new ArrayList<>();
         sprites = new ArrayList<>();
         items = new ArrayList<>();
-
     }
 
     /**
@@ -98,7 +97,6 @@ public class Model {
             s.update();
         }
         door.update();
-        // System.out.println(chrono.affiche());
     }
 
     /**

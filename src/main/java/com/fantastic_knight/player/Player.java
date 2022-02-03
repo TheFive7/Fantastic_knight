@@ -1,10 +1,10 @@
 package com.fantastic_knight.player;
 
 import com.fantastic_knight.animation.AnimationImage;
-import com.fantastic_knight.model.Chrono;
 import com.fantastic_knight.model.Sprite;
 import com.fantastic_knight.model.State;
 import com.fantastic_knight.model.Model;
+import com.fantastic_knight.model.Timer;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
@@ -34,7 +34,7 @@ public class Player extends Sprite {
     int lastMove;
     Model model;
     AnimationImage animation;
-    Chrono chrono;
+    final double vDash = 10;
 
     // 0 RIGHT; 180 LEFT
 
@@ -153,12 +153,27 @@ public class Player extends Sprite {
      * Fais sauter le personnage
      */
     public void jump() {
-        if (state == State.JUMP || state == State.IDLE) return;
+        if (state == State.JUMP || state == State.IDLE || state == State.DASH) return;
         if (lastMove == 1) angle = 180;
         else if (lastMove == 2) angle = 0;
         xVelocity = 5;
         yVelocity = -vSaut;
         state = State.JUMP;
+    }
+
+    /**
+     * Move dash (high speed movement of the player)
+     */
+    public void dash(){
+        if(state == State.JUMP || state == State.FALL) return;
+        Timer timer = new Timer(300,this);
+        xVelocity = vDash;
+        yVelocity = 0;
+        if(lastMove==1) animation.setImages(imageLeft);
+        else animation.setImages(imageRight);
+        state = State.DASH;
+        Thread t = new Thread(timer);
+        t.start();
     }
 
     /**
@@ -174,7 +189,7 @@ public class Player extends Sprite {
         } else { // moving or falling
 
             // Si il marche
-            if (state == State.WALK) {
+            if (state == State.WALK || state == State.DASH) {
                 animation.getTimer().start();
             }
 
@@ -193,8 +208,6 @@ public class Player extends Sprite {
             if(isWin()){
                 setWin(false);
                 model.labelWin.setOpacity(100);
-                // chrono.terminate();
-
             }
         }
     }
@@ -236,7 +249,7 @@ public class Player extends Sprite {
      * @param shape1 : Rectangle pour savoir la prochaine position
      */
     public void testWalk(Rectangle shape1) {
-        if (state == State.WALK) {
+        if (state == State.WALK || state == State.DASH) {
             // NO FLOOR DETECTION for actual position: just move perso one pixel down
             shape1.setX(xPosition);
             shape1.setY(yPosition + 1);
@@ -357,6 +370,10 @@ public class Player extends Sprite {
 
     public State getState() {
         return state;
+    }
+
+    public void setState(State state){
+        this.state = state;
     }
 
     public double getWidth() {
