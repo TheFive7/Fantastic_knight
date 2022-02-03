@@ -35,11 +35,11 @@ public class Timer implements Runnable {
      */
     public void run() {
         try {
-            bool = false;// disable
+            bool = false; // disable
             if(item!=null) item.setActive(bool);
             if(player!=null) player.setState(State.DASH);
             Thread.sleep(time);
-            bool = true;// able
+            bool = true; // unable
             if(item!=null) item.setActive(bool);
             if(player!=null) player.setState(State.IDLE);
             Thread.currentThread().interrupt();

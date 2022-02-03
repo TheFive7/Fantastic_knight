@@ -12,12 +12,12 @@ public class Arrow extends Item {
 
     double xVelocity;
     int factor;
-    Timer timer = new Timer(5000, this);
+    Timer timer = new Timer(2000, this);
 
     public Arrow(Model model) {
         super(model);
         type = "arrow";
-        width = 20;
+        width = 50;
         height = 7;
 
         factor = -1;

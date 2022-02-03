@@ -54,7 +54,7 @@ public class View {
     public void returnMenu() {
         double tempsChrono = model.chrono.getTime();
         model.chrono.terminate();
-        RankingMenu.register(tempsChrono);
+        // RankingMenu.register(tempsChrono);
 
         model.state = Model.STATE_INITIAL;
         model.reset();

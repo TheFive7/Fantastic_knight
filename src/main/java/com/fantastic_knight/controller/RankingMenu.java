@@ -16,6 +16,7 @@ import static com.fantastic_knight.Game.scene_menu;
 
 public class RankingMenu extends Pane {
     public String[] tabPseudo = new String[100];
+    public String[] rang = new String[100];
     public static List<String> data = new ArrayList<>();
 
 
@@ -48,32 +49,41 @@ public class RankingMenu extends Pane {
 
         String fileNameTime = "time";
 
-        int compteur = 0;
         List<Double> temps = new ArrayList<>();
-        String[] tabTime;
+        String[] tab;
 
         // trier les temps
         try {
             data.clear();
-            // for(int i=0; i<tabPseudo.length; i++){tabPseudo[i] = null;}
             FileInputStream file = new FileInputStream("src/main/java/com/fantastic_knight/time/"+ fileNameTime +".txt");
             Scanner scanner = new Scanner(file);
+
+            int index = 0;
+
             while (scanner.hasNext()) {
-                tabTime = scanner.nextLine().split(",");
-                double tmp = Double.parseDouble(tabTime[1]);
+                tab = scanner.nextLine().split(",");
+                double tmp = Double.parseDouble(tab[1]);
 
-                data.add(tabTime[0] + "," + tabTime[1]);
+                data.add(tab[0] + "," + tab[1]);
                 temps.add(tmp);
-                Collections.sort(temps);
-                System.out.println(tabTime[0] + " " + tabTime[1]);
 
-                // c'est ici que ça merde
-                int index = temps.indexOf(tmp);
-                tabPseudo[index] = tabTime[0];
-
-                compteur ++;
-
+                tabPseudo[index] = tab[0];
+                index ++;
             }
+            Collections.sort(temps);
+
+            for (String s : data){
+                String[] value = s.split(",");
+                double tmp = Double.parseDouble(value[1]);
+                String name = value[0];
+
+                for (double d : temps){
+                    if (d == tmp){
+                        tabPseudo[temps.indexOf(d)] = name;
+                    }
+                }
+            }
+
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -94,10 +104,9 @@ public class RankingMenu extends Pane {
 
     public static void register(double temps){
         try {
-            System.out.println(temps);
             PrintWriter writer = new PrintWriter("src/main/java/com/fantastic_knight/time/time.txt");
-            for(int i = 0; i < data.size(); i++){
-                writer.print(data.get(i));
+            for (String datum : data) {
+                writer.print(datum);
                 writer.println();
             }
             writer.print(MenuController.globalPseudo + "," + temps);

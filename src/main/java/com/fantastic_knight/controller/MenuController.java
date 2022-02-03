@@ -52,10 +52,7 @@ public class MenuController {
      * récuprère le pseudo du textfield
      */
     public void pseudo(){
-        String pseudo = varPseudo.getText();
-        globalPseudo = pseudo;
-
-        System.out.println(pseudo);
+        globalPseudo = varPseudo.getText();
     }
 
     public void quit() {

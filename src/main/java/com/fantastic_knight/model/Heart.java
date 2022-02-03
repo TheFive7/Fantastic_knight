@@ -23,7 +23,7 @@ public class Heart extends Item {
     @Override
     public void update() {
         if (!getActive()) {
-            Timer timer = new Timer(3000, this);
+            Timer timer = new Timer(1000, this);
             Thread t = new Thread(timer);
 
             // Display Heart

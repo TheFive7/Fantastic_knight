@@ -1,5 +1,6 @@
-guigui,4.77
-maxime,8.23
-alex,9.87
-peter,6.45
-simon,12.36
+Maxime,5.56
+Simon,6.56
+Baptiste,3.56
+Guillaume,9.56
+Pedro,4.56
+Lou,2.56

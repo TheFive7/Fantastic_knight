@@ -23,7 +23,6 @@ public class LevelMaker extends Pane {
     boolean isDoor = false;
     boolean isSlime = false;
     boolean isArrowTrap = false;
-    boolean arrowTrapLeft = true;
     Image currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png");
 
     Platform[][] platforms = new Platform[12][40];
@@ -59,7 +58,6 @@ public class LevelMaker extends Pane {
         paneMaker.setOnMouseClicked(e -> drawPlatform(e,platforms));
         paneMaker.setOnMouseDragged(e -> drawPlatform(e,platforms));
 
-
         // PANE CHOOSE
         Pane paneChoose = new Pane();
         paneChoose.setPrefSize(300,800); paneChoose.setLayoutX(1200);
@@ -84,7 +82,10 @@ public class LevelMaker extends Pane {
         choiceBoxLevels = new ChoiceBox<>(levels);
         choiceBoxLevels.setValue(choiceBoxLevels.getItems().get(0));
         choiceBoxLevels.setLayoutX(50); choiceBoxLevels.setLayoutY(150);
-        choiceBoxLevels.setOnAction(e -> fileNameLoad = choiceBoxLevels.getValue());
+        choiceBoxLevels.setOnAction(e -> {
+            fileNameLoad = choiceBoxLevels.getValue();
+            textFieldFileName.setText(fileNameLoad);
+        });
 
         // LOAD
         Button buttonLoad = new Button("LOAD");
@@ -115,11 +116,6 @@ public class LevelMaker extends Pane {
         arrowTrapCheck.setLayoutX(50); arrowTrapCheck.setLayoutY(400);
         arrowTrapCheck.setOnAction(e -> arrowTrapActive());
 
-        // ROTATION
-        CheckBox arrowTrapRotationCheck = new CheckBox("RIGHT");
-        arrowTrapRotationCheck.setLayoutX(150); arrowTrapRotationCheck.setLayoutY(400);
-        arrowTrapRotationCheck.setOnAction(e -> arrowTrapLeft = !arrowTrapLeft);
-
         // CLEAR
         Button buttonClear = new Button();
         buttonClear.setPrefSize(150,160);
@@ -136,7 +132,7 @@ public class LevelMaker extends Pane {
 
         // AJOUTS
         paneChoose.getChildren().addAll(fileName,exportFile,spikesImage,buttonExport,buttonLoad,toggleButton,
-                slimeCheck,doorCheck,arrowTrapCheck,arrowTrapRotationCheck,buttonClear,buttonMenu,textFieldFileName,choiceBoxLevels);
+                slimeCheck,doorCheck,arrowTrapCheck,buttonClear,buttonMenu,textFieldFileName,choiceBoxLevels);
         paneLevelMaker.getChildren().addAll(paneMaker,paneChoose);
         getChildren().add(paneLevelMaker);
     }
@@ -264,7 +260,6 @@ public class LevelMaker extends Pane {
      */
     void export(){
         try {
-
             PrintWriter writer = new PrintWriter("src/main/java/com/fantastic_knight/save/" + fileNameExport +".sav");
             for(int i = 0; i < 12; i++){
                 for (int j = 0; j < 40; j++){
@@ -292,6 +287,7 @@ public class LevelMaker extends Pane {
     void load(Pane paneMaker){
         clear();
         try {
+
             FileInputStream file = new FileInputStream("src/main/java/com/fantastic_knight/save/"+ fileNameLoad +".sav");
             Scanner scanner = new Scanner(file);
 
