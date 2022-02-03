@@ -110,6 +110,7 @@ public class RankingMenu extends Pane {
                 writer.print(datum);
                 writer.println();
             }
+            if (MenuController.globalPseudo == null){MenuController.globalPseudo = "Unknown";}
             writer.print(MenuController.globalPseudo + "," + temps);
             writer.println();
             writer.close();
