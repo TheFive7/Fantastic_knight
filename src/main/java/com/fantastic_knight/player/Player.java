@@ -40,12 +40,14 @@ public class Player extends Sprite {
         super(model);
         this.model = model;
 
-        imageRight = new Image[2];
-        imageLeft = new Image[2];
-        imageRight[0] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_stand.png");
-        imageRight[1] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_walk.png");
-        imageLeft[0] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_stand.png");
-        imageLeft[1] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_walk.png");
+        imageRight = new Image[3];
+        imageLeft = new Image[3];
+        imageRight[0] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_stand_right.png");
+        imageRight[1] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_walk_right.png");
+        imageRight[2] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_walk1_right.png");
+        imageLeft[0] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_stand_left.png");
+        imageLeft[1] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_walk_left.png");
+        imageLeft[2] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_walk1_left.png");
         width = imageRight[0].getWidth();
         height = imageRight[0].getHeight();
 
