@@ -20,7 +20,7 @@ public class ArrowTrap extends Item {
         shape = new Rectangle(width, height);
         shape.setX(xPosition);
         shape.setY(yPosition);
-        image = new Image("file:src/main/resources/com/fantastic_knight/items/arrowTrap.png");
+        image = new Image("file:src/main/resources/com/fantastic_knight/items/arrowTrap_left.png");
         shape.setFill(new ImagePattern(image));
     }
 

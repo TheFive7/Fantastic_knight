@@ -19,12 +19,14 @@ public class Arrow extends Item {
         type = "arrow";
         width = 20;
         height = 7;
+
         factor = -1;
+        image = new Image("file:src/main/resources/com/fantastic_knight/items/arrow_left.png");
+
         xVelocity = 4 * factor;
         shape = new Rectangle(width, height);
         shape.setX(xPosition);
         shape.setY(yPosition);
-        image = new Image("file:src/main/resources/com/fantastic_knight/items/arrow.png");
         shape.setFill(new ImagePattern(image));
     }
 
