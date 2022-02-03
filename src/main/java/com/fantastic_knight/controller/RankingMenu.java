@@ -16,7 +16,6 @@ import static com.fantastic_knight.Game.scene_menu;
 
 public class RankingMenu extends Pane {
     public String[] tabPseudo = new String[100];
-    public String[] rang = new String[100];
     public static List<String> data = new ArrayList<>();
 
 
@@ -45,7 +44,6 @@ public class RankingMenu extends Pane {
         classement.setTextFill(Color.WHITE);
         classement.setStyle("-fx-font-weight: bold");
         getChildren().addAll(bgImage, buttonMenu, classement);
-
 
         String fileNameTime = "time";
 
@@ -84,7 +82,6 @@ public class RankingMenu extends Pane {
                 }
             }
 
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -104,6 +101,19 @@ public class RankingMenu extends Pane {
     }
 
     public static void register(double temps){
+        FileInputStream file;
+        try {
+            data.clear();
+            file = new FileInputStream("src/main/java/com/fantastic_knight/time/time.txt");
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNext()) {
+                String[] tab = scanner.nextLine().split(",");
+                data.add(tab[0] + "," + tab[1]);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
         try {
             PrintWriter writer = new PrintWriter("src/main/java/com/fantastic_knight/time/time.txt");
             for (String datum : data) {
