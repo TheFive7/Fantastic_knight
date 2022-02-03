@@ -22,6 +22,7 @@ public class LevelMaker extends Pane {
     boolean isSpike = false;
     boolean isDoor = false;
     boolean isSlime = false;
+    boolean isArrowTrap = false;
     Image currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png");
 
     Platform[][] platforms = new Platform[12][40];
@@ -108,6 +109,11 @@ public class LevelMaker extends Pane {
         doorCheck.setLayoutX(50); doorCheck.setLayoutY(350);
         doorCheck.setOnAction(e -> doorActive());
 
+        // ARROW TRAP
+        CheckBox arrowTrapCheck = new CheckBox("ARROW TRAP");
+        arrowTrapCheck.setLayoutX(50); arrowTrapCheck.setLayoutY(400);
+        arrowTrapCheck.setOnAction(e -> arrowTrapActive());
+
         // CLEAR
         Button buttonClear = new Button();
         buttonClear.setPrefSize(150,160);
@@ -123,7 +129,7 @@ public class LevelMaker extends Pane {
         buttonMenu.setOnAction(e -> menu());
 
         // AJOUTS
-        paneChoose.getChildren().addAll(fileName,exportFile,spikesImage,buttonExport,buttonLoad,toggleButton,slimeCheck,doorCheck,buttonClear,buttonMenu,textFieldFileName,choiceBoxLevels);
+        paneChoose.getChildren().addAll(fileName,exportFile,spikesImage,buttonExport,buttonLoad,toggleButton,slimeCheck,doorCheck,arrowTrapCheck,buttonClear,buttonMenu,textFieldFileName,choiceBoxLevels);
         paneLevelMaker.getChildren().addAll(paneMaker,paneChoose);
         getChildren().add(paneLevelMaker);
     }
@@ -186,6 +192,16 @@ public class LevelMaker extends Pane {
         }
     }
 
+    public void arrowTrapActive(){
+        if (!isArrowTrap){
+            isArrowTrap = true;
+            currentImg = new Image("file:src/main/resources/com/fantastic_knight/items/arrowTrap.png");
+        } else {
+            isArrowTrap = false;
+            currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png");
+        }
+    }
+
     /**
      * Dessine une plateforme
      * @param e : Mouse Event
@@ -199,6 +215,9 @@ public class LevelMaker extends Pane {
                 platforms[x][y].setxCoordonnee(x);
                 platforms[x][y].setyCoordonnee(y);
                 platforms[x][y].setOpacity(100);
+                platforms[x][y].setWidth(100);
+                platforms[x][y].setHeight(20);
+                platforms[x][y].setLayoutX(x * 100);
 
                 // Spikes & Platform
                 if(isSpike)platforms[x][y].setType("spike");
@@ -211,6 +230,14 @@ public class LevelMaker extends Pane {
                     platforms[x][y].setWidth(70);
                     platforms[x][y].setHeight(100);
                     platforms[x][y].setLayoutX(x * 100 + 15);
+                }
+
+                // ArrowTrap
+                if (isArrowTrap){
+                    platforms[x][y].setType("arrowTrap");
+                    platforms[x][y].setWidth(50);
+                    platforms[x][y].setHeight(50);
+                    platforms[x][y].setLayoutX(x * 100 + 25);
                 }
 
                 platforms[x][y].setFill(new ImagePattern(currentImg));
@@ -305,6 +332,14 @@ public class LevelMaker extends Pane {
                             platform.setWidth(70);
                             platform.setHeight(100);
                             platform.setLayoutX(x * 100 + 15);
+                        }
+                        case "arrowTrap" -> {
+                            platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/items/arrowTrap.png")));
+                            platform.setOpacity(100);
+                            platform.setType("arrowTrap");
+                            platform.setWidth(50);
+                            platform.setHeight(50);
+                            platform.setLayoutX(x * 100 + 25);
                         }
                         default -> {
                             platform.setOpacity(0);

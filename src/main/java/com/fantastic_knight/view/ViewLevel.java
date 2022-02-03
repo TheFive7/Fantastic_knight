@@ -69,14 +69,14 @@ public class ViewLevel {
         // Player
         pane.getChildren().add(model.player.getShape());
 
-        // ArrowTrap
+/*        // ArrowTrap
         ArrowTrap arrowTrap = new ArrowTrap(model);
         arrowTrap.getShape().setX(700);
         arrowTrap.getShape().setY(model.height - arrowTrap.getShape().getHeight());
         model.obstacles.add(arrowTrap.getShape());
         model.items.add(arrowTrap);
         pane.getChildren().add(arrowTrap.getShape());
-        pane.getChildren().add(arrowTrap.getArrow().getShape());
+        pane.getChildren().add(arrowTrap.getArrow().getShape());*/
     }
 
     /**
@@ -140,12 +140,27 @@ public class ViewLevel {
                             door.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/door.png")));
                             pane.getChildren().add(door);
                         }
+                        case "arrowTrap" -> {
+                            ArrowTrap arrowTrap = new ArrowTrap(model);
+                            arrowTrap.getShape().setX(platform.getxCoordonnee() * 100 + 25);
+                            arrowTrap.getShape().setY(platform.getyCoordonnee() * 20);
+                            arrowTrap.getShape().setWidth(50);
+                            arrowTrap.getShape().setHeight(50);
+                            arrowTrap.initArrow();
+                            arrowTrap.getShape().setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/items/arrowTrap.png")));
+                            model.obstacles.add(arrowTrap.getShape());
+                            model.items.add(arrowTrap);
+                            pane.getChildren().add(arrowTrap.getArrow().getShape());
+                            pane.getChildren().add(arrowTrap.getShape());
+                        }
                         default -> platform.setOpacity(0);
                     }
 
                     platform.setType(type);
                     if (!type.equals("door")) {
-                        pane.getChildren().add(platform);
+                        if (!type.equals("arrowTrap")){
+                            pane.getChildren().add(platform);
+                        }
                     }
                 }
             }
