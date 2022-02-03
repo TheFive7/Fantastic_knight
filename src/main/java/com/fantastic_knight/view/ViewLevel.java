@@ -1,9 +1,7 @@
 package com.fantastic_knight.view;
 
 import com.fantastic_knight.Game;
-import com.fantastic_knight.items.ArrowTrap;
-import com.fantastic_knight.items.Slime;
-import com.fantastic_knight.items.Spikes;
+import com.fantastic_knight.items.*;
 import com.fantastic_knight.levelMaker.LevelMaker;
 import com.fantastic_knight.levelMaker.Platform;
 import com.fantastic_knight.model.*;
@@ -69,11 +67,10 @@ public class ViewLevel {
 
         // Player
         pane.getChildren().add(model.player.getShape());
-
     }
 
     /**
-     * Load requested leveandé
+     * Load requested levelname
      * @param nameLevel : requested level name
      */
     public void loadLevel(String nameLevel) {
@@ -145,13 +142,42 @@ public class ViewLevel {
                             pane.getChildren().add(arrowTrap.getArrow().getShape());
                             pane.getChildren().add(arrowTrap.getShape());
                         }
+                        case "flameTrap" -> {
+                            platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/items/fire_platform.png")));
+                            platform.setOpacity(100);
+
+                            FlameTrap flameTrap = new FlameTrap(model);
+                            flameTrap.setShape(platform);
+                            flameTrap.initFlames();
+
+                            model.obstacles.add(flameTrap.getShape());
+                            model.items.add(flameTrap);
+
+                            for(Flame flame : flameTrap.getFlame()) {
+                                pane.getChildren().add(flame.getShape());
+                            }
+                        }
+                        case "button" -> {
+                            platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/items/button.png")));
+                            platform.setOpacity(100);
+
+                            Button button = new Button(model);
+                            button.getShape().setX(platform.getxCoordonnee() * 100 + 25);
+                            button.getShape().setY(platform.getyCoordonnee() * 20);
+                            button.getShape().setWidth(50);
+                            button.getShape().setHeight(20);
+                            model.items.add(button);
+                            pane.getChildren().add(button.getShape());
+                        }
                         default -> platform.setOpacity(0);
                     }
 
                     platform.setType(type);
                     if (!type.equals("door")) {
                         if (!type.equals("arrowTrap")){
-                            pane.getChildren().add(platform);
+                            if (!type.equals("button")){
+                                pane.getChildren().add(platform);
+                            }
                         }
                     }
                 }
