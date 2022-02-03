@@ -90,7 +90,8 @@ public class RankingMenu extends Pane {
         }
 
         // affichage classement
-        for(int i = 0; i < 5; i++){
+        int nb = Math.min(data.size(), 5);
+        for(int i = 0; i < nb; i++){
             Label label = new Label();
             label.setText((i+1) + "e   " + tabPseudo[i] + " : " + temps.get(i));
             label.setStyle("-fx-font-weight: bold");

@@ -1,6 +1,2 @@
-Maxime,5.56
-Simon,6.56
-Baptiste,3.56
-Guillaume,9.56
-Pedro,4.56
-Lou,2.56
+titi,0.79
+toto,2.32
