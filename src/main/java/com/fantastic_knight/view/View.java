@@ -54,7 +54,9 @@ public class View {
     public void returnMenu() {
         double tempsChrono = model.chrono.getTime();
         model.chrono.terminate();
-        RankingMenu.register(tempsChrono);
+        if (model.player.isWin()){
+            RankingMenu.register(tempsChrono);
+        }
 
         model.state = Model.STATE_INITIAL;
         model.reset();
