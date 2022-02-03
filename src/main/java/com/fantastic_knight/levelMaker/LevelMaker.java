@@ -23,6 +23,8 @@ public class LevelMaker extends Pane {
     boolean isDoor = false;
     boolean isSlime = false;
     boolean isArrowTrap = false;
+    boolean isFlameTrap = false;
+    boolean isButton = false;
     Image currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png");
 
     Platform[][] platforms = new Platform[12][40];
@@ -85,6 +87,7 @@ public class LevelMaker extends Pane {
         choiceBoxLevels.setOnAction(e -> {
             fileNameLoad = choiceBoxLevels.getValue();
             textFieldFileName.setText(fileNameLoad);
+            fileNameExport = textFieldFileName.getText();
         });
 
         // LOAD
@@ -116,6 +119,16 @@ public class LevelMaker extends Pane {
         arrowTrapCheck.setLayoutX(50); arrowTrapCheck.setLayoutY(400);
         arrowTrapCheck.setOnAction(e -> arrowTrapActive());
 
+        // FLAME TRAP
+        CheckBox flameTrapCheck = new CheckBox("FLAME TRAP");
+        flameTrapCheck.setLayoutX(50); flameTrapCheck.setLayoutY(450);
+        flameTrapCheck.setOnAction(e -> flameTrapActive());
+
+        // BUTTON
+        CheckBox buttonCheck = new CheckBox("BUTTON");
+        buttonCheck.setLayoutX(150); buttonCheck.setLayoutY(450);
+        buttonCheck.setOnAction(e -> buttonActive());
+
         // CLEAR
         Button buttonClear = new Button();
         buttonClear.setPrefSize(150,160);
@@ -132,7 +145,7 @@ public class LevelMaker extends Pane {
 
         // AJOUTS
         paneChoose.getChildren().addAll(fileName,exportFile,spikesImage,buttonExport,buttonLoad,toggleButton,
-                slimeCheck,doorCheck,arrowTrapCheck,buttonClear,buttonMenu,textFieldFileName,choiceBoxLevels);
+                slimeCheck,doorCheck,arrowTrapCheck,flameTrapCheck,buttonCheck,buttonClear,buttonMenu,textFieldFileName,choiceBoxLevels);
         paneLevelMaker.getChildren().addAll(paneMaker,paneChoose);
         getChildren().add(paneLevelMaker);
     }
@@ -205,6 +218,26 @@ public class LevelMaker extends Pane {
         }
     }
 
+    public void flameTrapActive(){
+        if (!isFlameTrap){
+            isFlameTrap = true;
+            currentImg = new Image("file:src/main/resources/com/fantastic_knight/items/fire_platform.png");
+        } else {
+            isFlameTrap = false;
+            currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png");
+        }
+    }
+
+    public void buttonActive(){
+        if (!isButton){
+            isButton = true;
+            currentImg = new Image("file:src/main/resources/com/fantastic_knight/items/button.png");
+        } else {
+            isButton = false;
+            currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png");
+        }
+    }
+
     /**
      * Dessine une plateforme
      * @param e : Mouse Event
@@ -226,6 +259,7 @@ public class LevelMaker extends Pane {
                 // Spikes & Platform
                 if(isSpike)platforms[x][y].setType("spike");
                 else if (isSlime)platforms[x][y].setType("slime");
+                else if (isFlameTrap)platforms[x][y].setType("flameTrap");
                 else {platforms[x][y].setType("platform");}
 
                 // Door
@@ -243,6 +277,15 @@ public class LevelMaker extends Pane {
                     platforms[x][y].setHeight(50);
                     platforms[x][y].setLayoutX(x * 100 + 25);
                     platforms[x][y].setLayoutY(y * 20 - 10);
+                }
+
+                // Button
+                if (isButton){
+                    platforms[x][y].setType("button");
+                    platforms[x][y].setWidth(50);
+                    platforms[x][y].setHeight(20);
+                    platforms[x][y].setLayoutX(x * 100 + 25);
+                    platforms[x][y].setLayoutY(y * 20);
                 }
 
                 platforms[x][y].setFill(new ImagePattern(currentImg));
@@ -264,7 +307,7 @@ public class LevelMaker extends Pane {
             for(int i = 0; i < 12; i++){
                 for (int j = 0; j < 40; j++){
                     writer.print(platforms[i][j].toString() + " ");
-                    System.out.println(platforms[i][j].toString());
+                    // System.out.println(platforms[i][j].toString());
                 }
                 writer.println();
             }
@@ -274,7 +317,7 @@ public class LevelMaker extends Pane {
             choiceBoxLevels.setItems(FXCollections.observableArrayList(findAllLevels()));
             choiceBoxLevels.setValue(choiceBoxLevels.getItems().get(0));
 
-            System.out.println("Fichier " + fileNameExport + " sauvegardé.");
+            // System.out.println("Fichier " + fileNameExport + " sauvegardé.");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -346,6 +389,19 @@ public class LevelMaker extends Pane {
                             platform.setHeight(50);
                             platform.setLayoutX(x * 100 + 25);
                         }
+                        case "flameTrap" -> {
+                            platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/items/fire_platform.png")));
+                            platform.setOpacity(100);
+                            platform.setType("flameTrap");
+                        }
+                        case "button" -> {
+                            platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/items/button.png")));
+                            platform.setOpacity(100);
+                            platform.setType("button");
+                            platform.setWidth(50);
+                            platform.setHeight(20);
+                            platform.setLayoutX(x * 100 + 25);
+                        }
                         default -> {
                             platform.setOpacity(0);
                             platform.setType("void");
@@ -357,7 +413,7 @@ public class LevelMaker extends Pane {
             }
             scanner.close();
 
-            System.out.println("Fichier " + fileNameLoad + " chargé");
+            // System.out.println("Fichier " + fileNameLoad + " chargé");
 
         } catch (Exception e) {
             e.printStackTrace();
