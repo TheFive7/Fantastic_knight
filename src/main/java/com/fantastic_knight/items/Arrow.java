@@ -11,6 +11,7 @@ import javafx.scene.shape.Shape;
 public class Arrow extends Item {
 
     double xVelocity;
+    int factor;
     Timer timer = new Timer(5000, this);
 
     public Arrow(Model model) {
@@ -18,7 +19,8 @@ public class Arrow extends Item {
         type = "arrow";
         width = 20;
         height = 7;
-        xVelocity = 2;
+        factor = -1;
+        xVelocity = 4 * factor;
         shape = new Rectangle(width, height);
         shape.setX(xPosition);
         shape.setY(yPosition);
@@ -31,7 +33,7 @@ public class Arrow extends Item {
         playerHitbox.setX(model.player.getxPosition());
         playerHitbox.setY(model.player.getyPosition());
 
-        getShape().setX(getShape().getX() - xVelocity);
+        getShape().setX(getShape().getX() + xVelocity);
 
         if (isActive){
             Shape inter = Shape.intersect(playerHitbox, shape);
