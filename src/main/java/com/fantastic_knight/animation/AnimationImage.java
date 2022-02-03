@@ -27,7 +27,7 @@ public class AnimationImage {
     /**
      * Activate image animation
      */
-    private void toggleTimer() {
+    public void toggleTimer() {
         if (timer == null) {
             timer = new AnimationTimer() {
                 private final int MAXSAMPPLES = speed;
