@@ -16,6 +16,8 @@ public class Model {
 
     public final static int STATE_INITIAL = 1;
     final static int STATE_PLAY = 2;
+    public Chrono chrono;
+    public Thread thread;
 
     // WINDOW
     public final int width;
@@ -69,6 +71,9 @@ public class Model {
     public void startGame() {
         state = STATE_PLAY;
         sprites.add(player);
+        chrono = new Chrono();
+        thread = new Thread(chrono);
+        thread.start();
     }
 
     /**

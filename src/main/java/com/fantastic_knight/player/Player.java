@@ -1,6 +1,7 @@
 package com.fantastic_knight.player;
 
 import com.fantastic_knight.animation.AnimationImage;
+import com.fantastic_knight.model.Chrono;
 import com.fantastic_knight.model.Sprite;
 import com.fantastic_knight.model.State;
 import com.fantastic_knight.model.Model;
@@ -33,6 +34,7 @@ public class Player extends Sprite {
     int lastMove;
     Model model;
     AnimationImage animation;
+    Chrono chrono;
 
     // 0 RIGHT; 180 LEFT
 
@@ -191,6 +193,8 @@ public class Player extends Sprite {
             if(isWin()){
                 setWin(false);
                 model.labelWin.setOpacity(100);
+                // chrono.terminate();
+
             }
         }
     }

@@ -1,6 +1,6 @@
 package com.fantastic_knight.view;
 
-import com.fantastic_knight.model.Chrono;
+import com.fantastic_knight.controller.RankingMenu;
 import com.fantastic_knight.model.Model;
 import javafx.scene.Group;
 import javafx.scene.layout.Pane;
@@ -52,6 +52,10 @@ public class View {
      * Return to menu
      */
     public void returnMenu() {
+        double tempsChrono = model.chrono.getTime();
+        model.chrono.terminate();
+        RankingMenu.register(tempsChrono);
+
         model.state = Model.STATE_INITIAL;
         model.reset();
         primaryStage.setScene(scene_levels);

@@ -2,14 +2,20 @@ package com.fantastic_knight.controller;
 
 import com.fantastic_knight.levelMaker.LevelMaker;
 import com.fantastic_knight.menu.LevelsMenu;
+import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 
-import static com.fantastic_knight.Game.primaryStage;
-import static com.fantastic_knight.Game.scene_credits;
+import static com.fantastic_knight.Game.*;
+
 
 public class MenuController {
     public static Scene scene_levels;
     public static Scene scene_levelMaker;
+    public static String globalPseudo;
+
+    @FXML
+    TextField varPseudo;
 
     /**
      * Bouton PLAY
@@ -31,6 +37,25 @@ public class MenuController {
 
     public void displayCredits(){
         primaryStage.setScene(scene_credits);
+    }
+
+    /**
+     * Bouton RANKING
+     */
+    public void ranking() {
+        RankingMenu rankingMenu = new RankingMenu();
+        Scene scene_ranking = new Scene(rankingMenu, model.width, model.height);
+        primaryStage.setScene(scene_ranking);
+    }
+
+    /**
+     * récuprère le pseudo du textfield
+     */
+    public void pseudo(){
+        String pseudo = varPseudo.getText();
+        globalPseudo = pseudo;
+
+        System.out.println(pseudo);
     }
 
     public void quit() {
