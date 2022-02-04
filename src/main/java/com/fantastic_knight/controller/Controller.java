@@ -63,4 +63,6 @@ public class Controller {
     public void dash() {
         model.player.dash();
     }
+
+    public void deployProtection() {model.player.deployProtection();}
 }

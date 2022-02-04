@@ -49,12 +49,12 @@ public class ControllerKeyboard implements EventHandler<KeyEvent> {
             control.resetPerso();
         } else if (arg0.getCode() == KeyCode.M) {
             view.returnMenu();
-        } else if (arg0.getCode() == KeyCode.F) {
-            control.stopPerso();
         } else if (arg0.getCode() == KeyCode.SPACE) {
             control.jumpPerso();
         } else if (arg0.getCode() == KeyCode.E) {
             control.dash();
+        } else if (arg0.getCode() == KeyCode.F) {
+            control.deployProtection();
         }
     }
 }

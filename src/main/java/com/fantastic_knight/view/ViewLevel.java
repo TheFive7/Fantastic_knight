@@ -65,6 +65,9 @@ public class ViewLevel {
         model.labelWin.setLayoutX(200);
         pane.getChildren().add(model.labelWin);
 
+        // Protection
+        pane.getChildren().add(model.player.getProtection());
+
         // Player
         pane.getChildren().add(model.player.getShape());
     }

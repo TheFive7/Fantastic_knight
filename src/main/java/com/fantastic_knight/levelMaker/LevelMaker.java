@@ -180,11 +180,11 @@ public class LevelMaker extends Pane {
         if (!isSpike){
             isSpike = true;
             currentImg = new Image("file:src/main/resources/com/fantastic_knight/items/spike.png");
-            button.setStyle("-fx-background-image: url('"+ Game.class.getResource("on.png")+"');-fx-background-color: transparent;-fx-background-repeat: no-repeat");
+            button.setStyle("-fx-background-image: url('"+ Game.class.getResource("icons/on.png")+"');-fx-background-color: transparent;-fx-background-repeat: no-repeat");
         } else {
             isSpike = false;
             currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png");
-            button.setStyle("-fx-background-image: url('"+ Game.class.getResource("off.png")+"');-fx-background-color: transparent;-fx-background-repeat: no-repeat");
+            button.setStyle("-fx-background-image: url('"+ Game.class.getResource("icons/off.png")+"');-fx-background-color: transparent;-fx-background-repeat: no-repeat");
         }
     }
 
@@ -388,6 +388,7 @@ public class LevelMaker extends Pane {
                             platform.setWidth(50);
                             platform.setHeight(50);
                             platform.setLayoutX(x * 100 + 25);
+                            platform.setLayoutY(y * 20 - 10);
                         }
                         case "flameTrap" -> {
                             platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/items/fire_platform.png")));

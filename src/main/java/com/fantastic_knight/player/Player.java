@@ -5,6 +5,7 @@ import com.fantastic_knight.model.Sprite;
 import com.fantastic_knight.model.State;
 import com.fantastic_knight.model.Model;
 import com.fantastic_knight.model.Timer;
+import com.fantastic_knight.objects.Protection;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
@@ -35,6 +36,7 @@ public class Player extends Sprite {
     Model model;
     AnimationImage animation;
     final double vDash = 10;
+    Protection protection;
 
     // 0 RIGHT; 180 LEFT
 
@@ -68,6 +70,7 @@ public class Player extends Sprite {
         animation = new AnimationImage(imageRight, shape, 10);
         animated = true;
         win = false;
+        protection = new Protection(this);
         name = "Knight Red";
     }
 
@@ -208,6 +211,7 @@ public class Player extends Sprite {
             if(isWin()){
                 setWin(false);
                 model.labelWin.setOpacity(100);
+                model.chrono.terminate();
             }
         }
     }
@@ -336,6 +340,22 @@ public class Player extends Sprite {
         shape.setY(getyPosition());
     }
 
+    public void deployProtection(){
+        if (state != State.JUMP){
+            getProtection().toggleActive();
+            if (getProtection().getActive()){
+                model.obstacles.add(protection);
+                protection.setOpacity(100);
+                protection.setCenterX(getxPosition() + getWidth() / 2);
+                protection.setCenterY(getyPosition() + getHeight() / 2);
+                protection.setRadius(getHeight() / 2 + 10);
+            } else {
+                model.obstacles.remove(protection);
+                protection.setOpacity(0);
+            }
+        }
+    }
+
     public Rectangle getShape() {
         return shape;
     }
@@ -410,5 +430,9 @@ public class Player extends Sprite {
 
     public void setWin(boolean win) {
         this.win = win;
+    }
+
+    public Protection getProtection() {
+        return protection;
     }
 }

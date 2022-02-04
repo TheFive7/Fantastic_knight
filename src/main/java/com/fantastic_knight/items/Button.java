@@ -10,7 +10,7 @@ import javafx.scene.shape.Shape;
 
 public class Button extends Item {
 
-    Timer timer = new Timer(2000, this);
+    Timer timer = new Timer(1000, this);
 
     public Button(Model model) {
         super(model);

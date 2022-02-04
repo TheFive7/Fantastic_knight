@@ -32,12 +32,7 @@ public class Game extends Application {
 
     /*
      * TODO
-     *  Do some Levels
-     *  Do Door to finish level
-     *  Implement Door in LevelMaker
      *  Do scrolling
-     *  Do graphics door
-     *  Organize code
      */
 
     @Override
@@ -61,8 +56,6 @@ public class Game extends Application {
         scene_menu = new Scene(root_menu, model.width, model.height);
         scene_game = new Scene(view.root, model.width, model.height);
         scene_credits = new Scene(root_credits, model.width, model.height);
-
-
 
         stage.setTitle("Fantastic Knight");
         stage.initStyle(StageStyle.TRANSPARENT);

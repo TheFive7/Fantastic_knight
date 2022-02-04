@@ -28,7 +28,7 @@ public class LevelsMenu extends Pane {
 
         getChildren().addAll(bgImage, buttonMenu);
 
-        // brows levels
+        // browse levels
         int i = 0;
         int j = 0;
         int compteur = 1;
@@ -37,7 +37,7 @@ public class LevelsMenu extends Pane {
             ButtonLevel buttonLevel = new ButtonLevel(levelName, 60 + j * 250, 219 + i * 130);
             int finalCompteur = compteur;
             buttonLevel.setOnAction(e -> selectLevel(finalCompteur));
-            getChildren().add(buttonLevel);
+            getChildren().addAll(buttonLevel);
             compteur++;
             i++;
 
