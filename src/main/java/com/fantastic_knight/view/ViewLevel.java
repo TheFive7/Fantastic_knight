@@ -98,7 +98,7 @@ public class ViewLevel {
                     platform.setWidth(100);
                     platform.setHeight(20);
                     platform.setxCoordonnee(x);
-                    platform.setyCoordonnee(y + 800);
+                    platform.setyCoordonnee(y);
                     platform.setLayoutX(x * 100);
                     platform.setLayoutY(y * 20);
 
