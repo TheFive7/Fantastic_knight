@@ -1,7 +1,6 @@
 package com.fantastic_knight;
 
 import com.fantastic_knight.controller.Controller;
-import com.fantastic_knight.controller.RankingMenu;
 import com.fantastic_knight.model.Model;
 import com.fantastic_knight.view.View;
 import javafx.application.Application;
@@ -22,7 +21,6 @@ public class Game extends Application {
     public static Scene scene_game;
     public static Scene scene_menu;
     public static Scene scene_credits;
-    public static Scene scene_ranking;
 
     public static List<String> levels = findAllLevels();
 
@@ -33,6 +31,9 @@ public class Game extends Application {
     /*
      * TODO
      *  Do scrolling
+     *  Refactor Background
+     *  More animation -> Player (Dead)
+     *  Shield left
      */
 
     @Override
@@ -50,7 +51,6 @@ public class Game extends Application {
 
         FXMLLoader fxmlLoaderCredits = new FXMLLoader(getClass().getResource("menu/credits.fxml"));
         Parent root_credits = fxmlLoaderCredits.load();
-
 
         // SCENES PRINCIPALES
         scene_menu = new Scene(root_menu, model.width, model.height);
