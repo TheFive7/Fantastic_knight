@@ -25,6 +25,7 @@ public class LevelMaker extends Pane {
     boolean isArrowTrap = false;
     boolean isFlameTrap = false;
     boolean isButton = false;
+    boolean isShield = false;
     Image currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png");
 
     Platform[][] platforms = new Platform[12][40];
@@ -104,9 +105,9 @@ public class LevelMaker extends Pane {
         toggleButton.setStyle("-fx-background-image: url('"+ Game.class.getResource("icons/off.png")+"');-fx-background-color: transparent;-fx-background-repeat: no-repeat");
         toggleButton.setOnAction(e -> spikesActive(toggleButton));
 
-        //SLIME
+        // SLIME
         CheckBox slimeCheck = new CheckBox("SLIME");
-        slimeCheck.setLayoutX(50); slimeCheck.setLayoutY(500);
+        slimeCheck.setLayoutX(150); slimeCheck.setLayoutY(500);
         slimeCheck.setOnAction(e -> slimeActive());
 
         // DOOR
@@ -129,6 +130,11 @@ public class LevelMaker extends Pane {
         buttonCheck.setLayoutX(150); buttonCheck.setLayoutY(450);
         buttonCheck.setOnAction(e -> buttonActive());
 
+        // SHIELD
+        CheckBox shieldCheck = new CheckBox("SHIELD");
+        shieldCheck.setLayoutX(50); shieldCheck.setLayoutY(500);
+        shieldCheck.setOnAction(e -> shieldActive());
+
         // CLEAR
         Button buttonClear = new Button();
         buttonClear.setPrefSize(150,160);
@@ -145,7 +151,7 @@ public class LevelMaker extends Pane {
 
         // AJOUTS
         paneChoose.getChildren().addAll(fileName,exportFile,spikesImage,buttonExport,buttonLoad,toggleButton,
-                slimeCheck,doorCheck,arrowTrapCheck,flameTrapCheck,buttonCheck,buttonClear,buttonMenu,textFieldFileName,choiceBoxLevels);
+                slimeCheck,doorCheck,arrowTrapCheck,flameTrapCheck,buttonCheck,shieldCheck,buttonClear,buttonMenu,textFieldFileName,choiceBoxLevels);
         paneLevelMaker.getChildren().addAll(paneMaker,paneChoose);
         getChildren().add(paneLevelMaker);
     }
@@ -238,6 +244,16 @@ public class LevelMaker extends Pane {
         }
     }
 
+    public void shieldActive(){
+        if (!isShield){
+            isShield = true;
+            currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/shield.png");
+        } else {
+            isShield = false;
+            currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png");
+        }
+    }
+
     /**
      * Dessine une plateforme
      * @param e : Mouse Event
@@ -285,6 +301,15 @@ public class LevelMaker extends Pane {
                     platforms[x][y].setWidth(50);
                     platforms[x][y].setHeight(20);
                     platforms[x][y].setLayoutX(x * 100 + 25);
+                    platforms[x][y].setLayoutY(y * 20);
+                }
+
+                // Button
+                if (isShield){
+                    platforms[x][y].setType("shield");
+                    platforms[x][y].setWidth(40);
+                    platforms[x][y].setHeight(40);
+                    platforms[x][y].setLayoutX(x * 100 + 30);
                     platforms[x][y].setLayoutY(y * 20);
                 }
 
@@ -402,6 +427,14 @@ public class LevelMaker extends Pane {
                             platform.setWidth(50);
                             platform.setHeight(20);
                             platform.setLayoutX(x * 100 + 25);
+                        }
+                        case "shield" -> {
+                            platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/shield.png")));
+                            platform.setOpacity(100);
+                            platform.setType("shield");
+                            platform.setWidth(40);
+                            platform.setHeight(40);
+                            platform.setLayoutX(x * 100 + 30);
                         }
                         default -> {
                             platform.setOpacity(0);

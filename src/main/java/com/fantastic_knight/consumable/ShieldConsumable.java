@@ -14,8 +14,8 @@ public class ShieldConsumable extends Consumable {
     public ShieldConsumable(Model model) {
         super(model);
         type = "shield";
-        width = 50;
-        height = 50;
+        width = 40;
+        height = 40;
         shape = new Rectangle(width, height);
         shape.setX(xPosition);
         shape.setY(yPosition);

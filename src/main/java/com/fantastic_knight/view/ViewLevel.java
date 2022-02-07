@@ -73,11 +73,11 @@ public class ViewLevel {
         pane.getChildren().add(model.player.getShape());
 
         // Shield
-        model.shieldConsumable = new ShieldConsumable(model);
-        model.shieldConsumable.getShape().setX(700);
-        model.shieldConsumable.getShape().setY(model.height-model.shieldConsumable.getShape().getHeight());
-        model.consumables.add(model.shieldConsumable);
-        pane.getChildren().add(model.shieldConsumable.getShape());
+//        ShieldConsumable shieldConsumable = new ShieldConsumable(model);
+//        shieldConsumable.getShape().setX(700);
+//        shieldConsumable.getShape().setY(model.height-shieldConsumable.getShape().getHeight());
+//        model.consumables.add(shieldConsumable);
+//        pane.getChildren().add(shieldConsumable.getShape());
     }
 
     /**
@@ -180,6 +180,18 @@ public class ViewLevel {
                             model.items.add(button);
                             pane.getChildren().add(button.getShape());
                         }
+                        case "shield" -> {
+                            platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/shield.png")));
+                            platform.setOpacity(100);
+
+                            ShieldConsumable shieldConsumable = new ShieldConsumable(model);
+                            shieldConsumable.getShape().setX(platform.getxCoordonnee() * 100 + 30);
+                            shieldConsumable.getShape().setY(platform.getyCoordonnee() * 20);
+                            shieldConsumable.getShape().setWidth(40);
+                            shieldConsumable.getShape().setHeight(40);
+                            model.consumables.add(shieldConsumable);
+                            pane.getChildren().add(shieldConsumable.getShape());
+                        }
                         default -> platform.setOpacity(0);
                     }
 
@@ -187,7 +199,9 @@ public class ViewLevel {
                     if (!type.equals("door")) {
                         if (!type.equals("arrowTrap")){
                             if (!type.equals("button")){
-                                pane.getChildren().add(platform);
+                                if (!type.equals("shield")){
+                                    pane.getChildren().add(platform);
+                                }
                             }
                         }
                     }

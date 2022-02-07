@@ -5,8 +5,6 @@ import com.fantastic_knight.consumable.ShieldConsumable;
 import com.fantastic_knight.items.Item;
 import com.fantastic_knight.player.Player;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Shape;
 
 import java.io.File;
@@ -26,7 +24,7 @@ public class Model {
     public final int height;
     public final List<Shape> obstacles; // obstacles in each scene
     public final List<Item> items;      // items in the game
-    public final List<Consumable> consumables;      // consumable in the game
+    public final List<Consumable> consumables;      // consumables in the game
 
     // Objets
     public final Player player;
@@ -50,7 +48,6 @@ public class Model {
 
     // ATH
     public Shield shield;
-    public ShieldConsumable shieldConsumable;
     public Heart heart;
 
     // EXIT
