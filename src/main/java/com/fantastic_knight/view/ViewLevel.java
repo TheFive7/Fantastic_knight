@@ -1,6 +1,7 @@
 package com.fantastic_knight.view;
 
 import com.fantastic_knight.Game;
+import com.fantastic_knight.consumable.ShieldConsumable;
 import com.fantastic_knight.items.*;
 import com.fantastic_knight.levelMaker.LevelMaker;
 import com.fantastic_knight.levelMaker.Platform;
@@ -70,6 +71,13 @@ public class ViewLevel {
 
         // Player
         pane.getChildren().add(model.player.getShape());
+
+        // Shield
+        model.shieldConsumable = new ShieldConsumable(model);
+        model.shieldConsumable.getShape().setX(700);
+        model.shieldConsumable.getShape().setY(model.height-model.shieldConsumable.getShape().getHeight());
+        model.consumables.add(model.shieldConsumable);
+        pane.getChildren().add(model.shieldConsumable.getShape());
     }
 
     /**

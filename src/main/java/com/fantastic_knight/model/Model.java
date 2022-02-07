@@ -1,5 +1,7 @@
 package com.fantastic_knight.model;
 
+import com.fantastic_knight.consumable.Consumable;
+import com.fantastic_knight.consumable.ShieldConsumable;
 import com.fantastic_knight.items.Item;
 import com.fantastic_knight.player.Player;
 import javafx.scene.control.Label;
@@ -24,6 +26,7 @@ public class Model {
     public final int height;
     public final List<Shape> obstacles; // obstacles in each scene
     public final List<Item> items;      // items in the game
+    public final List<Consumable> consumables;      // consumable in the game
 
     // Objets
     public final Player player;
@@ -47,6 +50,7 @@ public class Model {
 
     // ATH
     public Shield shield;
+    public ShieldConsumable shieldConsumable;
     public Heart heart;
 
     // EXIT
@@ -62,6 +66,7 @@ public class Model {
         obstacles = new ArrayList<>();
         sprites = new ArrayList<>();
         items = new ArrayList<>();
+        consumables = new ArrayList<>();
     }
 
     /**
@@ -81,9 +86,9 @@ public class Model {
     public void reset() {
         sprites.clear();
         items.clear();
+        consumables.clear();
         obstacles.clear();
         player.reset();
-        shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/shield.png")));
     }
 
     /**
@@ -95,6 +100,9 @@ public class Model {
         }
         for (Sprite s : sprites) {
             s.update();
+        }
+        for (Consumable c : consumables) {
+            c.update();
         }
         door.update();
     }

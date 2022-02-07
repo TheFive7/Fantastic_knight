@@ -9,7 +9,7 @@ public class Shield extends Rectangle {
     final double height;
     final double xpos;
     final double ypos;
-    final Image image;
+    Image image;
 
     public Shield() {
         width = 100;
@@ -22,5 +22,9 @@ public class Shield extends Rectangle {
         setY(ypos);
         image = new Image("file:src/main/resources/com/fantastic_knight/assets/shield.png");
         setFill(new ImagePattern(image));
+    }
+
+    public void setImage(Image image){
+        this.image = image;
     }
 }

@@ -412,6 +412,8 @@ public class Player extends Sprite {
         if (!life) {
             model.heart.setActive(false);
             getModel().shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/shield_empty.png")));
+        } else {
+            getModel().shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/shield.png")));
         }
         this.life = life;
     }
