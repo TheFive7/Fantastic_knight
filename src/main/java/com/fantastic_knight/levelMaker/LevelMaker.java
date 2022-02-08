@@ -15,6 +15,7 @@ import java.io.*;
 import java.util.Scanner;
 
 import static com.fantastic_knight.Game.*;
+import static com.fantastic_knight.levelMaker.LevelMakerConstructor.setCheckActive;
 import static com.fantastic_knight.model.Model.findAllLevels;
 
 public class LevelMaker extends Pane {
@@ -27,7 +28,7 @@ public class LevelMaker extends Pane {
     boolean isButton = false;
     boolean isShield = false;
     boolean isHalo = false;
-    Image currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png");
+    public static Image currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png");
 
     Platform[][] platforms = new Platform[12][40];
     String fileNameExport = "default";
@@ -109,37 +110,37 @@ public class LevelMaker extends Pane {
         // SLIME
         CheckBox slimeCheck = new CheckBox("SLIME");
         slimeCheck.setLayoutX(150); slimeCheck.setLayoutY(500);
-        slimeCheck.setOnAction(e -> slimeActive());
+        slimeCheck.setOnAction(e -> isSlime = setCheckActive(isSlime,"items","slime"));
 
         // DOOR
         CheckBox doorCheck = new CheckBox("DOOR");
         doorCheck.setLayoutX(50); doorCheck.setLayoutY(350);
-        doorCheck.setOnAction(e -> doorActive());
+        doorCheck.setOnAction(e -> isDoor = setCheckActive(isDoor,"assets","door"));
 
         // ARROW TRAP
         CheckBox arrowTrapCheck = new CheckBox("ARROW TRAP");
         arrowTrapCheck.setLayoutX(50); arrowTrapCheck.setLayoutY(400);
-        arrowTrapCheck.setOnAction(e -> arrowTrapActive());
+        arrowTrapCheck.setOnAction(e -> isArrowTrap = setCheckActive(isArrowTrap,"items","arrowTrap_left"));
 
         // FLAME TRAP
         CheckBox flameTrapCheck = new CheckBox("FLAME TRAP");
         flameTrapCheck.setLayoutX(50); flameTrapCheck.setLayoutY(450);
-        flameTrapCheck.setOnAction(e -> flameTrapActive());
+        flameTrapCheck.setOnAction(e -> isFlameTrap = setCheckActive(isFlameTrap,"items","fire_platform"));
 
         // BUTTON
         CheckBox buttonCheck = new CheckBox("BUTTON");
         buttonCheck.setLayoutX(150); buttonCheck.setLayoutY(450);
-        buttonCheck.setOnAction(e -> buttonActive());
+        buttonCheck.setOnAction(e -> isButton = setCheckActive(isButton,"items","button"));
 
         // SHIELD
         CheckBox shieldCheck = new CheckBox("SHIELD");
         shieldCheck.setLayoutX(50); shieldCheck.setLayoutY(500);
-        shieldCheck.setOnAction(e -> shieldActive());
+        shieldCheck.setOnAction(e -> isShield = setCheckActive(isShield,"assets","shield"));
 
         // HALO
         CheckBox haloCheck = new CheckBox("HALO");
         haloCheck.setLayoutX(50); haloCheck.setLayoutY(550);
-        haloCheck.setOnAction(e -> haloActive());
+        haloCheck.setOnAction(e -> isHalo = setCheckActive(isHalo,"consumables","halo"));
 
         // CLEAR
         Button buttonClear = new Button();
@@ -197,76 +198,6 @@ public class LevelMaker extends Pane {
             isSpike = false;
             currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png");
             button.setStyle("-fx-background-image: url('"+ Game.class.getResource("icons/off.png")+"');-fx-background-color: transparent;-fx-background-repeat: no-repeat");
-        }
-    }
-
-    private void slimeActive() {
-        if (!isSlime){
-            isSlime = true;
-            currentImg = new Image("file:src/main/resources/com/fantastic_knight/items/slime.png");
-        } else {
-            isSlime = false;
-            currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png");
-        }
-    }
-
-    public void doorActive(){
-        if (!isDoor){
-            isDoor = true;
-            currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/door.png");
-        } else {
-            isDoor = false;
-            currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png");
-        }
-    }
-
-    public void arrowTrapActive(){
-        if (!isArrowTrap){
-            isArrowTrap = true;
-            currentImg = new Image("file:src/main/resources/com/fantastic_knight/items/arrowTrap_left.png");
-        } else {
-            isArrowTrap = false;
-            currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png");
-        }
-    }
-
-    public void flameTrapActive(){
-        if (!isFlameTrap){
-            isFlameTrap = true;
-            currentImg = new Image("file:src/main/resources/com/fantastic_knight/items/fire_platform.png");
-        } else {
-            isFlameTrap = false;
-            currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png");
-        }
-    }
-
-    public void buttonActive(){
-        if (!isButton){
-            isButton = true;
-            currentImg = new Image("file:src/main/resources/com/fantastic_knight/items/button.png");
-        } else {
-            isButton = false;
-            currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png");
-        }
-    }
-
-    public void shieldActive(){
-        if (!isShield){
-            isShield = true;
-            currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/shield.png");
-        } else {
-            isShield = false;
-            currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png");
-        }
-    }
-
-    public void haloActive(){
-        if (!isHalo){
-            isHalo = true;
-            currentImg = new Image("file:src/main/resources/com/fantastic_knight/consumables/halo.png");
-        } else {
-            isHalo = false;
-            currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png");
         }
     }
 
