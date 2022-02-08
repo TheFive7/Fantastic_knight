@@ -28,6 +28,7 @@ public class LevelMaker extends Pane {
     boolean isButton = false;
     boolean isShield = false;
     boolean isHalo = false;
+    boolean isSword = false;
     public static Image currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png");
 
     Platform[][] platforms = new Platform[12][40];
@@ -142,11 +143,16 @@ public class LevelMaker extends Pane {
         haloCheck.setLayoutX(50); haloCheck.setLayoutY(550);
         haloCheck.setOnAction(e -> isHalo = setCheckActive(isHalo,"consumables","halo"));
 
+        // SWORD
+        CheckBox swordCheck = new CheckBox("SWORD");
+        swordCheck.setLayoutX(50); swordCheck.setLayoutY(600);
+        swordCheck.setOnAction(e -> isSword = setCheckActive(isSword,"consumables","sword"));
+
         // CLEAR
         Button buttonClear = new Button();
         buttonClear.setPrefSize(150,160);
         buttonClear.setStyle("-fx-background-image: url('"+ Game.class.getResource("icons/clear.png")+"');-fx-background-color: transparent; -fx-background-repeat: no-repeat");
-        buttonClear.setLayoutX(105); buttonClear.setLayoutY(550);
+        buttonClear.setLayoutX(105); buttonClear.setLayoutY(650);
         buttonClear.setOnAction(e -> clear());
 
         // MENU
@@ -158,7 +164,7 @@ public class LevelMaker extends Pane {
 
         // AJOUTS
         paneChoose.getChildren().addAll(fileName,exportFile,spikesImage,buttonExport,buttonLoad,toggleButton,
-                slimeCheck,doorCheck,arrowTrapCheck,flameTrapCheck,buttonCheck,shieldCheck,haloCheck,buttonClear,buttonMenu,textFieldFileName,choiceBoxLevels);
+                slimeCheck,doorCheck,arrowTrapCheck,flameTrapCheck,buttonCheck,shieldCheck,haloCheck,swordCheck,buttonClear,buttonMenu,textFieldFileName,choiceBoxLevels);
         paneLevelMaker.getChildren().addAll(paneMaker,paneChoose);
         getChildren().add(paneLevelMaker);
     }
@@ -251,7 +257,7 @@ public class LevelMaker extends Pane {
                     platforms[x][y].setLayoutY(y * 20);
                 }
 
-                // Button
+                // Shield
                 if (isShield){
                     platforms[x][y].setType("shield");
                     platforms[x][y].setWidth(40);
@@ -260,9 +266,18 @@ public class LevelMaker extends Pane {
                     platforms[x][y].setLayoutY(y * 20);
                 }
 
-                // Button
+                // Halo
                 if (isHalo){
                     platforms[x][y].setType("halo");
+                    platforms[x][y].setWidth(40);
+                    platforms[x][y].setHeight(40);
+                    platforms[x][y].setLayoutX(x * 100 + 30);
+                    platforms[x][y].setLayoutY(y * 20);
+                }
+
+                // Sword
+                if (isSword){
+                    platforms[x][y].setType("sword");
                     platforms[x][y].setWidth(40);
                     platforms[x][y].setHeight(40);
                     platforms[x][y].setLayoutX(x * 100 + 30);
@@ -396,6 +411,14 @@ public class LevelMaker extends Pane {
                             platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/consumables/halo.png")));
                             platform.setOpacity(100);
                             platform.setType("halo");
+                            platform.setWidth(40);
+                            platform.setHeight(40);
+                            platform.setLayoutX(x * 100 + 30);
+                        }
+                        case "sword" -> {
+                            platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/sword.png")));
+                            platform.setOpacity(100);
+                            platform.setType("sword");
                             platform.setWidth(40);
                             platform.setHeight(40);
                             platform.setLayoutX(x * 100 + 30);

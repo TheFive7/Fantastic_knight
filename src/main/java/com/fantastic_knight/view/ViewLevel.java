@@ -3,6 +3,7 @@ package com.fantastic_knight.view;
 import com.fantastic_knight.Game;
 import com.fantastic_knight.consumable.HaloConsumable;
 import com.fantastic_knight.consumable.ShieldConsumable;
+import com.fantastic_knight.consumable.SwordConsumable;
 import com.fantastic_knight.items.*;
 import com.fantastic_knight.levelMaker.LevelMaker;
 import com.fantastic_knight.levelMaker.Platform;
@@ -53,6 +54,10 @@ public class ViewLevel {
         model.shield = new Shield();
         pane.getChildren().add(model.shield);
 
+        // Sword
+        model.sword = new Sword();
+        pane.getChildren().add(model.sword);
+
         // Heart
         model.heart = new Heart(model);
         model.items.add(model.heart);
@@ -73,12 +78,17 @@ public class ViewLevel {
         // Player
         pane.getChildren().add(model.player.getShape());
 
-        // Halo
-//        HaloConsumable haloConsumable = new HaloConsumable(model);
-//        haloConsumable.getShape().setX(700);
-//        haloConsumable.getShape().setY(model.height-haloConsumable.getShape().getHeight());
-//        model.consumables.add(haloConsumable);
-//        pane.getChildren().add(haloConsumable.getShape());
+        // Sword
+        model.swordPlayer = new Sword();
+        pane.getChildren().add(model.swordPlayer);
+
+
+        // Sword
+//        SwordConsumable swordConsumable = new SwordConsumable(model);
+//        swordConsumable.getShape().setX(700);
+//        swordConsumable.getShape().setY(model.height-swordConsumable.getShape().getHeight());
+//        model.consumables.add(swordConsumable);
+//        pane.getChildren().add(swordConsumable.getShape());
     }
 
     /**
@@ -205,6 +215,18 @@ public class ViewLevel {
                             model.consumables.add(haloConsumable);
                             pane.getChildren().add(haloConsumable.getShape());
                         }
+                        case "sword" -> {
+                            platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/sword.png")));
+                            platform.setOpacity(100);
+
+                            SwordConsumable swordConsumable = new SwordConsumable(model);
+                            swordConsumable.getShape().setX(platform.getxCoordonnee() * 100 + 30);
+                            swordConsumable.getShape().setY(platform.getyCoordonnee() * 20);
+                            swordConsumable.getShape().setWidth(40);
+                            swordConsumable.getShape().setHeight(40);
+                            model.consumables.add(swordConsumable);
+                            pane.getChildren().add(swordConsumable.getShape());
+                        }
                         default -> platform.setOpacity(0);
                     }
 
@@ -214,7 +236,9 @@ public class ViewLevel {
                             if (!type.equals("button")){
                                 if (!type.equals("shield")){
                                     if (!type.equals("halo")) {
-                                        pane.getChildren().add(platform);
+                                        if (!type.equals("sword")) {
+                                            pane.getChildren().add(platform);
+                                        }
                                     }
                                 }
                             }

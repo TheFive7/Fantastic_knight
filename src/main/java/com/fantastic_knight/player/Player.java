@@ -182,6 +182,12 @@ public class Player extends Sprite {
         t.start();
     }
 
+    public void sword(){
+        model.swordPlayer.setX(getxPosition()+10);
+        model.swordPlayer.setY(getyPosition());
+        model.swordPlayer.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/sword.png")));
+    }
+
     /**
      * Actualisation du joueur
      */
