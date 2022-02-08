@@ -8,7 +8,6 @@ import javafx.scene.control.TextField;
 
 import static com.fantastic_knight.Game.*;
 
-
 public class MenuController {
     public static Scene scene_levels;
     public static Scene scene_levelMaker;

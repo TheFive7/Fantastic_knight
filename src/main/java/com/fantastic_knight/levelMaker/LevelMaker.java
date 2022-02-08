@@ -26,6 +26,7 @@ public class LevelMaker extends Pane {
     boolean isFlameTrap = false;
     boolean isButton = false;
     boolean isShield = false;
+    boolean isHalo = false;
     Image currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png");
 
     Platform[][] platforms = new Platform[12][40];
@@ -135,6 +136,11 @@ public class LevelMaker extends Pane {
         shieldCheck.setLayoutX(50); shieldCheck.setLayoutY(500);
         shieldCheck.setOnAction(e -> shieldActive());
 
+        // HALO
+        CheckBox haloCheck = new CheckBox("HALO");
+        haloCheck.setLayoutX(50); haloCheck.setLayoutY(550);
+        haloCheck.setOnAction(e -> haloActive());
+
         // CLEAR
         Button buttonClear = new Button();
         buttonClear.setPrefSize(150,160);
@@ -151,7 +157,7 @@ public class LevelMaker extends Pane {
 
         // AJOUTS
         paneChoose.getChildren().addAll(fileName,exportFile,spikesImage,buttonExport,buttonLoad,toggleButton,
-                slimeCheck,doorCheck,arrowTrapCheck,flameTrapCheck,buttonCheck,shieldCheck,buttonClear,buttonMenu,textFieldFileName,choiceBoxLevels);
+                slimeCheck,doorCheck,arrowTrapCheck,flameTrapCheck,buttonCheck,shieldCheck,haloCheck,buttonClear,buttonMenu,textFieldFileName,choiceBoxLevels);
         paneLevelMaker.getChildren().addAll(paneMaker,paneChoose);
         getChildren().add(paneLevelMaker);
     }
@@ -254,6 +260,16 @@ public class LevelMaker extends Pane {
         }
     }
 
+    public void haloActive(){
+        if (!isHalo){
+            isHalo = true;
+            currentImg = new Image("file:src/main/resources/com/fantastic_knight/consumables/halo.png");
+        } else {
+            isHalo = false;
+            currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png");
+        }
+    }
+
     /**
      * Dessine une plateforme
      * @param e : Mouse Event
@@ -307,6 +323,15 @@ public class LevelMaker extends Pane {
                 // Button
                 if (isShield){
                     platforms[x][y].setType("shield");
+                    platforms[x][y].setWidth(40);
+                    platforms[x][y].setHeight(40);
+                    platforms[x][y].setLayoutX(x * 100 + 30);
+                    platforms[x][y].setLayoutY(y * 20);
+                }
+
+                // Button
+                if (isHalo){
+                    platforms[x][y].setType("halo");
                     platforms[x][y].setWidth(40);
                     platforms[x][y].setHeight(40);
                     platforms[x][y].setLayoutX(x * 100 + 30);
@@ -432,6 +457,14 @@ public class LevelMaker extends Pane {
                             platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/shield.png")));
                             platform.setOpacity(100);
                             platform.setType("shield");
+                            platform.setWidth(40);
+                            platform.setHeight(40);
+                            platform.setLayoutX(x * 100 + 30);
+                        }
+                        case "halo" -> {
+                            platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/consumables/halo.png")));
+                            platform.setOpacity(100);
+                            platform.setType("halo");
                             platform.setWidth(40);
                             platform.setHeight(40);
                             platform.setLayoutX(x * 100 + 30);

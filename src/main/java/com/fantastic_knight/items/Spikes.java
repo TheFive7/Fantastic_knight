@@ -9,7 +9,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 public class Spikes extends Item {
-    Timer timer = new Timer(1500, this);
+    Timer timer = new Timer(500, this);
 
     public Spikes(Model m) {
         super(m);

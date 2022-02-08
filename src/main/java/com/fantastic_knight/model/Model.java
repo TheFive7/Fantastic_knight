@@ -1,6 +1,7 @@
 package com.fantastic_knight.model;
 
 import com.fantastic_knight.consumable.Consumable;
+import com.fantastic_knight.consumable.HaloConsumable;
 import com.fantastic_knight.consumable.ShieldConsumable;
 import com.fantastic_knight.items.Item;
 import com.fantastic_knight.player.Player;

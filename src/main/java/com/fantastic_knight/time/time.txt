@@ -30,3 +30,11 @@ Maxime,2.1
 Unknown,8.67
 Unknown,41.28
 Unknown,15.0
+Unknown,7.78
+Unknown,201.0
+Unknown,14.81
+baptiste,2.58
+baptiste,2.55
+baptiste,2.78
+baptiste,4.42
+baptiste,2.3

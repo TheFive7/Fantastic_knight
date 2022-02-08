@@ -18,6 +18,7 @@ public abstract class Item {
 
     public Item(Model model){
         this.model = model;
+        type = "item";
         isActive = true;
         xPosition = 0;
         yPosition = 0;
@@ -47,4 +48,6 @@ public abstract class Item {
     public void setActive(boolean active) {
         isActive = active;
     }
+
+    public String getType(){return type;}
 }

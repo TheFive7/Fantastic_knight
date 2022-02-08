@@ -31,10 +31,12 @@ public class ShieldConsumable extends Consumable {
         if (isActive){
             Shape inter = Shape.intersect(playerHitbox, shape);
             Bounds b = inter.getBoundsInLocal();
-            if (b.getWidth() != -1) {
-                isActive = false;
-                model.player.setLife(true);
-                getShape().setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/anything.png")));
+            if (!model.player.isLife()) {
+                if (b.getWidth() != -1) {
+                    isActive = false;
+                    model.player.setLife(true);
+                    getShape().setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/anything.png")));
+                }
             }
         }
     }

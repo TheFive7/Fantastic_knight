@@ -1,6 +1,7 @@
 package com.fantastic_knight.view;
 
 import com.fantastic_knight.Game;
+import com.fantastic_knight.consumable.HaloConsumable;
 import com.fantastic_knight.consumable.ShieldConsumable;
 import com.fantastic_knight.items.*;
 import com.fantastic_knight.levelMaker.LevelMaker;
@@ -72,12 +73,12 @@ public class ViewLevel {
         // Player
         pane.getChildren().add(model.player.getShape());
 
-        // Shield
-//        ShieldConsumable shieldConsumable = new ShieldConsumable(model);
-//        shieldConsumable.getShape().setX(700);
-//        shieldConsumable.getShape().setY(model.height-shieldConsumable.getShape().getHeight());
-//        model.consumables.add(shieldConsumable);
-//        pane.getChildren().add(shieldConsumable.getShape());
+        // Halo
+//        HaloConsumable haloConsumable = new HaloConsumable(model);
+//        haloConsumable.getShape().setX(700);
+//        haloConsumable.getShape().setY(model.height-haloConsumable.getShape().getHeight());
+//        model.consumables.add(haloConsumable);
+//        pane.getChildren().add(haloConsumable.getShape());
     }
 
     /**
@@ -192,6 +193,18 @@ public class ViewLevel {
                             model.consumables.add(shieldConsumable);
                             pane.getChildren().add(shieldConsumable.getShape());
                         }
+                        case "halo" -> {
+                            platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/consumables/halo.png")));
+                            platform.setOpacity(100);
+
+                            HaloConsumable haloConsumable = new HaloConsumable(model);
+                            haloConsumable.getShape().setX(platform.getxCoordonnee() * 100 + 30);
+                            haloConsumable.getShape().setY(platform.getyCoordonnee() * 20);
+                            haloConsumable.getShape().setWidth(40);
+                            haloConsumable.getShape().setHeight(40);
+                            model.consumables.add(haloConsumable);
+                            pane.getChildren().add(haloConsumable.getShape());
+                        }
                         default -> platform.setOpacity(0);
                     }
 
@@ -200,7 +213,9 @@ public class ViewLevel {
                         if (!type.equals("arrowTrap")){
                             if (!type.equals("button")){
                                 if (!type.equals("shield")){
-                                    pane.getChildren().add(platform);
+                                    if (!type.equals("halo")) {
+                                        pane.getChildren().add(platform);
+                                    }
                                 }
                             }
                         }

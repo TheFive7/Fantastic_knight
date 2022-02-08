@@ -1,6 +1,7 @@
 package com.fantastic_knight.player;
 
 import com.fantastic_knight.animation.AnimationImage;
+import com.fantastic_knight.items.Item;
 import com.fantastic_knight.model.Sprite;
 import com.fantastic_knight.model.State;
 import com.fantastic_knight.model.Model;
@@ -29,6 +30,7 @@ public class Player extends Sprite {
     double xVelocity; // pixel/s
     double yVelocity; // pixel/s
     boolean life;
+    boolean invincibility;
     boolean win;
     double angle;
     State state;
@@ -57,6 +59,7 @@ public class Player extends Sprite {
 
         shape = new Rectangle(width, height);
         life = true;
+        invincibility = false;
         xPosition = 0;
         yPosition = model.height - height;
         xVelocity = 5;
@@ -416,6 +419,22 @@ public class Player extends Sprite {
             getModel().shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/shield.png")));
         }
         this.life = life;
+    }
+
+    public boolean isInvincibility() {
+        return invincibility;
+    }
+
+    public void setInvincivility(boolean invincibility){
+        if (invincibility){
+            for (Item i : model.items) {
+                if (!i.getType().equals("item")){
+                    Timer timer = new Timer(5000,i);
+                    Thread t = new Thread(timer);
+                    t.start();
+                }
+            }
+        }
     }
 
     public Model getModel() {
