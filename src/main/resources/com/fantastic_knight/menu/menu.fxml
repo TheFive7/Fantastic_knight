@@ -9,9 +9,19 @@
     <ImageView fitHeight="800.0" fitWidth="1200.0" onInputMethodTextChanged="#pseudo" pickOnBounds="true" preserveRatio="true">
         <Image url="@menu.png" />
     </ImageView>
+    <Label layoutX="25.0" layoutY="10.0" prefHeight="40.0" prefWidth="200.0" text="Multiplayer">
+        <font>
+            <Font name="System Bold" size="24"/>
+        </font>
+    </Label>
+    <ImageView fx:id="iconMultiplayer" fitHeight="40.0" fitWidth="100.0" preserveRatio="true" layoutX="200.0" layoutY="10.0">
+        <Image url="@../icons/off.png" />
+    </ImageView>
     <Button layoutX="1128.0" layoutY="697.0" mnemonicParsing="false" onAction="#quit" opacity="0.0" prefHeight="85.3" prefWidth="60.0" />
     <Button layoutX="500.0" layoutY="305.0" mnemonicParsing="false" onAction="#play" opacity="0.0" prefHeight="100.0" prefWidth="200.0" />
+    <Button layoutX="500.0" layoutY="450.0" mnemonicParsing="false" onAction="#options" opacity="0.0" prefHeight="100.0" prefWidth="200.0" />
     <Button layoutX="1128.0" layoutY="433.0" mnemonicParsing="false" onAction="#playLevelMaker" opacity="0.0" prefHeight="67.0" prefWidth="54.0" />
+    <Button layoutX="200.0" layoutY="10.0" mnemonicParsing="false" onAction="#multiplayer" opacity="0.0" prefHeight="40.0" prefWidth="100.0" />
    <Button layoutX="500.0" layoutY="593.0" mnemonicParsing="false" onAction="#displayCredits" opacity="0.0" prefHeight="107.0" prefWidth="200.0" />
    <Label layoutX="67.0" layoutY="299.0" text="Entrez votre pseudo">
       <font>
