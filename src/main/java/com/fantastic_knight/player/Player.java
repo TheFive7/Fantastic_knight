@@ -38,6 +38,7 @@ public class Player extends Sprite {
     Model model;
     AnimationImage animation;
     final double vDash = 10;
+    private boolean canDash = true;
     Protection protection;
 
     // 0 RIGHT; 180 LEFT
@@ -171,13 +172,12 @@ public class Player extends Sprite {
      * Move dash (high speed movement of the player)
      */
     public void dash(){
-        if(state == State.JUMP || state == State.FALL) return;
+        if(state == State.JUMP || state == State.FALL || !canDash) return;
         Timer timer = new Timer(300,this);
         xVelocity = vDash;
         yVelocity = 0;
         if(lastMove==1) animation.setImages(imageLeft);
         else animation.setImages(imageRight);
-        state = State.DASH;
         Thread t = new Thread(timer);
         t.start();
     }
@@ -461,5 +461,13 @@ public class Player extends Sprite {
 
     public Protection getProtection() {
         return protection;
+    }
+
+    public boolean isCanDash() {
+        return canDash;
+    }
+
+    public void setCanDash(boolean canDash) {
+        this.canDash = canDash;
     }
 }
