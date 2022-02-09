@@ -33,12 +33,13 @@ public class Game extends Application {
      *  Do scrolling
      *  Refactor Background
      *  More animation -> Player (Dead)
-     *  Shield left
+     *  creer pieges en jeu
+     *  halo clignotant avant de disparaitre
      */
 
     @Override
     public void start(Stage stage) throws Exception {
-        //System.out.println(levels);
+        // System.out.println(levels);
         primaryStage = stage;
 
         model = new Model();

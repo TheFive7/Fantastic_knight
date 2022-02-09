@@ -21,7 +21,7 @@ public class Arrow extends Item {
         height = 7;
 
         factor = -1;
-        image = new Image("file:src/main/resources/com/fantastic_knight/items/arrow_left.png");
+        image = new Image("file:src/main/resources/com/fantastic_knight/items/arrow.png");
 
         xVelocity = 4 * factor;
         shape = new Rectangle(width, height);

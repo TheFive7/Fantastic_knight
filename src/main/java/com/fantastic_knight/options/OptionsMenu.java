@@ -78,14 +78,12 @@ public class OptionsMenu extends Pane {
     }
 
     private void chooseSkinPanel() {
-        System.out.println("\nSkins selected\n");
         paneOptionsMenu.getChildren().clear();
         createSkinPane();
         paneOptionsMenu.getChildren().addAll(changeSkin,buttonMenu,buttonSkin,buttonSounds);
     }
 
     private void chooseSoundPanel() {
-        System.out.println("\nNext selected\n");
         paneOptionsMenu.getChildren().clear();
         createSoundPane();
         paneOptionsMenu.getChildren().addAll(buttonMenu,buttonSkin,buttonSounds);

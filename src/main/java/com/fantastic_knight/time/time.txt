@@ -39,3 +39,11 @@ baptiste,2.78
 baptiste,4.42
 baptiste,2.3
 Unknown,13.26
+Unknown,3.78
+Unknown,68.41
+Unknown,16.28
+Unknown,88.29
+Unknown,41.76
+Unknown,35.66
+Unknown,30.15
+Unknown,28.64
