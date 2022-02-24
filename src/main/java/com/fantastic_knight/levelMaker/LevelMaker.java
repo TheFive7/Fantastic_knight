@@ -102,17 +102,18 @@ public class LevelMaker extends Pane {
 
         // CHOICE ITEMS
         ObservableList<String> options = FXCollections.observableArrayList();
+        String chemin = "file:src/main/resources/com/fantastic_knight/";
         options.addAll(
-                "file:src/main/resources/com/fantastic_knight/" + "assets" + "/" + "platform" + ".png",
-                "file:src/main/resources/com/fantastic_knight/" + "items" + "/" + "spike" + ".png",
-                "file:src/main/resources/com/fantastic_knight/" + "items" + "/" + "slime" + ".png",
-                "file:src/main/resources/com/fantastic_knight/" + "assets" + "/" + "door" + ".png",
-                "file:src/main/resources/com/fantastic_knight/" + "items" + "/" + "arrowTrap_left" + ".png",
-                "file:src/main/resources/com/fantastic_knight/" + "items" + "/" + "fire_platform" + ".png",
-                "file:src/main/resources/com/fantastic_knight/" + "items" + "/" + "button" + ".png",
-                "file:src/main/resources/com/fantastic_knight/" + "assets" + "/" + "shield" + ".png",
-                "file:src/main/resources/com/fantastic_knight/" + "consumables" + "/" + "halo" + ".png",
-                "file:src/main/resources/com/fantastic_knight/" + "consumables" + "/" + "sword" + ".png"
+                chemin + "assets" + "/" + "platform" + ".png",
+                chemin + "items" + "/" + "spike" + ".png",
+                chemin + "items" + "/" + "slime" + ".png",
+                chemin + "assets" + "/" + "door" + ".png",
+                chemin + "items" + "/" + "arrowTrap_left" + ".png",
+                chemin + "items" + "/" + "fire_platform" + ".png",
+                chemin + "items" + "/" + "button" + ".png",
+                chemin + "assets" + "/" + "shield" + ".png",
+                chemin + "consumables" + "/" + "halo" + ".png",
+                chemin + "consumables" + "/" + "sword" + ".png"
         );
 
         ComboBox<String> comboBox = new ComboBox<>(options);
@@ -462,7 +463,7 @@ class StatusListCell extends ListCell<String> {
         super.updateItem(item, empty);
         setGraphic(null);
         setText(null);
-        if(item != null){
+        if (item != null){
             ImageView imageView = new ImageView(new Image(item));
 
             imageView.setFitWidth(100);
