@@ -55,7 +55,7 @@ public class ControllerKeyboard implements EventHandler<KeyEvent> {
             control.dash();
         } else if (arg0.getCode() == KeyCode.F) {
             control.deployProtection();
-        } else if (arg0.getCode() == KeyCode.A) {
+        } else if (arg0.getCode() == KeyCode.ALT) {
             control.sword();
         }
     }
