@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -12,6 +13,8 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Font;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static com.fantastic_knight.Game.*;
@@ -20,15 +23,16 @@ import static com.fantastic_knight.model.Model.findAllLevels;
 
 public class LevelMaker extends Pane {
 
-    boolean isSpike = false;
-    boolean isDoor = false;
-    boolean isSlime = false;
-    boolean isArrowTrap = false;
-    boolean isFlameTrap = false;
-    boolean isButton = false;
-    boolean isShield = false;
-    boolean isHalo = false;
-    boolean isSword = false;
+    List<Boolean> booleans = new ArrayList<>(){
+        {
+            add(true); add(false);
+            add(false); add(false);
+            add(false); add(false);
+            add(false); add(false);
+            add(false); add(false);
+        }
+    };
+
     public static Image currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png");
 
     Platform[][] platforms = new Platform[12][40];
@@ -72,7 +76,8 @@ public class LevelMaker extends Pane {
         // FILE NAME
         Label fileName = new Label("File name :"); fileName.setLayoutX(10); fileName.setLayoutY(25); fileName.setFont(new Font(20));
         fileName.setStyle("-fx-font-weight: bold");
-        TextField textFieldFileName = new TextField(fileNameExport); textFieldFileName.setLayoutX(150); textFieldFileName.setLayoutY(15); textFieldFileName.setPrefSize(120,55);
+        TextField textFieldFileName = new TextField(fileNameExport); textFieldFileName.setLayoutX(150);
+        textFieldFileName.setLayoutY(15); textFieldFileName.setPrefSize(120,55);
         textFieldFileName.setStyle("-fx-background-image: url('"+ Game.class.getResource("icons/paper.png")+"');-fx-background-color: transparent");
         textFieldFileName.setOnKeyReleased(e -> fileNameExport = textFieldFileName.getText());
 
@@ -92,61 +97,82 @@ public class LevelMaker extends Pane {
             fileNameLoad = choiceBoxLevels.getValue();
             textFieldFileName.setText(fileNameLoad);
             fileNameExport = textFieldFileName.getText();
+            load(paneMaker);
         });
 
-        // LOAD
-        Button buttonLoad = new Button("LOAD");
-        buttonLoad.setLayoutX(200); buttonLoad.setLayoutY(150);
-        buttonLoad.setOnAction(e -> load(paneMaker));
+        // CHOICE ITEMS
+        ObservableList<String> options = FXCollections.observableArrayList();
+        options.addAll(
+                "file:src/main/resources/com/fantastic_knight/" + "assets" + "/" + "platform" + ".png",
+                "file:src/main/resources/com/fantastic_knight/" + "items" + "/" + "spike" + ".png",
+                "file:src/main/resources/com/fantastic_knight/" + "items" + "/" + "slime" + ".png",
+                "file:src/main/resources/com/fantastic_knight/" + "assets" + "/" + "door" + ".png",
+                "file:src/main/resources/com/fantastic_knight/" + "items" + "/" + "arrowTrap_left" + ".png",
+                "file:src/main/resources/com/fantastic_knight/" + "items" + "/" + "fire_platform" + ".png",
+                "file:src/main/resources/com/fantastic_knight/" + "items" + "/" + "button" + ".png",
+                "file:src/main/resources/com/fantastic_knight/" + "assets" + "/" + "shield" + ".png",
+                "file:src/main/resources/com/fantastic_knight/" + "consumables" + "/" + "halo" + ".png",
+                "file:src/main/resources/com/fantastic_knight/" + "consumables" + "/" + "sword" + ".png"
+        );
 
-        // TOGGLE BUTTON
-        Label spikesImage = new Label(""); spikesImage.setStyle("-fx-background-color: transparent;-fx-background-image: url('"+ Game.class.getResource("items/spike.png")+"')");
-        spikesImage.setPrefSize(100,25);
-        spikesImage.setLayoutX(50); spikesImage.setLayoutY(305);
-        ToggleButton toggleButton = new ToggleButton();
-        toggleButton.setLayoutX(175); toggleButton.setLayoutY(305); toggleButton.setPrefSize(100,45);
-        toggleButton.setStyle("-fx-background-image: url('"+ Game.class.getResource("icons/off.png")+"');-fx-background-color: transparent;-fx-background-repeat: no-repeat");
-        toggleButton.setOnAction(e -> spikesActive(toggleButton));
+        ComboBox<String> comboBox = new ComboBox<>(options);
+        comboBox.setLayoutX(50); comboBox.setLayoutY(200);
+        comboBox.setCellFactory(c -> new StatusListCell());
+        comboBox.setButtonCell(new StatusListCell());
+        comboBox.setValue(comboBox.getItems().get(0));
+        comboBox.setStyle(
+                """
+                -fx-background-color: transparent;
+                -fx-border-color: black;
+                -fx-border-width: 3px;
+                """
+        );
 
-        // SLIME
-        CheckBox slimeCheck = new CheckBox("SLIME");
-        slimeCheck.setLayoutX(150); slimeCheck.setLayoutY(500);
-        slimeCheck.setOnAction(e -> isSlime = setCheckActive(isSlime,"items","slime"));
 
-        // DOOR
-        CheckBox doorCheck = new CheckBox("DOOR");
-        doorCheck.setLayoutX(50); doorCheck.setLayoutY(350);
-        doorCheck.setOnAction(e -> isDoor = setCheckActive(isDoor,"assets","door"));
-
-        // ARROW TRAP
-        CheckBox arrowTrapCheck = new CheckBox("ARROW TRAP");
-        arrowTrapCheck.setLayoutX(50); arrowTrapCheck.setLayoutY(400);
-        arrowTrapCheck.setOnAction(e -> isArrowTrap = setCheckActive(isArrowTrap,"items","arrowTrap_left"));
-
-        // FLAME TRAP
-        CheckBox flameTrapCheck = new CheckBox("FLAME TRAP");
-        flameTrapCheck.setLayoutX(50); flameTrapCheck.setLayoutY(450);
-        flameTrapCheck.setOnAction(e -> isFlameTrap = setCheckActive(isFlameTrap,"items","fire_platform"));
-
-        // BUTTON
-        CheckBox buttonCheck = new CheckBox("BUTTON");
-        buttonCheck.setLayoutX(150); buttonCheck.setLayoutY(450);
-        buttonCheck.setOnAction(e -> isButton = setCheckActive(isButton,"items","button"));
-
-        // SHIELD
-        CheckBox shieldCheck = new CheckBox("SHIELD");
-        shieldCheck.setLayoutX(50); shieldCheck.setLayoutY(500);
-        shieldCheck.setOnAction(e -> isShield = setCheckActive(isShield,"assets","shield"));
-
-        // HALO
-        CheckBox haloCheck = new CheckBox("HALO");
-        haloCheck.setLayoutX(50); haloCheck.setLayoutY(550);
-        haloCheck.setOnAction(e -> isHalo = setCheckActive(isHalo,"consumables","halo"));
-
-        // SWORD
-        CheckBox swordCheck = new CheckBox("SWORD");
-        swordCheck.setLayoutX(50); swordCheck.setLayoutY(600);
-        swordCheck.setOnAction(e -> isSword = setCheckActive(isSword,"consumables","sword"));
+        comboBox.setOnAction(e -> {
+            switch (comboBox.getSelectionModel().getSelectedIndex()) {
+                case 0 -> {
+                    booleans.set(0, setCheckActive(booleans.get(0), "assets", "platform"));
+                    setAllFalse(0);
+                }
+                case 1 -> {
+                    booleans.set(1, setCheckActive(booleans.get(1), "items", "spike"));
+                    setAllFalse(1);
+                }
+                case 2 -> {
+                    booleans.set(2, setCheckActive(booleans.get(2), "items", "slime"));
+                    setAllFalse(2);
+                }
+                case 3 -> {
+                    booleans.set(3, setCheckActive(booleans.get(3), "assets", "door"));
+                    setAllFalse(3);
+                }
+                case 4 -> {
+                    booleans.set(4, setCheckActive(booleans.get(4), "items", "arrowTrap_left"));
+                    setAllFalse(4);
+                }
+                case 5 -> {
+                    booleans.set(5, setCheckActive(booleans.get(5), "items", "fire_platform"));
+                    setAllFalse(5);
+                }
+                case 6 -> {
+                    booleans.set(6, setCheckActive(booleans.get(6), "items", "button"));
+                    setAllFalse(6);
+                }
+                case 7 -> {
+                    booleans.set(7, setCheckActive(booleans.get(7), "assets", "shield"));
+                    setAllFalse(7);
+                }
+                case 8 -> {
+                    booleans.set(8, setCheckActive(booleans.get(8), "consumables", "halo"));
+                    setAllFalse(8);
+                }
+                case 9 -> {
+                    booleans.set(9, setCheckActive(booleans.get(9), "consumables", "sword"));
+                    setAllFalse(9);
+                }
+            }
+        });
 
         // CLEAR
         Button buttonClear = new Button();
@@ -163,10 +189,18 @@ public class LevelMaker extends Pane {
         buttonMenu.setOnAction(e -> menu());
 
         // AJOUTS
-        paneChoose.getChildren().addAll(fileName,exportFile,spikesImage,buttonExport,buttonLoad,toggleButton,
-                slimeCheck,doorCheck,arrowTrapCheck,flameTrapCheck,buttonCheck,shieldCheck,haloCheck,swordCheck,buttonClear,buttonMenu,textFieldFileName,choiceBoxLevels);
+        paneChoose.getChildren().addAll(fileName,exportFile,buttonExport,buttonClear,buttonMenu,textFieldFileName,choiceBoxLevels,comboBox);
         paneLevelMaker.getChildren().addAll(paneMaker,paneChoose);
         getChildren().add(paneLevelMaker);
+
+         load(paneMaker);
+    }
+
+    void setAllFalse(int index){
+        for (Boolean b : booleans){
+            booleans.set(booleans.indexOf(b), false);
+        }
+        booleans.set(index, true);
     }
 
     /**
@@ -193,21 +227,6 @@ public class LevelMaker extends Pane {
     }
 
     /**
-     * Active les piques
-     */
-    void spikesActive(ToggleButton button){
-        if (!isSpike){
-            isSpike = true;
-            currentImg = new Image("file:src/main/resources/com/fantastic_knight/items/spike.png");
-            button.setStyle("-fx-background-image: url('"+ Game.class.getResource("icons/on.png")+"');-fx-background-color: transparent;-fx-background-repeat: no-repeat");
-        } else {
-            isSpike = false;
-            currentImg = new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png");
-            button.setStyle("-fx-background-image: url('"+ Game.class.getResource("icons/off.png")+"');-fx-background-color: transparent;-fx-background-repeat: no-repeat");
-        }
-    }
-
-    /**
      * Dessine une plateforme
      * @param e : Mouse Event
      * @param platforms : Tableau des plateformes
@@ -226,13 +245,13 @@ public class LevelMaker extends Pane {
                 platforms[x][y].setLayoutY(y * 20);
 
                 // Spikes & Platform
-                if(isSpike)platforms[x][y].setType("spike");
-                else if (isSlime)platforms[x][y].setType("slime");
-                else if (isFlameTrap)platforms[x][y].setType("flameTrap");
+                if(booleans.get(1))platforms[x][y].setType("spike");
+                else if (booleans.get(2))platforms[x][y].setType("slime");
+                else if (booleans.get(5))platforms[x][y].setType("flameTrap");
                 else {platforms[x][y].setType("platform");}
 
                 // Door
-                if (isDoor){
+                if (booleans.get(3)){
                     platforms[x][y].setType("door");
                     platforms[x][y].setWidth(70);
                     platforms[x][y].setHeight(100);
@@ -240,7 +259,7 @@ public class LevelMaker extends Pane {
                 }
 
                 // ArrowTrap
-                if (isArrowTrap){
+                if (booleans.get(4)){
                     platforms[x][y].setType("arrowTrap");
                     platforms[x][y].setWidth(50);
                     platforms[x][y].setHeight(50);
@@ -249,7 +268,7 @@ public class LevelMaker extends Pane {
                 }
 
                 // Button
-                if (isButton){
+                if (booleans.get(6)){
                     platforms[x][y].setType("button");
                     platforms[x][y].setWidth(50);
                     platforms[x][y].setHeight(20);
@@ -258,7 +277,7 @@ public class LevelMaker extends Pane {
                 }
 
                 // Shield
-                if (isShield){
+                if (booleans.get(7)){
                     platforms[x][y].setType("shield");
                     platforms[x][y].setWidth(40);
                     platforms[x][y].setHeight(40);
@@ -267,7 +286,7 @@ public class LevelMaker extends Pane {
                 }
 
                 // Halo
-                if (isHalo){
+                if (booleans.get(8)){
                     platforms[x][y].setType("halo");
                     platforms[x][y].setWidth(40);
                     platforms[x][y].setHeight(40);
@@ -276,7 +295,7 @@ public class LevelMaker extends Pane {
                 }
 
                 // Sword
-                if (isSword){
+                if (booleans.get(9)){
                     platforms[x][y].setType("sword");
                     platforms[x][y].setWidth(40);
                     platforms[x][y].setHeight(40);
@@ -308,10 +327,6 @@ public class LevelMaker extends Pane {
                 writer.println();
             }
             writer.close();
-
-            // UPDATE CHOICEBOX
-            choiceBoxLevels.setItems(FXCollections.observableArrayList(findAllLevels()));
-            choiceBoxLevels.setValue(choiceBoxLevels.getItems().get(0));
 
             // System.out.println("Fichier " + fileNameExport + " sauvegardé.");
         } catch (IOException e) {
@@ -438,6 +453,35 @@ public class LevelMaker extends Pane {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+}
+
+class StatusListCell extends ListCell<String> {
+    protected void updateItem(String item, boolean empty){
+        super.updateItem(item, empty);
+        setGraphic(null);
+        setText(null);
+        if(item != null){
+            ImageView imageView = new ImageView(new Image(item));
+
+            imageView.setFitWidth(100);
+            imageView.setFitHeight(20);
+
+            if (item.contains("door")){
+                imageView.setFitWidth(70);
+                imageView.setFitHeight(100);
+            } else if (item.contains("arrowTrap_left")){
+                imageView.setFitWidth(50);
+                imageView.setFitHeight(50);
+            } else if (item.contains("button")){
+                imageView.setFitWidth(50);
+                imageView.setFitHeight(20);
+            } else if (item.contains("consumables") || item.contains("shield")){
+                imageView.setFitWidth(80);
+                imageView.setFitHeight(80);
+            }
+            setGraphic(imageView);
         }
     }
 }
