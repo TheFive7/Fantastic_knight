@@ -1,5 +1,6 @@
 package com.fantastic_knight.menu;
 
+import com.fantastic_knight.Game;
 import com.fantastic_knight.model.Model;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -34,14 +35,14 @@ public class LevelsMenu extends Pane {
         int compteur = 1;
         for (String levelName : levels) {
             // Print and creation
-            ButtonLevel buttonLevel = new ButtonLevel(levelName, 60 + j * 250, 219 + i * 130);
+            ButtonLevel buttonLevel = new ButtonLevel(levelName, 60 + i * 250, 180 + j * 300);
             int finalCompteur = compteur;
             buttonLevel.setOnAction(e -> selectLevel(finalCompteur));
             getChildren().addAll(buttonLevel);
             compteur++;
             i++;
 
-            // If 4 levels in a column, we start a new column
+            // If 4 levels in a line, we start a new line
             if (i == 4) {
                 i = 0;
                 j++;
@@ -72,18 +73,18 @@ class ButtonLevel extends Button {
         setText(name);
         setLayoutX(x);
         setLayoutY(y);
-        setPrefSize(200, 100);
-        setHeight(100);
-        setWidth(200);
+        setPrefSize(300, 300);
         String css = """
+                -fx-border-color: transparent;
+                -fx-border-width: 0;
+                -fx-background-color: transparent;
                 -fx-font: 22 Arial;
-                -fx-base: #444444;
-                -fx-background-radius: 40px;
-                -fx-border-color:black;
-                -fx-border-radius: 40;
-                -fx-border-width: 3;
+                -fx-font-weight: bold;
+                -fx-background-repeat: no-repeat;
+                -fx-background-size: 300 300;
                 """;
         setStyle(css);
+        setStyle(getStyle() + "-fx-background-image: url('"+ Game.class.getResource("icons/flag.png")+"')");
         setOpacity(100);
     }
 }

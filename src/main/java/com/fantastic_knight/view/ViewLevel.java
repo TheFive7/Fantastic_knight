@@ -79,8 +79,10 @@ public class ViewLevel {
         pane.getChildren().add(model.player.getShape());
 
         // Sword
-        model.swordPlayer = new Sword();
-        pane.getChildren().add(model.swordPlayer);
+        model.swordPlayer = new SwordPlayer(model);
+        model.swordPlayer.getShape().setWidth(70);
+        model.swordPlayer.getShape().setHeight(70);
+        pane.getChildren().add(model.swordPlayer.getShape());
 
 
         // Sword
