@@ -23,7 +23,7 @@ public class Arrow extends Item {
         factor = -1;
         image = new Image("file:src/main/resources/com/fantastic_knight/items/arrow.png");
 
-        xVelocity = 4 * factor;
+        xVelocity = 5 * factor;
         shape = new Rectangle(width, height);
         shape.setX(xPosition);
         shape.setY(yPosition);
