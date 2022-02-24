@@ -12,7 +12,7 @@ public class SwordConsumable extends Consumable {
 
     public SwordConsumable(Model model) {
         super(model);
-        type = "shield";
+        type = "sword";
         width = 40;
         height = 40;
         shape = new Rectangle(width, height);
@@ -32,8 +32,9 @@ public class SwordConsumable extends Consumable {
             Bounds b = inter.getBoundsInLocal();
             if (b.getWidth() != -1) {
                 isActive = false;
-                model.sword.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/sword.png")));
+                model.sword.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/consumables/sword.png")));
                 getShape().setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/anything.png")));
+                model.player.setSword(true);
             }
         }
     }

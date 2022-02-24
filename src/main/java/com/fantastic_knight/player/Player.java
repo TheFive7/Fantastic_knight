@@ -39,6 +39,7 @@ public class Player extends Sprite {
     AnimationImage animation;
     final double vDash = 10;
     Protection protection;
+    boolean isSword;
 
     // 0 RIGHT; 180 LEFT
 
@@ -74,6 +75,7 @@ public class Player extends Sprite {
         animated = true;
         win = false;
         protection = new Protection(this);
+        isSword = false;
         name = "Knight Red";
     }
 
@@ -91,6 +93,9 @@ public class Player extends Sprite {
         angle = 180;
         lastMove = 1;
         state = State.WALK;
+
+        model.swordPlayer.orientationSword("left");
+
     }
 
     /**
@@ -106,6 +111,8 @@ public class Player extends Sprite {
         angle = 0;
         lastMove = 2;
         state = State.WALK;
+
+        model.swordPlayer.orientationSword("right");
     }
 
     /**
@@ -114,7 +121,8 @@ public class Player extends Sprite {
     public void stop() {
         xVelocity = 0;
         yVelocity = 0;
-        angle = 0;
+        if (lastMove == 1) angle = 180;
+        else angle = 0;
         state = State.IDLE;
     }
 
@@ -182,10 +190,18 @@ public class Player extends Sprite {
         t.start();
     }
 
+    /**
+     * Draw the sword
+     */
     public void sword(){
-        model.swordPlayer.setX(getxPosition()+10);
-        model.swordPlayer.setY(getyPosition());
-        model.swordPlayer.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/sword.png")));
+        if (isSword){
+            model.swordPlayer.setActive(!model.swordPlayer.getActive());
+            if (angle == 180){
+                model.swordPlayer.orientationSword("left");
+            } else if (angle == 0){
+                model.swordPlayer.orientationSword("right");
+            }
+        }
     }
 
     /**
@@ -222,6 +238,8 @@ public class Player extends Sprite {
                 model.labelWin.setOpacity(100);
                 model.chrono.terminate();
             }
+
+            model.swordPlayer.update();
         }
     }
 
@@ -365,6 +383,28 @@ public class Player extends Sprite {
         }
     }
 
+    public void setInvincivility(boolean invincibility){
+        if (invincibility){
+            for (Item i : model.items) {
+                if (!i.getType().equals("item")){
+                    Timer timer = new Timer(5000,i);
+                    Thread t = new Thread(timer);
+                    t.start();
+                }
+            }
+        }
+    }
+
+    public void setLife(boolean life) {
+        if (!life) {
+            model.heart.setActive(false);
+            getModel().shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/shield_empty.png")));
+        } else {
+            getModel().shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/shield.png")));
+        }
+        this.life = life;
+    }
+
     public Rectangle getShape() {
         return shape;
     }
@@ -417,30 +457,8 @@ public class Player extends Sprite {
         return life;
     }
 
-    public void setLife(boolean life) {
-        if (!life) {
-            model.heart.setActive(false);
-            getModel().shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/shield_empty.png")));
-        } else {
-            getModel().shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/shield.png")));
-        }
-        this.life = life;
-    }
-
     public boolean isInvincibility() {
         return invincibility;
-    }
-
-    public void setInvincivility(boolean invincibility){
-        if (invincibility){
-            for (Item i : model.items) {
-                if (!i.getType().equals("item")){
-                    Timer timer = new Timer(5000,i);
-                    Thread t = new Thread(timer);
-                    t.start();
-                }
-            }
-        }
     }
 
     public Model getModel() {
@@ -461,5 +479,9 @@ public class Player extends Sprite {
 
     public Protection getProtection() {
         return protection;
+    }
+
+    public void setSword(boolean isSword){
+        this.isSword = isSword;
     }
 }

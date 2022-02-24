@@ -1,7 +1,9 @@
 package com.fantastic_knight.model;
 
 import com.fantastic_knight.consumable.Consumable;
+import com.fantastic_knight.consumable.SwordConsumable;
 import com.fantastic_knight.items.Item;
+import com.fantastic_knight.items.SwordPlayer;
 import com.fantastic_knight.player.Player;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Shape;
@@ -46,7 +48,7 @@ public class Model {
     public Shape westWall;
 
     // PLAYER
-    public Sword swordPlayer;
+    public SwordPlayer swordPlayer;
 
     // ATH
     public Shield shield;
