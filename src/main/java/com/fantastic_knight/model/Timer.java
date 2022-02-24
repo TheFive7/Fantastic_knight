@@ -41,7 +41,12 @@ public class Timer implements Runnable {
             Thread.sleep(time);
             bool = true; // unable
             if(item!=null) item.setActive(bool);
-            if(player!=null) player.setState(State.IDLE);
+            if(player!=null) {
+                player.setState(State.IDLE);
+                player.setCanDash(false);
+                Thread.sleep(1500);
+                player.setCanDash(true);
+            }
             Thread.currentThread().interrupt();
             return;
         } catch (InterruptedException e) {
