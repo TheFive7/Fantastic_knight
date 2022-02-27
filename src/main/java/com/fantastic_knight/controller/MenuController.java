@@ -6,6 +6,7 @@ import com.fantastic_knight.menu.LevelsMenu;
 import com.fantastic_knight.options.OptionsMenu;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -61,7 +62,10 @@ public class MenuController {
      */
     public void ranking() {
         RankingMenu rankingMenu = new RankingMenu();
-        Scene scene_ranking = new Scene(rankingMenu, model.width, model.height);
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setContent(rankingMenu);
+        Scene scene_ranking = new Scene(scrollPane, model.width, model.height);
         primaryStage.setScene(scene_ranking);
     }
 

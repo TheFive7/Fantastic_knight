@@ -5,9 +5,12 @@ import com.fantastic_knight.model.Model;
 import javafx.scene.Group;
 import javafx.scene.layout.Pane;
 
+import java.util.List;
+
 import static com.fantastic_knight.Game.levels;
 import static com.fantastic_knight.Game.primaryStage;
 import static com.fantastic_knight.controller.MenuController.scene_levels;
+import static com.fantastic_knight.model.Model.findAllLevels;
 
 public class View {
 
@@ -54,7 +57,8 @@ public class View {
     public void returnMenu() {
         if (model.player.isWin()){
             double tempsChrono = model.chrono.getTime();
-            RankingMenu.register(tempsChrono);
+            List<String> levels = findAllLevels();
+            RankingMenu.register(tempsChrono, levels.get(model.level - 1));
         }
 
         model.state = Model.STATE_INITIAL;

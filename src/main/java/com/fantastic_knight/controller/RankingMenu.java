@@ -13,6 +13,7 @@ import java.util.*;
 
 import static com.fantastic_knight.Game.primaryStage;
 import static com.fantastic_knight.Game.scene_menu;
+import static com.fantastic_knight.model.Model.findAllLevels;
 
 public class RankingMenu extends Pane {
     public String[] tabPseudo = new String[100];
@@ -21,7 +22,6 @@ public class RankingMenu extends Pane {
 
     public RankingMenu() {
         // size
-        setHeight(800);
         setWidth(1200);
 
         // Background
@@ -49,28 +49,25 @@ public class RankingMenu extends Pane {
 
         List<Double> temps = new ArrayList<>();
         String[] tab;
-
+        ArrayList<String> levels = (ArrayList<String>) findAllLevels();
+        HashMap<String, ArrayList<String>> data2 = new HashMap<>();
+        levels.forEach(l -> data2.put(l,new ArrayList<>()));
         // trier les temps
         try {
             data.clear();
             FileInputStream file = new FileInputStream("src/main/java/com/fantastic_knight/time/"+ fileNameTime +".txt");
             Scanner scanner = new Scanner(file);
 
-            int index = 0;
-
             while (scanner.hasNext()) {
                 tab = scanner.nextLine().split(",");
                 double tmp = Double.parseDouble(tab[1]);
-
-                data.add(tab[0] + "," + tab[1]);
+                //data2.get(tab[2]).add(tab[0] + "," + tab[1]);
+                data.add(tab[0] + "," + tab[1] + "," + tab[2]);
                 temps.add(tmp);
-
-                tabPseudo[index] = tab[0];
-                index ++;
             }
             Collections.sort(temps);
 
-            for (String s : data){
+/*            for (String s : data){
                 String[] value = s.split(",");
                 double tmp = Double.parseDouble(value[1]);
                 String name = value[0];
@@ -80,27 +77,47 @@ public class RankingMenu extends Pane {
                         tabPseudo[temps.indexOf(d)] = name;
                     }
                 }
+            }*/
+
+            for (double t : temps) {
+                for (String s : data) {
+                    String[] value = s.split(",");
+                    double tmp = Double.parseDouble(value[1]);
+                    if (tmp == t)
+                        data2.get(value[2]).add(value[0] + "," + value[1]);
+                }
             }
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        // affichage classement
-        int nb = Math.min(data.size(), 5);
-        for(int i = 0; i < nb; i++){
-            Label label = new Label();
-            label.setText((i+1) + "e   " + tabPseudo[i] + " : " + temps.get(i));
-            label.setStyle("-fx-font-weight: bold");
-            label.setLayoutX(400);
-            label.setLayoutY(400+50*i);
-            label.setFont(new Font(44));
-            label.setTextFill(Color.BLACK);
-            getChildren().add(label);
-        }
+        data2.forEach((k,v) -> {
+            Label title = new Label();
+            title.setText(k);
+            title.setStyle("-fx-font-weight: bold");
+            title.setLayoutX(400);
+            title.setLayoutY(350+50*5*levels.indexOf(k));
+            title.setFont(new Font(54));
+            title.setTextFill(Color.BLACK);
+            getChildren().add(title);
+            for (int i=0; i<v.size();i++) {
+                if (i==4)
+                    break;
+                Label label = new Label();
+                label.setText((i+1) + " : " + v.get(i));
+                label.setStyle("-fx-font-weight: bold");
+                label.setLayoutX(400);
+                label.setLayoutY(400 + 250 * levels.indexOf(k) + 50*i);
+                label.setFont(new Font(44));
+                label.setTextFill(Color.BLACK);
+                getChildren().add(label);
+            }
+        });
+
     }
 
-    public static void register(double temps){
+    public static void register(double temps, String level){
         FileInputStream file;
         try {
             data.clear();
@@ -108,7 +125,7 @@ public class RankingMenu extends Pane {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNext()) {
                 String[] tab = scanner.nextLine().split(",");
-                data.add(tab[0] + "," + tab[1]);
+                data.add(tab[0] + "," + tab[1] + "," + tab[2]);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -121,7 +138,7 @@ public class RankingMenu extends Pane {
                 writer.println();
             }
             if (MenuController.globalPseudo == null){MenuController.globalPseudo = "Unknown";}
-            writer.print(MenuController.globalPseudo + "," + temps);
+            writer.print(MenuController.globalPseudo + "," + temps + "," + level);
             writer.println();
             writer.close();
         } catch (IOException e) {
