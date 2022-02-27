@@ -30,6 +30,7 @@ public class LevelMaker extends Pane {
             add(false); add(false);
             add(false); add(false);
             add(false); add(false);
+            add(false);
         }
     };
 
@@ -112,6 +113,7 @@ public class LevelMaker extends Pane {
                 chemin + "items" + "/" + "fire_platform" + ".png",
                 chemin + "items" + "/" + "button" + ".png",
                 chemin + "assets" + "/" + "shield" + ".png",
+                chemin + "assets" + "/" + "key" + ".png",
                 chemin + "consumables" + "/" + "halo" + ".png",
                 chemin + "consumables" + "/" + "sword" + ".png"
         );
@@ -165,12 +167,16 @@ public class LevelMaker extends Pane {
                     setAllFalse(7);
                 }
                 case 8 -> {
-                    booleans.set(8, setCheckActive(booleans.get(8), "consumables", "halo"));
+                    booleans.set(8, setCheckActive(booleans.get(8), "assets", "key"));
                     setAllFalse(8);
                 }
                 case 9 -> {
-                    booleans.set(9, setCheckActive(booleans.get(9), "consumables", "sword"));
+                    booleans.set(9, setCheckActive(booleans.get(8), "consumables", "halo"));
                     setAllFalse(9);
+                }
+                case 10 -> {
+                    booleans.set(10, setCheckActive(booleans.get(9), "consumables", "sword"));
+                    setAllFalse(10);
                 }
             }
         });
@@ -286,8 +292,17 @@ public class LevelMaker extends Pane {
                     platforms[x][y].setLayoutY(y * 20);
                 }
 
-                // Halo
+                // Key
                 if (booleans.get(8)){
+                    platforms[x][y].setType("key");
+                    platforms[x][y].setWidth(40);
+                    platforms[x][y].setHeight(40);
+                    platforms[x][y].setLayoutX(x * 100 + 30);
+                    platforms[x][y].setLayoutY(y * 20);
+                }
+
+                // Halo
+                if (booleans.get(9)){
                     platforms[x][y].setType("halo");
                     platforms[x][y].setWidth(40);
                     platforms[x][y].setHeight(40);
@@ -296,7 +311,7 @@ public class LevelMaker extends Pane {
                 }
 
                 // Sword
-                if (booleans.get(9)){
+                if (booleans.get(10)){
                     platforms[x][y].setType("sword");
                     platforms[x][y].setWidth(40);
                     platforms[x][y].setHeight(40);
@@ -423,6 +438,16 @@ public class LevelMaker extends Pane {
                             platform.setHeight(40);
                             platform.setLayoutX(x * 100 + 30);
                         }
+
+                        case "key" -> {
+                            platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/key.png")));
+                            platform.setOpacity(100);
+                            platform.setType("key");
+                            platform.setWidth(40);
+                            platform.setHeight(40);
+                            platform.setLayoutX(x * 100 + 30);
+                        }
+
                         case "halo" -> {
                             platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/consumables/halo.png")));
                             platform.setOpacity(100);

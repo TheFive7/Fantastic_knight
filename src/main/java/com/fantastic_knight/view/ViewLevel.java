@@ -2,6 +2,7 @@ package com.fantastic_knight.view;
 
 import com.fantastic_knight.Game;
 import com.fantastic_knight.consumable.HaloConsumable;
+import com.fantastic_knight.consumable.KeyConsumable;
 import com.fantastic_knight.consumable.ShieldConsumable;
 import com.fantastic_knight.consumable.SwordConsumable;
 import com.fantastic_knight.items.*;
@@ -204,6 +205,17 @@ public class ViewLevel {
                             shieldConsumable.getShape().setHeight(40);
                             model.consumables.add(shieldConsumable);
                             pane.getChildren().add(shieldConsumable.getShape());
+                        }
+                        case "key" -> {
+                            platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/key.png")));
+                            platform.setOpacity(0);
+                            KeyConsumable keyConsumable = new KeyConsumable(model);
+                            keyConsumable.getShape().setX(platform.getxCoordonnee() * 100 + 30);
+                            keyConsumable.getShape().setY(platform.getyCoordonnee() * 20);
+                            keyConsumable.getShape().setWidth(40);
+                            keyConsumable.getShape().setHeight(40);
+                            model.consumables.add(keyConsumable);
+                            pane.getChildren().add(keyConsumable.getShape());
                         }
                         case "halo" -> {
                             platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/consumables/halo.png")));

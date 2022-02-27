@@ -31,7 +31,7 @@ public class Door extends Rectangle {
         Shape inter = Shape.intersect(joueur, this);
         Bounds b = inter.getBoundsInParent();
         if (b.getWidth() != -1) {
-            if (!model.player.isWin()) {
+            if (!model.player.isWin() && model.isKey) {
                 model.player.setWin(true);
             }
         }

@@ -56,6 +56,7 @@ public class Model {
     public Heart heart;
 
     // EXIT
+    public boolean isKey = false;
     public Door door = new Door(this);
 
     public Model() {
