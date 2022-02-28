@@ -500,9 +500,12 @@ class StatusListCell extends ListCell<String> {
             } else if (item.contains("arrowTrap_left")){
                 imageView.setFitWidth(50);
                 imageView.setFitHeight(50);
-            } else if (item.contains("button")){
+            } else if (item.contains("button")) {
                 imageView.setFitWidth(50);
                 imageView.setFitHeight(20);
+            } else if (item.contains("key")) {
+                imageView.setFitWidth(32);
+                imageView.setFitHeight(32);
             } else if (item.contains("consumables") || item.contains("shield")){
                 imageView.setFitWidth(80);
                 imageView.setFitHeight(80);
