@@ -1,3 +1,2 @@
 Unknown,18.46,level 1
-Unknown,4.96,keyTest
-Unknown,11.36,testKey2
+Unknown,3.41,default

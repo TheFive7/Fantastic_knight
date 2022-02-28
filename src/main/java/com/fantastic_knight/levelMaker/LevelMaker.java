@@ -10,6 +10,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
 import java.io.*;
@@ -102,6 +103,7 @@ public class LevelMaker extends Pane {
         });
 
         // CHOICE ITEMS
+
         ObservableList<String> options = FXCollections.observableArrayList();
         String chemin = "file:src/main/resources/com/fantastic_knight/";
         options.addAll(
@@ -123,14 +125,12 @@ public class LevelMaker extends Pane {
         comboBox.setCellFactory(c -> new StatusListCell());
         comboBox.setButtonCell(new StatusListCell());
         comboBox.setValue(comboBox.getItems().get(0));
-        comboBox.setStyle(
-                """
-                -fx-background-color: transparent;
-                -fx-border-color: black;
-                -fx-border-width: 3px;
-                """
-        );
 
+        comboBox.setStyle(
+                "-fx-background-color: transparent;" +
+                "-fx-border-width: 5px;" +
+                "-fx-border-color: black;"
+        );
 
         comboBox.setOnAction(e -> {
             switch (comboBox.getSelectionModel().getSelectedIndex()) {
