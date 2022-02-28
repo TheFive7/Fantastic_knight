@@ -63,7 +63,10 @@ public class MenuController {
     public void ranking() {
         RankingMenu rankingMenu = new RankingMenu();
         ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setPrefSize(1200,800);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVvalue(scrollPane.getVmax());
         scrollPane.setContent(rankingMenu);
         Scene scene_ranking = new Scene(scrollPane, model.width, model.height);
         primaryStage.setScene(scene_ranking);
