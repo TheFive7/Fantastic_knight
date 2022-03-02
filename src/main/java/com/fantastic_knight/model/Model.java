@@ -1,7 +1,7 @@
 package com.fantastic_knight.model;
 
 import com.fantastic_knight.consumable.Consumable;
-import com.fantastic_knight.consumable.SwordConsumable;
+import com.fantastic_knight.items.Door;
 import com.fantastic_knight.items.Item;
 import com.fantastic_knight.items.SwordPlayer;
 import com.fantastic_knight.player.Player;
@@ -57,7 +57,7 @@ public class Model {
 
     // EXIT
     public boolean isKey = false;
-    public Door door = new Door(this);
+    public Door door;
 
     public Model() {
         state = STATE_INITIAL;
@@ -66,6 +66,7 @@ public class Model {
         height = 800;
         lastFrame = -1;
         player = new Player(this);
+        door = new Door(this);
         obstacles = new ArrayList<>();
         sprites = new ArrayList<>();
         items = new ArrayList<>();

@@ -6,7 +6,6 @@ import com.fantastic_knight.consumable.KeyConsumable;
 import com.fantastic_knight.consumable.ShieldConsumable;
 import com.fantastic_knight.consumable.SwordConsumable;
 import com.fantastic_knight.items.*;
-import com.fantastic_knight.levelMaker.LevelMaker;
 import com.fantastic_knight.levelMaker.Platform;
 import com.fantastic_knight.model.*;
 import javafx.scene.image.Image;
@@ -148,12 +147,12 @@ public class ViewLevel {
                         }
                         case "door" -> {
                             Door door = model.door;
-                            door.setX(platform.getxCoordonnee() * 100 + 15);
-                            door.setY(platform.getyCoordonnee() * 20);
-                            door.setWidth(70);
-                            door.setHeight(100);
-                            door.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/door.png")));
-                            pane.getChildren().add(door);
+                            door.getShape().setX(platform.getxCoordonnee() * 100 + 15);
+                            door.getShape().setY(platform.getyCoordonnee() * 20);
+                            door.getShape().setWidth(70);
+                            door.getShape().setHeight(100);
+                            door.getShape().setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/door.png")));
+                            pane.getChildren().add(door.getShape());
                         }
                         case "arrowTrap" -> {
                             ArrowTrap arrowTrap = new ArrowTrap(model);
