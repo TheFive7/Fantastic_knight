@@ -1,10 +1,11 @@
 package com.fantastic_knight.controller;
 
+import com.fantastic_knight.Game;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
@@ -25,7 +26,13 @@ public class RankingMenu extends Pane {
         setWidth(1200);
 
         // Background
-        ImageView bgImage = new ImageView(new Image("file:src/main/resources/com/fantastic_knight/menu/levels.png"));
+        setBackground(new Background(
+                new BackgroundImage(
+                        new Image("file:src/main/resources/com/fantastic_knight/menu/levels.png"),
+                        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                        BackgroundSize.DEFAULT)));
+
+        //setStyle("-fx-background-repeat: url('" + Game.class.getResource("levels.png") + "')");
 
         // button return menu
         Button buttonMenu = new Button();
@@ -39,11 +46,11 @@ public class RankingMenu extends Pane {
         Label classement = new Label();
         classement.setText("Classement : ");
         classement.setLayoutX(400);
-        classement.setLayoutY(300);
+        classement.setLayoutY(280);
         classement.setFont(new Font(58));
         classement.setTextFill(Color.WHITE);
         classement.setStyle("-fx-font-weight: bold");
-        getChildren().addAll(bgImage, buttonMenu, classement);
+        getChildren().addAll(buttonMenu, classement);
 
         String fileNameTime = "time";
 
@@ -109,7 +116,7 @@ public class RankingMenu extends Pane {
                 label.setStyle("-fx-font-weight: bold");
                 label.setLayoutX(400);
                 label.setLayoutY(400 + 250 * levels.indexOf(k) + 50*i);
-                label.setFont(new Font(44));
+                label.setFont(new Font(38));
                 label.setTextFill(Color.BLACK);
                 getChildren().add(label);
             }

@@ -10,6 +10,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 
 import static com.fantastic_knight.Game.*;
 
@@ -63,6 +64,7 @@ public class MenuController {
     public void ranking() {
         RankingMenu rankingMenu = new RankingMenu();
         ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setPannable(false);
         scrollPane.setPrefSize(1200,800);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
