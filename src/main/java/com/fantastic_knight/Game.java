@@ -30,11 +30,7 @@ public class Game extends Application {
 
     /*
      * TODO
-     *  Do scrolling
-     *  Refactor Background
-     *  More animation -> Player (Dead)
-     *  creer pieges en jeu
-     *  halo clignotant avant de disparaitre
+     *  Door refactoring
      */
 
     @Override

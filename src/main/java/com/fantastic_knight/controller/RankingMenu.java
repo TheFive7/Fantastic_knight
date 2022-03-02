@@ -17,12 +17,11 @@ import static com.fantastic_knight.Game.scene_menu;
 import static com.fantastic_knight.model.Model.findAllLevels;
 
 public class RankingMenu extends Pane {
-    public String[] tabPseudo = new String[100];
     public static List<String> data = new ArrayList<>();
 
 
     public RankingMenu() {
-        // size
+        // Size
         setWidth(1200);
 
         // Background
@@ -34,7 +33,7 @@ public class RankingMenu extends Pane {
 
         //setStyle("-fx-background-repeat: url('" + Game.class.getResource("levels.png") + "')");
 
-        // button return menu
+        // Button return menu
         Button buttonMenu = new Button();
         buttonMenu.setLayoutX(1128);
         buttonMenu.setLayoutY(697);
@@ -42,7 +41,7 @@ public class RankingMenu extends Pane {
         buttonMenu.setOpacity(0);
         buttonMenu.setPrefSize(60, 85.3);
 
-        // classement
+        // Classement
         Label classement = new Label();
         classement.setText("Classement : ");
         classement.setLayoutX(400);
@@ -59,7 +58,8 @@ public class RankingMenu extends Pane {
         ArrayList<String> levels = (ArrayList<String>) findAllLevels();
         HashMap<String, ArrayList<String>> data2 = new HashMap<>();
         levels.forEach(l -> data2.put(l,new ArrayList<>()));
-        // trier les temps
+
+        // Trier les temps
         try {
             data.clear();
             FileInputStream file = new FileInputStream("src/main/java/com/fantastic_knight/time/"+ fileNameTime +".txt");
@@ -68,23 +68,10 @@ public class RankingMenu extends Pane {
             while (scanner.hasNext()) {
                 tab = scanner.nextLine().split(",");
                 double tmp = Double.parseDouble(tab[1]);
-                //data2.get(tab[2]).add(tab[0] + "," + tab[1]);
                 data.add(tab[0] + "," + tab[1] + "," + tab[2]);
                 temps.add(tmp);
             }
             Collections.sort(temps);
-
-/*            for (String s : data){
-                String[] value = s.split(",");
-                double tmp = Double.parseDouble(value[1]);
-                String name = value[0];
-
-                for (double d : temps){
-                    if (d == tmp){
-                        tabPseudo[temps.indexOf(d)] = name;
-                    }
-                }
-            }*/
 
             for (double t : temps) {
                 for (String s : data) {
