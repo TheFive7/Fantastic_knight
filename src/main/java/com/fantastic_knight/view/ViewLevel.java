@@ -250,7 +250,9 @@ public class ViewLevel {
                                 if (!type.equals("shield")){
                                     if (!type.equals("halo")) {
                                         if (!type.equals("sword")) {
-                                            pane.getChildren().add(platform);
+                                            if (!type.equals("key")) {
+                                                pane.getChildren().add(platform);
+                                            }
                                         }
                                     }
                                 }

@@ -19,6 +19,7 @@ public class KeyConsumable extends Consumable {
         shape.setY(yPosition);
         image = new Image("file:src/main/resources/com/fantastic_knight/assets/key.png");
         shape.setFill(new ImagePattern(image));
+        model.isKey = false;
     }
 
     @Override
