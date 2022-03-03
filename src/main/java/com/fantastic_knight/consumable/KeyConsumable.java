@@ -34,6 +34,7 @@ public class KeyConsumable extends Consumable {
                 if (b.getWidth() != -1) {
                     isActive = false;
                     model.isKey = true;
+                    model.key.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/key.png")));
                     getShape().setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/anything.png")));
                 }
             }

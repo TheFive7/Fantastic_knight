@@ -54,6 +54,7 @@ public class Model {
     public Shield shield;
     public Sword sword;
     public Heart heart;
+    public Key key;
 
     // EXIT
     public boolean isKey = false;

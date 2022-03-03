@@ -58,6 +58,10 @@ public class ViewLevel {
         model.sword = new Sword();
         pane.getChildren().add(model.sword);
 
+        // Key
+        model.key = new Key();
+        pane.getChildren().add(model.key);
+
         // Heart
         model.heart = new Heart(model);
         model.items.add(model.heart);
