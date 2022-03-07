@@ -67,4 +67,6 @@ public class Controller {
     public void deployProtection() {model.player.deployProtection();}
 
     public void sword() {model.player.sword();}
+
+    public void returnMenu() {MenuController.returnMenu();}
 }

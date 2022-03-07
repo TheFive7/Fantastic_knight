@@ -57,6 +57,8 @@ public class ControllerKeyboard implements EventHandler<KeyEvent> {
             control.deployProtection();
         } else if (arg0.getCode() == KeyCode.ALT) {
             control.sword();
+        } else if (arg0.getCode() == KeyCode.ESCAPE) {
+            control.returnMenu();
         }
     }
 }

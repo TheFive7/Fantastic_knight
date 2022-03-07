@@ -19,7 +19,6 @@ import static com.fantastic_knight.model.Model.findAllLevels;
 public class RankingMenu extends Pane {
     public static List<String> data = new ArrayList<>();
 
-
     public RankingMenu() {
         // Size
         setWidth(1200);

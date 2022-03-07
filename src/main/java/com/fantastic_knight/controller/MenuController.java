@@ -2,6 +2,7 @@ package com.fantastic_knight.controller;
 
 import com.fantastic_knight.Game;
 import com.fantastic_knight.levelMaker.LevelMaker;
+import com.fantastic_knight.menu.Credits;
 import com.fantastic_knight.menu.LevelsMenu;
 import com.fantastic_knight.options.OptionsMenu;
 import javafx.fxml.FXML;
@@ -55,6 +56,8 @@ public class MenuController {
     }
 
     public void displayCredits(){
+        Credits credits = new Credits();
+        scene_credits = new Scene(credits,1200,800);
         primaryStage.setScene(scene_credits);
     }
 
@@ -62,6 +65,7 @@ public class MenuController {
      * Bouton RANKING
      */
     public void ranking() {
+        System.out.println(model.state);
         RankingMenu rankingMenu = new RankingMenu();
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setPannable(false);
@@ -94,6 +98,11 @@ public class MenuController {
      */
     public void pseudo(){
         globalPseudo = varPseudo.getText();
+    }
+
+    public static void returnMenu() {
+        primaryStage.setScene(scene_menu);
+        System.out.println("test");
     }
 
     public void quit() {
