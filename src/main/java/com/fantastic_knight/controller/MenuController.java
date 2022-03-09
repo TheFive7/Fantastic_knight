@@ -70,6 +70,7 @@ public class MenuController {
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setPannable(false);
         scrollPane.setPrefSize(1200,800);
+        scrollPane.setFitToWidth(true);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVvalue(scrollPane.getVmax());
