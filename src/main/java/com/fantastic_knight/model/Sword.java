@@ -20,7 +20,7 @@ public class Sword extends Rectangle {
         ypos = 0;
         setX(xpos);
         setY(ypos);
-        image = new Image("file:src/main/resources/com/fantastic_knight/assets/anything.png");
+        image = new Image("file:src/main/resources/com/fantastic_knight/assets/no_sword.png");
         setFill(new ImagePattern(image));
     }
 
