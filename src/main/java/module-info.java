@@ -2,6 +2,7 @@ module com.fantastic_knight {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.graphics;
+    requires javafx.media;
 
     exports com.fantastic_knight;
     exports com.fantastic_knight.model;

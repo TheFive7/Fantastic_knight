@@ -9,10 +9,13 @@ import com.fantastic_knight.model.Timer;
 import com.fantastic_knight.objects.Protection;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +24,7 @@ public class Player extends Sprite {
     final double width;
     final double height;
     final boolean animated;
-    final String name;
+    String name;
     final Image[] imageRight;
     final Image[] imageLeft;
     final double vSaut = 18;
@@ -48,14 +51,11 @@ public class Player extends Sprite {
         super(model);
         this.model = model;
 
+        name = "Red Knight";
         imageRight = new Image[3];
         imageLeft = new Image[3];
-        imageRight[0] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_stand_right.png");
-        imageRight[1] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_walk_right.png");
-        imageRight[2] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_walk1_right.png");
-        imageLeft[0] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_stand_left.png");
-        imageLeft[1] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_walk_left.png");
-        imageLeft[2] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_walk1_left.png");
+        chooseSkin();
+
         width = imageRight[0].getWidth();
         height = imageRight[0].getHeight();
 
@@ -77,7 +77,6 @@ public class Player extends Sprite {
         win = false;
         protection = new Protection(this);
         isSword = false;
-        name = "Knight Red";
     }
 
 
@@ -397,9 +396,12 @@ public class Player extends Sprite {
     }
 
     public void setLife(boolean life) {
+        Media hurtSound = new Media(new File("src/main/resources/com/fantastic_knight/sounds/dead.wav").toURI().toString());
+        MediaPlayer mediaPlayerHurt = new MediaPlayer(hurtSound);
         if (!life) {
             model.heart.setActive(false);
             getModel().shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/shield_empty.png")));
+            //mediaPlayerHurt.setVolume(model.volume); mediaPlayerHurt.play();
         } else {
             getModel().shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/shield.png")));
         }
@@ -492,5 +494,34 @@ public class Player extends Sprite {
 
     public void setSword(boolean isSword){
         this.isSword = isSword;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void chooseSkin() {
+        switch (name) {
+            case "Red Knight" -> {
+                imageRight[0] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_stand_right.png");
+                imageRight[1] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_walk_right.png");
+                imageRight[2] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_walk1_right.png");
+                imageLeft[0] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_stand_left.png");
+                imageLeft[1] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_walk_left.png");
+                imageLeft[2] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_walk1_left.png");
+            }
+            case "Grey Knight" -> {
+                imageRight[0] = new Image("file:src/main/resources/com/fantastic_knight/player/perso_droite_idle.png");
+                imageRight[1] = new Image("file:src/main/resources/com/fantastic_knight/player/perso_droite_walk.png");
+                imageRight[2] = new Image("file:src/main/resources/com/fantastic_knight/player/perso_droite_idle.png");
+                imageLeft[0] = new Image("file:src/main/resources/com/fantastic_knight/player/perso_gauche_idle.png");
+                imageLeft[1] = new Image("file:src/main/resources/com/fantastic_knight/player/perso_gauche_walk.png");
+                imageLeft[2] = new Image("file:src/main/resources/com/fantastic_knight/player/perso_gauche_idle.png");
+            }
+        }
     }
 }

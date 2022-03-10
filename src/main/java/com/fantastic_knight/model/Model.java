@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
 public class Model {
 
     public final static int STATE_INITIAL = 1;
@@ -60,6 +63,11 @@ public class Model {
     public boolean isKey = false;
     public Door door;
 
+    // SOUNDS
+    public double volume = 20.0;
+    //public Media backgroundMusic = new Media(new File("src/main/resources/com/fantastic_knight/sounds/fantasy.wav").toURI().toString());
+    //public MediaPlayer mediaPlayerBackgroundMusic = new MediaPlayer(backgroundMusic);
+
     public Model() {
         state = STATE_INITIAL;
         level = 1;
@@ -72,6 +80,8 @@ public class Model {
         sprites = new ArrayList<>();
         items = new ArrayList<>();
         consumables = new ArrayList<>();
+
+        //mediaPlayerBackgroundMusic.play();
     }
 
     /**

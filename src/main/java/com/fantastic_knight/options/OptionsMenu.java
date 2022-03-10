@@ -1,11 +1,15 @@
 package com.fantastic_knight.options;
 
 import com.fantastic_knight.Game;
+import com.fantastic_knight.menu.ButtonLevel;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +22,14 @@ public class OptionsMenu extends Pane {
     public static Pane changeSkin;
     public static Pane modifySounds;
     public static Button buttonMenu;
-    public static Button buttonSkin;
-    public static Button buttonSounds;
+    public static ButtonLevel buttonSkin;
+    public static ButtonLevel buttonSounds;
     public static ToggleButton previousPlayer;
     public static ToggleButton nextPlayer;
     public static ImageView imageViewPlayer;
+    public static ImageView imageSound;
     public static List<Image> listSkins;
+    public static int indexSkin;
 
     public OptionsMenu() {
 
@@ -38,25 +44,26 @@ public class OptionsMenu extends Pane {
         // Image of the player
         imageViewPlayer = new ImageView(listSkins.get(0));
         imageViewPlayer.setLayoutX(300);
-        imageViewPlayer.setLayoutY(125);
+        imageViewPlayer.setLayoutY(25);
         imageViewPlayer.setFitHeight(imageViewPlayer.getImage().getHeight()*5);
         imageViewPlayer.setFitWidth(imageViewPlayer.getImage().getWidth()*5);
 
+        // Pane general
         paneOptionsMenu = new Pane();
         paneOptionsMenu.setPrefSize(1200, 800);
 
         // Button chose the skin
-        buttonSkin = new Button("SKINS");
-        buttonSkin.setLayoutX(250); buttonSkin.setLayoutY(50);
+        buttonSkin = new ButtonLevel("SKINS",275,75);
         buttonSkin.setOnAction(e -> chooseSkinPanel());
         buttonSkin.setPrefSize(150, 50);
+        buttonSkin.setStyle(getStyle() + "-fx-background-image: url('"+ Game.class.getResource("icons/button.png")+"')");
         paneOptionsMenu.getChildren().add(buttonSkin);
 
         // Button modifies the sounds
-        buttonSounds = new Button("SOUNDS");
-        buttonSounds.setLayoutX(800); buttonSounds.setLayoutY(50);
+        buttonSounds = new ButtonLevel("SOUNDS",775,75);
         buttonSounds.setOnAction(e -> chooseSoundPanel());
         buttonSounds.setPrefSize(150,50);
+        buttonSounds.setStyle(getStyle() + "-fx-background-image: url('"+ Game.class.getResource("icons/button.png")+"')");
         paneOptionsMenu.getChildren().add(buttonSounds);
 
         // Button return to menu
@@ -69,10 +76,11 @@ public class OptionsMenu extends Pane {
         paneOptionsMenu.getChildren().add(buttonMenu);
 
         // Adding the panel for the skin customization
+        indexSkin=0;
         createSkinPane();
 
-        // AJOUTS
-        paneOptionsMenu.setStyle("-fx-background-image: url('"+ Game.class.getResource("assets/bg.png")+"')");
+        // Adding all elements
+        paneOptionsMenu.setStyle("-fx-background-image: url('"+ Game.class.getResource("menu/options.png")+"')");
         paneOptionsMenu.getChildren().add(changeSkin);
         getChildren().add(paneOptionsMenu);
     }
@@ -96,6 +104,7 @@ public class OptionsMenu extends Pane {
         } else {
             index--;
         }
+        indexSkin = index;
         imageViewPlayer.setImage(listSkins.get(index));
         paneOptionsMenu.getChildren().clear();
         createSkinPane();
@@ -109,6 +118,7 @@ public class OptionsMenu extends Pane {
         } else {
             index++;
         }
+        indexSkin = index;
         imageViewPlayer.setImage(listSkins.get(index));
         paneOptionsMenu.getChildren().clear();
         createSkinPane();
@@ -124,30 +134,117 @@ public class OptionsMenu extends Pane {
         changeSkin = new Pane();
         changeSkin.setPrefSize(800,600);
         changeSkin.setLayoutX(200); changeSkin.setLayoutY(175);
-        changeSkin.setStyle("-fx-background-color: #4D3B2A");
 
         // Button to choose the previous style
         previousPlayer = new ToggleButton();
-        previousPlayer.setLayoutX(75); previousPlayer.setLayoutY(450); previousPlayer.setPrefSize(100,100);
+        previousPlayer.setLayoutX(75); previousPlayer.setLayoutY(300); previousPlayer.setPrefSize(100,100);
         previousPlayer.setStyle("-fx-background-image: url('"+ Game.class.getResource("icons/previous.png")+"');-fx-background-color: transparent;-fx-background-repeat: no-repeat");
         previousPlayer.setOnAction(e -> previousPlayer(imageViewPlayer, listSkins));
 
         // Button to choose the next style
         nextPlayer = new ToggleButton();
-        nextPlayer.setLayoutX(650); nextPlayer.setLayoutY(450); nextPlayer.setPrefSize(100,100);
+        nextPlayer.setLayoutX(650); nextPlayer.setLayoutY(300); nextPlayer.setPrefSize(100,100);
         nextPlayer.setStyle("-fx-background-image: url('"+ Game.class.getResource("icons/next.png")+"');-fx-background-color: transparent;-fx-background-repeat: no-repeat");
         nextPlayer.setOnAction(e -> nextPlayer(imageViewPlayer, listSkins));
 
-        changeSkin.getChildren().addAll(imageViewPlayer,previousPlayer,nextPlayer);
+        // Button to save
+        Button saveButton = new ButtonLevel("SAVE",325,500);
+        saveButton.setOnAction(e -> settingNamePlayer());
+        saveButton.setPrefSize(150,50);
+        saveButton.setStyle(getStyle() + "-fx-background-image: url('"+ Game.class.getResource("icons/button.png")+"')");
+
+        changeSkin.getChildren().addAll(imageViewPlayer,previousPlayer,nextPlayer,saveButton);
     }
 
     public void createSoundPane(){
         // Skin Panel
         modifySounds = new Pane();
         modifySounds.setPrefSize(800,600);
-        modifySounds.setLayoutX(200); modifySounds.setLayoutY(175);
-        modifySounds.setStyle("-fx-background-color: red");
+        modifySounds.setLayoutX(200); modifySounds.setLayoutY(165);
 
+        // Label for background music
+        Label backgroundMusic = new Label("- Musique");
+        backgroundMusic.setLayoutX(25); backgroundMusic.setLayoutY(50);
+        backgroundMusic.setFont(new Font(25));
+        backgroundMusic.setStyle("-fx-font-weight: bold; -fx-text-fill: black");
+
+        // Label environnment sounds
+        Label environnementSounds = new Label("- Autres");
+        environnementSounds.setLayoutX(25); environnementSounds.setLayoutY(300);
+        environnementSounds.setFont(new Font(25));
+        environnementSounds.setStyle("-fx-font-weight: bold; -fx-text-fill: black");
+
+        // Image sound
+        imageSound = new ImageView(new Image("file:src/main/resources/com/fantastic_knight/icons/sound.png"));
+        imageSound.setFitHeight(imageSound.getImage().getHeight()*0.20);
+        imageSound.setFitWidth(imageSound.getImage().getWidth()*0.20);
+        imageSound.setLayoutX(50); imageSound.setLayoutY(125);
+
+        // Vertical slider for background music
+        Slider slider = new Slider(0, 100, 50);
+        slider.setLayoutX(200); slider.setLayoutY(150);
+        slider.setPrefSize(500,50);
+        slider.setShowTickMarks(false); slider.setShowTickLabels(false);
+        slider.setMajorTickUnit(0.25f);
+        slider.setBlockIncrement(0.5f);
+        slider.setValueChanging(true);
+        slider.setOnMouseDragged(e -> {
+            modifySounds.getChildren().remove(imageSound);
+            chooseIconSound(slider.getValue(),50,125);
+        });
+
+        // Vertical slider for sounds
+        Slider soundsSlider = new Slider(0, 100, 50);
+        soundsSlider.setLayoutX(200); soundsSlider.setLayoutY(350);
+        soundsSlider.setPrefSize(500,50);
+        soundsSlider.setShowTickMarks(false); soundsSlider.setShowTickLabels(false);
+        soundsSlider.setMajorTickUnit(0.25f);
+        soundsSlider.setBlockIncrement(0.5f);
+        soundsSlider.setValueChanging(true);
+        soundsSlider.setOnMouseDragged(e -> {
+            modifySounds.getChildren().remove(imageSound);
+            chooseIconSound(soundsSlider.getValue(),50,125);
+        });
+
+        // Button to save
+        Button saveButton = new ButtonLevel("SAVE",325,500);
+        saveButton.setOnAction(e -> saveSoundProperties(slider.getValue(),soundsSlider.getValue()));
+        saveButton.setPrefSize(150,50);
+        saveButton.setStyle(getStyle() + "-fx-background-image: url('"+ Game.class.getResource("icons/button.png")+"')");
+
+        // Adding all the elements
+        modifySounds.getChildren().addAll(backgroundMusic,environnementSounds,slider,soundsSlider,imageSound,saveButton);
         paneOptionsMenu.getChildren().addAll(modifySounds);
+    }
+
+    private void settingNamePlayer() {
+        if (indexSkin == 0) model.player.setName("Red Knight");
+        else { model.player.setName("Grey Knight"); }
+        model.player.chooseSkin();
+
+        // SOUT À DÉGAGER \\
+        System.out.println(model.player.getName());
+    }
+    private void chooseIconSound(double value, double x, double y) {
+        // Changing if the volume is set at 0%
+        if (value==0){
+            imageSound = new ImageView(new Image("file:src/main/resources/com/fantastic_knight/icons/mute.png"));
+            imageSound.setFitHeight(imageSound.getImage().getHeight()*0.10);
+            imageSound.setFitWidth(imageSound.getImage().getWidth()*0.10);
+        } else {
+            imageSound = new ImageView(new Image("file:src/main/resources/com/fantastic_knight/icons/sound.png"));
+            imageSound.setFitHeight(imageSound.getImage().getHeight()*0.20);
+            imageSound.setFitWidth(imageSound.getImage().getWidth()*0.20);
+        }
+        imageSound.setLayoutX(x); imageSound.setLayoutY(y);
+        modifySounds.getChildren().add(imageSound);
+    }
+
+    private void saveSoundProperties(double valueMusic, double valueSounds) {
+        System.out.println("save :)");
+        //model.mediaPlayerBackgroundMusic.setVolume(valueMusic/100);
+        System.out.println("Setting the volume at : "+valueMusic/100+"\n");
+        model.volume = valueSounds;
+        System.out.println("Setting the sounds at : "+valueSounds/100+"\n");
     }
 }
