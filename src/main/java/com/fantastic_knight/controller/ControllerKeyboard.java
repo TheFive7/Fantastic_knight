@@ -22,6 +22,8 @@ public class ControllerKeyboard implements EventHandler<KeyEvent> {
         view.root.requestFocus();
         view.root.setOnKeyPressed(this);
 
+        view.scrollPane.setOnMouseClicked(e -> view.root.requestFocus());
+
         // Keys
         view.root.setOnKeyReleased(event -> {
             if (model.state == Model.STATE_INITIAL) return;

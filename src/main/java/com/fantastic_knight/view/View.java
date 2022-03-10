@@ -10,6 +10,7 @@ import java.util.List;
 import static com.fantastic_knight.Game.levels;
 import static com.fantastic_knight.Game.primaryStage;
 import static com.fantastic_knight.controller.MenuController.scene_levels;
+import static com.fantastic_knight.model.Model.factor;
 import static com.fantastic_knight.model.Model.findAllLevels;
 
 public class View {
@@ -19,13 +20,13 @@ public class View {
     ViewLevel currentLevel;
 
     // PANE
-    Pane paneGame = new Pane();
-    public ScrollPane scrollPane = new ScrollPane();
+    Pane paneGame;
+    public ScrollPane scrollPane;
 
     public View(Model model) {
         this.model = model;
         root = new Pane();
-        // game();
+        game();
     }
 
     /**
@@ -37,6 +38,7 @@ public class View {
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVvalue(scrollPane.getVmax());
+        scrollPane.setStyle("-fx-border-color: black");
         scrollPane.setContent(root);
     }
 
@@ -47,7 +49,7 @@ public class View {
         root.getChildren().clear();
 
         paneGame = new Pane();
-        paneGame.setPrefSize(model.width, model.height * 2);
+        paneGame.setPrefSize(model.width, model.height * factor);
         for (int i = 0; i < levels.size(); i++) {
             if (model.level - 1 == i) {
                 currentLevel = new ViewLevel(model, paneGame, i);

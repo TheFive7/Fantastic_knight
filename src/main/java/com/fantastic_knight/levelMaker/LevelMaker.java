@@ -49,16 +49,17 @@ public class LevelMaker extends Pane {
         paneLevelMaker.setPrefSize(1500,800);
 
         // PANE MAKER
-//        ScrollPane scrollPane = new ScrollPane();
-//        scrollPane.setPrefSize(1200,800);
-//        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-//        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-//        scrollPane.setVvalue(scrollPane.getVmax());
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setPrefSize(1200,800);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVvalue(scrollPane.getVmax());
+        scrollPane.setStyle("-fx-border-color: black");
 
         Pane paneMaker = new Pane();
-        paneMaker.setPrefSize(1200,800 * 2);
+        paneMaker.setPrefSize(1200,800 * factor);
 
-//        scrollPane.setContent(paneMaker);
+        scrollPane.setContent(paneMaker);
 
         // Background
         paneMaker.setStyle("-fx-background-image: url('"+ Game.class.getResource("assets/bg.png")+"')");
@@ -206,8 +207,8 @@ public class LevelMaker extends Pane {
 
         // AJOUTS
         paneChoose.getChildren().addAll(fileName,exportFile,buttonExport,buttonClear,buttonMenu,textFieldFileName,choiceBoxLevels,comboBox);
-//        paneLevelMaker.getChildren().addAll(scrollPane,paneChoose);
-        paneLevelMaker.getChildren().addAll(paneMaker,paneChoose);
+        paneLevelMaker.getChildren().addAll(scrollPane,paneChoose);
+//        paneLevelMaker.getChildren().addAll(paneMaker,paneChoose);
         getChildren().add(paneLevelMaker);
 
         load(paneMaker);

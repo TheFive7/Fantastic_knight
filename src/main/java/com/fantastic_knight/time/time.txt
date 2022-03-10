@@ -19,3 +19,4 @@ Unknown,6.71,default
 Unknown,14.59,easy
 Unknown,21.95,level 1
 Unknown,28.08,level 3
+Unknown,5.74,default
