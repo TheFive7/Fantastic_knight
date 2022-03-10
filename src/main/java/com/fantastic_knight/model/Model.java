@@ -29,6 +29,7 @@ public class Model {
     public final List<Shape> obstacles; // obstacles in each scene
     public final List<Item> items;      // items in the game
     public final List<Consumable> consumables;      // consumables in the game
+    public static int factor = 1;
 
     // Objets
     public final Player player;

@@ -2,7 +2,7 @@ package com.fantastic_knight.view;
 
 import com.fantastic_knight.controller.RankingMenu;
 import com.fantastic_knight.model.Model;
-import javafx.scene.Group;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 
 import java.util.List;
@@ -14,26 +14,30 @@ import static com.fantastic_knight.model.Model.findAllLevels;
 
 public class View {
 
-    public final Group root;
+    public final Pane root;
     final Model model;
     ViewLevel currentLevel;
 
     // PANE
-    Pane paneGame;
+    Pane paneGame = new Pane();
+    public ScrollPane scrollPane = new ScrollPane();
 
     public View(Model model) {
         this.model = model;
-        root = new Group();
-        game();
+        root = new Pane();
+        // game();
     }
-
 
     /**
      * Sets up the game view
      */
     public void game() {
-        paneGame = new Pane();
-        paneGame.setPrefSize(model.width, model.height);
+        scrollPane = new ScrollPane();
+        scrollPane.setPrefSize(1200,800);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVvalue(scrollPane.getVmax());
+        scrollPane.setContent(root);
     }
 
     /**
@@ -42,6 +46,8 @@ public class View {
     public void startGame() {
         root.getChildren().clear();
 
+        paneGame = new Pane();
+        paneGame.setPrefSize(model.width, model.height * 2);
         for (int i = 0; i < levels.size(); i++) {
             if (model.level - 1 == i) {
                 currentLevel = new ViewLevel(model, paneGame, i);

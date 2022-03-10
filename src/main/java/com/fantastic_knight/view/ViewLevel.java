@@ -18,6 +18,8 @@ import javafx.scene.text.Font;
 import java.io.FileInputStream;
 import java.util.Scanner;
 
+import static com.fantastic_knight.model.Model.factor;
+
 public class ViewLevel {
 
     final Model model;
@@ -34,13 +36,17 @@ public class ViewLevel {
 
         // Define obstacle for outside the view.
         model.northWall = new Rectangle(0, -50, model.width, 50);
-        model.southWall = new Rectangle(0, model.height, model.width, 50);
-        model.westWall = new Rectangle(-50, -50, 50, model.height + 100);
-        model.eastWall = new Rectangle(model.width, -50, 50, model.height + 100);
+        model.southWall = new Rectangle(0, model.height * factor, model.width, 50);
+        model.westWall = new Rectangle(-50, -50, 50, model.height * factor + 100);
+        model.eastWall = new Rectangle(model.width, -50, 50, model.height * factor + 100);
         model.obstacles.add(model.northWall);
         model.obstacles.add(model.southWall);
         model.obstacles.add(model.eastWall);
         model.obstacles.add(model.westWall);
+
+//        Rectangle r1 = new Rectangle(300, model.height * 2 - 100, 100, 20);
+//        model.obstacles.add(r1);
+//        pane.getChildren().add(r1);
 
         // Autocall the init method to set up the level.
         loadLevel(Game.levels.get(levelNumber));
@@ -87,14 +93,6 @@ public class ViewLevel {
         model.swordPlayer.getShape().setWidth(70);
         model.swordPlayer.getShape().setHeight(70);
         pane.getChildren().add(model.swordPlayer.getShape());
-
-
-        // Sword
-//        SwordConsumable swordConsumable = new SwordConsumable(model);
-//        swordConsumable.getShape().setX(700);
-//        swordConsumable.getShape().setY(model.height-swordConsumable.getShape().getHeight());
-//        model.consumables.add(swordConsumable);
-//        pane.getChildren().add(swordConsumable.getShape());
     }
 
     /**
@@ -112,7 +110,7 @@ public class ViewLevel {
             // Parcours du tableau
             for (int i = 0; i < 12; i++) {
                 String[] mots = scanner.nextLine().split(ESPACE);
-                for (int j = 0; j < 40; j++) {
+                for (int j = 0; j < 40 * factor; j++) {
                     String[] coordonnees = mots[j].split(VIRGULE);
 
                     // Lecture des valeurs

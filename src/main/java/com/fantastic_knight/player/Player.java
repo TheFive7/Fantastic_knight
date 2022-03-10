@@ -19,6 +19,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.fantastic_knight.model.Model.factor;
+
 public class Player extends Sprite {
     final Rectangle shape;
     final double width;
@@ -63,7 +65,7 @@ public class Player extends Sprite {
         life = true;
         invincibility = false;
         xPosition = 0;
-        yPosition = model.height - height;
+        yPosition = model.height * factor - height;
         xVelocity = 5;
         yVelocity = 0;
         angle = 0;
@@ -226,7 +228,7 @@ public class Player extends Sprite {
 
             // tombe ou saute
             if (state == State.FALL || state == State.JUMP) {
-                if (yPosition >= model.height) state = State.IDLE;
+                if (yPosition >= model.height * factor) state = State.IDLE;
                 else yVelocity++;
             }
 
@@ -339,7 +341,7 @@ public class Player extends Sprite {
                 boolean collide = false;
                 for (Shape s : lst) {
                     Shape inter = Shape.intersect(shape1, s);
-                    Bounds b = inter.getBoundsInParent();
+                    Bounds b = inter.getBoundsInLocal();
                     if (b.getWidth() != -1) {
                         collide = true;
                     }
@@ -396,8 +398,8 @@ public class Player extends Sprite {
     }
 
     public void setLife(boolean life) {
-        Media hurtSound = new Media(new File("src/main/resources/com/fantastic_knight/sounds/dead.wav").toURI().toString());
-        MediaPlayer mediaPlayerHurt = new MediaPlayer(hurtSound);
+        // Media hurtSound = new Media(new File("src/main/resources/com/fantastic_knight/sounds/dead.wav").toURI().toString());
+        // MediaPlayer mediaPlayerHurt = new MediaPlayer(hurtSound);
         if (!life) {
             model.heart.setActive(false);
             getModel().shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/shield_empty.png")));
