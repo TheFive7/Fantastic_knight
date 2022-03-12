@@ -9,6 +9,7 @@ import java.util.List;
 
 import static com.fantastic_knight.Game.levels;
 import static com.fantastic_knight.Game.primaryStage;
+import static com.fantastic_knight.controller.MenuController.isMultiplayerOn;
 import static com.fantastic_knight.controller.MenuController.scene_levels;
 import static com.fantastic_knight.model.Model.factor;
 import static com.fantastic_knight.model.Model.findAllLevels;
@@ -63,10 +64,17 @@ public class View {
      * Return to menu
      */
     public void returnMenu() {
-        if (model.player.isWin()){
+        if (model.player1.isWin()){
             double tempsChrono = model.chrono.getTime();
             List<String> levels = findAllLevels();
             RankingMenu.register(tempsChrono, levels.get(model.level - 1));
+        }
+        if (isMultiplayerOn){
+            if (model.player2.isWin()){
+                double tempsChrono = model.chrono.getTime();
+                List<String> levels = findAllLevels();
+                RankingMenu.register(tempsChrono, levels.get(model.level - 1));
+            }
         }
 
         model.state = Model.STATE_INITIAL;
