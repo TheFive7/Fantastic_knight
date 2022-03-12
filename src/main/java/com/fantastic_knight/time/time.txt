@@ -20,3 +20,25 @@ Unknown,14.59,easy
 Unknown,21.95,level 1
 Unknown,28.08,level 3
 Unknown,5.74,default
+Unknown,3.84,default
+Unknown,3.95,default
+Unknown,3.07,default
+Unknown,3.09,default
+Unknown,8.67,default
+Unknown,20.13,level 1
+Unknown,11.79,easy
+Unknown,3.25,default
+Unknown,3.52,default
+Unknown,35.42,default
+Unknown,3.59,default
+Unknown,10.06,easy
+Unknown,19.1,level 1
+Unknown,21.54,level 3
+Unknown,4.71,default
+Unknown,50.52,easy
+Unknown,23.81,level 1
+Unknown,8.02,default
+Unknown,5.54,default
+Unknown,7.62,default
+Unknown,10.78,easy
+Unknown,16.63,easy
