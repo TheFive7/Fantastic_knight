@@ -28,11 +28,6 @@ public class Game extends Application {
         launch(args);
     }
 
-    /*
-     * TODO
-     *  Door refactoring
-     */
-
     @Override
     public void start(Stage stage) throws Exception {
         // System.out.println(levels);
@@ -51,7 +46,8 @@ public class Game extends Application {
 
         // SCENES PRINCIPALES
         scene_menu = new Scene(root_menu, model.width, model.height);
-        scene_game = new Scene(view.scrollPane, model.width, model.height);
+//        scene_game = new Scene(view.scrollPane, model.width, model.height);
+        scene_game = new Scene(view.root, model.width, model.height);
         scene_credits = new Scene(root_credits, model.width, model.height);
 
         stage.setTitle("Fantastic Knight");
