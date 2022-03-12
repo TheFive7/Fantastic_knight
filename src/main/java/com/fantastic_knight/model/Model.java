@@ -13,8 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import static com.fantastic_knight.controller.MenuController.isMultiplayerOn;
 
 public class Model {
 
@@ -32,11 +31,12 @@ public class Model {
     public static int factor = 1;
 
     // Objets
-    public final Player player;
+    public final Player player1;
+    public final Player player2;
     public final Label labelWin = new Label("You WIN ! Press 'M' to return Menu.");
 
     // SPRITES
-    final List<Sprite> sprites;
+    public final List<Player> sprites;
 
     // STATE
     public int state;
@@ -53,12 +53,19 @@ public class Model {
 
     // PLAYER
     public SwordPlayer swordPlayer;
+    public SwordPlayer swordPlayer2;
 
-    // ATH
+    // ATH PLAYER 1
     public Shield shield;
     public Sword sword;
     public Heart heart;
     public Key key;
+
+    // ATH PLAYER 2
+    public Shield shield2;
+    public Sword sword2;
+    public Heart heart2;
+    public Key key2;
 
     // EXIT
     public boolean isKey = false;
@@ -75,14 +82,15 @@ public class Model {
         width = 1200;
         height = 800;
         lastFrame = -1;
-        player = new Player(this);
+        player1 = new Player(this, "Red Knight");
+        player2 = new Player(this, "Grey Knight");
         door = new Door(this);
         obstacles = new ArrayList<>();
         sprites = new ArrayList<>();
         items = new ArrayList<>();
         consumables = new ArrayList<>();
 
-        //mediaPlayerBackgroundMusic.play();
+        // mediaPlayerBackgroundMusic.play();
     }
 
     /**
@@ -90,7 +98,8 @@ public class Model {
      */
     public void startGame() {
         state = STATE_PLAY;
-        sprites.add(player);
+        sprites.add(player1);
+        if (isMultiplayerOn) sprites.add(player2);
         chrono = new Chrono();
         thread = new Thread(chrono);
         thread.start();
@@ -100,11 +109,12 @@ public class Model {
      * Reset the game
      */
     public void reset() {
+        player1.reset();
+        if (isMultiplayerOn) player2.reset();
         sprites.clear();
         items.clear();
         consumables.clear();
         obstacles.clear();
-        player.reset();
     }
 
     /**
