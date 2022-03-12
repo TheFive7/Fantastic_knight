@@ -218,12 +218,12 @@ public class OptionsMenu extends Pane {
     }
 
     private void settingNamePlayer() {
-        if (indexSkin == 0) model.player.setName("Red Knight");
-        else { model.player.setName("Grey Knight"); }
-        model.player.chooseSkin();
+        if (indexSkin == 0) model.player1.setName("Red Knight");
+        else { model.player1.setName("Grey Knight"); }
+        model.player1.chooseSkin();
 
         // SOUT À DÉGAGER \\
-        System.out.println(model.player.getName());
+        System.out.println(model.player1.getName());
     }
     private void chooseIconSound(double value, double x, double y) {
         // Changing if the volume is set at 0%
