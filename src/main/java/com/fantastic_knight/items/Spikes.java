@@ -2,6 +2,7 @@ package com.fantastic_knight.items;
 
 import com.fantastic_knight.model.Model;
 import com.fantastic_knight.model.Timer;
+import com.fantastic_knight.player.Player;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
@@ -28,19 +29,21 @@ public class Spikes extends Item {
      */
     @Override
     public void update() {
-        playerHitbox.setX(model.player.getxPosition());
-        playerHitbox.setY(model.player.getyPosition());
+        for (Player player : model.sprites) {
+            playerHitbox.setX(player.getxPosition());
+            playerHitbox.setY(player.getyPosition());
 
-        Shape inter = Shape.intersect(playerHitbox, shape);
-        Bounds b = inter.getBoundsInParent();
-        if (b.getWidth() != -1) {
-            Thread t = new Thread(timer);
-            if (isActive) {
-                if (model.player.isLife()) {
-                    model.player.setLife(false);
-                    t.start();
-                } else {
-                    model.player.reset();
+            Shape inter = Shape.intersect(playerHitbox, shape);
+            Bounds b = inter.getBoundsInParent();
+            if (b.getWidth() != -1) {
+                Thread t = new Thread(timer);
+                if (isActive) {
+                    if (player.isLife()) {
+                        player.setLife(false);
+                        t.start();
+                    } else {
+                        player.reset();
+                    }
                 }
             }
         }
