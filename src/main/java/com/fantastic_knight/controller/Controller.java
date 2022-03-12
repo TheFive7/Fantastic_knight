@@ -41,32 +41,56 @@ public class Controller {
     }
 
     public void movePersoLeft() {
-        model.player.moveLeft();
+        model.player1.moveLeft();
     }
 
     public void movePersoRight() {
-        model.player.moveRight();
+        model.player1.moveRight();
     }
 
     public void jumpPerso() {
-        model.player.jump();
+        model.player1.jump();
     }
 
     public void stopPerso() {
-        model.player.stop();
-    }
-
-    public void resetPerso() {
-        model.player.reset();
+        model.player1.stop();
     }
 
     public void dash() {
-        model.player.dash();
+        model.player1.dash();
     }
 
-    public void deployProtection() {model.player.deployProtection();}
+    public void deployProtection() {model.player1.deployProtection();}
 
-    public void sword() {model.player.sword();}
+    public void sword() {model.player1.sword();}
 
-    public void returnMenu() {MenuController.returnMenu();}
+    public void resetPerso() {
+        model.player1.reset();
+        model.player2.reset();
+    }
+
+    // PLAYER 2
+    public void movePersoLeft_2() {
+        model.player2.moveLeft();
+    }
+
+    public void movePersoRight_2() {
+        model.player2.moveRight();
+    }
+
+    public void jumpPerso_2() {
+        model.player2.jump();
+    }
+
+    public void stopPerso_2() {
+        model.player2.stop();
+    }
+
+    public void dash_2() {
+        model.player2.dash();
+    }
+
+    public void deployProtection_2() {model.player2.deployProtection();}
+
+    public void sword_2() {model.player2.sword();}
 }
