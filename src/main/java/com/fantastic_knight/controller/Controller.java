@@ -4,6 +4,8 @@ import com.fantastic_knight.model.Model;
 import com.fantastic_knight.view.View;
 import javafx.animation.AnimationTimer;
 
+import static com.fantastic_knight.controller.MenuController.isMultiplayerOn;
+
 public class Controller {
     protected final Model model;
     protected final View view;
@@ -66,7 +68,7 @@ public class Controller {
 
     public void resetPerso() {
         model.player1.reset();
-        model.player2.reset();
+        if (isMultiplayerOn) model.player2.reset();
     }
 
     // PLAYER 2
