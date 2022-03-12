@@ -20,7 +20,7 @@ public class MenuController {
     public static Scene scene_levelMaker;
     public static Scene scene_options;
     public static String globalPseudo;
-    public boolean isMultiplayerOn = false;
+    public static boolean isMultiplayerOn = false;
 
     @FXML
     TextField varPseudo;
