@@ -7,6 +7,8 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+import static com.fantastic_knight.controller.MenuController.isMultiplayerOn;
+
 public class ControllerKeyboard implements EventHandler<KeyEvent> {
 
     protected final Model model;
@@ -27,12 +29,25 @@ public class ControllerKeyboard implements EventHandler<KeyEvent> {
         // Keys
         view.root.setOnKeyReleased(event -> {
             if (model.state == Model.STATE_INITIAL) return;
+
+            // PLAYER 1
             // Left
-            if (event.getCode() == KeyCode.Q && model.player.getAngle() == 180 && model.player.getState() == State.WALK) {
+            if (event.getCode() == KeyCode.Q && model.player1.getAngle() == 180 && model.player1.getState() == State.WALK) {
                 control.stopPerso();
                 // Right
-            } else if (event.getCode() == KeyCode.D && model.player.getAngle() == 0 && model.player.getState() == State.WALK) {
+            } else if (event.getCode() == KeyCode.D && model.player1.getAngle() == 0 && model.player1.getState() == State.WALK) {
                 control.stopPerso();
+            }
+
+            // PLAYER 2
+            if (isMultiplayerOn) {
+                // Left
+                if (event.getCode() == KeyCode.LEFT && model.player2.getAngle() == 180 && model.player2.getState() == State.WALK) {
+                    control.stopPerso_2();
+                    // Right
+                } else if (event.getCode() == KeyCode.RIGHT && model.player2.getAngle() == 0 && model.player2.getState() == State.WALK) {
+                    control.stopPerso_2();
+                }
             }
         });
     }
@@ -43,6 +58,7 @@ public class ControllerKeyboard implements EventHandler<KeyEvent> {
 
         // System.out.println("keycode = "+arg0.getCode());
 
+        // PLAYER 1
         if (arg0.getCode() == KeyCode.Q) {
             control.movePersoLeft();
         } else if (arg0.getCode() == KeyCode.D) {
@@ -59,8 +75,23 @@ public class ControllerKeyboard implements EventHandler<KeyEvent> {
             control.deployProtection();
         } else if (arg0.getCode() == KeyCode.ALT) {
             control.sword();
-        } else if (arg0.getCode() == KeyCode.ESCAPE) {
-            control.returnMenu();
+        }
+
+        if (isMultiplayerOn){
+            // PLAYER 2
+            if (arg0.getCode() == KeyCode.LEFT) {
+                control.movePersoLeft_2();
+            } else if (arg0.getCode() == KeyCode.RIGHT) {
+                control.movePersoRight_2();
+            } else if (arg0.getCode() == KeyCode.UP) {
+                control.jumpPerso_2();
+            } else if (arg0.getCode() == KeyCode.DOWN) {
+                control.dash_2();
+            } else if (arg0.getCode() == KeyCode.CONTROL) {
+                control.deployProtection_2();
+            } else if (arg0.getCode() == KeyCode.SHIFT) {
+                control.sword_2();
+            }
         }
     }
 }
