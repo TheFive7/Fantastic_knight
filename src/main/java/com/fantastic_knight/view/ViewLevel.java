@@ -18,6 +18,7 @@ import javafx.scene.text.Font;
 import java.io.FileInputStream;
 import java.util.Scanner;
 
+import static com.fantastic_knight.controller.MenuController.isMultiplayerOn;
 import static com.fantastic_knight.model.Model.factor;
 
 public class ViewLevel {
@@ -56,22 +57,55 @@ public class ViewLevel {
 
     // to initialize levels
     public void init() {
+        // PLAYER 1
         // Shield
         model.shield = new Shield();
         pane.getChildren().add(model.shield);
+        model.player1.setShield(model.shield);
 
         // Sword
         model.sword = new Sword();
         pane.getChildren().add(model.sword);
+        model.player1.setSword(model.sword);
 
         // Key
         model.key = new Key();
         pane.getChildren().add(model.key);
+        model.player1.setKey(model.key);
 
         // Heart
-        model.heart = new Heart(model);
+        model.heart = new Heart(model, model.player1);
         model.items.add(model.heart);
         pane.getChildren().add(model.heart.getShape());
+        model.player1.setHeart(model.heart);
+
+        // PLAYER 2
+        if (isMultiplayerOn){
+            // Shield
+            model.shield2 = new Shield();
+            model.shield2.setLayoutX(model.width - 75);
+            pane.getChildren().add(model.shield2);
+            model.player2.setShield(model.shield2);
+
+            // Sword
+            model.sword2 = new Sword();
+            model.sword2.setLayoutX(model.width - 225);
+            pane.getChildren().add(model.sword2);
+            model.player2.setSword(model.sword2);
+
+            // Key
+            model.key2 = new Key();
+            model.key2.setLayoutX(model.width - 375);
+            pane.getChildren().add(model.key2);
+            model.player2.setKey(model.key2);
+
+            // Heart
+            model.heart2 = new Heart(model, model.player2);
+            model.items.add(model.heart2);
+            pane.getChildren().add(model.heart2.getShape());
+            model.player2.setHeart(model.heart2);
+        }
+
 
         // Label
         model.labelWin.setOpacity(0);
@@ -83,16 +117,30 @@ public class ViewLevel {
         pane.getChildren().add(model.labelWin);
 
         // Protection
-        pane.getChildren().add(model.player.getProtection());
+        pane.getChildren().add(model.player1.getProtection());
+        if (isMultiplayerOn) pane.getChildren().add(model.player2.getProtection());
 
         // Player
-        pane.getChildren().add(model.player.getShape());
+        pane.getChildren().add(model.player1.getShape());
+        if (isMultiplayerOn) pane.getChildren().add(model.player2.getShape());
 
         // Sword
-        model.swordPlayer = new SwordPlayer(model);
+        model.swordPlayer = new SwordPlayer(model, model.player1);
         model.swordPlayer.getShape().setWidth(70);
         model.swordPlayer.getShape().setHeight(70);
         pane.getChildren().add(model.swordPlayer.getShape());
+        model.player1.setSwordPlayer(model.swordPlayer);
+        model.items.add(model.swordPlayer);
+
+        // Sword
+        if (isMultiplayerOn) {
+            model.swordPlayer2 = new SwordPlayer(model, model.player2);
+            model.swordPlayer2.getShape().setWidth(70);
+            model.swordPlayer2.getShape().setHeight(70);
+            pane.getChildren().add(model.swordPlayer2.getShape());
+            model.player2.setSwordPlayer(model.swordPlayer2);
+            model.items.add(model.swordPlayer2);
+        }
     }
 
     /**
