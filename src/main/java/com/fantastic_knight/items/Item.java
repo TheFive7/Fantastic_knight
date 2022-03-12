@@ -22,7 +22,7 @@ public abstract class Item {
         isActive = true;
         xPosition = 0;
         yPosition = 0;
-        playerHitbox = new Rectangle(model.player.getWidth(), model.player.getHeight());
+        playerHitbox = new Rectangle(model.player1.getWidth(), model.player1.getHeight());
     }
 
     public abstract void update();
