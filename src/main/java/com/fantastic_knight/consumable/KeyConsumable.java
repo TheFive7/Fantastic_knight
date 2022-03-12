@@ -1,6 +1,7 @@
 package com.fantastic_knight.consumable;
 
 import com.fantastic_knight.model.Model;
+import com.fantastic_knight.player.Player;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
@@ -24,18 +25,20 @@ public class KeyConsumable extends Consumable {
 
     @Override
     public void update() {
-        playerHitbox.setX(model.player.getxPosition());
-        playerHitbox.setY(model.player.getyPosition());
+        for (Player player : model.sprites) {
+            playerHitbox.setX(player.getxPosition());
+            playerHitbox.setY(player.getyPosition());
 
-        if (isActive){
-            Shape inter = Shape.intersect(playerHitbox, shape);
-            Bounds b = inter.getBoundsInLocal();
-            if (!model.isKey) {
-                if (b.getWidth() != -1) {
-                    isActive = false;
-                    model.isKey = true;
-                    model.key.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/key.png")));
-                    getShape().setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/anything.png")));
+            if (isActive) {
+                Shape inter = Shape.intersect(playerHitbox, shape);
+                Bounds b = inter.getBoundsInLocal();
+                if (!model.isKey) {
+                    if (b.getWidth() != -1) {
+                        isActive = false;
+                        model.isKey = true;
+                        player.getKey().setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/key.png")));
+                        getShape().setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/anything.png")));
+                    }
                 }
             }
         }
