@@ -2,10 +2,8 @@ package com.fantastic_knight.player;
 
 import com.fantastic_knight.animation.AnimationImage;
 import com.fantastic_knight.items.Item;
-import com.fantastic_knight.model.Sprite;
-import com.fantastic_knight.model.State;
-import com.fantastic_knight.model.Model;
-import com.fantastic_knight.model.Timer;
+import com.fantastic_knight.items.SwordPlayer;
+import com.fantastic_knight.model.*;
 import com.fantastic_knight.objects.Protection;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
@@ -19,6 +17,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.fantastic_knight.controller.MenuController.isMultiplayerOn;
 import static com.fantastic_knight.model.Model.factor;
 
 public class Player extends Sprite {
@@ -47,13 +46,20 @@ public class Player extends Sprite {
     Protection protection;
     boolean isSword;
 
+    // ATH
+    Shield shield;
+    Heart heart;
+    Sword sword;
+    SwordPlayer swordPlayer;
+    Key key;
+
     // 0 RIGHT; 180 LEFT
 
-    public Player(Model model) {
+    public Player(Model model, String name) {
         super(model);
         this.model = model;
+        this.name = name;
 
-        name = "Red Knight";
         imageRight = new Image[3];
         imageLeft = new Image[3];
         chooseSkin();
@@ -97,6 +103,7 @@ public class Player extends Sprite {
         state = State.WALK;
 
         model.swordPlayer.orientationSword("left");
+        if (isMultiplayerOn) model.swordPlayer2.orientationSword("left");
 
     }
 
@@ -115,6 +122,7 @@ public class Player extends Sprite {
         state = State.WALK;
 
         model.swordPlayer.orientationSword("right");
+        if (isMultiplayerOn) model.swordPlayer2.orientationSword("right");
     }
 
     /**
@@ -142,7 +150,7 @@ public class Player extends Sprite {
         shape.setX(xPosition);
         shape.setY(yPosition);
         state = State.IDLE;
-        model.shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/shield.png")));
+        shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/shield.png")));
     }
 
     /**
@@ -197,11 +205,11 @@ public class Player extends Sprite {
      */
     public void sword(){
         if (isSword){
-            model.swordPlayer.setActive(!model.swordPlayer.getActive());
+            swordPlayer.setActive(!swordPlayer.getActive());
             if (angle == 180){
-                model.swordPlayer.orientationSword("left");
+                swordPlayer.orientationSword("left");
             } else if (angle == 0){
-                model.swordPlayer.orientationSword("right");
+                swordPlayer.orientationSword("right");
             }
         }
     }
@@ -401,13 +409,41 @@ public class Player extends Sprite {
         // Media hurtSound = new Media(new File("src/main/resources/com/fantastic_knight/sounds/dead.wav").toURI().toString());
         // MediaPlayer mediaPlayerHurt = new MediaPlayer(hurtSound);
         if (!life) {
-            model.heart.setActive(false);
-            getModel().shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/shield_empty.png")));
-            //mediaPlayerHurt.setVolume(model.volume); mediaPlayerHurt.play();
+            heart.setActive(false);
+            shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/shield_empty.png")));
+            // mediaPlayerHurt.setVolume(model.volume); mediaPlayerHurt.play();
         } else {
-            getModel().shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/shield.png")));
+            shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/shield.png")));
         }
         this.life = life;
+    }
+
+    public void setHeart(Heart heart){
+        this.heart = heart;
+    }
+
+    public void setShield(Shield shield){
+        this.shield = shield;
+    }
+
+    public void setSword(Sword sword){
+        this.sword = sword;
+    }
+
+    public Sword getSword(){
+        return this.sword;
+    }
+
+    public void setSwordPlayer(SwordPlayer swordPlayer){
+        this.swordPlayer = swordPlayer;
+    }
+
+    public Key getKey(){
+        return this.key;
+    }
+
+    public void setKey(Key key){
+        this.key = key;
     }
 
     public Rectangle getShape() {
