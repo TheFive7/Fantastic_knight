@@ -560,6 +560,22 @@ public class Player extends Sprite {
                 imageLeft[1] = new Image("file:src/main/resources/com/fantastic_knight/player/perso_gauche_walk.png");
                 imageLeft[2] = new Image("file:src/main/resources/com/fantastic_knight/player/perso_gauche_idle.png");
             }
+            case "Platine Knight" -> {
+                imageRight[0] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_stand_right_platine.png");
+                imageRight[1] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_walk_right_platine.png");
+                imageRight[2] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_walk1_right_platine.png");
+                imageLeft[0] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_stand_left_platine.png");
+                imageLeft[1] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_walk_left_platine.png");
+                imageLeft[2] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_walk1_left_platine.png");
+            }
+            case "Gold Knight" -> {
+                imageRight[0] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_stand_right_gold.png");
+                imageRight[1] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_walk_right_gold.png");
+                imageRight[2] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_walk1_right_gold.png");
+                imageLeft[0] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_stand_left_gold.png");
+                imageLeft[1] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_walk_left_gold.png");
+                imageLeft[2] = new Image("file:src/main/resources/com/fantastic_knight/player/Knight_walk1_left_gold.png");
+            }
         }
     }
 }

@@ -73,8 +73,8 @@ public class Model {
 
     // SOUNDS
     public double volume = 20.0;
-    //public Media backgroundMusic = new Media(new File("src/main/resources/com/fantastic_knight/sounds/fantasy.wav").toURI().toString());
-    //public MediaPlayer mediaPlayerBackgroundMusic = new MediaPlayer(backgroundMusic);
+    // public Media backgroundMusic = new Media(new File("src/main/resources/com/fantastic_knight/sounds/fantasy.wav").toURI().toString());
+    // public MediaPlayer mediaPlayerBackgroundMusic = new MediaPlayer(backgroundMusic);
 
     public Model() {
         state = STATE_INITIAL;
@@ -83,7 +83,7 @@ public class Model {
         height = 800;
         lastFrame = -1;
         player1 = new Player(this, "Red Knight");
-        player2 = new Player(this, "Grey Knight");
+        player2 = new Player(this, "Platine Knight");
         door = new Door(this);
         obstacles = new ArrayList<>();
         sprites = new ArrayList<>();
