@@ -25,7 +25,7 @@ public class Door extends Item {
     }
 
     public void update() {
-        for (Player player : model.sprites) {
+        for (Player player : model.players) {
             double x = player.getxPosition();
             double y = player.getyPosition();
             Rectangle joueur = new Rectangle(player.getWidth(), player.getHeight());
