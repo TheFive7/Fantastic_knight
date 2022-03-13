@@ -182,7 +182,6 @@ public class Ennemy extends Sprite {
             }
 
             // SIMPLE AI
-            System.out.println(chrono.getTime());
             if (chrono.getTime() < timeRound) {
                 moveRight();
             } else if (chrono.getTime() >= timeRound && chrono.getTime() <= timeRound*2){
