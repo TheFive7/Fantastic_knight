@@ -1,6 +1,7 @@
 package com.fantastic_knight.model;
 
 import com.fantastic_knight.items.Item;
+import com.fantastic_knight.player.Ennemy;
 import com.fantastic_knight.player.Player;
 
 public class Timer implements Runnable {
@@ -8,6 +9,7 @@ public class Timer implements Runnable {
     boolean bool;
     Item item;
     Player player;
+    Ennemy ennemy;
 
     public Timer(int time) {
         this.time = time;
@@ -30,6 +32,13 @@ public class Timer implements Runnable {
         this.player = player;
     }
 
+    public Timer(int time, Ennemy ennemy) {
+        this.time = time;
+        this.bool = false;
+        item = null;
+        this.ennemy = ennemy;
+    }
+
     /**
      * Start timer
      */
@@ -38,9 +47,11 @@ public class Timer implements Runnable {
             bool = false; // disable
             if(item!=null) item.setActive(bool);
             if(player!=null) player.setState(State.DASH);
+            if (ennemy!=null) ennemy.setActive(bool);
             Thread.sleep(time);
             bool = true; // unable
             if(item!=null) item.setActive(bool);
+            if (ennemy!=null) ennemy.setActive(bool);
             if(player!=null) {
                 player.setState(State.IDLE);
                 player.setCanDash(false);
