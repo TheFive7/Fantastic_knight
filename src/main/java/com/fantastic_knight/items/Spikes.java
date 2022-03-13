@@ -29,7 +29,7 @@ public class Spikes extends Item {
      */
     @Override
     public void update() {
-        for (Player player : model.sprites) {
+        for (Player player : model.players) {
             playerHitbox.setX(player.getxPosition());
             playerHitbox.setY(player.getyPosition());
 
