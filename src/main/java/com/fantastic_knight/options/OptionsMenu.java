@@ -37,6 +37,8 @@ public class OptionsMenu extends Pane {
         listSkins = new ArrayList<>() {
             {
                 add(new Image("file:src/main/resources/com/fantastic_knight/player/Knight_stand_right.png"));
+                add(new Image("file:src/main/resources/com/fantastic_knight/player/Knight_stand_right_platine.png"));
+                add(new Image("file:src/main/resources/com/fantastic_knight/player/Knight_stand_right_gold.png"));
                 add(new Image("file:src/main/resources/com/fantastic_knight/player/perso_droite_idle.png"));
             }
         };
@@ -218,12 +220,13 @@ public class OptionsMenu extends Pane {
     }
 
     private void settingNamePlayer() {
-        if (indexSkin == 0) model.player1.setName("Red Knight");
-        else { model.player1.setName("Grey Knight"); }
+        switch (indexSkin) {
+            case 0 -> {model.player1.setName("Red Knight");}
+            case 1 -> {model.player1.setName("Platine Knight");}
+            case 2 -> {model.player1.setName("Gold Knight");}
+            case 3 -> {model.player1.setName("Grey Knight");}
+        }
         model.player1.chooseSkin();
-
-        // SOUT À DÉGAGER \\
-        System.out.println(model.player1.getName());
     }
     private void chooseIconSound(double value, double x, double y) {
         // Changing if the volume is set at 0%
@@ -241,7 +244,6 @@ public class OptionsMenu extends Pane {
     }
 
     private void saveSoundProperties(double valueMusic, double valueSounds) {
-        System.out.println("save :)");
         //model.mediaPlayerBackgroundMusic.setVolume(valueMusic/100);
         System.out.println("Setting the volume at : "+valueMusic/100+"\n");
         model.volume = valueSounds;
