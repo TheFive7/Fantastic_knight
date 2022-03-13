@@ -4,7 +4,9 @@ import com.fantastic_knight.consumable.Consumable;
 import com.fantastic_knight.items.Door;
 import com.fantastic_knight.items.Item;
 import com.fantastic_knight.items.SwordPlayer;
+import com.fantastic_knight.player.Ennemy;
 import com.fantastic_knight.player.Player;
+import com.fantastic_knight.player.Sprite;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Shape;
 
@@ -25,9 +27,6 @@ public class Model {
     // WINDOW
     public final int width;
     public final int height;
-    public final List<Shape> obstacles; // obstacles in each scene
-    public final List<Item> items;      // items in the game
-    public final List<Consumable> consumables;      // consumables in the game
     public static int factor = 1;
 
     // Objets
@@ -35,8 +34,12 @@ public class Model {
     public final Player player2;
     public final Label labelWin = new Label("You WIN ! Press 'M' to return Menu.");
 
-    // SPRITES
-    public final List<Player> sprites;
+    // LISTS
+    public final List<Player> players;
+    public final List<Ennemy> ennemies;
+    public final List<Shape> obstacles; // obstacles in each scene
+    public final List<Item> items;      // items in the game
+    public final List<Consumable> consumables;      // consumables in the game
 
     // STATE
     public int state;
@@ -54,6 +57,9 @@ public class Model {
     // PLAYER
     public SwordPlayer swordPlayer;
     public SwordPlayer swordPlayer2;
+
+    // ENNEMIES
+    public Ennemy ennemy;
 
     // ATH PLAYER 1
     public Shield shield;
@@ -84,9 +90,11 @@ public class Model {
         lastFrame = -1;
         player1 = new Player(this, "Red Knight");
         player2 = new Player(this, "Platine Knight");
+        ennemy = new Ennemy(this);
         door = new Door(this);
         obstacles = new ArrayList<>();
-        sprites = new ArrayList<>();
+        players = new ArrayList<>();
+        ennemies = new ArrayList<>();
         items = new ArrayList<>();
         consumables = new ArrayList<>();
 
@@ -98,8 +106,9 @@ public class Model {
      */
     public void startGame() {
         state = STATE_PLAY;
-        sprites.add(player1);
-        if (isMultiplayerOn) sprites.add(player2);
+        players.add(player1);
+        if (isMultiplayerOn) players.add(player2);
+        ennemies.add(ennemy);
         chrono = new Chrono();
         thread = new Thread(chrono);
         thread.start();
@@ -111,10 +120,12 @@ public class Model {
     public void reset() {
         player1.reset();
         if (isMultiplayerOn) player2.reset();
-        sprites.clear();
+        ennemy.reset();
+        players.clear();
         items.clear();
         consumables.clear();
         obstacles.clear();
+        ennemies.clear();
     }
 
     /**
@@ -124,11 +135,14 @@ public class Model {
         for (Item i : items) {
             i.update();
         }
-        for (Sprite s : sprites) {
-            s.update();
+        for (Player p : players) {
+            p.update();
         }
         for (Consumable c : consumables) {
             c.update();
+        }
+        for (Ennemy e : ennemies) {
+            e.update();
         }
         door.update();
     }
