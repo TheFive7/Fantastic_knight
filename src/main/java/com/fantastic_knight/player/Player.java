@@ -7,13 +7,10 @@ import com.fantastic_knight.model.*;
 import com.fantastic_knight.objects.Protection;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,7 +65,6 @@ public class Player extends Sprite {
         height = imageRight[0].getHeight();
 
         shape = new Rectangle(width, height);
-        life = true;
         invincibility = false;
         xPosition = 0;
         yPosition = model.height * factor - height;
@@ -150,6 +146,7 @@ public class Player extends Sprite {
         shape.setX(xPosition);
         shape.setY(yPosition);
         state = State.IDLE;
+        isSword = false;
         shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/shield.png")));
     }
 
@@ -541,6 +538,8 @@ public class Player extends Sprite {
     public void setName(String name) {
         this.name = name;
     }
+
+    public boolean getisSword(){return this.isSword;}
 
     public void chooseSkin() {
         switch (name) {
