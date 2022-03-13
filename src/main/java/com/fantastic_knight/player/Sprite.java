@@ -1,4 +1,6 @@
-package com.fantastic_knight.model;
+package com.fantastic_knight.player;
+
+import com.fantastic_knight.model.Model;
 
 public abstract class Sprite {
 
