@@ -141,6 +141,9 @@ public class ViewLevel {
             model.player2.setSwordPlayer(model.swordPlayer2);
             model.items.add(model.swordPlayer2);
         }
+
+        // Ennemy
+        pane.getChildren().add(model.ennemy.getShape());
     }
 
     /**
