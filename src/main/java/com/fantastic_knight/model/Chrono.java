@@ -29,9 +29,17 @@ public class Chrono implements Runnable {
         running = false;
     }
 
+    public void restart(){
+        running = true;
+    }
+
     public String affiche() {
         return this.time + "";
     }
 
     public double getTime(){return time;}
+
+    public void setTime(double time){
+        this.time = time;
+    }
 }
