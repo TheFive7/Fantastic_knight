@@ -42,3 +42,11 @@ Unknown,5.54,default
 Unknown,7.62,default
 Unknown,10.78,easy
 Unknown,16.63,easy
+Unknown,4.71,default
+Unknown,7.53,default
+Unknown,5.22,default
+Unknown,3.18,default
+Unknown,4.04,default
+Unknown,6.36,default
+Unknown,6.79,default
+Unknown,3.09,default
