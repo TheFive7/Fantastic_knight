@@ -190,7 +190,7 @@ public class Ennemy extends Sprite {
                 chrono.setTime(0);
             }
 
-            Rectangle shape1 = new Rectangle(width, height);
+            Rectangle shape = new Rectangle(width, height);
 
             // Bouge pas
             if (state == State.IDLE) {
@@ -202,7 +202,7 @@ public class Ennemy extends Sprite {
                     animation.getTimer().start();
                 }
 
-                testWalk(shape1);
+                testWalk(shape);
 
                 // tombe ou saute
                 if (state == State.FALL || state == State.JUMP) {
@@ -210,7 +210,7 @@ public class Ennemy extends Sprite {
                     else yVelocity++;
                 }
 
-                testCollision(shape1);
+                testCollision(shape);
             }
         }
     }
