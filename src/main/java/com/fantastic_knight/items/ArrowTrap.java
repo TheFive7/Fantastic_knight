@@ -1,7 +1,6 @@
 package com.fantastic_knight.items;
 
 import com.fantastic_knight.model.Model;
-
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;

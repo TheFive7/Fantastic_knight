@@ -42,6 +42,7 @@ public class Player extends Sprite {
     private boolean canDash = true;
     Protection protection;
     boolean isSword;
+    boolean isAttack;
 
     // ATH
     Shield shield;
@@ -81,6 +82,7 @@ public class Player extends Sprite {
         win = false;
         protection = new Protection(this);
         isSword = false;
+        isAttack = false;
     }
 
 
@@ -98,8 +100,8 @@ public class Player extends Sprite {
         lastMove = 1;
         state = State.WALK;
 
-        model.swordPlayer.orientationSword("left");
-        if (isMultiplayerOn) model.swordPlayer2.orientationSword("left");
+        if (this.equals(model.player1)) model.swordPlayer.orientationSword("left");
+        if (this.equals(model.player2)) model.swordPlayer2.orientationSword("left");
 
     }
 
@@ -117,8 +119,8 @@ public class Player extends Sprite {
         lastMove = 2;
         state = State.WALK;
 
-        model.swordPlayer.orientationSword("right");
-        if (isMultiplayerOn) model.swordPlayer2.orientationSword("right");
+        if (this.equals(model.player1)) model.swordPlayer.orientationSword("right");
+        if (this.equals(model.player2)) model.swordPlayer2.orientationSword("right");
     }
 
     /**

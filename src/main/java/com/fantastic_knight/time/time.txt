@@ -52,3 +52,10 @@ Unknown,6.79,default
 Unknown,3.09,default
 Unknown,3.22,default
 Unknown,3.1,default
+Unknown,13.51,default
+Unknown,18.55,default
+Unknown,31.98,default
+Unknown,39.32,default
+Unknown,7.99,default
+Unknown,22.02,default
+Unknown,38.5,default
