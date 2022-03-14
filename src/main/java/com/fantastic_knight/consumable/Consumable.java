@@ -22,7 +22,7 @@ public abstract class Consumable {
         isActive = true;
         xPosition = 0;
         yPosition = 0;
-        playerHitbox = new Rectangle(model.player1.getWidth(), model.player1.getHeight());
+        playerHitbox = model.player1.getShape();
     }
 
     public abstract void update();

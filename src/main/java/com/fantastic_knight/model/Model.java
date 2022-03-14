@@ -6,7 +6,6 @@ import com.fantastic_knight.items.Item;
 import com.fantastic_knight.items.SwordPlayer;
 import com.fantastic_knight.player.Ennemy;
 import com.fantastic_knight.player.Player;
-import com.fantastic_knight.player.Sprite;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Shape;
 
@@ -27,7 +26,7 @@ public class Model {
     // WINDOW
     public final int width;
     public final int height;
-    public static int factor = 1;
+    public static int factor = 2;
 
     // Objets
     public final Player player1;
@@ -108,7 +107,7 @@ public class Model {
         state = STATE_PLAY;
         players.add(player1);
         if (isMultiplayerOn) players.add(player2);
-        ennemies.add(ennemy);
+        // ennemies.add(ennemy);
         chrono = new Chrono();
         thread = new Thread(chrono);
         thread.start();

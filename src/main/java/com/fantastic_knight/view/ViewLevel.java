@@ -18,6 +18,7 @@ import javafx.scene.text.Font;
 import java.io.FileInputStream;
 import java.util.Scanner;
 
+import static com.fantastic_knight.Game.view;
 import static com.fantastic_knight.controller.MenuController.isMultiplayerOn;
 import static com.fantastic_knight.model.Model.factor;
 
@@ -44,6 +45,10 @@ public class ViewLevel {
         model.obstacles.add(model.southWall);
         model.obstacles.add(model.eastWall);
         model.obstacles.add(model.westWall);
+        pane.getChildren().add(model.northWall);
+        pane.getChildren().add(model.southWall);
+        pane.getChildren().add(model.eastWall);
+        pane.getChildren().add(model.westWall);
 
 //        Rectangle r1 = new Rectangle(300, model.height * 2 - 100, 100, 20);
 //        model.obstacles.add(r1);
@@ -80,21 +85,22 @@ public class ViewLevel {
         model.player1.setHeart(model.heart);
 
         // PLAYER 2
+        model.shield2 = new Shield();
+        model.sword2 = new Sword();
+        model.key2 = new Key();
+
         if (isMultiplayerOn){
             // Shield
-            model.shield2 = new Shield();
             model.shield2.setLayoutX(model.width - 75);
             pane.getChildren().add(model.shield2);
             model.player2.setShield(model.shield2);
 
             // Sword
-            model.sword2 = new Sword();
             model.sword2.setLayoutX(model.width - 225);
             pane.getChildren().add(model.sword2);
             model.player2.setSword(model.sword2);
 
             // Key
-            model.key2 = new Key();
             model.key2.setLayoutX(model.width - 375);
             pane.getChildren().add(model.key2);
             model.player2.setKey(model.key2);
@@ -121,8 +127,12 @@ public class ViewLevel {
         if (isMultiplayerOn) pane.getChildren().add(model.player2.getProtection());
 
         // Player
+        pane.getChildren().add(model.player1.getFirstShape());
         pane.getChildren().add(model.player1.getShape());
-        if (isMultiplayerOn) pane.getChildren().add(model.player2.getShape());
+        if (isMultiplayerOn) {
+            pane.getChildren().add(model.player2.getFirstShape());
+            pane.getChildren().add(model.player2.getShape());
+        }
 
         // Sword
         model.swordPlayer = new SwordPlayer(model, model.player1);
@@ -143,7 +153,7 @@ public class ViewLevel {
         }
 
         // Ennemy
-        pane.getChildren().add(model.ennemy.getShape());
+        // pane.getChildren().add(model.ennemy.getShape());
     }
 
     /**
@@ -177,6 +187,7 @@ public class ViewLevel {
                     platform.setyCoordonnee(y);
                     platform.setLayoutX(x * 100);
                     platform.setLayoutY(y * 20);
+                    //dSystem.out.println("put a platform in "+(x*100)+","+(y*20));
 
                     switch (type) {
                         case "platform" -> {

@@ -1,7 +1,10 @@
 package com.fantastic_knight.view;
 
 import com.fantastic_knight.controller.RankingMenu;
+import com.fantastic_knight.model.Key;
 import com.fantastic_knight.model.Model;
+import com.fantastic_knight.model.Shield;
+import com.fantastic_knight.model.Sword;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 
@@ -28,6 +31,41 @@ public class View {
         this.model = model;
         root = new Pane();
         game();
+    }
+
+    public void update() {
+        scrollPane.setVvalue((model.player1.getyPosition() + model.player1.getHeight()) / (model.height * factor));
+
+        // SI PLAYER 2 > PLAYER 1
+        if (isMultiplayerOn){
+            if (model.player2.getyPosition() < model.player1.getyPosition()) {
+                scrollPane.setVvalue((model.player2.getyPosition() + model.player2.getHeight()) / (model.height * factor));
+            }
+        }
+
+        // PLAYER 1
+        model.shield.setY((model.player1.getyPosition() + model.player1.getHeight() - model.height * scrollPane.getVvalue()));
+        model.sword.setY((model.player1.getyPosition() + model.player1.getHeight() - model.height * scrollPane.getVvalue()));
+        model.key.setY((model.player1.getyPosition() + model.player1.getHeight() - model.height * scrollPane.getVvalue()));
+
+        // PLAYER 2
+        if (isMultiplayerOn) {
+            model.shield2.setY((model.player1.getyPosition() + model.player1.getHeight() - model.height * scrollPane.getVvalue()));
+            model.sword2.setY((model.player1.getyPosition() + model.player1.getHeight() - model.height * scrollPane.getVvalue()));
+            model.key2.setY((model.player1.getyPosition() + model.player1.getHeight() - model.height * scrollPane.getVvalue()));
+        }
+
+        // SI PLAYER 2 > PLAYER 1
+        if (isMultiplayerOn){
+            if (model.player2.getyPosition() < model.player1.getyPosition()) {
+                model.shield.setY((model.player2.getyPosition() + model.player2.getHeight() - model.height * scrollPane.getVvalue()));
+                model.sword.setY((model.player2.getyPosition() + model.player2.getHeight() - model.height * scrollPane.getVvalue()));
+                model.key.setY((model.player2.getyPosition() + model.player2.getHeight() - model.height * scrollPane.getVvalue()));
+                model.shield2.setY((model.player2.getyPosition() + model.player2.getHeight() - model.height * scrollPane.getVvalue()));
+                model.sword2.setY((model.player2.getyPosition() + model.player2.getHeight() - model.height * scrollPane.getVvalue()));
+                model.key2.setY((model.player2.getyPosition() + model.player2.getHeight() - model.height * scrollPane.getVvalue()));
+            }
+        }
     }
 
     /**

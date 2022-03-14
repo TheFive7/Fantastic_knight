@@ -5,6 +5,7 @@ import com.fantastic_knight.view.View;
 import javafx.animation.AnimationTimer;
 
 import static com.fantastic_knight.controller.MenuController.isMultiplayerOn;
+import static com.fantastic_knight.model.Model.factor;
 
 public class Controller {
     protected final Model model;
@@ -27,6 +28,7 @@ public class Controller {
                 }
                 model.lastFrame = arg0;
                 model.update();
+                view.update();
             }
         };
     }

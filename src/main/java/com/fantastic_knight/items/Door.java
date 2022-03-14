@@ -26,13 +26,10 @@ public class Door extends Item {
 
     public void update() {
         for (Player player : model.players) {
-            double x = player.getxPosition();
-            double y = player.getyPosition();
-            Rectangle joueur = new Rectangle(player.getWidth(), player.getHeight());
-            joueur.setX(x);
-            joueur.setY(y);
+            playerHitbox.setX(player.getxPosition());
+            playerHitbox.setY(player.getyPosition());
 
-            Shape inter = Shape.intersect(joueur, shape);
+            Shape inter = Shape.intersect(playerHitbox, shape);
             Bounds b = inter.getBoundsInParent();
             if (b.getWidth() != -1) {
                 if (!player.isWin() && model.isKey) {

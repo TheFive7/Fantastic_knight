@@ -19,6 +19,7 @@ import static com.fantastic_knight.model.Model.factor;
 
 public class Player extends Sprite {
     final Rectangle shape;
+    final Rectangle shapeNextPos;
     final double width;
     final double height;
     final boolean animated;
@@ -66,6 +67,8 @@ public class Player extends Sprite {
         height = imageRight[0].getHeight();
 
         shape = new Rectangle(width, height);
+        shapeNextPos = new Rectangle(width, height);
+        shapeNextPos.setOpacity(0);
         invincibility = false;
         xPosition = 0;
         yPosition = model.height * factor - height;
@@ -140,7 +143,7 @@ public class Player extends Sprite {
     public void reset() {
         setWin(false);
         xPosition = 0;
-        yPosition = model.height - height;
+        yPosition = model.height * factor - height;
         xVelocity = 5;
         yVelocity = 0;
         angle = 0;
@@ -218,7 +221,6 @@ public class Player extends Sprite {
      */
     @Override
     public void update() {
-        Rectangle shape1 = new Rectangle(width, height);
 
         // Bouge pas
         if (state == State.IDLE) {
@@ -230,8 +232,8 @@ public class Player extends Sprite {
                 animation.getTimer().start();
             }
 
-            testJump(shape1);
-            testWalk(shape1);
+            testJump();
+            testWalk();
 
             // tombe ou saute
             if (state == State.FALL || state == State.JUMP) {
@@ -239,7 +241,7 @@ public class Player extends Sprite {
                 else yVelocity++;
             }
 
-            testCollision(shape1);
+            testCollision();
 
             // Win
             if(isWin()){
@@ -255,18 +257,17 @@ public class Player extends Sprite {
     /**
      * Sauter
      *
-     * @param shape1 : Rectangle pour savoir la prochaine position
      */
-    public void testJump(Rectangle shape1) {
+    public void testJump() {
         if (state == State.JUMP) {
             double y = yPosition + yVelocity;
-            shape1.setX(xPosition);
-            shape1.setY(y);
+            shapeNextPos.setX(xPosition);
+            shapeNextPos.setY(y);
 
             // Détection de collision
             boolean isFloor = false;
             for (Shape s : model.obstacles) {
-                Shape inter = Shape.intersect(shape1, s);
+                Shape inter = Shape.intersect(shapeNextPos, s);
                 Bounds b = inter.getBoundsInLocal();
                 if (b.getWidth() != -1) {
                     isFloor = true;
@@ -286,18 +287,17 @@ public class Player extends Sprite {
     /**
      * Marche
      *
-     * @param shape1 : Rectangle pour savoir la prochaine position
      */
-    public void testWalk(Rectangle shape1) {
+    public void testWalk() {
         if (state == State.WALK || state == State.DASH) {
             // NO FLOOR DETECTION for actual position: just move perso one pixel down
-            shape1.setX(xPosition);
-            shape1.setY(yPosition + 1);
+            shapeNextPos.setX(xPosition);
+            shapeNextPos.setY(yPosition + 1);
 
             // Détection de collision
             boolean isFloor = false;
             for (Shape s : model.obstacles) {
-                Shape inter = Shape.intersect(shape1, s);
+                Shape inter = Shape.intersect(shapeNextPos, s);
                 Bounds b = inter.getBoundsInLocal();
                 if (b.getWidth() != -1) {
                     isFloor = true;
@@ -315,20 +315,19 @@ public class Player extends Sprite {
     /**
      * Collision
      *
-     * @param shape1 : Rectangle pour savoir la prochaine position
      */
-    public void testCollision(Rectangle shape1) {
+    public void testCollision() {
         double x = getNewX();
         double y = getNewY();
 
         // COLLISION DETECTION
-        shape1.setX(x);
-        shape1.setY(y);
+        shapeNextPos.setX(x);
+        shapeNextPos.setY(y);
 
         // Which obstacle in collision with Player
         List<Shape> lst = new ArrayList<>();
         for (Shape s : model.obstacles) {
-            Shape inter = Shape.intersect(shape1, s);
+            Shape inter = Shape.intersect(shapeNextPos, s);
             Bounds b = inter.getBoundsInLocal();
             if (b.getWidth() != -1) {
                 lst.add(s);
@@ -343,11 +342,11 @@ public class Player extends Sprite {
                 yVelocity = i;
                 x = getNewX();
                 y = getNewY();
-                shape1.setX(x);
-                shape1.setY(y);
+                shapeNextPos.setX(x);
+                shapeNextPos.setY(y);
                 boolean collide = false;
                 for (Shape s : lst) {
-                    Shape inter = Shape.intersect(shape1, s);
+                    Shape inter = Shape.intersect(shapeNextPos, s);
                     Bounds b = inter.getBoundsInLocal();
                     if (b.getWidth() != -1) {
                         collide = true;
@@ -446,6 +445,9 @@ public class Player extends Sprite {
     }
 
     public Rectangle getShape() {
+        return shapeNextPos;
+    }
+    public Rectangle getFirstShape() {
         return shape;
     }
 
