@@ -33,7 +33,7 @@ public class MenuController {
      */
     public void play() {
         LevelsMenu levelsMenu = new LevelsMenu();
-        scene_levels = new Scene(levelsMenu, 1200, 800);
+        scene_levels = new Scene(levelsMenu.scrollPane, 1200, 800);
         primaryStage.setScene(scene_levels);
     }
 

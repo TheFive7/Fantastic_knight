@@ -30,15 +30,16 @@ public class RankingMenu extends Pane {
                         BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                         BackgroundSize.DEFAULT)));
 
-        //setStyle("-fx-background-repeat: url('" + Game.class.getResource("levels.png") + "')");
 
         // Button return menu
         Button buttonMenu = new Button();
-        buttonMenu.setLayoutX(1128);
+        buttonMenu.setLayoutX(1115);
         buttonMenu.setLayoutY(697);
         buttonMenu.setOnAction(e -> returnMenu());
-        buttonMenu.setOpacity(0);
-        buttonMenu.setPrefSize(60, 85.3);
+        ImageView imageView = new ImageView(new Image("file:src/main/resources/com/fantastic_knight/icons/back.png"));
+        buttonMenu.setGraphic(imageView);
+        buttonMenu.setPrefSize(40, 40);
+        buttonMenu.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT,null,null)));
 
         // Classement
         Label classement = new Label();

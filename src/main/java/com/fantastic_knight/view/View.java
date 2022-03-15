@@ -39,7 +39,7 @@ public class View {
         // SI PLAYER 2 > PLAYER 1
         if (isMultiplayerOn){
             if (model.player2.getyPosition() < model.player1.getyPosition()) {
-                scrollPane.setVvalue((model.player2.getyPosition() + model.player2.getHeight()) / (model.height * factor));
+                scrollPane.setVvalue((model.player2.getyPosition() + model.player2.getHeight() - scrollPane.getVvalue() * model.player2.getyPosition()) / (model.height * factor));
             }
         }
 
