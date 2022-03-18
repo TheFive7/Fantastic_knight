@@ -447,6 +447,7 @@ public class Player extends Sprite {
     public Rectangle getShape() {
         return shapeNextPos;
     }
+
     public Rectangle getFirstShape() {
         return shape;
     }

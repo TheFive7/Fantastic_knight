@@ -39,6 +39,7 @@ public class Model {
     public final List<Shape> obstacles; // obstacles in each scene
     public final List<Item> items;      // items in the game
     public final List<Consumable> consumables;      // consumables in the game
+    public static List<String> levels = findAllLevels();
 
     // STATE
     public int state;
@@ -107,7 +108,7 @@ public class Model {
         state = STATE_PLAY;
         players.add(player1);
         if (isMultiplayerOn) players.add(player2);
-        // ennemies.add(ennemy);
+        ennemies.add(ennemy);
         chrono = new Chrono();
         thread = new Thread(chrono);
         thread.start();

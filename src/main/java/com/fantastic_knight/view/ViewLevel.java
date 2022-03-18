@@ -55,7 +55,7 @@ public class ViewLevel {
 //        pane.getChildren().add(r1);
 
         // Autocall the init method to set up the level.
-        loadLevel(Game.levels.get(levelNumber));
+        loadLevel(Model.levels.get(levelNumber));
 
         init();
     }
@@ -153,7 +153,8 @@ public class ViewLevel {
         }
 
         // Ennemy
-        // pane.getChildren().add(model.ennemy.getShape());
+        pane.getChildren().add(model.ennemy.getFirstShape());
+        pane.getChildren().add(model.ennemy.getShape());
     }
 
     /**

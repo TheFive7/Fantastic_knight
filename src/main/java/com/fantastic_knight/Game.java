@@ -9,9 +9,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import java.util.List;
-
-import static com.fantastic_knight.model.Model.findAllLevels;
 
 public class Game extends Application {
     public static View view;
@@ -22,15 +19,12 @@ public class Game extends Application {
     public static Scene scene_menu;
     public static Scene scene_credits;
 
-    public static List<String> levels = findAllLevels();
-
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-        // System.out.println(levels);
         primaryStage = stage;
 
         model = new Model();
@@ -47,7 +41,6 @@ public class Game extends Application {
         // SCENES PRINCIPALES
         scene_menu = new Scene(root_menu, model.width, model.height);
         scene_game = new Scene(view.scrollPane, model.width, model.height);
-//        scene_game = new Scene(view.root, model.width, model.height);
         scene_credits = new Scene(root_credits, model.width, model.height);
 
         stage.setTitle("Fantastic Knight");

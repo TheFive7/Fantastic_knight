@@ -1,16 +1,12 @@
 package com.fantastic_knight.view;
 
 import com.fantastic_knight.controller.RankingMenu;
-import com.fantastic_knight.model.Key;
 import com.fantastic_knight.model.Model;
-import com.fantastic_knight.model.Shield;
-import com.fantastic_knight.model.Sword;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 
 import java.util.List;
 
-import static com.fantastic_knight.Game.levels;
 import static com.fantastic_knight.Game.primaryStage;
 import static com.fantastic_knight.controller.MenuController.isMultiplayerOn;
 import static com.fantastic_knight.controller.MenuController.scene_levels;
@@ -39,7 +35,7 @@ public class View {
         // SI PLAYER 2 > PLAYER 1
         if (isMultiplayerOn){
             if (model.player2.getyPosition() < model.player1.getyPosition()) {
-                scrollPane.setVvalue((model.player2.getyPosition() + model.player2.getHeight() - scrollPane.getVvalue() * model.player2.getyPosition()) / (model.height * factor));
+                scrollPane.setVvalue((model.player2.getyPosition() + model.player2.getHeight()) / (model.height * factor));
             }
         }
 
@@ -89,7 +85,7 @@ public class View {
 
         paneGame = new Pane();
         paneGame.setPrefSize(model.width, model.height * factor);
-        for (int i = 0; i < levels.size(); i++) {
+        for (int i = 0; i < Model.levels.size(); i++) {
             if (model.level - 1 == i) {
                 currentLevel = new ViewLevel(model, paneGame, i);
                 break;

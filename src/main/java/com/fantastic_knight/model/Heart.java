@@ -30,8 +30,8 @@ public class Heart extends Item {
             Thread t = new Thread(timer);
 
             // Display Heart
-            getShape().setX(player.getShape().getX() - 32);
-            getShape().setY(player.getShape().getY() - 32);
+            getShape().setX(player.getFirstShape().getX() - 32);
+            getShape().setY(player.getFirstShape().getY() - 32);
             getShape().setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/heart_burst.png")));
             t.start();
         } else {

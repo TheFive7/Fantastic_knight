@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 import static com.fantastic_knight.Game.*;
-import static com.fantastic_knight.controller.MenuController.returnMenu;
+import static com.fantastic_knight.model.Model.levels;
 
 public class LevelsMenu extends Pane {
 

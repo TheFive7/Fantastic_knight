@@ -1,6 +1,7 @@
 package com.fantastic_knight.levelMaker;
 
 import com.fantastic_knight.Game;
+import com.fantastic_knight.model.Model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
@@ -239,7 +240,7 @@ public class LevelMaker extends Pane {
      * Retourne au menu
      */
     void menu() {
-        levels = findAllLevels();
+        Model.levels = findAllLevels();
         primaryStage.setWidth(1200);
         primaryStage.setScene(scene_menu);
     }

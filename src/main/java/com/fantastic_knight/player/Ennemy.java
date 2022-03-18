@@ -19,6 +19,7 @@ import static com.fantastic_knight.model.Model.factor;
 
 public class Ennemy extends Sprite {
     Rectangle shape;
+    Rectangle shapeNextPos;
     final double width;
     final double height;
     double xPosition;
@@ -55,6 +56,8 @@ public class Ennemy extends Sprite {
         height = imageRight[0].getHeight();
         shape = new Rectangle(width, height);
         shape.setFill(new ImagePattern(imageRight[0]));
+        shapeNextPos = new Rectangle(width, height);
+        shapeNextPos.setOpacity(0);
 
         // POSITION
         xPosition = 700;
@@ -119,7 +122,7 @@ public class Ennemy extends Sprite {
      */
     public void reset() {
         xPosition = 700;
-        yPosition = model.height - height;
+        yPosition = model.height * factor - height;
         xVelocity = 1;
         yVelocity = 0;
         angle = 0;
@@ -190,8 +193,6 @@ public class Ennemy extends Sprite {
                 chrono.setTime(0);
             }
 
-            Rectangle shape = new Rectangle(width, height);
-
             // Bouge pas
             if (state == State.IDLE) {
                 animation.getTimer().stop();
@@ -202,7 +203,7 @@ public class Ennemy extends Sprite {
                     animation.getTimer().start();
                 }
 
-                testWalk(shape);
+                testWalk();
 
                 // tombe ou saute
                 if (state == State.FALL || state == State.JUMP) {
@@ -210,26 +211,24 @@ public class Ennemy extends Sprite {
                     else yVelocity++;
                 }
 
-                testCollision(shape);
+                testCollision();
             }
         }
     }
 
     /**
      * Marche
-     *
-     * @param shape1 : Rectangle pour savoir la prochaine position
      */
-    public void testWalk(Rectangle shape1) {
+    public void testWalk() {
         if (state == State.WALK || state == State.DASH) {
             // NO FLOOR DETECTION for actual position: just move perso one pixel down
-            shape1.setX(xPosition);
-            shape1.setY(yPosition + 1);
+            shapeNextPos.setX(xPosition);
+            shapeNextPos.setY(yPosition + 1);
 
             // Détection de collision
             boolean isFloor = false;
             for (Shape s : model.obstacles) {
-                Shape inter = Shape.intersect(shape1, s);
+                Shape inter = Shape.intersect(shapeNextPos, s);
                 Bounds b = inter.getBoundsInLocal();
                 if (b.getWidth() != -1) {
                     isFloor = true;
@@ -246,21 +245,19 @@ public class Ennemy extends Sprite {
 
     /**
      * Collision
-     *
-     * @param shape1 : Rectangle pour savoir la prochaine position
      */
-    public void testCollision(Rectangle shape1) {
+    public void testCollision() {
         double x = getNewX();
         double y = getNewY();
 
         // COLLISION DETECTION
-        shape1.setX(x);
-        shape1.setY(y);
+        shapeNextPos.setX(x);
+        shapeNextPos.setY(y);
 
         // Which obstacle in collision with Player
         List<Shape> lst = new ArrayList<>();
         for (Shape s : model.obstacles) {
-            Shape inter = Shape.intersect(shape1, s);
+            Shape inter = Shape.intersect(shapeNextPos, s);
             Bounds b = inter.getBoundsInLocal();
             if (b.getWidth() != -1) {
                 lst.add(s);
@@ -275,11 +272,11 @@ public class Ennemy extends Sprite {
                 yVelocity = i;
                 x = getNewX();
                 y = getNewY();
-                shape1.setX(x);
-                shape1.setY(y);
+                shapeNextPos.setX(x);
+                shapeNextPos.setY(y);
                 boolean collide = false;
                 for (Shape s : lst) {
-                    Shape inter = Shape.intersect(shape1, s);
+                    Shape inter = Shape.intersect(shapeNextPos, s);
                     Bounds b = inter.getBoundsInLocal();
                     if (b.getWidth() != -1) {
                         collide = true;
@@ -338,5 +335,9 @@ public class Ennemy extends Sprite {
 
     public Rectangle getShape() {
         return shape;
+    }
+
+    public Rectangle getFirstShape() {
+        return shapeNextPos;
     }
 }
