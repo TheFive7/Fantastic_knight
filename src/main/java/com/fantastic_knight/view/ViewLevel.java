@@ -8,6 +8,7 @@ import com.fantastic_knight.consumable.SwordConsumable;
 import com.fantastic_knight.items.*;
 import com.fantastic_knight.levelMaker.Platform;
 import com.fantastic_knight.model.*;
+import com.fantastic_knight.player.Ennemy;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -151,10 +152,6 @@ public class ViewLevel {
             model.player2.setSwordPlayer(model.swordPlayer2);
             model.items.add(model.swordPlayer2);
         }
-
-        // Ennemy
-        pane.getChildren().add(model.ennemy.getFirstShape());
-        pane.getChildren().add(model.ennemy.getShape());
     }
 
     /**
@@ -305,6 +302,21 @@ public class ViewLevel {
                             model.consumables.add(swordConsumable);
                             pane.getChildren().add(swordConsumable.getShape());
                         }
+                        case "ennemy" -> {
+                            platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/player/Knight_stand_right_gold.png")));
+                            platform.setOpacity(100);
+
+                            Ennemy ennemy = new Ennemy(model);
+                            ennemy.getShape().setX(platform.getxCoordonnee() * 100 + 30);
+                            ennemy.getShape().setY(platform.getyCoordonnee() * 20 + 10);
+                            ennemy.getFirstShape().setX(platform.getxCoordonnee() * 100 + 30);
+                            ennemy.getFirstShape().setY(platform.getyCoordonnee() * 20 + 10);
+                            ennemy.setxPosition(platform.getxCoordonnee() * 100 + 30);
+                            ennemy.setyPosition(platform.getyCoordonnee() * 20);
+                            model.ennemies.add(ennemy);
+                            pane.getChildren().add(ennemy.getFirstShape());
+                            pane.getChildren().add(ennemy.getShape());
+                        }
                         default -> platform.setOpacity(0);
                     }
 
@@ -316,7 +328,9 @@ public class ViewLevel {
                                     if (!type.equals("halo")) {
                                         if (!type.equals("sword")) {
                                             if (!type.equals("key")) {
-                                                pane.getChildren().add(platform);
+                                                if (!type.equals("ennemy")) {
+                                                    pane.getChildren().add(platform);
+                                                }
                                             }
                                         }
                                     }

@@ -58,9 +58,6 @@ public class Model {
     public SwordPlayer swordPlayer;
     public SwordPlayer swordPlayer2;
 
-    // ENNEMIES
-    public Ennemy ennemy;
-
     // ATH PLAYER 1
     public Shield shield;
     public Sword sword;
@@ -90,7 +87,6 @@ public class Model {
         lastFrame = -1;
         player1 = new Player(this, "Red Knight");
         player2 = new Player(this, "Platine Knight");
-        ennemy = new Ennemy(this);
         door = new Door(this);
         obstacles = new ArrayList<>();
         players = new ArrayList<>();
@@ -108,7 +104,6 @@ public class Model {
         state = STATE_PLAY;
         players.add(player1);
         if (isMultiplayerOn) players.add(player2);
-        ennemies.add(ennemy);
         chrono = new Chrono();
         thread = new Thread(chrono);
         thread.start();
@@ -120,7 +115,9 @@ public class Model {
     public void reset() {
         player1.reset();
         if (isMultiplayerOn) player2.reset();
-        ennemy.reset();
+        for (Ennemy ennemy : ennemies){
+            ennemy.reset();
+        }
         players.clear();
         items.clear();
         consumables.clear();

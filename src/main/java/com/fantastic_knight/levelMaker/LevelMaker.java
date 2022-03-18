@@ -33,7 +33,7 @@ public class LevelMaker extends Pane {
             add(false); add(false);
             add(false); add(false);
             add(false); add(false);
-            add(false);
+            add(false); add(false);
         }
     };
 
@@ -128,7 +128,8 @@ public class LevelMaker extends Pane {
                 chemin + "assets" + "/" + "shield" + ".png",
                 chemin + "assets" + "/" + "key" + ".png",
                 chemin + "consumables" + "/" + "halo" + ".png",
-                chemin + "consumables" + "/" + "sword" + ".png"
+                chemin + "consumables" + "/" + "sword" + ".png",
+                chemin + "player" + "/" + "Knight_stand_right_gold" + ".png"
         );
 
         ComboBox<String> comboBox = new ComboBox<>(options);
@@ -182,12 +183,16 @@ public class LevelMaker extends Pane {
                     setAllFalse(8);
                 }
                 case 9 -> {
-                    booleans.set(9, setCheckActive(booleans.get(8), "consumables", "halo"));
+                    booleans.set(9, setCheckActive(booleans.get(9), "consumables", "halo"));
                     setAllFalse(9);
                 }
                 case 10 -> {
-                    booleans.set(10, setCheckActive(booleans.get(9), "consumables", "sword"));
+                    booleans.set(10, setCheckActive(booleans.get(10), "consumables", "sword"));
                     setAllFalse(10);
+                }
+                case 11 -> {
+                    booleans.set(11, setCheckActive(booleans.get(11), "player", "Knight_stand_right_gold"));
+                    setAllFalse(11);
                 }
             }
         });
@@ -329,6 +334,15 @@ public class LevelMaker extends Pane {
                     platforms[x][y].setHeight(40);
                     platforms[x][y].setLayoutX(x * 100 + 30);
                     platforms[x][y].setLayoutY(y * 20);
+                }
+
+                // Ennemy
+                if (booleans.get(11)){
+                    platforms[x][y].setType("ennemy");
+                    platforms[x][y].setWidth(40);
+                    platforms[x][y].setHeight(70);
+                    platforms[x][y].setLayoutX(x * 100 + 30);
+                    platforms[x][y].setLayoutY(y * 20 + 10);
                 }
 
                 platforms[x][y].setFill(new ImagePattern(currentImg));
@@ -476,6 +490,15 @@ public class LevelMaker extends Pane {
                             platform.setHeight(40);
                             platform.setLayoutX(x * 100 + 30);
                         }
+                        case "ennemy" -> {
+                            platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/player/Knight_stand_right_gold.png")));
+                            platform.setOpacity(100);
+                            platform.setType("ennemy");
+                            platform.setWidth(40);
+                            platform.setHeight(70);
+                            platform.setLayoutX(x * 100 + 30);
+                            platform.setLayoutY(y * 20 + 10);
+                        }
                         default -> {
                             platform.setOpacity(0);
                             platform.setType("void");
@@ -521,6 +544,9 @@ class StatusListCell extends ListCell<String> {
             } else if (item.contains("consumables") || item.contains("shield")){
                 imageView.setFitWidth(80);
                 imageView.setFitHeight(80);
+            } else if (item.contains("player")) {
+                imageView.setFitWidth(40);
+                imageView.setFitHeight(70);
             }
             setGraphic(imageView);
         }
