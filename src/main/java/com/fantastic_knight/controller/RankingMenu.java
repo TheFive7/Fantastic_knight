@@ -45,9 +45,9 @@ public class RankingMenu extends Pane {
         Label classement = new Label();
         classement.setText("Classement : ");
         classement.setLayoutX(400);
-        classement.setLayoutY(250);
+        classement.setLayoutY(150);
         classement.setFont(new Font(58));
-        classement.setTextFill(Color.WHITE);
+        classement.setTextFill(Color.LIGHTGRAY);
         classement.setStyle("-fx-font-weight: bold");
         getChildren().addAll(buttonMenu, classement);
 
@@ -91,8 +91,8 @@ public class RankingMenu extends Pane {
             title.setText(k);
             title.setStyle("-fx-font-weight: bold");
             title.setLayoutX(400);
-            title.setLayoutY(325+60*5*levels.indexOf(k));
-            title.setFont(new Font(54));
+            title.setLayoutY(220+60*5*levels.indexOf(k));
+            title.setFont(new Font(44));
             title.setTextFill(Color.BLACK);
             getChildren().add(title);
             for (int i=0; i<v.size();i++) {
@@ -100,11 +100,10 @@ public class RankingMenu extends Pane {
                     break;
                 Label label = new Label();
                 label.setText((i+1) + " : " + v.get(i));
-                label.setStyle("-fx-font-weight: bold");
                 label.setLayoutX(400);
-                label.setLayoutY(380 + 60*5 * levels.indexOf(k) + 65*i);
+                label.setLayoutY(280 + 60*5 * levels.indexOf(k) + 65*i);
                 label.setFont(new Font(38));
-                label.setTextFill(Color.BLACK);
+                label.setTextFill(Color.color(0.05,0.05,0.05));
                 getChildren().add(label);
             }
         });
