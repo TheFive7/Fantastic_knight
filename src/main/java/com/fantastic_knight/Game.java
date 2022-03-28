@@ -23,6 +23,13 @@ public class Game extends Application {
         launch(args);
     }
 
+    /*
+    TODO
+     * Bug Halo (on se prend la flèche)
+     * Bug épée (elle sort desfois comme ça)
+     * Bug level 3 (message pas au niveau du perso)
+     */
+
     @Override
     public void start(Stage stage) throws Exception {
         primaryStage = stage;
