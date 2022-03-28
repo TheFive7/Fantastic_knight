@@ -25,9 +25,22 @@ public class Game extends Application {
 
     /*
     TODO
-     * Bug Halo (on se prend la flèche)
-     * Bug épée (elle sort desfois comme ça)
-     * Bug level 3 (message pas au niveau du perso)
+     ***** BUGS *****
+     * Bug : Halo (on se prend la flèche)
+     * Bug : épée (elle sort desfois comme ça)
+     * Bug : level 3 (message pas au niveau du perso)
+     * Bug : Click sur le classement réduit tout
+     *
+     ***** A FAIRE *****
+     * Ajouter le chrono pour pouvoir le voir
+     * Faire un .jar du projet
+     *
+     ***** OPTIONNEL *****
+     * Système de rang pour débloquer des niveaux et des skins
+     * Améliorer l'IA de l'ennemi
+     * Ajouter la fausse plateforme et la pierre
+     * Ajouter l'animation de la mort de l'ennemi
+     * Ajouter l'animation du slash de l'épéee
     */
 
     @Override
