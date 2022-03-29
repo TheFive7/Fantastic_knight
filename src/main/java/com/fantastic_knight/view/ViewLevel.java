@@ -50,10 +50,6 @@ public class ViewLevel {
         pane.getChildren().add(model.eastWall);
         pane.getChildren().add(model.westWall);
 
-//        Rectangle r1 = new Rectangle(300, model.height * 2 - 100, 100, 20);
-//        model.obstacles.add(r1);
-//        pane.getChildren().add(r1);
-
         // Autocall the init method to set up the level.
         loadLevel(Model.levels.get(levelNumber));
 
@@ -184,7 +180,7 @@ public class ViewLevel {
                     platform.setyCoordonnee(y);
                     platform.setLayoutX(x * 100);
                     platform.setLayoutY(y * 20);
-                    //dSystem.out.println("put a platform in "+(x*100)+","+(y*20));
+                    // System.out.println("put a platform in "+(x*100)+","+(y*20));
 
                     switch (type) {
                         case "platform" -> {

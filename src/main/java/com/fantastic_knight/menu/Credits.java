@@ -1,5 +1,6 @@
 package com.fantastic_knight.menu;
 
+import com.fantastic_knight.model.Sounds;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.control.Button;
@@ -18,6 +19,9 @@ public class Credits extends Pane {
     public ScrollPane sp;
 
     public Credits() {
+        Sounds.mediaPlayerBackgroundMusic.stop();
+        Sounds.mediaPlayerCredit.play();
+
         sp = new ScrollPane();
         Image credits = new Image("file:src/main/resources/com/fantastic_knight/menu/credits.png");
         sp.setContent(new ImageView(credits));
@@ -32,7 +36,10 @@ public class Credits extends Pane {
         Button buttonMenu = new Button();
         buttonMenu.setLayoutX(1115);
         buttonMenu.setLayoutY(697);
-        buttonMenu.setOnAction(e -> returnMenu());
+        buttonMenu.setOnAction(e -> {
+            Sounds.mediaPlayerCredit.stop();
+            returnMenu();
+        });
         ImageView imageView = new ImageView(new Image("file:src/main/resources/com/fantastic_knight/icons/back.png"));
         buttonMenu.setGraphic(imageView);
         buttonMenu.setPrefSize(40, 40);

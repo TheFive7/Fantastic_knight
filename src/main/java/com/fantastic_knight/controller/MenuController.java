@@ -4,6 +4,7 @@ import com.fantastic_knight.Game;
 import com.fantastic_knight.levelMaker.LevelMaker;
 import com.fantastic_knight.menu.Credits;
 import com.fantastic_knight.menu.LevelsMenu;
+import com.fantastic_knight.model.Sounds;
 import com.fantastic_knight.options.OptionsMenu;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -102,6 +103,7 @@ public class MenuController {
     }
 
     public static void returnMenu() {
+        Sounds.mediaPlayerBackgroundMusic.play();
         primaryStage.setScene(scene_menu);
         System.out.println("test");
     }

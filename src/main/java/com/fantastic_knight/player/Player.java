@@ -7,10 +7,13 @@ import com.fantastic_knight.model.*;
 import com.fantastic_knight.objects.Protection;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -249,14 +252,12 @@ public class Player extends Sprite {
                 model.labelWin.setOpacity(100);
                 model.chrono.terminate();
             }
-
             model.swordPlayer.update();
         }
     }
 
     /**
      * Sauter
-     *
      */
     public void testJump() {
         if (state == State.JUMP) {
@@ -404,12 +405,13 @@ public class Player extends Sprite {
     }
 
     public void setLife(boolean life) {
-        // Media hurtSound = new Media(new File("src/main/resources/com/fantastic_knight/sounds/dead.wav").toURI().toString());
-        // MediaPlayer mediaPlayerHurt = new MediaPlayer(hurtSound);
         if (!life) {
             heart.setActive(false);
             shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/shield_empty.png")));
-            // mediaPlayerHurt.setVolume(model.volume); mediaPlayerHurt.play();
+
+            // Sounds.mediaPlayerHurt = new MediaPlayer(Sounds.hurtSound);
+            Sounds.mediaPlayerHurt.stop();
+            Sounds.mediaPlayerHurt.play();
         } else {
             shield.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/shield.png")));
         }
@@ -500,10 +502,6 @@ public class Player extends Sprite {
         return life;
     }
 
-    public boolean isInvincibility() {
-        return invincibility;
-    }
-
     public Model getModel() {
         return model;
     }
@@ -524,10 +522,6 @@ public class Player extends Sprite {
         return protection;
     }
 
-    public boolean isCanDash() {
-        return canDash;
-    }
-
     public void setCanDash(boolean canDash) {
         this.canDash = canDash;
     }
@@ -536,15 +530,9 @@ public class Player extends Sprite {
         this.isSword = isSword;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
-
-    public boolean getisSword(){return this.isSword;}
 
     public void chooseSkin() {
         switch (name) {

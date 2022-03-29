@@ -67,3 +67,6 @@ Unknown,31.67,level 3
 Unknown,39.11,easy
 Unknown,51.94,level 1
 Unknown,25.39,level 2
+Unknown,45.5,easy
+Unknown,21.09,level 2
+Unknown,32.05,easy

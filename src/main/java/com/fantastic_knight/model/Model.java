@@ -7,6 +7,8 @@ import com.fantastic_knight.items.SwordPlayer;
 import com.fantastic_knight.player.Ennemy;
 import com.fantastic_knight.player.Player;
 import javafx.scene.control.Label;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Shape;
 
 import java.io.File;
@@ -36,8 +38,8 @@ public class Model {
     // LISTS
     public final List<Player> players;
     public final List<Ennemy> ennemies;
-    public final List<Shape> obstacles; // obstacles in each scene
-    public final List<Item> items;      // items in the game
+    public final List<Shape> obstacles;             // obstacles in each scene
+    public final List<Item> items;                  // items in the game
     public final List<Consumable> consumables;      // consumables in the game
     public static List<String> levels = findAllLevels();
 
@@ -75,9 +77,7 @@ public class Model {
     public Door door;
 
     // SOUNDS
-    public double volume = 20.0;
-    // public Media backgroundMusic = new Media(new File("src/main/resources/com/fantastic_knight/sounds/fantasy.wav").toURI().toString());
-    // public MediaPlayer mediaPlayerBackgroundMusic = new MediaPlayer(backgroundMusic);
+    public double volume = 1.0;
 
     public Model() {
         state = STATE_INITIAL;
@@ -94,7 +94,8 @@ public class Model {
         items = new ArrayList<>();
         consumables = new ArrayList<>();
 
-        // mediaPlayerBackgroundMusic.play();
+        Sounds.mediaPlayerBackgroundMusic.setCycleCount(MediaPlayer.INDEFINITE);
+        Sounds.mediaPlayerBackgroundMusic.play();
     }
 
     /**
@@ -115,9 +116,6 @@ public class Model {
     public void reset() {
         player1.reset();
         if (isMultiplayerOn) player2.reset();
-        for (Ennemy ennemy : ennemies){
-            ennemy.reset();
-        }
         players.clear();
         items.clear();
         consumables.clear();

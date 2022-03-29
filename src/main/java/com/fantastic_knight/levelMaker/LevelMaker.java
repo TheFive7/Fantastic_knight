@@ -2,6 +2,7 @@ package com.fantastic_knight.levelMaker;
 
 import com.fantastic_knight.Game;
 import com.fantastic_knight.model.Model;
+import com.fantastic_knight.model.Sounds;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
@@ -10,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;

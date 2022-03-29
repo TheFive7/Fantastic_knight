@@ -110,7 +110,6 @@ public class View {
                 RankingMenu.register(tempsChrono, levels.get(model.level - 1));
             }
         }
-
         model.state = Model.STATE_INITIAL;
         model.reset();
         primaryStage.setScene(scene_levels);
