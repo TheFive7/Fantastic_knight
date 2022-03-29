@@ -66,7 +66,7 @@ public class MenuController {
      * Bouton RANKING
      */
     public void ranking() {
-        System.out.println(model.state);
+        // System.out.println(model.state);
         RankingMenu rankingMenu = new RankingMenu();
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setPannable(false);
@@ -105,7 +105,6 @@ public class MenuController {
     public static void returnMenu() {
         Sounds.mediaPlayerBackgroundMusic.play();
         primaryStage.setScene(scene_menu);
-        System.out.println("test");
     }
 
     public void quit() {

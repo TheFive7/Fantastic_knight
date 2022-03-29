@@ -2,6 +2,7 @@ package com.fantastic_knight.options;
 
 import com.fantastic_knight.Game;
 import com.fantastic_knight.menu.ButtonLevel;
+import com.fantastic_knight.model.Sounds;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -166,21 +167,21 @@ public class OptionsMenu extends Pane {
 
         // Label for background music
         Label backgroundMusic = new Label("- Musique");
-        backgroundMusic.setLayoutX(25); backgroundMusic.setLayoutY(50);
+        backgroundMusic.setLayoutX(100); backgroundMusic.setLayoutY(50);
         backgroundMusic.setFont(new Font(25));
         backgroundMusic.setStyle("-fx-font-weight: bold; -fx-text-fill: black");
 
         // Label environnment sounds
         Label environnementSounds = new Label("- Autres");
-        environnementSounds.setLayoutX(25); environnementSounds.setLayoutY(300);
+        environnementSounds.setLayoutX(100); environnementSounds.setLayoutY(300);
         environnementSounds.setFont(new Font(25));
         environnementSounds.setStyle("-fx-font-weight: bold; -fx-text-fill: black");
 
         // Image sound
         imageSound = new ImageView(new Image("file:src/main/resources/com/fantastic_knight/icons/sound.png"));
-        imageSound.setFitHeight(imageSound.getImage().getHeight()*0.20);
-        imageSound.setFitWidth(imageSound.getImage().getWidth()*0.20);
-        imageSound.setLayoutX(50); imageSound.setLayoutY(125);
+        imageSound.setFitHeight(imageSound.getImage().getHeight()*0.15);
+        imageSound.setFitWidth(imageSound.getImage().getWidth()*0.15);
+        imageSound.setLayoutX(100); imageSound.setLayoutY(125);
 
         // Vertical slider for background music
         Slider slider = new Slider(0, 100, 50);
@@ -192,7 +193,7 @@ public class OptionsMenu extends Pane {
         slider.setValueChanging(true);
         slider.setOnMouseDragged(e -> {
             modifySounds.getChildren().remove(imageSound);
-            chooseIconSound(slider.getValue(),50,125);
+            chooseIconSound(slider.getValue());
         });
 
         // Vertical slider for sounds
@@ -205,7 +206,7 @@ public class OptionsMenu extends Pane {
         soundsSlider.setValueChanging(true);
         soundsSlider.setOnMouseDragged(e -> {
             modifySounds.getChildren().remove(imageSound);
-            chooseIconSound(soundsSlider.getValue(),50,125);
+            chooseIconSound(soundsSlider.getValue());
         });
 
         // Button to save
@@ -228,25 +229,28 @@ public class OptionsMenu extends Pane {
         }
         model.player1.chooseSkin();
     }
-    private void chooseIconSound(double value, double x, double y) {
+
+    private void chooseIconSound(double value) {
         // Changing if the volume is set at 0%
-        if (value==0){
+        if (value == 0){
             imageSound = new ImageView(new Image("file:src/main/resources/com/fantastic_knight/icons/mute.png"));
-            imageSound.setFitHeight(imageSound.getImage().getHeight()*0.10);
-            imageSound.setFitWidth(imageSound.getImage().getWidth()*0.10);
-        } else {
-            imageSound = new ImageView(new Image("file:src/main/resources/com/fantastic_knight/icons/sound.png"));
             imageSound.setFitHeight(imageSound.getImage().getHeight()*0.20);
             imageSound.setFitWidth(imageSound.getImage().getWidth()*0.20);
+        } else {
+            imageSound = new ImageView(new Image("file:src/main/resources/com/fantastic_knight/icons/sound.png"));
+            imageSound.setFitHeight(imageSound.getImage().getHeight()*0.15);
+            imageSound.setFitWidth(imageSound.getImage().getWidth()*0.15);
         }
-        imageSound.setLayoutX(x); imageSound.setLayoutY(y);
+        imageSound.setLayoutX(100); imageSound.setLayoutY(125);
         modifySounds.getChildren().add(imageSound);
     }
 
     private void saveSoundProperties(double valueMusic, double valueSounds) {
-        //model.mediaPlayerBackgroundMusic.setVolume(valueMusic/100);
-        System.out.println("Setting the volume at : "+valueMusic/100+"\n");
-        model.volume = valueSounds;
-        System.out.println("Setting the sounds at : "+valueSounds/100+"\n");
+        // MUSIC
+        Sounds.mediaPlayerBackgroundMusic.setVolume(valueMusic/100);
+        Sounds.mediaPlayerCredit.setVolume(valueMusic/100);
+
+        // SOUNDS
+        Sounds.mediaPlayerHurt.setVolume(valueSounds/100);
     }
 }
