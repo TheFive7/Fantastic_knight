@@ -23,7 +23,7 @@ public class Game extends Application {
         launch(args);
     }
 
-    /*
+    /*------------------------------------------------
     TODO
      ***** BUGS *****
      * Bug : Halo (on se prend la flèche)
@@ -34,6 +34,9 @@ public class Game extends Application {
      ***** A FAIRE *****
      * Ajouter le chrono pour pouvoir le voir
      * Faire un .jar du projet
+     * Classement à réagencer
+     * Options à réagencer
+     * Enlever le bouton roue dentée inutile
      *
      ***** OPTIONNEL *****
      * Système de rang pour débloquer des niveaux et des skins
@@ -41,7 +44,7 @@ public class Game extends Application {
      * Ajouter la fausse plateforme et la pierre
      * Ajouter l'animation de la mort de l'ennemi
      * Ajouter l'animation du slash de l'épéee
-    */
+    ---------------------------------------------------*/
 
     @Override
     public void start(Stage stage) throws Exception {

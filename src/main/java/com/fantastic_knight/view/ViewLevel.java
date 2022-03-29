@@ -19,7 +19,6 @@ import javafx.scene.text.Font;
 import java.io.FileInputStream;
 import java.util.Scanner;
 
-import static com.fantastic_knight.Game.view;
 import static com.fantastic_knight.controller.MenuController.isMultiplayerOn;
 import static com.fantastic_knight.model.Model.factor;
 
