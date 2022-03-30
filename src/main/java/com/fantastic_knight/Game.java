@@ -28,17 +28,17 @@ public class Game extends Application {
      ***** BUGS *****
      o Bug : Halo (on se prend la flèche)
      o Bug : épée (elle sort desfois comme ça)
-     o Bug : level 3 (message pas au niveau du perso)
+     x Bug : level 3 (message pas au niveau du perso)
      o Bug : Click sur le classement réduit tout
      *
      ***** A FAIRE *****
-     o Ajouter le chrono pour pouvoir le voir
      o Faire un .jar du projet
      o Classement à réagencer
      x Options à réagencer
      x Enlever le bouton roue dentée inutile
      *
      ***** OPTIONNEL *****
+     o Ajouter le chrono pour pouvoir le voir
      o Système de rang pour débloquer des niveaux et des skins
      o Améliorer l'IA de l'ennemi
      o Ajouter la fausse plateforme et la pierre

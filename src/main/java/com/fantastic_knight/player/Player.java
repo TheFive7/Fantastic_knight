@@ -7,17 +7,12 @@ import com.fantastic_knight.model.*;
 import com.fantastic_knight.objects.Protection;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.fantastic_knight.controller.MenuController.isMultiplayerOn;
 import static com.fantastic_knight.model.Model.factor;
 
 public class Player extends Sprite {
@@ -108,7 +103,6 @@ public class Player extends Sprite {
 
         if (this.equals(model.player1)) model.swordPlayer.orientationSword("left");
         if (this.equals(model.player2)) model.swordPlayer2.orientationSword("left");
-
     }
 
     /**
@@ -249,6 +243,7 @@ public class Player extends Sprite {
             // Win
             if(isWin()){
                 setWin(false);
+                model.labelWin.setLayoutY(getFirstShape().getY());
                 model.labelWin.setOpacity(100);
                 model.chrono.terminate();
             }
