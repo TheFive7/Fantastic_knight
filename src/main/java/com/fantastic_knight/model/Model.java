@@ -76,9 +76,6 @@ public class Model {
     public boolean isKey = false;
     public Door door;
 
-    // SOUNDS
-    public double volume = 1.0;
-
     public Model() {
         state = STATE_INITIAL;
         level = 1;

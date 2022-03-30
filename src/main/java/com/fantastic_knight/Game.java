@@ -26,24 +26,24 @@ public class Game extends Application {
     /*------------------------------------------------
     TODO
      ***** BUGS *****
-     * Bug : Halo (on se prend la flèche)
-     * Bug : épée (elle sort desfois comme ça)
-     * Bug : level 3 (message pas au niveau du perso)
-     * Bug : Click sur le classement réduit tout
+     o Bug : Halo (on se prend la flèche)
+     o Bug : épée (elle sort desfois comme ça)
+     o Bug : level 3 (message pas au niveau du perso)
+     o Bug : Click sur le classement réduit tout
      *
      ***** A FAIRE *****
-     * Ajouter le chrono pour pouvoir le voir
-     * Faire un .jar du projet
-     * Classement à réagencer
-     * Options à réagencer
-     * Enlever le bouton roue dentée inutile
+     o Ajouter le chrono pour pouvoir le voir
+     o Faire un .jar du projet
+     o Classement à réagencer
+     o Options à réagencer
+     x Enlever le bouton roue dentée inutile
      *
      ***** OPTIONNEL *****
-     * Système de rang pour débloquer des niveaux et des skins
-     * Améliorer l'IA de l'ennemi
-     * Ajouter la fausse plateforme et la pierre
-     * Ajouter l'animation de la mort de l'ennemi
-     * Ajouter l'animation du slash de l'épéee
+     o Système de rang pour débloquer des niveaux et des skins
+     o Améliorer l'IA de l'ennemi
+     o Ajouter la fausse plateforme et la pierre
+     o Ajouter l'animation de la mort de l'ennemi
+     o Ajouter l'animation du slash de l'épéee
     ---------------------------------------------------*/
 
     @Override
