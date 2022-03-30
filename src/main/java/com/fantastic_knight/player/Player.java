@@ -249,6 +249,7 @@ public class Player extends Sprite {
             // Win
             if(isWin()){
                 setWin(false);
+                model.labelWin.setLayoutY(getFirstShape().getY());
                 model.labelWin.setOpacity(100);
                 model.chrono.terminate();
             }
