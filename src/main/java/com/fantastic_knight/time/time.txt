@@ -71,3 +71,9 @@ Unknown,25.39,level 2
 Unknown,45.5,easy
 Unknown,21.09,level 2
 Unknown,32.05,easy
+Unknown,33.86,musee
+Unknown,7.97,musee
+Unknown,5.56,musee
+Unknown,7.43,musee
+Unknown,3.34,test
+Unknown,3.56,test
