@@ -100,7 +100,7 @@ public class OptionsMenu extends Pane {
         createSoundPane();
         paneOptionsMenu.getChildren().addAll(buttonMenu,buttonSkin,buttonSounds);
     }
-
+ 
     private void previousPlayer(ImageView imageViewPlayer, List<Image> listSkins) {
         int index = listSkins.indexOf(imageViewPlayer.getImage());
         if (index == 0) {
