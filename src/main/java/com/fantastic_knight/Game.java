@@ -35,7 +35,7 @@ public class Game extends Application {
      o Ajouter le chrono pour pouvoir le voir
      o Faire un .jar du projet
      o Classement à réagencer
-     o Options à réagencer
+     x Options à réagencer
      x Enlever le bouton roue dentée inutile
      *
      ***** OPTIONNEL *****
@@ -43,7 +43,7 @@ public class Game extends Application {
      o Améliorer l'IA de l'ennemi
      o Ajouter la fausse plateforme et la pierre
      o Ajouter l'animation de la mort de l'ennemi
-     o Ajouter l'animation du slash de l'épéee
+     o Ajouter l'animation du slash de l'épée
     ---------------------------------------------------*/
 
     @Override
