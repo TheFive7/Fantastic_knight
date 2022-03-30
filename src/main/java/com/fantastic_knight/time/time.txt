@@ -60,6 +60,7 @@ Unknown,7.99,default
 Unknown,22.02,default
 Unknown,38.5,default
 Unknown,32.36,default
+Unknown,127.36,default
 Unknown,44.68,default
 Unknown,71.54,level 1
 Unknown,32.4,level 3
