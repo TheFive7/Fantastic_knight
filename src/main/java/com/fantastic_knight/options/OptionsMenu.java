@@ -100,7 +100,7 @@ public class OptionsMenu extends Pane {
         createSoundPane();
         paneOptionsMenu.getChildren().addAll(buttonMenu,buttonSkin,buttonSounds);
     }
- 
+
     private void previousPlayer(ImageView imageViewPlayer, List<Image> listSkins) {
         int index = listSkins.indexOf(imageViewPlayer.getImage());
         if (index == 0) {
@@ -194,7 +194,7 @@ public class OptionsMenu extends Pane {
         slider.setValueChanging(true);
         slider.setOnMouseDragged(e -> {
             modifySounds.getChildren().remove(imageSound);
-            chooseIconSound(slider.getValue());
+            chooseIconSound(slider.getValue(), 1);
         });
 
         // Image sound
@@ -213,7 +213,7 @@ public class OptionsMenu extends Pane {
         soundsSlider.setValueChanging(true);
         soundsSlider.setOnMouseDragged(e -> {
             modifySounds.getChildren().remove(imageSoundOther);
-            chooseIconSound(soundsSlider.getValue());
+            chooseIconSound(soundsSlider.getValue(), 2);
         });
 
         // Button to save
@@ -237,19 +237,36 @@ public class OptionsMenu extends Pane {
         model.player1.chooseSkin();
     }
 
-    private void chooseIconSound(double value) {
-        // Changing if the volume is set at 0%
-        if (value == 0){
-            imageSound = new ImageView(new Image("file:src/main/resources/com/fantastic_knight/icons/mute.png"));
-            imageSound.setFitHeight(imageSound.getImage().getHeight()*0.20);
-            imageSound.setFitWidth(imageSound.getImage().getWidth()*0.20);
+    private void chooseIconSound(double value, int i) {
+        if (i==1) {
+            // Changing if the volume is set at 0%
+            if (value == 0) {
+                imageSound = new ImageView(new Image("file:src/main/resources/com/fantastic_knight/icons/mute.png"));
+                imageSound.setFitHeight(imageSound.getImage().getHeight() * 0.20);
+                imageSound.setFitWidth(imageSound.getImage().getWidth() * 0.20);
+            } else {
+                imageSound = new ImageView(new Image("file:src/main/resources/com/fantastic_knight/icons/sound.png"));
+                imageSound.setFitHeight(imageSound.getImage().getHeight() * 0.15);
+                imageSound.setFitWidth(imageSound.getImage().getWidth() * 0.15);
+            }
+            imageSound.setLayoutX(100);
+            imageSound.setLayoutY(125);
+            modifySounds.getChildren().add(imageSound);
         } else {
-            imageSound = new ImageView(new Image("file:src/main/resources/com/fantastic_knight/icons/sound.png"));
-            imageSound.setFitHeight(imageSound.getImage().getHeight()*0.15);
-            imageSound.setFitWidth(imageSound.getImage().getWidth()*0.15);
+            // Changing if the volume is set at 0%
+            if (value == 0) {
+                imageSoundOther = new ImageView(new Image("file:src/main/resources/com/fantastic_knight/icons/mute.png"));
+                imageSoundOther.setFitHeight(imageSoundOther.getImage().getHeight() * 0.20);
+                imageSoundOther.setFitWidth(imageSoundOther.getImage().getWidth() * 0.20);
+            } else {
+                imageSoundOther = new ImageView(new Image("file:src/main/resources/com/fantastic_knight/icons/sound.png"));
+                imageSoundOther.setFitHeight(imageSoundOther.getImage().getHeight() * 0.15);
+                imageSoundOther.setFitWidth(imageSoundOther.getImage().getWidth() * 0.15);
+            }
+            imageSoundOther.setLayoutX(100);
+            imageSoundOther.setLayoutY(335);
+            modifySounds.getChildren().add(imageSoundOther);
         }
-        imageSound.setLayoutX(100); imageSound.setLayoutY(125);
-        modifySounds.getChildren().add(imageSound);
     }
 
     private void saveSoundProperties(double valueMusic, double valueSounds) {

@@ -88,13 +88,14 @@ public class Player extends Sprite {
 
 
     /**
-     * Bouge à gauche
+     * Move the player left
      */
     public void moveLeft() {
         if (state == State.JUMP || state == State.FALL) return;
 
         // Image
         animation.setImages(imageLeft);
+
         xVelocity = 5;
         yVelocity = 0;
         angle = 180;
@@ -106,13 +107,14 @@ public class Player extends Sprite {
     }
 
     /**
-     * Bouge à droite
+     * Move the player right
      */
     public void moveRight() {
         if (state == State.JUMP || state == State.FALL) return;
 
         // Image
         animation.setImages(imageRight);
+
         xVelocity = 5;
         yVelocity = 0;
         angle = 0;
@@ -124,7 +126,7 @@ public class Player extends Sprite {
     }
 
     /**
-     * Stop le personnage
+     * Stop the player
      */
     public void stop() {
         xVelocity = 0;
@@ -135,7 +137,7 @@ public class Player extends Sprite {
     }
 
     /**
-     * Reset le personnage
+     * Reset the player
      */
     public void reset() {
         setWin(false);
@@ -153,8 +155,8 @@ public class Player extends Sprite {
     }
 
     /**
-     * Retourne la nouvelle abscisse
-     * @return : La nouvelle abscisse
+     * Return new x
+     * @return : new x
      */
     private double getNewX() {
         double x = getxPosition();
@@ -163,8 +165,8 @@ public class Player extends Sprite {
     }
 
     /**
-     * Retourne la nouvelle ordonnée
-     * @return : Nouvelle ordonnéee
+     * Return new y
+     * @return : new y
      */
     private double getNewY() {
         double y = getyPosition();
@@ -173,7 +175,7 @@ public class Player extends Sprite {
     }
 
     /**
-     * Fais sauter le personnage
+     * Player jump
      */
     public void jump() {
         if (state == State.JUMP || state == State.IDLE || state == State.DASH) return;
@@ -185,7 +187,7 @@ public class Player extends Sprite {
     }
 
     /**
-     * Move dash (high speed movement of the player)
+     * Dash (high speed movement of the player)
      */
     public void dash(){
         if(state == State.JUMP || state == State.FALL || !canDash) return;
@@ -214,7 +216,7 @@ public class Player extends Sprite {
     }
 
     /**
-     * Actualisation du joueur
+     * Player update
      */
     @Override
     public void update() {
@@ -229,8 +231,8 @@ public class Player extends Sprite {
                 animation.getTimer().start();
             }
 
-            testJump();
-            testWalk();
+            jumpVerification();
+            walkVerification();
 
             // tombe ou saute
             if (state == State.FALL || state == State.JUMP) {
@@ -238,7 +240,7 @@ public class Player extends Sprite {
                 else yVelocity++;
             }
 
-            testCollision();
+            collisionVerification();
 
             // Win
             if(isWin()){
@@ -252,9 +254,9 @@ public class Player extends Sprite {
     }
 
     /**
-     * Sauter
+     * Jump
      */
-    public void testJump() {
+    public void jumpVerification() {
         if (state == State.JUMP) {
             double y = yPosition + yVelocity;
             shapeNextPos.setX(xPosition);
@@ -281,10 +283,9 @@ public class Player extends Sprite {
     }
 
     /**
-     * Marche
-     *
+     * Walk
      */
-    public void testWalk() {
+    public void walkVerification() {
         if (state == State.WALK || state == State.DASH) {
             // NO FLOOR DETECTION for actual position: just move perso one pixel down
             shapeNextPos.setX(xPosition);
@@ -310,9 +311,8 @@ public class Player extends Sprite {
 
     /**
      * Collision
-     *
      */
-    public void testCollision() {
+    public void collisionVerification() {
         double x = getNewX();
         double y = getNewY();
 

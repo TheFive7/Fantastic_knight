@@ -75,3 +75,9 @@ Unknown,18.19,Level oral 1
 Unknown,21.73,Level oral 1
 Unknown,69.51,Level oral 1
 Unknown,27.6,Level oral 1
+Unknown,32.22,Level oral 1
+Unknown,5.84,musee
+Unknown,8.57,musee
+Unknown,14.59,test
+Gwenou,55.03,Level oral 1
+Gwenou,8.86,test
