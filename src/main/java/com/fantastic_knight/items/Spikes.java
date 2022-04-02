@@ -24,9 +24,6 @@ public class Spikes extends Item {
         shape.setFill(new ImagePattern(image));
     }
 
-    /**
-     * Update spike
-     */
     @Override
     public void update() {
         for (Player player : model.players) {

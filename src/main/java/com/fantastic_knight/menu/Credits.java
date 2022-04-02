@@ -19,9 +19,11 @@ public class Credits extends Pane {
     public ScrollPane sp;
 
     public Credits() {
+        // SOUNDS
         Sounds.mediaPlayerBackgroundMusic.stop();
         Sounds.mediaPlayerCredit.play();
 
+        // SCROLLPANE
         sp = new ScrollPane();
         Image credits = new Image("file:src/main/resources/com/fantastic_knight/menu/credits.png");
         sp.setContent(new ImageView(credits));
@@ -30,7 +32,6 @@ public class Credits extends Pane {
         sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         setHeight(1600);
         defile();
-        //getChildren().add(sp);
 
         // Button return menu
         Button buttonMenu = new Button();

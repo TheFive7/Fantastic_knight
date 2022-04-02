@@ -25,6 +25,9 @@ public abstract class Item {
         playerHitbox = model.player1.getShape();
     }
 
+    /**
+     * Update item
+     */
     public abstract void update();
 
     public void setShape(Rectangle shape) {

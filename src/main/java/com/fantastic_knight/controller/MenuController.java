@@ -4,15 +4,15 @@ import com.fantastic_knight.Game;
 import com.fantastic_knight.levelMaker.LevelMaker;
 import com.fantastic_knight.menu.Credits;
 import com.fantastic_knight.menu.LevelsMenu;
+import com.fantastic_knight.menu.RankingMenu;
 import com.fantastic_knight.model.Sounds;
-import com.fantastic_knight.options.OptionsMenu;
+import com.fantastic_knight.menu.OptionsMenu;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
 
 import static com.fantastic_knight.Game.*;
 
@@ -30,7 +30,7 @@ public class MenuController {
     ImageView iconMultiplayer;
 
     /**
-     * Bouton PLAY
+     * Play button
      */
     public void play() {
         LevelsMenu levelsMenu = new LevelsMenu();
@@ -39,7 +39,7 @@ public class MenuController {
     }
 
     /**
-     * Bouton Options
+     * Options button
      */
     public void options() {
         OptionsMenu optionsMenu = new OptionsMenu();
@@ -48,7 +48,7 @@ public class MenuController {
     }
 
     /**
-     * Bouton PLAY LevelMaker
+     * LevelMaker button
      */
     public void playLevelMaker() {
         scene_levelMaker = new Scene(new LevelMaker(), 1200, 800);
@@ -56,6 +56,9 @@ public class MenuController {
         primaryStage.setScene(scene_levelMaker);
     }
 
+    /**
+     * Display crédits
+     */
     public void displayCredits(){
         Credits credits = new Credits();
         scene_credits = new Scene(credits,1200,800);
@@ -63,10 +66,9 @@ public class MenuController {
     }
 
     /**
-     * Bouton RANKING
+     * Ranking button
      */
     public void ranking() {
-        // System.out.println(model.state);
         RankingMenu rankingMenu = new RankingMenu();
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setPannable(false);
@@ -81,7 +83,7 @@ public class MenuController {
     }
 
     /**
-     * Bouton Multiplayer
+     * Multiplayer button
      */
     public void multiplayer() {
         if (isMultiplayerOn){
@@ -96,12 +98,15 @@ public class MenuController {
     }
 
     /**
-     * récupère le pseudo du textfield
+     * Get pseudo
      */
     public void pseudo(){
         globalPseudo = varPseudo.getText();
     }
 
+    /**
+     * Return to the menu
+     */
     public static void returnMenu() {
         Sounds.mediaPlayerBackgroundMusic.play();
         primaryStage.setScene(scene_menu);

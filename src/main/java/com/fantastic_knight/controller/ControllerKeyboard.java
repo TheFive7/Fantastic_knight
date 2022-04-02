@@ -77,8 +77,8 @@ public class ControllerKeyboard implements EventHandler<KeyEvent> {
             control.sword();
         }
 
+        // PLAYER 2
         if (isMultiplayerOn){
-            // PLAYER 2
             if (arg0.getCode() == KeyCode.LEFT) {
                 control.movePersoLeft_2();
             } else if (arg0.getCode() == KeyCode.RIGHT) {

@@ -22,7 +22,7 @@ public class LevelsMenu extends Pane {
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-        // size
+        // Size
         setPrefSize(1200,1600);
 
         // Background
@@ -40,7 +40,7 @@ public class LevelsMenu extends Pane {
 
         getChildren().addAll(bgImage, buttonMenu);
 
-        // browse levels
+        // Browse levels
         int i = 0;
         int j = 0;
         int compteur = 1;

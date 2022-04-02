@@ -1,4 +1,4 @@
-package com.fantastic_knight.objects;
+package com.fantastic_knight.ath;
 
 import com.fantastic_knight.player.Player;
 import javafx.scene.paint.Color;

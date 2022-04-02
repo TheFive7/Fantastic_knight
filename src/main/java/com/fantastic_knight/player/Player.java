@@ -1,10 +1,14 @@
 package com.fantastic_knight.player;
 
-import com.fantastic_knight.animation.AnimationImage;
+import com.fantastic_knight.model.AnimationImage;
+import com.fantastic_knight.ath.Heart;
+import com.fantastic_knight.ath.Key;
+import com.fantastic_knight.ath.Shield;
+import com.fantastic_knight.ath.Sword;
 import com.fantastic_knight.items.Item;
 import com.fantastic_knight.items.SwordPlayer;
 import com.fantastic_knight.model.*;
-import com.fantastic_knight.objects.Protection;
+import com.fantastic_knight.ath.Protection;
 import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;

@@ -1,6 +1,6 @@
 package com.fantastic_knight.items;
 
-import com.fantastic_knight.animation.AnimationImage;
+import com.fantastic_knight.model.AnimationImage;
 import com.fantastic_knight.model.Model;
 import com.fantastic_knight.model.Timer;
 import com.fantastic_knight.player.Player;

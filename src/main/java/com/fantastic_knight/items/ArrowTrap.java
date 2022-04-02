@@ -41,6 +41,9 @@ public class ArrowTrap extends Item {
         arrow.update();
     }
 
+    /**
+     * Initialize the arrow
+     */
     public void initArrow(){
         arrow = new Arrow(model);
         arrow.getShape().setX(getShape().getX());

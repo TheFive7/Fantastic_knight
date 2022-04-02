@@ -1,11 +1,10 @@
-package com.fantastic_knight.controller;
+package com.fantastic_knight.menu;
 
-import com.fantastic_knight.Game;
+import com.fantastic_knight.controller.MenuController;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;

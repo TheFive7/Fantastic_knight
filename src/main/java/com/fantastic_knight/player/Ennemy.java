@@ -1,6 +1,6 @@
 package com.fantastic_knight.player;
 
-import com.fantastic_knight.animation.AnimationImage;
+import com.fantastic_knight.model.AnimationImage;
 import com.fantastic_knight.model.Chrono;
 import com.fantastic_knight.model.Model;
 import com.fantastic_knight.model.State;
@@ -14,7 +14,6 @@ import javafx.scene.shape.Shape;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.fantastic_knight.controller.MenuController.isMultiplayerOn;
 import static com.fantastic_knight.model.Model.factor;
 
 public class Ennemy extends Sprite {
@@ -80,7 +79,7 @@ public class Ennemy extends Sprite {
     }
 
     /**
-     * Bouge à gauche
+     * Move left
      */
     public void moveLeft() {
         if (state == State.FALL) return;
@@ -93,7 +92,7 @@ public class Ennemy extends Sprite {
     }
 
     /**
-     * Bouge à droite
+     * Move right
      */
     public void moveRight() {
         if (state == State.FALL) return;
@@ -107,38 +106,8 @@ public class Ennemy extends Sprite {
     }
 
     /**
-     * Stop l'ennemi
-     */
-    public void stop() {
-        xVelocity = 0;
-        yVelocity = 0;
-        if (lastMove == 1) angle = 180;
-        else angle = 0;
-        state = State.IDLE;
-    }
-
-    /**
-     * Reset l'ennemi
-     */
-    public void reset() {
-        xPosition = 700;
-        yPosition = model.height * factor - height;
-        xVelocity = 1;
-        yVelocity = 0;
-        angle = 0;
-        life = true;
-        isActive = true;
-        shape.setX(xPosition);
-        shape.setY(yPosition);
-        state = State.IDLE;
-        Thread thread = new Thread(chrono);
-        thread.start();
-        animation.getTimer().start();
-    }
-
-    /**
-     * Retourne la nouvelle abscisse
-     * @return : La nouvelle abscisse
+     * Return new x
+     * @return : New x
      */
     private double getNewX() {
         double x = getxPosition();
@@ -147,8 +116,8 @@ public class Ennemy extends Sprite {
     }
 
     /**
-     * Retourne la nouvelle ordonnée
-     * @return : Nouvelle ordonnéee
+     * Return new y
+     * @return : New y
      */
     private double getNewY() {
         double y = getyPosition();
@@ -217,7 +186,7 @@ public class Ennemy extends Sprite {
     }
 
     /**
-     * Marche
+     * Walk
      */
     public void testWalk() {
         if (state == State.WALK || state == State.DASH) {

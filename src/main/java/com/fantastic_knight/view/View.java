@@ -1,6 +1,6 @@
 package com.fantastic_knight.view;
 
-import com.fantastic_knight.controller.RankingMenu;
+import com.fantastic_knight.menu.RankingMenu;
 import com.fantastic_knight.model.Model;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
@@ -29,6 +29,9 @@ public class View {
         game();
     }
 
+    /**
+     * Update scrolling
+     */
     public void update() {
         scrollPane.setVvalue((model.player1.getyPosition() + model.player1.getHeight()) / (model.height * factor));
 

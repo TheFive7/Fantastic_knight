@@ -1,4 +1,4 @@
-package com.fantastic_knight.animation;
+package com.fantastic_knight.model;
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.Image;

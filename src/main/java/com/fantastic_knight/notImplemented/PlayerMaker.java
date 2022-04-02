@@ -1,4 +1,4 @@
-package com.fantastic_knight.playerMaker;
+package com.fantastic_knight.notImplemented;
 
 import javafx.application.Application;
 import javafx.scene.Scene;

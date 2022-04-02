@@ -32,8 +32,9 @@ public class Game extends Application {
      o Bug : Click sur le classement réduit tout
      *
      ***** A FAIRE *****
+     o Centrer le texte de fin sur l'écran
      o Faire un .jar du projet
-     o Classement à réagencer
+     x Classement à réagencer
      x Options à réagencer
      x Enlever le bouton roue dentée inutile
      *

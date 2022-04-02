@@ -5,7 +5,6 @@ import com.fantastic_knight.view.View;
 import javafx.animation.AnimationTimer;
 
 import static com.fantastic_knight.controller.MenuController.isMultiplayerOn;
-import static com.fantastic_knight.model.Model.factor;
 
 public class Controller {
     protected final Model model;
@@ -44,6 +43,16 @@ public class Controller {
         animator.start();
     }
 
+    /**
+     * Reset all perso
+     */
+    public void resetPerso() {
+        model.player1.reset();
+        if (isMultiplayerOn) model.player2.reset();
+    }
+
+    // PLAYER 1
+
     public void movePersoLeft() {
         model.player1.moveLeft();
     }
@@ -67,11 +76,6 @@ public class Controller {
     public void deployProtection() {model.player1.deployProtection();}
 
     public void sword() {model.player1.sword();}
-
-    public void resetPerso() {
-        model.player1.reset();
-        if (isMultiplayerOn) model.player2.reset();
-    }
 
     // PLAYER 2
     public void movePersoLeft_2() {

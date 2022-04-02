@@ -113,7 +113,6 @@ public class LevelMaker extends Pane {
         });
 
         // CHOICE ITEMS
-
         ObservableList<String> options = FXCollections.observableArrayList();
         String chemin = "file:src/main/resources/com/fantastic_knight/";
         options.addAll(
@@ -131,18 +130,21 @@ public class LevelMaker extends Pane {
                 chemin + "player" + "/" + "Knight_stand_right_gold" + ".png"
         );
 
+        // COMBOBOX
         ComboBox<String> comboBox = new ComboBox<>(options);
         comboBox.setLayoutX(50); comboBox.setLayoutY(200);
         comboBox.setCellFactory(c -> new StatusListCell());
         comboBox.setButtonCell(new StatusListCell());
         comboBox.setValue(comboBox.getItems().get(0));
 
+        // CSS
         comboBox.setStyle(
                 "-fx-background-color: transparent;" +
                 "-fx-border-width: 5px;" +
                 "-fx-border-color: black;"
         );
 
+        // COMBOBOX CHOICES
         comboBox.setOnAction(e -> {
             switch (comboBox.getSelectionModel().getSelectedIndex()) {
                 case 0 -> {
@@ -213,12 +215,15 @@ public class LevelMaker extends Pane {
         // AJOUTS
         paneChoose.getChildren().addAll(fileName,exportFile,buttonExport,buttonClear,buttonMenu,textFieldFileName,choiceBoxLevels,comboBox);
         paneLevelMaker.getChildren().addAll(scrollPane,paneChoose);
-//        paneLevelMaker.getChildren().addAll(paneMaker,paneChoose);
         getChildren().add(paneLevelMaker);
 
         load(paneMaker);
     }
 
+    /**
+     * Set all the booleans to false without the index boolean
+     * @param index : index of the boolean who must be true
+     */
     void setAllFalse(int index){
         for (Boolean b : booleans){
             booleans.set(booleans.indexOf(b), false);
@@ -227,7 +232,7 @@ public class LevelMaker extends Pane {
     }
 
     /**
-     * Efface tous les rectangles
+     * Clear all the platforms
      */
     void clear() {
         for (Platform[] platform : platforms){
@@ -241,7 +246,7 @@ public class LevelMaker extends Pane {
     }
 
     /**
-     * Retourne au menu
+     * Back to the menu
      */
     void menu() {
         Model.levels = findAllLevels();
@@ -250,9 +255,9 @@ public class LevelMaker extends Pane {
     }
 
     /**
-     * Dessine une plateforme
+     * Draw a platform
      * @param e : Mouse Event
-     * @param platforms : Tableau des plateformes
+     * @param platforms : Platforms Array
      */
     void drawPlatform(MouseEvent e, Platform[][] platforms){
         int x = (int) (Math.round(e.getX() * 10)/1000);
@@ -409,6 +414,7 @@ public class LevelMaker extends Pane {
                     platform.setLayoutX(x * 100);
                     platform.setLayoutY(y * 20);
 
+                    // Chaque type a son pattern
                     switch (type) {
                         case "platform" -> {
                             platform.setFill(new ImagePattern(new Image("file:src/main/resources/com/fantastic_knight/assets/platform.png")));
@@ -517,6 +523,9 @@ public class LevelMaker extends Pane {
     }
 }
 
+/**
+ * List of choice with image
+ */
 class StatusListCell extends ListCell<String> {
     protected void updateItem(String item, boolean empty){
         super.updateItem(item, empty);

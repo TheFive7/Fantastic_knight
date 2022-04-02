@@ -1,5 +1,9 @@
 package com.fantastic_knight.model;
 
+import com.fantastic_knight.ath.Heart;
+import com.fantastic_knight.ath.Key;
+import com.fantastic_knight.ath.Shield;
+import com.fantastic_knight.ath.Sword;
 import com.fantastic_knight.consumable.Consumable;
 import com.fantastic_knight.items.Door;
 import com.fantastic_knight.items.Item;
@@ -7,7 +11,6 @@ import com.fantastic_knight.items.SwordPlayer;
 import com.fantastic_knight.player.Ennemy;
 import com.fantastic_knight.player.Player;
 import javafx.scene.control.Label;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Shape;
 

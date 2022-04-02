@@ -1,6 +1,10 @@
 package com.fantastic_knight.view;
 
 import com.fantastic_knight.Game;
+import com.fantastic_knight.ath.Heart;
+import com.fantastic_knight.ath.Key;
+import com.fantastic_knight.ath.Shield;
+import com.fantastic_knight.ath.Sword;
 import com.fantastic_knight.consumable.HaloConsumable;
 import com.fantastic_knight.consumable.KeyConsumable;
 import com.fantastic_knight.consumable.ShieldConsumable;
@@ -56,7 +60,9 @@ public class ViewLevel {
         init();
     }
 
-    // to initialize levels
+    /**
+     * Initialize level
+     */
     public void init() {
         // PLAYER 1
         // Shield
@@ -315,6 +321,7 @@ public class ViewLevel {
                         default -> platform.setOpacity(0);
                     }
 
+                    // If not same dimension than platform
                     platform.setType(type);
                     if (!type.equals("door")) {
                         if (!type.equals("arrowTrap")){

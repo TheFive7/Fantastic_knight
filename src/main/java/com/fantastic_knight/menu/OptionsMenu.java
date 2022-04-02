@@ -1,4 +1,4 @@
-package com.fantastic_knight.options;
+package com.fantastic_knight.menu;
 
 import com.fantastic_knight.Game;
 import com.fantastic_knight.menu.ButtonLevel;
@@ -253,7 +253,6 @@ public class OptionsMenu extends Pane {
             imageSound.setLayoutY(125);
             modifySounds.getChildren().add(imageSound);
         } else {
-            // Changing if the volume is set at 0%
             if (value == 0) {
                 imageSoundOther = new ImageView(new Image("file:src/main/resources/com/fantastic_knight/icons/mute.png"));
                 imageSoundOther.setFitHeight(imageSoundOther.getImage().getHeight() * 0.20);
