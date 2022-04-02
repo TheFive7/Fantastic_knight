@@ -29,3 +29,7 @@ Chef de projet : **HENNEQUIN Maxime**
 GitHub
 -
 https://github.com/TheFive7/Fantastic_knight
+
+Trello
+-
+https://trello.com/b/iuRS1DWp/fantasticknight
